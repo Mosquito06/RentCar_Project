@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
-import kr.or.dgit.RentCar_Project.content.performenceContent;
+import kr.or.dgit.RentCar_Project.content.PerformenceContent;
 import kr.or.dgit.RentCar_Project.list.AdminPerformenceTable;
 
 public class AdminMainPerformence extends JPanel {
@@ -37,7 +37,7 @@ public class AdminMainPerformence extends JPanel {
 		searchPanel.setLayout(null);
 		add(searchPanel);
 		
-		performenceContent perform = new performenceContent();
+		PerformenceContent perform = new PerformenceContent();
 		perform.setBounds(12, 0, 349, 376);
 		searchPanel.add(perform);
 				

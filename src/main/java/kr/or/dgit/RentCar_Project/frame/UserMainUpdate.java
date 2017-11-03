@@ -16,8 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
-import Calender.CalendarFrame;
-import kr.or.dgit.RentCar_Project.content.updateContent;
+import kr.or.dgit.RentCar_Project.content.UpdateContent;
 import kr.or.dgit.RentCar_Project.list.AbstractTable;
 import kr.or.dgit.RentCar_Project.list.UserUpdateTable;
 
@@ -44,7 +43,7 @@ public class UserMainUpdate extends JPanel {
 		labelPanel.add(userImg);
 		userImg.setIcon(new ImageIcon(System.getProperty("user.dir") + "\\Images\\user1.png"));
 
-		updateContent updatecontent = new updateContent();
+		UpdateContent updatecontent = new UpdateContent();
 		updatecontent.setBorder(new LineBorder(SystemColor.activeCaptionBorder));
 		updatecontent.setBounds(405, 10, 569, 350);
 		upPanel.add(updatecontent);
@@ -72,7 +71,7 @@ public class UserMainUpdate extends JPanel {
 
 			@Override
 			public void focusGained(FocusEvent e) {
-				calendarFrame frame = new calendarFrame();
+				CalendarFrame frame = new CalendarFrame();
 				frame.setVisible(true);
 			}
 

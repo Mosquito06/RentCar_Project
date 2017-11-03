@@ -12,13 +12,13 @@ import javax.swing.border.EmptyBorder;
 
 import kr.or.dgit.RentCar_Project.component.calendarComponent;
 
-public class calendarFrame extends JFrame {
+public class CalendarFrame extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField DateField;
 
 
-	public calendarFrame(JTextField DateField) {
+	public CalendarFrame(JTextField DateField) {
 		this.DateField = DateField;
 		setBounds(100, 100, 306, 323);
 		contentPane = new JPanel();

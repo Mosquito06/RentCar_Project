@@ -6,10 +6,10 @@ import javax.swing.JTextField;
 import java.awt.GridLayout;
 import javax.swing.SwingConstants;
 
-public class textFieldComponent extends JPanel {
+public class TextFieldComponent extends JPanel {
 	private JTextField textField;
 
-	public textFieldComponent(String title) {
+	public TextFieldComponent(String title) {
 		setLayout(new GridLayout(0, 2, 5, 0));
 
 		JLabel lblNewLabel = new JLabel(title);
