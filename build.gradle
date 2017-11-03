@@ -27,6 +27,9 @@ dependencies {
 	// https://mvnrepository.com/artifact/org.mybatis/mybatis
 	compile group: 'org.mybatis', name: 'mybatis', version: '3.4.5'
 	
+	// LookAndFeel 파일 추가(jar 파일 추가)
+	compile files('libs/liquidlnf.jar')
+	
     testImplementation 'junit:junit:4.12'
 }
 
