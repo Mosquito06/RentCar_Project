@@ -1,61 +1,88 @@
 package kr.or.dgit.RentCar_Project.component;
 
-import javax.swing.JPanel;
+import java.awt.BorderLayout;
 import java.awt.GridLayout;
+
+import javax.swing.JPanel;
 import javax.swing.JLabel;
-import javax.swing.SwingConstants;
+import java.awt.FlowLayout;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import javax.swing.SwingConstants;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
 public class EmailTextFiedComponent extends JPanel {
-	private JTextField tfId;
+	private JTextField tfEmailId;
 	private JTextField tfEmailAddr;
 
 
 	public EmailTextFiedComponent(String title) {
-		setLayout(new GridLayout(0, 2, 10, 0));
+		setLayout(new BorderLayout(20, 0));
 		
 		JLabel lblEmail = new JLabel(title);
 		lblEmail.setHorizontalAlignment(SwingConstants.CENTER);
-		add(lblEmail);
+		add(lblEmail, BorderLayout.CENTER);
 		
 		JPanel emailPanel = new JPanel();
-		add(emailPanel);
-		emailPanel.setLayout(new GridLayout(0, 4, 0, 0));
+		add(emailPanel, BorderLayout.EAST);
+		emailPanel.setLayout(new BorderLayout(0, 0));
 		
-		tfId = new JTextField();
-		emailPanel.add(tfId);
-		tfId.setColumns(10);
+		tfEmailId = new JTextField();
+		emailPanel.add(tfEmailId, BorderLayout.WEST);
+		tfEmailId.setColumns(10);
 		
-		JLabel lble = new JLabel("@");
-		lble.setHorizontalAlignment(SwingConstants.CENTER);
-		emailPanel.add(lble);
+		JPanel emailPanel2 = new JPanel();
+		emailPanel.add(emailPanel2, BorderLayout.EAST);
+		emailPanel2.setLayout(new BorderLayout(0, 0));
+		
+		JLabel lblE = new JLabel("@");
+		emailPanel2.add(lblE, BorderLayout.WEST);
+		
+		JPanel emailPanel3 = new JPanel();
+		emailPanel2.add(emailPanel3, BorderLayout.EAST);
+		emailPanel3.setLayout(new BorderLayout(0, 0));
 		
 		tfEmailAddr = new JTextField();
-		emailPanel.add(tfEmailAddr);
+		emailPanel3.add(tfEmailAddr, BorderLayout.WEST);
 		tfEmailAddr.setColumns(10);
 		
 		JComboBox<String> cbEmailAddr = new JComboBox<>();
-		emailPanel.add(cbEmailAddr);
+		cbEmailAddr.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		cbEmailAddr.addItem("직접입력");
+		cbEmailAddr.addItem("naver.com");
+		cbEmailAddr.addItem("gmail.com");
+		cbEmailAddr.addItem("nate.com");
+		cbEmailAddr.addItem("daum.net");
+		
+		emailPanel3.add(cbEmailAddr, BorderLayout.EAST);
 
 	}
-	public String getTextValueId() {
-		return tfId.getText();
+	
+	public String getTextVauleId() {
+		return tfEmailId.getText();
 	}
+	
 	public String getTextValueEmailAddr() {
 		return tfEmailAddr.getText();
 	}
-	public void setTextValueId(String value) {
-		tfId.setText(value);
+	
+	public void setTextValueId(String value){
+		tfEmailId.setText(value);
 	}
+	
 	public void setTextValueEmailAddr(String value) {
 		tfEmailAddr.setText(value);
 	}
 	
-	public void isEmptyCheck() throws Exception{
-		if(getTextValueId().equals("")||getTextValueEmailAddr().equals("")) {
-			tfId.requestFocus();
+	public void isEmptyChech() throws Exception{
+		if(getTextVauleId().equals("")||getTextValueEmailAddr().equals("")) {
+			tfEmailId.requestFocus();
 		}
 	}
 }
