@@ -36,8 +36,7 @@ public class Login extends JFrame {
 	private JCheckBox adminLoginBox;
 
 	public static void main(String[] args) {
-		
-		
+				
 		// 룩앤필 변경
 		try {
 			UIManager.setLookAndFeel("com.birosoft.liquid.LiquidLookAndFeel");

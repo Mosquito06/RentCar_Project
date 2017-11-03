@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import kr.or.dgit.RentCar_Project.component.calendarComponent;
+import kr.or.dgit.RentCar_Project.component.CalendarComponent;
 
 public class CalendarFrame extends JFrame {
 
@@ -27,7 +27,7 @@ public class CalendarFrame extends JFrame {
 		setContentPane(contentPane);
 		setLocationRelativeTo(null);
 		
-		calendarComponent calendarPanel = new calendarComponent(this, DateField);
+		CalendarComponent calendarPanel = new CalendarComponent(this, DateField);
 		contentPane.add(calendarPanel, BorderLayout.NORTH);
 	
 	

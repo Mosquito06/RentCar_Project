@@ -32,9 +32,9 @@ dependencies {
 
 jar{
     version = 1.0
- 	mainClassName='kr.or.dgit.RentCar_Project.frame.calendarFrame'
+ 	mainClassName='kr.or.dgit.RentCar_Project.frame.Login'
 
-	baseName='calendarTest'
+	baseName='Login'
  	appendix='bin'
  	
  	manifest{

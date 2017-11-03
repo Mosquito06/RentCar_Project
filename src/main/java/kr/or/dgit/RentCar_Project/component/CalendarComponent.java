@@ -29,7 +29,7 @@ import javax.swing.JTextField;
 import javax.swing.Popup;
 import javax.swing.PopupFactory;
 
-public class calendarComponent extends JPanel {
+public class CalendarComponent extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	protected List<ActionListener> popupListeners = new ArrayList<ActionListener>();
@@ -54,7 +54,7 @@ public class calendarComponent extends JPanel {
 	protected String iconFile = "datepicker.gif";
 	protected String[] weekdayNames = { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
 
-	public calendarComponent() {
+	public CalendarComponent() {
 		super();
 		currentDisplayDate = Calendar.getInstance();
 		controlsOnTop = true;
@@ -62,7 +62,7 @@ public class calendarComponent extends JPanel {
 		createPanel();
 	}
 		
-	public calendarComponent(JFrame jframe, JTextField DateField) {
+	public CalendarComponent(JFrame jframe, JTextField DateField) {
 		super();
 		this.jframe = jframe;
 		this.DateField = DateField;
@@ -72,7 +72,7 @@ public class calendarComponent extends JPanel {
 		createPanel();
 	}
 
-	public calendarComponent(Calendar date) {
+	public CalendarComponent(Calendar date) {
 		super();
 		setDate(date);
 		controlsOnTop = true;
@@ -80,7 +80,7 @@ public class calendarComponent extends JPanel {
 		createPanel();
 	}
 
-	public calendarComponent(int month, int day, int year) {
+	public CalendarComponent(int month, int day, int year) {
 		super();
 		setDate(month, day, year);
 		controlsOnTop = true;
@@ -432,7 +432,7 @@ public class calendarComponent extends JPanel {
 		pane.add(new JLabel("Birthdate: "));
 		final JTextField testDate = new JTextField(10);
 		pane.add(testDate);
-		final calendarComponent dp = new calendarComponent();
+		final CalendarComponent dp = new CalendarComponent();
 		ImageIcon ii = dp.getImage();
 		// System.out.println(ii.getIconWidth());
 		// System.out.println(ii.getIconHeight());

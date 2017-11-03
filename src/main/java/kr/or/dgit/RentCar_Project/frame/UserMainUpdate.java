@@ -7,6 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -67,15 +69,17 @@ public class UserMainUpdate extends JPanel {
 		btnPanel.add(searchImg);
 
 		firstDateField = new JTextField();
-		firstDateField.addFocusListener(new FocusAdapter() {
+		firstDateField.addMouseListener(new MouseAdapter() {
 
 			@Override
-			public void focusGained(FocusEvent e) {
-				CalendarFrame frame = new CalendarFrame();
+			public void mouseClicked(MouseEvent e) {
+				CalendarFrame frame = new CalendarFrame(firstDateField);
 				frame.setVisible(true);
 			}
-
+		
+		
 		});
+		
 		btnPanel.add(firstDateField);
 		firstDateField.setColumns(10);
 
