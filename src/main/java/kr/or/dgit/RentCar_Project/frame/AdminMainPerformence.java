@@ -14,6 +14,7 @@ import javax.swing.border.LineBorder;
 
 import kr.or.dgit.RentCar_Project.content.PerformenceContent;
 import kr.or.dgit.RentCar_Project.list.AdminPerformenceTable;
+import javax.swing.border.TitledBorder;
 
 public class AdminMainPerformence extends JPanel {
 
@@ -32,17 +33,17 @@ public class AdminMainPerformence extends JPanel {
 		add(personImg);
 		
 		JPanel searchPanel = new JPanel();
-		searchPanel.setBorder(new LineBorder(SystemColor.activeCaptionBorder));
-		searchPanel.setBounds(601, -1, 373, 376);
+		searchPanel.setBorder(new TitledBorder(null, "\uAC80\uC0C9\uC870\uAC74", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		searchPanel.setBounds(601, 0, 373, 375);
 		searchPanel.setLayout(null);
 		add(searchPanel);
 		
 		PerformenceContent perform = new PerformenceContent();
-		perform.setBounds(12, 0, 349, 376);
+		perform.setBounds(12, 22, 349, 354);
 		searchPanel.add(perform);
 				
 		JPanel chartPanel = new JPanel();
-		chartPanel.setBorder(new LineBorder(SystemColor.activeCaptionBorder));
+		chartPanel.setBorder(new TitledBorder(null, "\uACB0\uACFC\uC694\uC57D", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		chartPanel.setBounds(601, 380, 372, 371);
 		add(chartPanel);
 		chartPanel.setLayout(null);

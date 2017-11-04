@@ -21,6 +21,9 @@ import javax.swing.border.LineBorder;
 import kr.or.dgit.RentCar_Project.content.UpdateContent;
 import kr.or.dgit.RentCar_Project.list.AbstractTable;
 import kr.or.dgit.RentCar_Project.list.UserUpdateTable;
+import javax.swing.border.TitledBorder;
+import javax.swing.UIManager;
+import java.awt.Color;
 
 public class UserMainUpdate extends JPanel {
 	private JTextField firstDateField;
@@ -46,7 +49,7 @@ public class UserMainUpdate extends JPanel {
 		userImg.setIcon(new ImageIcon(System.getProperty("user.dir") + "\\Images\\user1.png"));
 
 		UpdateContent updatecontent = new UpdateContent();
-		updatecontent.setBorder(new LineBorder(SystemColor.activeCaptionBorder));
+		updatecontent.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\uC815\uBCF4\uC785\uB825", TitledBorder.LEADING, TitledBorder.TOP, null, SystemColor.activeCaptionText));
 		updatecontent.setBounds(405, 10, 569, 350);
 		upPanel.add(updatecontent);
 
