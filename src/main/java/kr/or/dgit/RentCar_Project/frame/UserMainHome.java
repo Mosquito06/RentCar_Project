@@ -11,6 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import kr.or.dgit.RentCar_Setting.DBSettingHome;
+
 public class UserMainHome extends JPanel {
 
 	public UserMainHome() {
@@ -25,11 +27,11 @@ public class UserMainHome extends JPanel {
 		btnRent.setBounds(12, 20, 193, 44);
 		panel.add(btnRent);
 		
-		JButton btnSearch = new JButton("검색하기");
-		btnSearch.setBounds(12, 94, 193, 44);
-		panel.add(btnSearch);
+		JButton btnHistroy = new JButton("이용내역");
+		btnHistroy.setBounds(12, 94, 193, 44);
+		panel.add(btnHistroy);
 		
-		JButton btnUpdate = new JButton("정보수정 및 이용내역");
+		JButton btnUpdate = new JButton("내 정보 수정");
 		btnUpdate.addActionListener(new ActionListener() {
 			
 			@Override

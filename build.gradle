@@ -44,6 +44,7 @@ jar{
  		 attributes 'Title':baseName, 'Version':version, 'Main-Class':mainClassName
  	}
 	
+	// jar 생성 시 연관된 파일도 포함
 	dependsOn configurations.runtime
     	 from {
         	configurations.compile.collect {it.isDirectory()? it: zipTree(it)}

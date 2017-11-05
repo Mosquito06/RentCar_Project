@@ -1,0 +1,91 @@
+-- db 존재하면 삭제
+drop database if exists car_project;
+
+-- db 생성
+create database car_project;
+
+-- db 사용
+use car_project;
+
+-- 고객등급 테이블
+CREATE TABLE car_project.user_grade (
+	grade    VARCHAR(5) primary key,
+	discount INT(11)
+);
+
+-- 차종 테이블
+CREATE TABLE car_project.car_model (
+	car_model_code VARCHAR(11) primary key, 
+	car_model      VARCHAR(11)
+);
+
+
+-- 제조회사 테이블
+CREATE TABLE car_project.manufacturer (
+	manufacturer_code VARCHAR(11) primary key,
+	manufacturer_name VARCHAR(11)
+);
+
+-- 연료종류 테이블
+CREATE TABLE car_project.fuel (
+	fuel_code VARCHAR(11) primary key,
+	fuel_type VARCHAR(11)
+);
+
+-- 차량 제원 테이블
+CREATE TABLE car_project.car_data (
+	car_code          VARCHAR(11) primary key,
+	car_name          VARCHAR(20),
+	car_image         BLOB,
+	car_old           INT(11),
+	car_number        INT(11),
+	isauto            BOOLEAN,
+	car_seater        INT(11),
+	car_model_code    VARCHAR(11),
+	manufacturer_code VARCHAR(11),
+	fuel_code         VARCHAR(11),
+	foreign key(car_model_code) references car_model(car_model_code),
+	foreign key(manufacturer_code) references manufacturer(manufacturer_code),
+	foreign key(fuel_code) references fuel(fuel_code)
+);
+
+
+-- 대여단가정보 테이블
+CREATE TABLE car_project.rental_price (
+	car_code         VARCHAR(11) primary key, 
+	basic_price      INT(11), 
+	basic_time       INT(11), 
+	basic_time_price INT(11),
+	over_price       INT(11),
+	insurance        INT(11),
+	foreign key(car_code) references car_data(car_code)
+);
+
+-- 고객정보 테이블
+CREATE TABLE car_project.user (
+	user_code VARCHAR(11) primary key,
+	id        VARCHAR(20),
+	pw        VARCHAR(20),
+	user_name VARCHAR(11),
+	phone     VARCHAR(11),
+	email     VARCHAR(11),
+	gender    VARCHAR(5),
+	grade     VARCHAR(5),
+	foreign key(grade) references user_grade(grade)
+);
+
+-- 대여관리 테이블
+CREATE TABLE car_project.rent (
+	user_code   VARCHAR(11),
+	use_time    INT(11),
+	isInsurance BOOLEAN,
+	day_start   DATE,
+	day_end     DATE,
+	final_price INT(20),
+	car_code    VARCHAR(11),
+	foreign key(user_code) references user(user_code),
+	foreign key(car_code) references rental_price(car_code)
+);
+
+-- create and gran user
+grant select, insert, update, delete on car_project.* to 'User_RentCar' identified by '1234';

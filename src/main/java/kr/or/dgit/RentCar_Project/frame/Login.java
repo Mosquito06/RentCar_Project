@@ -2,6 +2,7 @@ package kr.or.dgit.RentCar_Project.frame;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
@@ -13,18 +14,18 @@ import java.util.regex.Pattern;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JPasswordField;
-import javax.swing.JCheckBox;
-import javax.swing.SwingConstants;
-import java.awt.Font;
+
+import kr.or.dgit.RentCar_Setting.DBSettingHome;
 
 public class Login extends JFrame {
 
@@ -162,7 +163,7 @@ public class Login extends JFrame {
 
 		// 로그인 버튼
 		JButton btnLogin = new JButton("\uB85C\uADF8\uC778");
-		btnLogin.setBounds(392, 400, 97, 23);
+		btnLogin.setBounds(333, 386, 97, 23);
 		
 		// 로그인 버튼 리스너
 		btnLogin.addActionListener(new ActionListener() {
@@ -212,6 +213,23 @@ public class Login extends JFrame {
 		adminLoginBox = new JCheckBox("관리자모드로 로그인하기");
 		adminLoginBox.setBounds(354, 452, 178, 23);
 		contentPane.add(adminLoginBox);
+		
+		JButton btnRegister = new JButton("회원가입");
+		btnRegister.setBounds(442, 386, 97, 23);
+		contentPane.add(btnRegister);
+		
+		JButton btnDb = new JButton("DB설치하기");
+		btnDb.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Frame frame = new DBSettingHome();
+				frame.setVisible(true);
+				
+			}
+		});
+		btnDb.setBounds(384, 419, 97, 23);
+		contentPane.add(btnDb);
 		
 		// 배경화면 
 		JLabel backImg = new JLabel("");
