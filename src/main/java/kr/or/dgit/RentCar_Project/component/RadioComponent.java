@@ -17,7 +17,7 @@ public class RadioComponent extends JPanel {
 		setLayout(new GridLayout(1, 0, 0, 0));
 		
 		JLabel lbl = new JLabel(srt);
-		lbl.setHorizontalAlignment(SwingConstants.TRAILING);
+		lbl.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lbl);
 		
 		rdbtnLeft = new JRadioButton(srt1);
@@ -26,10 +26,11 @@ public class RadioComponent extends JPanel {
 		add(rdbtnLeft);
 		
 		rdbtnRight = new JRadioButton(srt2);
+		rdbtnRight.setHorizontalAlignment(SwingConstants.CENTER);
 		add(rdbtnRight);
 		
 		ButtonGroup group = new ButtonGroup();
-		group.add(rdbtnRight);
+		group.add(rdbtnLeft);
 		group.add(rdbtnRight);
 	}
 
