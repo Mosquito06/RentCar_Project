@@ -8,7 +8,6 @@ import java.util.Enumeration;
 
 import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -21,6 +20,7 @@ import kr.or.dgit.RentCar_Project.content.UpdateContent;
 import kr.or.dgit.RentCar_Project.content.UpdateProfileContent;
 import kr.or.dgit.RentCar_Project.content.UpdatePwContent;
 
+@SuppressWarnings("serial")
 public class UserMainUpdate extends JPanel {
 
 	private JLabel userImg;

@@ -26,6 +26,16 @@ public class UserMainHome extends JPanel {
 		panel.add(btnRent);
 		
 		JButton btnHistroy = new JButton("이용내역");
+		btnHistroy.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JFrame frame = UserMain.getInstance();
+				frame.getContentPane().removeAll();
+				frame.getContentPane().add(new UserMainHistory(), BorderLayout.CENTER);
+				frame.setVisible(true);
+			}
+		});
 		btnHistroy.setBounds(12, 94, 193, 44);
 		panel.add(btnHistroy);
 		
