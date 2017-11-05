@@ -45,7 +45,9 @@ public class UserMainHome extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-			
+				
+				// 비밀번호 재확인(추후 코드 추가) 
+				String Pwcheck = JOptionPane.showInputDialog(null, "비밀번호를 입력해주세요.");
 				
 				
 				
@@ -59,6 +61,7 @@ public class UserMainHome extends JPanel {
 		btnUpdate.setBounds(12, 171, 193, 44);
 		panel.add(btnUpdate);
 		
+		// 나가기 버튼 리스너
 		JButton btnOut = new JButton("나가기");
 		btnOut.addActionListener(new ActionListener() {
 			
