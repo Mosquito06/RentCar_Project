@@ -1,8 +1,11 @@
 package kr.or.dgit.RentCar_Project.content;
 
+import java.util.Enumeration;
+
 import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 
 import kr.or.dgit.RentCar_Project.component.ImgRadioComponent;
 import javax.swing.JButton;
@@ -14,10 +17,6 @@ public class UpdateProfileContent extends JPanel {
 
 	public JButton getBtnUpdate() {
 		return btnUpdate;
-	}
-
-	public ButtonGroup getGroup() {
-		return group;
 	}
 
 	public UpdateProfileContent() {
@@ -68,6 +67,18 @@ public class UpdateProfileContent extends JPanel {
 		btnUpdate = new JButton("수정하기");
 		btnUpdate.setBounds(209, 306, 126, 23);
 		add(btnUpdate);
+	}
+	
+	// 라디오버튼 그룹에서 선택된 버튼의 텍스트 값 리턴 함수
+	public String getSelectRadioText() {
+		Enumeration<AbstractButton> selectObject = group.getElements();
+		while(selectObject.hasMoreElements()) {
+			JRadioButton jb = (JRadioButton) selectObject.nextElement();
+			if(jb.isSelected()) {
+				return jb.getText();
+			}
+		}
+		return null;
 	}
 
 }

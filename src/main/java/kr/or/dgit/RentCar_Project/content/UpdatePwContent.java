@@ -19,6 +19,10 @@ public class UpdatePwContent extends JPanel {
 	private JButton btnUpdate;
 	private JButton btnExit;
 
+	public JButton getBtnExit() {
+		return btnExit;
+	}
+	
 	public UpdatePwContent() {
 		setLayout(new GridLayout(0, 1, 0, 5));
 
@@ -50,10 +54,6 @@ public class UpdatePwContent extends JPanel {
 	 * 
 	 * return new Coffee(pCode, pName, pPrice, pTotal, pMargin); }
 	 */
-
-	public JButton getBtnExit() {
-		return btnExit;
-	}
 
 	public void setContent() {
 

@@ -54,24 +54,17 @@ public class UserMainUpdate extends JPanel {
 		// 이미지 수정하기 버튼 리스너
 		imgPanel.getBtnUpdate().addActionListener(new ActionListener() {
 			
-			private String selectString;
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Enumeration<AbstractButton> selectObject = imgPanel.getGroup().getElements();
-				while(selectObject.hasMoreElements()) {
-					JRadioButton jb = (JRadioButton) selectObject.nextElement();
-					if(jb.isSelected()) {
-						selectString = jb.getText();
-					}
+				String selectString = imgPanel.getSelectRadioText();
+				if(selectString != null) {
+					labelPanel.removeAll();
+					userImg = new JLabel("");
+					userImg.setBounds(72, 10, 327, 337);
+					labelPanel.add(userImg);
+					userImg.setIcon(new ImageIcon(System.getProperty("user.dir") + "\\Images\\userBig\\" + selectString + ".png"));
+					JOptionPane.showMessageDialog(null, "변경이 완료되었습니다.");
 				}
-				JOptionPane.showMessageDialog(null, "변경이 완료되었습니다.");
-				
-				labelPanel.removeAll();
-				userImg = new JLabel("");
-				userImg.setBounds(72, 10, 327, 337);
-				labelPanel.add(userImg);
-				userImg.setIcon(new ImageIcon(System.getProperty("user.dir") + "\\Images\\userBig\\" + selectString + ".png"));
 			}
 		});
 		
