@@ -2,9 +2,9 @@ package kr.or.dgit.RentCar_Project.list;
 
 import javax.swing.JPanel;
 
-public class UserUpdateTable extends AbstractTable {
+public class UserHistoryTable extends AbstractTable {
 
-	public UserUpdateTable() {
+	public UserHistoryTable() {
 
 	}
 

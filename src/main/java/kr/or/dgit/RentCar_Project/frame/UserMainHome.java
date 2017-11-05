@@ -11,8 +11,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import kr.or.dgit.RentCar_Setting.DBSettingHome;
-
 public class UserMainHome extends JPanel {
 
 	public UserMainHome() {
@@ -40,8 +38,6 @@ public class UserMainHome extends JPanel {
 				frame.getContentPane().removeAll();
 				frame.getContentPane().add(new UserMainUpdate(), BorderLayout.CENTER);
 				frame.setVisible(true);
-				
-				
 			}
 		});
 		btnUpdate.setBounds(12, 171, 193, 44);
