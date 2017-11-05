@@ -7,6 +7,8 @@ import javax.swing.JPanel;
 
 import kr.or.dgit.RentCar_Project.component.RadioComponent;
 import kr.or.dgit.RentCar_Project.component.TextFieldComponent;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 public class UpdateContent extends JPanel {
 
@@ -24,6 +26,17 @@ public class UpdateContent extends JPanel {
 
 		panelName = new TextFieldComponent("이름");
 		add(panelName);
+		
+		panelRadio = new RadioComponent("성별", "남", "여");
+		panelRadio.getRdbtnRight().setBounds(345, -1, 74, 38);
+		panelRadio.getRdbtnLeft().setBounds(254, 0, 83, 38);
+		add(panelRadio);
+		panelRadio.setLayout(null);
+				
+		JLabel lblNewLabel = new JLabel("성별");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setBounds(0, 0, 230, 38);
+		panelRadio.add(lblNewLabel);
 
 		panelEmail = new TextFieldComponent("이메일");
 		add(panelEmail);
@@ -36,9 +49,6 @@ public class UpdateContent extends JPanel {
 
 		panelPhone = new TextFieldComponent("전화번호");
 		add(panelPhone);
-
-		panelRadio = new RadioComponent("성별", "남", "여");
-		add(panelRadio);
 		
 		btnPanel = new JPanel();
 		add(btnPanel);
@@ -73,5 +83,4 @@ public class UpdateContent extends JPanel {
 		panelGrade.setTextValue("");
 		panelPhone.setTextValue("");
 	}
-
 }
