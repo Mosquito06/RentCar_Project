@@ -190,7 +190,7 @@ public class Login extends JFrame {
 					frame.setVisible(true);
 					setVisible(false);
 					return;
-				}
+				} 
 				
 				
 				if (idCheck > 0 || pwCheck > 0) {

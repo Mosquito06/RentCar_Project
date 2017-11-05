@@ -29,11 +29,17 @@ public class UserMainHome extends JPanel {
 		btnHistroy.setBounds(12, 94, 193, 44);
 		panel.add(btnHistroy);
 		
+		// 내 정보 수정 리스너
 		JButton btnUpdate = new JButton("내 정보 수정");
 		btnUpdate.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+			
+				
+				
+				
+				
 				JFrame frame = UserMain.getInstance();
 				frame.getContentPane().removeAll();
 				frame.getContentPane().add(new UserMainUpdate(), BorderLayout.CENTER);

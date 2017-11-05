@@ -17,11 +17,11 @@ public class ImgRadioComponent extends JPanel {
 		setLayout(new GridLayout(2, 0, 0, 0));
 
 		JLabel lbl = new JLabel("");
-		lbl.setIcon(new ImageIcon(System.getProperty("user.dir") + "\\Images\\userSmall\\" + imgName));
+		lbl.setIcon(new ImageIcon(System.getProperty("user.dir") + "\\Images\\userSmall\\" + imgName + ".png"));
 		lbl.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lbl);
 
-		ridioButton = new JRadioButton();
+		ridioButton = new JRadioButton(imgName);
 		ridioButton.setSelected(true);
 		ridioButton.setHorizontalAlignment(SwingConstants.CENTER);
 		add(ridioButton);

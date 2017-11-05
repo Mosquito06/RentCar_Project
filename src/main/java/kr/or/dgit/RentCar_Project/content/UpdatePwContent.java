@@ -24,13 +24,13 @@ public class UpdatePwContent extends JPanel {
 
 		nowPwPanel = new TextFieldComponent("현재 비밀번호");
 		add(nowPwPanel);
-		
+
 		changePwPanel = new TextFieldComponent("변경할 비밀번호");
 		add(changePwPanel);
 
 		confirmPwPanel = new TextFieldComponent("비밀번호 확인");
 		add(confirmPwPanel);
-		
+
 		btnPanel = new JPanel();
 		add(btnPanel);
 		btnPanel.setLayout(null);
@@ -38,7 +38,7 @@ public class UpdatePwContent extends JPanel {
 		btnUpdate = new JButton("수정하기");
 		btnUpdate.setBounds(93, 10, 129, 25);
 		btnPanel.add(btnUpdate);
-		
+
 		btnExit = new JButton("나가기");
 		btnExit.setBounds(240, 11, 129, 25);
 		btnPanel.add(btnExit);
@@ -51,6 +51,10 @@ public class UpdatePwContent extends JPanel {
 	 * return new Coffee(pCode, pName, pPrice, pTotal, pMargin); }
 	 */
 
+	public JButton getBtnExit() {
+		return btnExit;
+	}
+
 	public void setContent() {
 
 	}
@@ -59,13 +63,13 @@ public class UpdatePwContent extends JPanel {
 		confirmPwPanel.isEmptyCheck();
 		changePwPanel.isEmptyCheck();
 		nowPwPanel.isEmptyCheck();
-		
+
 	}
 
 	public void clear() {
 		confirmPwPanel.setTextValue("");
 		changePwPanel.setTextValue("");
 		nowPwPanel.setTextValue("");
-		
+
 	}
 }
