@@ -50,8 +50,8 @@ public class AdminMainPerformence extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				JComboBox selectComboBox = perform.selectGetComboBox();
-				JOptionPane.showMessageDialog(null, selectComboBox);
-				
+				Object item = selectComboBox.getSelectedItem();
+				JOptionPane.showMessageDialog(null, item);
 			}
 		});
 		perform.setBounds(12, 22, 349, 354);
