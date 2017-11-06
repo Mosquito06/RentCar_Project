@@ -4,7 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -20,6 +22,8 @@ import kr.or.dgit.RentCar_Project.component.EmailTextFiedComponent;
 import kr.or.dgit.RentCar_Project.component.PhoneTextFiedComponent;
 import kr.or.dgit.RentCar_Project.component.RadioComponent;
 import kr.or.dgit.RentCar_Project.component.TextFieldComponent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class AdminMainClientManager extends JPanel {
 	private JTable table;
@@ -30,7 +34,7 @@ public class AdminMainClientManager extends JPanel {
 		setLayout(null);
 		
 		JPanel inputPanel = new JPanel();
-		inputPanel.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.RAISED, null, null)), " \u25C0 \uACE0\uAC1D \uAD00\uB9AC \u25B6 ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		inputPanel.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.RAISED, null, null)), " \uACE0\uAC1D \uAD00\uB9AC  ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		inputPanel.setBounds(12, 26, 655, 319);
 		add(inputPanel);
 		inputPanel.setLayout(null);
@@ -88,7 +92,7 @@ public class AdminMainClientManager extends JPanel {
 		inputPanel.add(btnUpdate);
 		
 		JPanel useListPanel = new JPanel();
-		useListPanel.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.RAISED, null, null)), " \u25C0 \uC774\uC6A9 \uB0B4\uC5ED \u25B6 ", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		useListPanel.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.RAISED, null, null)), " \uC774\uC6A9 \uB0B4\uC5ED  ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		useListPanel.setBounds(671, 26, 291, 319);
 		add(useListPanel);
 		useListPanel.setLayout(new BorderLayout(0, 0));
@@ -118,7 +122,7 @@ public class AdminMainClientManager extends JPanel {
 		useListPanel.add(emptyPanel3, BorderLayout.EAST);
 		
 		JPanel clientListPanel = new JPanel();
-		clientListPanel.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.RAISED, null, null)), " \u25C0 \uACE0\uAC1D \uB9AC\uC2A4\uD2B8 \u25B6 ", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		clientListPanel.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.RAISED, null, null)), " \uACE0\uAC1D \uB9AC\uC2A4\uD2B8  ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		clientListPanel.setBounds(12, 358, 950, 349);
 		add(clientListPanel);
 		clientListPanel.setLayout(new BorderLayout(0, 0));
@@ -147,7 +151,17 @@ public class AdminMainClientManager extends JPanel {
 		JPanel emptyPanel6 = new JPanel();
 		clientListPanel.add(emptyPanel6, BorderLayout.EAST);
 		
-		JButton btnBack = new JButton("뒤로");
+		JButton btnBack = new JButton("나가기");
+		btnBack.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int confirm = JOptionPane.showConfirmDialog(null, "정말로 종료하시겠습니까?");
+				if(confirm == 0){
+					AdminMain.getInstance().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+					AdminMain.getInstance().setVisible(false);
+				}
+			}
+		});
 		btnBack.setBounds(865, 717, 97, 23);
 		add(btnBack);
 	}
