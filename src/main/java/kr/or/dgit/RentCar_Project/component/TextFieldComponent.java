@@ -17,6 +17,7 @@ public class TextFieldComponent extends JPanel {
 		add(lblNewLabel);
 
 		textField = new JTextField();
+		textField.setHorizontalAlignment(SwingConstants.CENTER);
 		add(textField);
 		textField.setColumns(10);
 

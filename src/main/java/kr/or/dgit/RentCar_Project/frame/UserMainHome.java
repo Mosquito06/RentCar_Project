@@ -22,6 +22,17 @@ public class UserMainHome extends JPanel {
 		panel.setLayout(null);
 		
 		JButton btnRent = new JButton("대여하기");
+		btnRent.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JFrame frame = UserMain.getInstance();
+				frame.getContentPane().removeAll();
+				frame.getContentPane().add(new UserMainReserve(), BorderLayout.CENTER);
+				frame.setVisible(true);
+			}
+		});
+		
 		btnRent.setBounds(12, 20, 193, 44);
 		panel.add(btnRent);
 		

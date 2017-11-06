@@ -1,20 +1,24 @@
 package kr.or.dgit.RentCar_Project.frame;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 
 import kr.or.dgit.RentCar_Project.content.PerformenceContent;
 import kr.or.dgit.RentCar_Project.list.AdminPerformenceTable;
-import javax.swing.border.TitledBorder;
 
 public class AdminMainPerformence extends JPanel {
 
@@ -33,12 +37,23 @@ public class AdminMainPerformence extends JPanel {
 		add(personImg);
 		
 		JPanel searchPanel = new JPanel();
-		searchPanel.setBorder(new TitledBorder(null, "\uAC80\uC0C9\uC870\uAC74", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		searchPanel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\uAC80\uC0C9\uC870\uAC74 \uC120\uD0DD", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		searchPanel.setBounds(601, 0, 373, 375);
 		searchPanel.setLayout(null);
 		add(searchPanel);
 		
+		
+		// 검색조건 선택 패널 리스너
 		PerformenceContent perform = new PerformenceContent();
+		perform.getBtnSearch().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JComboBox selectComboBox = perform.selectGetComboBox();
+				JOptionPane.showMessageDialog(null, selectComboBox);
+				
+			}
+		});
 		perform.setBounds(12, 22, 349, 354);
 		searchPanel.add(perform);
 				

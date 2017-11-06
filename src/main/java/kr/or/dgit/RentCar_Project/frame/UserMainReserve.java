@@ -1,4 +1,4 @@
-package kr.or.dgit.RentCar_Project.content;
+package kr.or.dgit.RentCar_Project.frame;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -15,7 +15,11 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
-public class ReserveContent extends JPanel implements ActionListener {
+import kr.or.dgit.RentCar_Project.content.ReserveAddCarContent;
+import kr.or.dgit.RentCar_Project.content.ReserveHeaderContent;
+import kr.or.dgit.RentCar_Project.content.ReserveLeftContent;
+
+public class UserMainReserve extends JPanel implements ActionListener {
 	private	ImageIcon img;
 	
 	
@@ -23,7 +27,7 @@ public class ReserveContent extends JPanel implements ActionListener {
 	/**
 	 * Create the panel.
 	 */
-	public ReserveContent() {
+	public UserMainReserve() {
 
 		setBounds(new Rectangle(0, 0, 500, 500));
 		setLayout(null);
