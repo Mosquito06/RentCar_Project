@@ -40,4 +40,10 @@ public class TextFieldComponent extends JPanel {
 		}
 	}
 
+	public JTextField getTextField() {
+		return textField;
+	}
+	
+	
+
 }
