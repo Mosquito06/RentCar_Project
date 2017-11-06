@@ -67,6 +67,7 @@ CREATE TABLE car_project.user (
 	id        VARCHAR(20),
 	pw        VARCHAR(20),
 	user_name VARCHAR(11),
+	user_image BLOB,
 	phone     VARCHAR(11),
 	email     VARCHAR(11),
 	gender    VARCHAR(5),
