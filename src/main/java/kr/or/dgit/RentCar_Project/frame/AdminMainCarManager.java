@@ -1,4 +1,4 @@
-package kr.or.dgit.RentCar_Project.content;
+package kr.or.dgit.RentCar_Project.frame;
 
 import java.awt.Color;
 
@@ -14,9 +14,9 @@ import kr.or.dgit.RentCar_Project.component.TextFieldComponent;
 import javax.swing.JButton;
 import kr.or.dgit.RentCar_Project.component.ComboBoxComponent;
 
-public class CarManagerContent extends JPanel {
+public class AdminMainCarManager extends JPanel {
 
-	public CarManagerContent() {
+	public AdminMainCarManager() {
 		setBounds(0, 0, 974, 751);
 		setLayout(null);
 		

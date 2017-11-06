@@ -1,4 +1,4 @@
-package kr.or.dgit.RentCar_Project.content;
+package kr.or.dgit.RentCar_Project.frame;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -21,11 +21,11 @@ import kr.or.dgit.RentCar_Project.component.PhoneTextFiedComponent;
 import kr.or.dgit.RentCar_Project.component.RadioComponent;
 import kr.or.dgit.RentCar_Project.component.TextFieldComponent;
 
-public class ClientManagerContent extends JPanel {
+public class AdminMainClientManager extends JPanel {
 	private JTable table;
 	private JTable table_1;
 
-	public ClientManagerContent() {
+	public AdminMainClientManager() {
 		setBounds(100, 100, 974, 751);
 		setLayout(null);
 		

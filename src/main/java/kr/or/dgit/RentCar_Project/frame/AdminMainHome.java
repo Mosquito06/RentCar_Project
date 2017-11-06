@@ -22,10 +22,30 @@ public class AdminMainHome extends JPanel {
 		btnPanel.setLayout(null);
 		
 		JButton btnRent = new JButton("고객관리");
+		btnRent.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JFrame frame = AdminMain.getInstance();
+				frame.getContentPane().removeAll();
+				frame.getContentPane().add(new AdminMainClientManager(), BorderLayout.CENTER);
+				frame.setVisible(true);
+			}
+		});
 		btnRent.setBounds(12, 20, 193, 44);
 		btnPanel.add(btnRent);
 		
 		JButton btnSearch = new JButton("차량관리");
+		btnSearch.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JFrame frame = AdminMain.getInstance();
+				frame.getContentPane().removeAll();
+				frame.getContentPane().add(new AdminMainCarManager(), BorderLayout.CENTER);
+				frame.setVisible(true);
+			}
+		});
 		btnSearch.setBounds(12, 94, 193, 44);
 		btnPanel.add(btnSearch);
 		
