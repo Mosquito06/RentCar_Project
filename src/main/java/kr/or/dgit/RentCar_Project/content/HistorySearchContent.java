@@ -1,6 +1,7 @@
 package kr.or.dgit.RentCar_Project.content;
 
 import java.awt.FlowLayout;
+import java.awt.Transparency;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
@@ -15,6 +16,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import kr.or.dgit.RentCar_Project.frame.CalendarFrame;
 
@@ -50,7 +53,7 @@ public class HistorySearchContent extends JPanel {
 		add(lblImg);
 		
 		// 첫 번째 날짜 텍스트 필드 리스너
-		FirstDateField = new JTextField();
+		FirstDateField = new JTextField("0000/00/00");
 		FirstDateField.setFocusable(false);
 		FirstDateField.addMouseListener(new MouseAdapter() {
 
@@ -60,14 +63,19 @@ public class HistorySearchContent extends JPanel {
 			}
 		});
 		
-		FirstDateField.addFocusListener(new FocusListener() {
-			public void focusLost(FocusEvent e) {}
-			
+		FirstDateField.getDocument().addDocumentListener(new DocumentListener() {
 			@Override
-			public void focusGained(FocusEvent e) {
-				FirstDateField.setFocusable(false);
-				setDayTime(FirstDateField, LastDateField);
+			public void removeUpdate(DocumentEvent e) {
 				
+			}
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				
+					setDayTime(FirstDateField,LastDateField);
+				
+			}
+			@Override
+			public void changedUpdate(DocumentEvent e) {
 				
 			}
 		});
@@ -79,7 +87,7 @@ public class HistorySearchContent extends JPanel {
 		add(lblText);
 
 		// 두 번째 날짜 텍스트 필드 리스너
-		LastDateField = new JTextField();
+		LastDateField = new JTextField("9999/99/99");
 		LastDateField.setFocusable(false);
 		LastDateField.addMouseListener(new MouseAdapter() {
 
@@ -90,17 +98,26 @@ public class HistorySearchContent extends JPanel {
 			
 		});
 		
-		LastDateField.addFocusListener(new FocusListener() {
-			public void focusLost(FocusEvent e) {}
+		LastDateField.getDocument().addDocumentListener(new DocumentListener() {
 			
-			@Override
-			public void focusGained(FocusEvent e) {
-				System.out.println("Sdf");
-				LastDateField.setFocusable(false);
-				setDayTime(FirstDateField, LastDateField);
+				@Override
+				public void removeUpdate(DocumentEvent e) {
+					
+				}
+				@Override
+				public void insertUpdate(DocumentEvent e) {
+					
+						setDayTime(FirstDateField,LastDateField);
+					
+					
+				}
+				@Override
+				public void changedUpdate(DocumentEvent e) {
+				}
+			
 				
-				
-			}
+			
+			
 		});
 		add(LastDateField);
 		LastDateField.setColumns(10);
@@ -122,18 +139,18 @@ public class HistorySearchContent extends JPanel {
 		toDay = simpleDate.format(date);
 		
 
-		tfSetting(FirstDateField,LastDateField);
+		
 
 	}
 
 	protected void setDayTime(JTextField firstDate, JTextField lastDate) {
 		Date Fdate = simpleDate.parse(firstDate.getText(), new ParsePosition(0));
 		Date Ldate = simpleDate.parse(lastDate.getText(), new ParsePosition(0));
-
-	
+		
 		if (Fdate.getTime() > Ldate.getTime()) {
 			JOptionPane.showMessageDialog(null,"반납일이 대여일보다 뒤여야 합니다");
-			lastDate.setText("");
+			
+			viewCalendar(lastDate);
 			return;
 		} 
 		
@@ -153,8 +170,7 @@ public class HistorySearchContent extends JPanel {
 	private void viewCalendar(JTextField tf) {
 		CalendarFrame cf = new CalendarFrame(tf);
 		cf.setVisible(true);
-		tf.setFocusable(true);
-		tf.requestFocus();
+		
 	}
 		
 }
