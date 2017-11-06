@@ -33,7 +33,7 @@ public class PerformenceContent extends JPanel {
 		Vector<String> list = new Vector<>();
 		list.add("소형");
 		list.add("중형");
-		
+
 		carModelBox.setComboBoxModel(list);
 		carModelBox.setBounds(1, 100, 349, 35);
 		add(carModelBox);
@@ -65,7 +65,7 @@ public class PerformenceContent extends JPanel {
 		btnReset = new JButton("초기화");
 		btnReset.setBounds(185, 290, 140, 39);
 		add(btnReset);
-		
+
 		group = new ButtonGroup();
 		group.add(carModelBox.getRadioButton());
 		group.add(carNameCBox.getRadioButton());
@@ -74,23 +74,21 @@ public class PerformenceContent extends JPanel {
 		group.add(genderBox.getRadioButton());
 		group.add(fuelBox.getRadioButton());
 	}
-	
+
 	public JComboBox selectGetComboBox() {
 		Enumeration<AbstractButton> selectObject = group.getElements();
-		while(selectObject.hasMoreElements()) {
+		while (selectObject.hasMoreElements()) {
 			JRadioButton jb = (JRadioButton) selectObject.nextElement();
-			if(jb.isSelected()) {
+			if (jb.isSelected()) {
 				Object[] content = jb.getParent().getComponents();
-				for(int i = 0; i < content.length; i++) {
-					if(content[i] instanceof JComboBox) {
+				for (int i = 0; i < content.length; i++) {
+					if (content[i] instanceof JComboBox) {
 						return (JComboBox) content[i];
 					}
 				}
 			}
 		}
-		
-		
 		return null;
 	}
-	
+
 }
