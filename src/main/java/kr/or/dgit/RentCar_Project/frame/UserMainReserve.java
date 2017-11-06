@@ -18,22 +18,19 @@ import javax.swing.border.TitledBorder;
 import kr.or.dgit.RentCar_Project.content.ReserveAddCarContent;
 import kr.or.dgit.RentCar_Project.content.ReserveHeaderContent;
 import kr.or.dgit.RentCar_Project.content.ReserveLeftContent;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EtchedBorder;
 
 public class UserMainReserve extends JPanel implements ActionListener {
 	private	ImageIcon img;
-	
-	
-	
-	/**
-	 * Create the panel.
-	 */
+
 	public UserMainReserve() {
 
 		setBounds(new Rectangle(0, 0, 500, 500));
 		setLayout(null);
 		
 		ReserveLeftContent panel_3 = new ReserveLeftContent();
-		panel_3.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "\uC0C1\uC138\uC815\uBCF4", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_3.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.LOWERED, null, null)), "\uC0C1\uC138\uC815\uBCF4", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel_3.setBounds(0, 79, 302, 672);
 		add(panel_3);
 		panel_3.setLayout(null);
@@ -53,7 +50,8 @@ public class UserMainReserve extends JPanel implements ActionListener {
 		panel_8.setLayout(new GridLayout(0, 1, 0, 0));
 		
 		ReserveHeaderContent panel = new ReserveHeaderContent();
-		panel.setBounds(0, 0, 980, 75);
+		panel.setBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.LOWERED, null, null)));
+		panel.setBounds(3, 3, 968, 72);
 		add(panel);
 		
 		JPanel panel_1 = new JPanel();
