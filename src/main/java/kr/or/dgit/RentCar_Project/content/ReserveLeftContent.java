@@ -1,9 +1,17 @@
 package kr.or.dgit.RentCar_Project.content;
 
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import kr.or.dgit.RentCar_Project.component.ComboBoxComponent;
 import kr.or.dgit.RentCar_Project.component.RadioComponent;
+import kr.or.dgit.RentCar_Project.frame.UserMain;
+import kr.or.dgit.RentCar_Project.frame.UserMainHome;
 
 @SuppressWarnings("serial")
 public class ReserveLeftContent extends JPanel {
@@ -40,6 +48,18 @@ public class ReserveLeftContent extends JPanel {
 		RadioComponent radioComponent = new RadioComponent("자차 보험", "포함", "비포함");
 		radioComponent.setBounds(45, 527, 205, 70);
 		add(radioComponent);
+		
+		JButton btnNewButton = new JButton("나가기");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFrame frame = UserMain.getInstance();
+				frame.getContentPane().removeAll();
+				frame.getContentPane().add(new UserMainHome(), BorderLayout.CENTER);
+				frame.setVisible(true);
+			}
+		});
+		btnNewButton.setBounds(69, 596, 167, 53);
+		add(btnNewButton);
 
 	}
 }
