@@ -3,8 +3,6 @@ package kr.or.dgit.RentCar_Project.content;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.ParsePosition;
@@ -18,6 +16,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import kr.or.dgit.RentCar_Project.component.TextFieldComponent;
 import kr.or.dgit.RentCar_Project.frame.CalendarFrame;
@@ -69,7 +69,7 @@ public class ReserveHeaderContent extends JPanel {
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int totalTime = Integer.parseInt(totalTimePanel.getTextField().getText());
-				if(totalTime==0){
+				if (totalTime == 0) {
 					JOptionPane.showMessageDialog(null, "날짜를 정확하게 입력하세요");
 				}
 			}
@@ -104,18 +104,18 @@ public class ReserveHeaderContent extends JPanel {
 			}
 		});
 
-		startPanel.getTextField().addFocusListener(new FocusListener() {
-			@Override
-			public void focusLost(FocusEvent e) {
+		startPanel.getTextField().getDocument().addDocumentListener(new DocumentListener() {
+			public void removeUpdate(DocumentEvent e) {
 			}
 
 			@Override
-			public void focusGained(FocusEvent e) {
-				setDayTime(startPanel, finalPanel);
-				startPanel.getTextField().setFocusable(false);
+			public void insertUpdate(DocumentEvent e) {
+				setDayTime(startPanel, finalPanel, startPanel);
 				startTimeCom.setSelectedIndex(0);
 			}
 
+			public void changedUpdate(DocumentEvent e) {
+			}
 		});
 
 		finalPanel.getTextField().addMouseListener(new MouseAdapter() {
@@ -126,31 +126,31 @@ public class ReserveHeaderContent extends JPanel {
 			}
 		});
 
-		finalPanel.getTextField().addFocusListener(new FocusListener() {
-			@Override
-			public void focusLost(FocusEvent e) {
+		finalPanel.getTextField().getDocument().addDocumentListener(new DocumentListener() {
+			public void removeUpdate(DocumentEvent e) {
 			}
 
 			@Override
-			public void focusGained(FocusEvent e) {
-				finalPanel.getTextField().setFocusable(false);
-				setDayTime(startPanel, finalPanel);
+			public void insertUpdate(DocumentEvent e) {
+				setDayTime(startPanel, finalPanel, finalPanel);
 				finalTimeCom.setSelectedIndex(0);
 			}
 
+			public void changedUpdate(DocumentEvent e) {
+			}
 		});
 
 		startTimeCom.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				setDayTime(startPanel, finalPanel);
+				setDayTime(startPanel, finalPanel, finalPanel);
 			}
 		});
 
 		finalTimeCom.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				setDayTime(startPanel, finalPanel);
+				setDayTime(startPanel, finalPanel, finalPanel);
 			}
 		});
 
@@ -178,7 +178,7 @@ public class ReserveHeaderContent extends JPanel {
 
 	}
 
-	private void setDayTime(TextFieldComponent startPanel, TextFieldComponent finalPanel) {
+	private void setDayTime(TextFieldComponent startPanel, TextFieldComponent finalPanel, TextFieldComponent tf) {
 		Date date1 = simpleDate.parse(toDay, new ParsePosition(0));
 		Date date2 = simpleDate.parse(startPanel.getTextField().getText(), new ParsePosition(0));
 
@@ -190,6 +190,7 @@ public class ReserveHeaderContent extends JPanel {
 		if (date1.getTime() > date2.getTime()) {
 			JOptionPane.showMessageDialog(null, toDay + " 이후로 선택하세요");
 			startPanel.getTextField().setText(toDay);
+			viewCalender(tf);
 			return;
 		} else if (date1.getTime() == date2.getTime()) {
 			if (time1.getTime() > time2.getTime()) {
@@ -216,8 +217,6 @@ public class ReserveHeaderContent extends JPanel {
 	private void viewCalender(TextFieldComponent TfPanel) {
 		cf = new CalendarFrame(TfPanel.getTextField());
 		cf.setVisible(true);
-		TfPanel.getTextField().setFocusable(true);
-		TfPanel.getTextField().requestFocus();
 	}
 
 	private void setTotalTime() {
