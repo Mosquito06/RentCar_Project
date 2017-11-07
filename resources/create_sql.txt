@@ -39,7 +39,7 @@ CREATE TABLE car_project.car_data (
 	car_image         BLOB,
 	car_old           INT(11),
 	car_number        INT(11),
-	isauto            BOOLEAN,
+	is_auto           VARCHAR(11),
 	car_seater        INT(11),
 	car_model_code    VARCHAR(11),
 	manufacturer_code VARCHAR(11),
