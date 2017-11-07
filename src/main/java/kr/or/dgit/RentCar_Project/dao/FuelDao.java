@@ -8,6 +8,6 @@ public interface FuelDao {
 	
 	int insertFuel(Fuel fuel);
 	int updateFuel(Fuel fuel);
-	int deleteFule(Fuel fuel);
+	int deleteFule(int fuelCode);
 	List<Fuel> selectFuelByAll();
 }

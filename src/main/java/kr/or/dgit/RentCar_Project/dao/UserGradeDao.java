@@ -8,6 +8,6 @@ public interface UserGradeDao {
 	
 	int insertUserGrade(UserGrade userGrade);
 	int updateUserGrade(UserGrade userGrade);
-	int deleteUserGrade(UserGrade userGrade);
+	int deleteUserGrade(String grade);
 	List<UserGrade> selectUserGradeByAll();
 }
