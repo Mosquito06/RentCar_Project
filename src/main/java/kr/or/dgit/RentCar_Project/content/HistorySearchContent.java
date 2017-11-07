@@ -1,9 +1,6 @@
 package kr.or.dgit.RentCar_Project.content;
 
 import java.awt.FlowLayout;
-import java.awt.Transparency;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.ParsePosition;
@@ -21,6 +18,7 @@ import javax.swing.event.DocumentListener;
 
 import kr.or.dgit.RentCar_Project.frame.CalendarFrame;
 
+@SuppressWarnings("serial")
 public class HistorySearchContent extends JPanel {
 	private JTextField FirstDateField;
 	private JTextField LastDateField;
@@ -28,11 +26,9 @@ public class HistorySearchContent extends JPanel {
 	private JButton btnCancel;
 	private JButton btnExit;
 	private SimpleDateFormat simpleDate;
-	private Date date;
-	private String toDay;
-	private String startDay;
-	private String finalDay;
-	
+	private Date startDate;
+	private Date lastDate;
+
 	public JButton getBtnSearch() {
 		return btnSearch;
 	}
@@ -51,7 +47,7 @@ public class HistorySearchContent extends JPanel {
 		JLabel lblImg = new JLabel("");
 		lblImg.setIcon(new ImageIcon(System.getProperty("user.dir") + "\\Images\\search.png"));
 		add(lblImg);
-		
+
 		// 첫 번째 날짜 텍스트 필드 리스너
 		FirstDateField = new JTextField("0000/00/00");
 		FirstDateField.setFocusable(false);
@@ -62,24 +58,20 @@ public class HistorySearchContent extends JPanel {
 				viewCalendar(FirstDateField);
 			}
 		});
-		
+
 		FirstDateField.getDocument().addDocumentListener(new DocumentListener() {
-			@Override
 			public void removeUpdate(DocumentEvent e) {
-				
 			}
+
 			@Override
 			public void insertUpdate(DocumentEvent e) {
-				
-					setDayTime(FirstDateField,LastDateField);
-				
+				setDayTime(FirstDateField, LastDateField, FirstDateField);
 			}
-			@Override
+
 			public void changedUpdate(DocumentEvent e) {
-				
 			}
 		});
-		
+
 		add(FirstDateField);
 		FirstDateField.setColumns(10);
 
@@ -95,29 +87,21 @@ public class HistorySearchContent extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				viewCalendar(LastDateField);
 			}
-			
+
 		});
-		
+
 		LastDateField.getDocument().addDocumentListener(new DocumentListener() {
-			
-				@Override
-				public void removeUpdate(DocumentEvent e) {
-					
-				}
-				@Override
-				public void insertUpdate(DocumentEvent e) {
-					
-						setDayTime(FirstDateField,LastDateField);
-					
-					
-				}
-				@Override
-				public void changedUpdate(DocumentEvent e) {
-				}
-			
-				
-			
-			
+			public void removeUpdate(DocumentEvent e) {
+			}
+
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				setDayTime(FirstDateField, LastDateField, LastDateField);
+
+			}
+
+			public void changedUpdate(DocumentEvent e) {
+			}
 		});
 		add(LastDateField);
 		LastDateField.setColumns(10);
@@ -130,47 +114,24 @@ public class HistorySearchContent extends JPanel {
 
 		btnExit = new JButton("나가기");
 		add(btnExit);
-		
-		
-		
+
+	}
+
+	private void setDayTime(JTextField firstTf, JTextField lastTf, JTextField tf) {
 		simpleDate = new SimpleDateFormat("yyyy/MM/dd");
-		
-		date = new Date();
-		toDay = simpleDate.format(date);
-		
+		startDate = simpleDate.parse(firstTf.getText(), new ParsePosition(0));
+		lastDate = simpleDate.parse(lastTf.getText(), new ParsePosition(0));
 
-		
-
-	}
-
-	protected void setDayTime(JTextField firstDate, JTextField lastDate) {
-		Date Fdate = simpleDate.parse(firstDate.getText(), new ParsePosition(0));
-		Date Ldate = simpleDate.parse(lastDate.getText(), new ParsePosition(0));
-		
-		if (Fdate.getTime() > Ldate.getTime()) {
-			JOptionPane.showMessageDialog(null,"반납일이 대여일보다 뒤여야 합니다");
-			
-			viewCalendar(lastDate);
+		if (startDate.getTime() > lastDate.getTime()) {
+			JOptionPane.showMessageDialog(null, "반납일이 대여일보다 뒤여야 합니다");
+			viewCalendar(tf);
 			return;
-		} 
-		
-		
-		
-	}
-
-	private void tfSetting(JTextField startTf, JTextField finalTf) {
-		startTf.setText(toDay);
-		finalTf.setText(toDay);
-
-		startDay = toDay;
-		finalDay = toDay;
-
+		}
 	}
 
 	private void viewCalendar(JTextField tf) {
 		CalendarFrame cf = new CalendarFrame(tf);
 		cf.setVisible(true);
-		
 	}
-		
+
 }
