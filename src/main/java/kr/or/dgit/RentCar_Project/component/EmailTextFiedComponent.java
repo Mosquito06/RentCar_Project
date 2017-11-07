@@ -49,11 +49,18 @@ public class EmailTextFiedComponent extends JPanel {
 		tfEmailAddr.setColumns(10);
 		
 		JComboBox<String> cbEmailAddr = new JComboBox<>();
+		
 		cbEmailAddr.addActionListener(new ActionListener() {
+			
 			public void actionPerformed(ActionEvent e) {
-				
+				if(cbEmailAddr.getSelectedIndex()==0) {
+					tfEmailAddr.setText("");
+				}else {
+					tfEmailAddr.setText((String) cbEmailAddr.getSelectedItem());
+				}
 			}
 		});
+		
 		cbEmailAddr.addItem("직접입력");
 		cbEmailAddr.addItem("naver.com");
 		cbEmailAddr.addItem("gmail.com");
