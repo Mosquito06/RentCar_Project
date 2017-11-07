@@ -10,10 +10,10 @@ public class User {
 	private byte[] userImg;
 	private String phone;
 	private String email;
-	private String gender;
+	private Gender gender;
 	private UserGrade grade;
 	public User(String userCode, String id, String pw, String userName, byte[] userImg, String phone, String email,
-			String gender, UserGrade grade) {
+			Gender gender, UserGrade grade) {
 		super();
 		this.userCode = userCode;
 		this.id = id;
@@ -71,10 +71,10 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getGender() {
+	public Gender getGender() {
 		return gender;
 	}
-	public void setGender(String gender) {
+	public void setGender(Gender gender) {
 		this.gender = gender;
 	}
 	public UserGrade getGrade() {

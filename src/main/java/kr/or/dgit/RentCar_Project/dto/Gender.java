@@ -1,5 +1,5 @@
 package kr.or.dgit.RentCar_Project.dto;
 
-public enum IsInsurance {
-	TRUE, FALSE;
+public enum Gender {
+	MALE, FEMALE;
 }
