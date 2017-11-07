@@ -19,7 +19,7 @@ public class EmailTextFiedComponent extends JPanel {
 
 
 	public EmailTextFiedComponent(String title) {
-		setLayout(new BorderLayout(20, 0));
+		setLayout(new BorderLayout(5, 0));
 		
 		JLabel lblEmail = new JLabel(title);
 		lblEmail.setHorizontalAlignment(SwingConstants.CENTER);

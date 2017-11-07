@@ -56,7 +56,7 @@ public class ExportService implements DbService {
 			int colCnt = rs.getMetaData().getColumnCount();
 			while (rs.next()) {
 				for (int i = 1; i <= colCnt; i++) {
-					sb.append(rs.getObject(i) + ",");
+					sb.append(rs.getObject(i) + "	");
 				}
 				sb.replace(sb.length() - 1, sb.length(), ""); 
 																
