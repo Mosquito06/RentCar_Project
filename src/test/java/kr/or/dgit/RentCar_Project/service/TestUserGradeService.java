@@ -7,11 +7,10 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-
 import kr.or.dgit.RentCar_Project.dto.UserGrade;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class TestUserGrade {
+public class TestUserGradeService {
 	private static UserGradeService userGradeService;
 	
 	

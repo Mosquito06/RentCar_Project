@@ -23,9 +23,21 @@
 			</if>
 		</where>
 	</sql>
+	<sql id="insertSql">
+		insert into user(id, pw, user_name, user_image, phone, email, gender, grade) 
+		values(#{id}, #{pw}, #{userName}, #{userImg}, #{phone}, #{email}, #{gender}, #{grade.grade})
+	</sql>
 	
 	<select id="selectUserByUserCode" parameterType="User" resultMap="UserResult">
 		<include refid="selectSql"/>
 		<include refid="whereSql"/>
 	</select>
+	
+	<select id="selectUserByAll" resultMap="UserResult">
+		<include refid="selectSql"/>
+	</select>
+	
+	<insert id="insertUser" parameterType="User">
+		<include refid="insertSql"/>
+	</insert>
 </mapper>

@@ -24,7 +24,11 @@ public class UserService implements UserDao {
 
 	@Override
 	public void insertUser(User user) {
-		// TODO Auto-generated method stub
+		try(SqlSession sqlsession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();){
+			userDao = sqlsession.getMapper(UserDao.class);
+			userDao.insertUser(user);
+			sqlsession.commit();
+		}
 
 	}
 
@@ -42,7 +46,6 @@ public class UserService implements UserDao {
 
 	@Override
 	public User selectUserByUserCode(User user) {
-		
 		try(SqlSession sqlsession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();){
 			userDao = sqlsession.getMapper(UserDao.class);
 			return userDao.selectUserByUserCode(user);
@@ -51,8 +54,10 @@ public class UserService implements UserDao {
 
 	@Override
 	public List<User> selectUserByAll() {
-		// TODO Auto-generated method stub
-		return null;
+		try(SqlSession sqlsession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();){
+			userDao = sqlsession.getMapper(UserDao.class);
+			return userDao.selectUserByAll();
+		}
 	}
 
 }
