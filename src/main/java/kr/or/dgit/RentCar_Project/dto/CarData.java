@@ -8,13 +8,13 @@ public class CarData {
 	private byte[] carImg;
 	private int carOld;
 	private int carNumder;
-	private boolean isAuto;
+	private IsAuto isAuto;
 	private String carSeater;
 	private CarModel carModelCode;
 	private Manufacturer manufacturerCode;
 	private Fuel fuelCode;
 
-	public CarData(String carCode, String carName, byte[] carImg, int carOld, int carNumder, boolean isAuto,
+	public CarData(String carCode, String carName, byte[] carImg, int carOld, int carNumder, IsAuto isAuto,
 			String carSeater, CarModel carModelCode, Manufacturer manufacturerCode, Fuel fuelCode) {
 		super();
 		this.carCode = carCode;
@@ -74,11 +74,11 @@ public class CarData {
 		this.carNumder = carNumder;
 	}
 
-	public boolean isAuto() {
+	public IsAuto isAuto() {
 		return isAuto;
 	}
 
-	public void setAuto(boolean isAuto) {
+	public void setAuto(IsAuto isAuto) {
 		this.isAuto = isAuto;
 	}
 
