@@ -6,8 +6,9 @@ import kr.or.dgit.RentCar_Project.dto.Fuel;
 
 public interface FuelDao {
 	
-	int insertFuel(Fuel fuel);
-	int updateFuel(Fuel fuel);
-	int deleteFule(int fuelCode);
+	void insertFuel(Fuel fuel);
+	void updateFuel(Fuel fuel);
+	void deleteFule(int fuelCode);
+	Fuel findFuelByFuelCode(int fuelCode);
 	List<Fuel> selectFuelByAll();
 }

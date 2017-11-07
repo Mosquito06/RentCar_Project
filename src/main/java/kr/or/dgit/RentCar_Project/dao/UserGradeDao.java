@@ -6,8 +6,9 @@ import kr.or.dgit.RentCar_Project.dto.UserGrade;
 
 public interface UserGradeDao {
 	
-	int insertUserGrade(UserGrade userGrade);
-	int updateUserGrade(UserGrade userGrade);
-	int deleteUserGrade(String grade);
+	void insertUserGrade(UserGrade userGrade);
+	void updateUserGrade(UserGrade userGrade);
+	void deleteUserGrade(String grade);
+	UserGrade findUserGradeByGrade(String grade);
 	List<UserGrade> selectUserGradeByAll();
 }

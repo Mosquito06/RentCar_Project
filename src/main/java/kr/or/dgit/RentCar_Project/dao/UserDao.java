@@ -5,8 +5,9 @@ import java.util.List;
 import kr.or.dgit.RentCar_Project.dto.User;
 
 public interface UserDao {
-	int insertUser(User user);
-	int updateUser(User user);
-	int deleteUser(String userCode);
+	void insertUser(User user);
+	void updateUser(User user);
+	void deleteUser(String userCode);
+	User findUserByUserCode(String userCode);
 	List<User> selectFuelByAll();
 }
