@@ -19,6 +19,8 @@ import javax.swing.border.TitledBorder;
 
 import kr.or.dgit.RentCar_Project.content.PerformenceContent;
 import kr.or.dgit.RentCar_Project.list.AdminPerformenceTable;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EtchedBorder;
 
 public class AdminMainPerformence extends JPanel {
 
@@ -26,7 +28,7 @@ public class AdminMainPerformence extends JPanel {
 		setLayout(null);
 		
 		AdminPerformenceTable adminTable = new AdminPerformenceTable();
-		adminTable.setBorder(new LineBorder(SystemColor.activeCaptionBorder));
+		adminTable.setBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.LOWERED, null, null)));
 		adminTable.setBounds(0, 80, 595, 671);
 		adminTable.loadDate();
 		add(adminTable);
@@ -37,7 +39,7 @@ public class AdminMainPerformence extends JPanel {
 		add(personImg);
 		
 		JPanel searchPanel = new JPanel();
-		searchPanel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\uAC80\uC0C9\uC870\uAC74 \uC120\uD0DD", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		searchPanel.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.LOWERED, null, null)), "\uAC80\uC0C9\uC870\uAC74 \uC120\uD0DD", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		searchPanel.setBounds(601, 0, 373, 375);
 		searchPanel.setLayout(null);
 		add(searchPanel);
@@ -57,19 +59,18 @@ public class AdminMainPerformence extends JPanel {
 		searchPanel.add(perform);
 				
 		JPanel chartPanel = new JPanel();
-		chartPanel.setBorder(new TitledBorder(null, "\uACB0\uACFC\uC694\uC57D", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		chartPanel.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.LOWERED, null, null)), "\uACB0\uACFC\uC694\uC57D", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		chartPanel.setBounds(601, 380, 372, 371);
 		add(chartPanel);
 		chartPanel.setLayout(null);
 		
 		JPanel chartBtnPanel = new JPanel();
-		chartBtnPanel.setBorder(new LineBorder(SystemColor.activeCaptionBorder));
-		chartBtnPanel.setBounds(0, 334, 372, 37);
+		chartBtnPanel.setBounds(12, 331, 348, 37);
 		chartPanel.add(chartBtnPanel);
 		chartBtnPanel.setLayout(null);
 		
 		JButton btnSpecific = new JButton("자세히 보기");
-		btnSpecific.setBounds(41, 7, 139, 23);
+		btnSpecific.setBounds(25, 8, 139, 23);
 		chartBtnPanel.add(btnSpecific);
 		
 		JButton btnExit = new JButton("나가기");
@@ -84,7 +85,7 @@ public class AdminMainPerformence extends JPanel {
 				
 			}
 		});
-		btnExit.setBounds(204, 7, 139, 23);
+		btnExit.setBounds(188, 8, 139, 23);
 		chartBtnPanel.add(btnExit);
 		
 		JLabel chartImg = new JLabel("");

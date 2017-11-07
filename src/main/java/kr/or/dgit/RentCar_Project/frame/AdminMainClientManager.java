@@ -155,11 +155,10 @@ public class AdminMainClientManager extends JPanel {
 		btnBack.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int confirm = JOptionPane.showConfirmDialog(null, "정말로 종료하시겠습니까?");
-				if(confirm == 0){
-					AdminMain.getInstance().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-					AdminMain.getInstance().setVisible(false);
-				}
+				JFrame frame = AdminMain.getInstance();
+				frame.getContentPane().removeAll();
+				frame.getContentPane().add(new AdminMainHome(), BorderLayout.CENTER);
+				frame.setVisible(true);
 			}
 		});
 		btnBack.setBounds(865, 717, 97, 23);

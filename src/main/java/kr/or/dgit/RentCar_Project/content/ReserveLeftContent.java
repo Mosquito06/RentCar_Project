@@ -42,11 +42,11 @@ public class ReserveLeftContent extends JPanel {
 		add(comboBoxComponent_3);
 		
 		RadioComponent panel_2 = new RadioComponent("변속기", "오토", "수동");
-		panel_2.setBounds(45, 437, 205, 70);
+		panel_2.setBounds(40, 435, 205, 70);
 		add(panel_2);
 		
 		RadioComponent radioComponent = new RadioComponent("자차 보험", "포함", "비포함");
-		radioComponent.setBounds(45, 527, 205, 70);
+		radioComponent.setBounds(40, 506, 205, 70);
 		add(radioComponent);
 		
 		JButton btnNewButton = new JButton("나가기");
@@ -58,7 +58,7 @@ public class ReserveLeftContent extends JPanel {
 				frame.setVisible(true);
 			}
 		});
-		btnNewButton.setBounds(69, 596, 167, 53);
+		btnNewButton.setBounds(62, 594, 167, 53);
 		add(btnNewButton);
 
 	}
