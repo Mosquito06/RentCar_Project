@@ -40,6 +40,17 @@ public class ReserveHeaderContent extends JPanel {
 	private String presentTime;
 	private TextFieldComponent startPanel;
 	private TextFieldComponent finalPanel;
+	private JButton btnSearch;
+
+	public JButton getBtnSearch() {
+		return btnSearch;
+	}
+	
+
+	public TextFieldComponent getTotalTimePanel() {
+		return totalTimePanel;
+	}
+
 
 	public ReserveHeaderContent() {
 
@@ -50,8 +61,8 @@ public class ReserveHeaderContent extends JPanel {
 		home.setBounds(12, 0, 81, 24);
 		add(home);
 
-		startPanel = new TextFieldComponent("대여일  ");
-		startPanel.setBounds(12, 31, 213, 35);
+		startPanel = new TextFieldComponent("대여일");
+		startPanel.setBounds(22, 31, 203, 35);
 		add(startPanel);
 		startPanel.setFocusable(false);
 
@@ -65,20 +76,13 @@ public class ReserveHeaderContent extends JPanel {
 		lblNewLabel.setBounds(765, 31, 68, 35);
 		add(lblNewLabel);
 
-		JButton btnSearch = new JButton("차량검색");
-		btnSearch.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				int totalTime = Integer.parseInt(totalTimePanel.getTextField().getText());
-				if (totalTime == 0) {
-					JOptionPane.showMessageDialog(null, "날짜를 정확하게 입력하세요");
-				}
-			}
-		});
+		btnSearch = new JButton("차량검색");
+		
 		btnSearch.setBounds(833, 22, 122, 41);
 		add(btnSearch);
 
-		finalPanel = new TextFieldComponent("반납일  ");
-		finalPanel.setBounds(314, 31, 213, 35);
+		finalPanel = new TextFieldComponent("반납일");
+		finalPanel.setBounds(325, 31, 202, 35);
 		add(finalPanel);
 		finalPanel.setFocusable(false);
 
@@ -110,7 +114,7 @@ public class ReserveHeaderContent extends JPanel {
 
 			@Override
 			public void insertUpdate(DocumentEvent e) {
-				setDayTime(startPanel, finalPanel, startPanel);
+				compareToDay(startPanel);
 				startTimeCom.setSelectedIndex(0);
 			}
 
@@ -132,7 +136,7 @@ public class ReserveHeaderContent extends JPanel {
 
 			@Override
 			public void insertUpdate(DocumentEvent e) {
-				setDayTime(startPanel, finalPanel, finalPanel);
+				
 				finalTimeCom.setSelectedIndex(0);
 			}
 
@@ -143,14 +147,14 @@ public class ReserveHeaderContent extends JPanel {
 		startTimeCom.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				setDayTime(startPanel, finalPanel, finalPanel);
+				setTotalTime();
 			}
 		});
 
 		finalTimeCom.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				setDayTime(startPanel, finalPanel, finalPanel);
+				setTotalTime();
 			}
 		});
 
@@ -162,6 +166,11 @@ public class ReserveHeaderContent extends JPanel {
 
 		tfSetting(startPanel, finalPanel);
 
+	}
+	
+	private void viewCalender(TextFieldComponent TfPanel) {
+		cf = new CalendarFrame(TfPanel.getTextField());
+		cf.setVisible(true);
 	}
 
 	private void tfSetting(TextFieldComponent startPanel, TextFieldComponent finalPanel) {
@@ -178,46 +187,80 @@ public class ReserveHeaderContent extends JPanel {
 
 	}
 
-	private void setDayTime(TextFieldComponent startPanel, TextFieldComponent finalPanel, TextFieldComponent tf) {
+	private void compareToDay(TextFieldComponent startPanel) {
 		Date date1 = simpleDate.parse(toDay, new ParsePosition(0));
 		Date date2 = simpleDate.parse(startPanel.getTextField().getText(), new ParsePosition(0));
 
-		Date time1 = simpleTime.parse(presentTime, new ParsePosition(0));
+	/*	Date time1 = simpleTime.parse(presentTime, new ParsePosition(0));
 		Date time2 = simpleTime.parse((String) startTimeCom.getSelectedItem(), new ParsePosition(0));
 		if (time2 == null) {
 			time2 = time1;
-		}
+		}*/
 		if (date1.getTime() > date2.getTime()) {
 			JOptionPane.showMessageDialog(null, toDay + " 이후로 선택하세요");
 			startPanel.getTextField().setText(toDay);
-			viewCalender(tf);
+			viewCalender(startPanel);
 			return;
-		} else if (date1.getTime() == date2.getTime()) {
+		} /*else if (date1.getTime() == date2.getTime()) {
 			if (time1.getTime() > time2.getTime()) {
 				JOptionPane.showMessageDialog(null, presentTime + " 이후로 선택하세요");
 				startTimeCom.setSelectedIndex(0);
 				return;
 			}
-		}
+		}*/
 
 		startDay = startPanel.getTextField().getText();
-		startTime = startTimeCom.getSelectedItem().toString();
-		lastDay = finalPanel.getTextField().getText();
-		lastTime = finalTimeCom.getSelectedItem().toString();
+//		startTime = startTimeCom.getSelectedItem().toString();
+		
+//		lastTime = finalTimeCom.getSelectedItem().toString();
 
-		if (startTime.equals("시간선택") || lastTime.equals("시간선택")) {
+		/*if (startTime.equals("시간선택") || lastTime.equals("시간선택")) {
 			totalTimePanel.getTextField().setText("0");
 			return;
 		}
 
-		setTotalTime();
+		setTotalTime();*/
+
+	}
+	
+	
+	private void compareToDay(TextFieldComponent sPanel,TextFieldComponent fPanel) {
+		Date date1 = simpleDate.parse(toDay, new ParsePosition(0));
+		Date date2 = simpleDate.parse(sPanel.getTextField().getText(), new ParsePosition(0));
+
+	/*	Date time1 = simpleTime.parse(presentTime, new ParsePosition(0));
+		Date time2 = simpleTime.parse((String) startTimeCom.getSelectedItem(), new ParsePosition(0));
+		if (time2 == null) {
+			time2 = time1;
+		}*/
+		if (date1.getTime() > date2.getTime()) {
+			JOptionPane.showMessageDialog(null, toDay + " 이후로 선택하세요");
+			startPanel.getTextField().setText(toDay);
+			viewCalender(startPanel);
+			return;
+		} /*else if (date1.getTime() == date2.getTime()) {
+			if (time1.getTime() > time2.getTime()) {
+				JOptionPane.showMessageDialog(null, presentTime + " 이후로 선택하세요");
+				startTimeCom.setSelectedIndex(0);
+				return;
+			}
+		}*/
+
+		startDay = startPanel.getTextField().getText();
+//		startTime = startTimeCom.getSelectedItem().toString();
+		
+//		lastTime = finalTimeCom.getSelectedItem().toString();
+
+		/*if (startTime.equals("시간선택") || lastTime.equals("시간선택")) {
+			totalTimePanel.getTextField().setText("0");
+			return;
+		}
+
+		setTotalTime();*/
 
 	}
 
-	private void viewCalender(TextFieldComponent TfPanel) {
-		cf = new CalendarFrame(TfPanel.getTextField());
-		cf.setVisible(true);
-	}
+
 
 	private void setTotalTime() {
 		SimpleDateFormat sf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
@@ -232,7 +275,6 @@ public class ReserveHeaderContent extends JPanel {
 		if (fTime <= sTime) {
 			JOptionPane.showMessageDialog(null, "반납일이 대여일보다 뒤여야 합니다");
 			totalTimePanel.getTextField().setText("0");
-			finalPanel.getTextField().setText(toDay);
 			finalTimeCom.setSelectedIndex(0);
 			return;
 		}

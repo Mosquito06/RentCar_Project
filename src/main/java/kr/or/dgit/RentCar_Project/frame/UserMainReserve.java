@@ -7,64 +7,82 @@ import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 import kr.or.dgit.RentCar_Project.content.ReserveAddCarContent;
 import kr.or.dgit.RentCar_Project.content.ReserveHeaderContent;
 import kr.or.dgit.RentCar_Project.content.ReserveLeftContent;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EtchedBorder;
 
-public class UserMainReserve extends JPanel implements ActionListener {
-	private	ImageIcon img;
+@SuppressWarnings("serial")
+public class UserMainReserve extends JPanel {
+	
 
 	public UserMainReserve() {
 
 		setBounds(new Rectangle(0, 0, 500, 500));
 		setLayout(null);
 		
-		ReserveLeftContent panel_3 = new ReserveLeftContent();
-		panel_3.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.LOWERED, null, null)), "\uC0C1\uC138\uC815\uBCF4", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel_3.setBounds(0, 79, 302, 672);
-		add(panel_3);
-		panel_3.setLayout(null);
+		ReserveLeftContent leftPanel = new ReserveLeftContent();
+		leftPanel.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.LOWERED, null, null)), "\uC0C1\uC138\uC815\uBCF4", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		leftPanel.setBounds(0, 79, 302, 672);
+		add(leftPanel);
+		leftPanel.setLayout(null);
 		
-		JPanel panel_4 = new JPanel();
-		panel_4.setBounds(310, 112, 664, 639);
-		add(panel_4);
-		panel_4.setLayout(new BorderLayout(0, 0));
+		JPanel rightPanel = new JPanel();
+		rightPanel.setBounds(310, 112, 664, 639);
+		add(rightPanel);
+		rightPanel.setLayout(new BorderLayout(0, 0));
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		panel_4.add(scrollPane);
+		rightPanel.add(scrollPane);
 		
-		ReserveAddCarContent panel_8 = new ReserveAddCarContent();
-		panel_8.setBorder(new LineBorder(new Color(0, 0, 0)));
-		scrollPane.setViewportView(panel_8);
-		panel_8.setLayout(new GridLayout(0, 1, 0, 0));
+		JPanel carList = new JPanel();
+		scrollPane.setViewportView(carList);
+		carList.setLayout(null);
 		
-		ReserveHeaderContent panel = new ReserveHeaderContent();
-		panel.setBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.LOWERED, null, null)));
-		panel.setBounds(3, 3, 968, 72);
-		add(panel);
+		JLabel lblNewLabel = new JLabel("날짜를 입력해 주세요");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setBounds(88, 136, 496, 171);
+		carList.add(lblNewLabel);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(310, 77, 664, 35);
-		add(panel_1);
-		panel_1.setLayout(null);
+		ReserveHeaderContent header = new ReserveHeaderContent();
+		header.setBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.LOWERED, null, null)));
+		header.setBounds(3, 3, 968, 72);
+		add(header);
+		
+		header.getBtnSearch().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(header.getTotalTimePanel().getTextValue().equals("0")) {
+					JOptionPane.showMessageDialog(null, "날짜를 정확하게 입력하세요");
+					return;
+				}
+				ReserveAddCarContent addCar = new ReserveAddCarContent();
+				scrollPane.setViewportView(addCar);
+				addCar.setLayout(new GridLayout(0, 1, 0, 0));
+				
+			}
+		});
+		
 		
 		JButton btnB = new JButton("소형");
-		btnB.setBounds(399, 79, 74, 29);
+		btnB.setBounds(402, 79, 74, 29);
 		add(btnB);
 		
 		JButton btnC = new JButton("중형");
-		btnC.setBounds(485, 79, 74, 29);
+		btnC.setBounds(490, 79, 74, 29);
 		add(btnC);
 		
 		JButton btnD = new JButton("고급");
@@ -76,30 +94,20 @@ public class UserMainReserve extends JPanel implements ActionListener {
 		add(btnA);
 		
 		JButton btnE = new JButton("RV/SUV");
-		btnE.setBounds(675, 79, 86, 29);
+		btnE.setBounds(680, 79, 86, 29);
 		add(btnE);
 		
 		JButton btnF = new JButton("수입차");
-		btnF.setBounds(786, 79, 74, 29);
+		btnF.setBounds(792, 79, 74, 29);
 		add(btnF);
 		
 		JButton btnG = new JButton("승합차");
 		btnG.setBounds(888, 79, 74, 29);
 		add(btnG);
-		img = new ImageIcon("D:\\workspace\\workspace_java\\testProject\\src\\testProject\\ui\\car1.jpg");
-
 	}
-
-
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
-
-
+	
+	
+	
+	
+	
 }
