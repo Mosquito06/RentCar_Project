@@ -1,7 +1,7 @@
-CC	소형차
-FV	승합차
-HC	고급차
-IC	수입차
-MC	중형차
-RUV	RV/SUV
-SC	경차
+CC	소형차
+FV	승합차
+HC	고급차
+IC	수입차
+MC	중형차
+RUV	RV/SUV
+SC	경차

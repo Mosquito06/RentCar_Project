@@ -12,3 +12,4 @@ public interface FuelDao {
 	Fuel findFuelByFuelCode(int fuelCode);
 	List<Fuel> selectFuelByAll();
 }
+ 
