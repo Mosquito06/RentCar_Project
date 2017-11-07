@@ -79,7 +79,7 @@ CREATE TABLE car_project.user (
 CREATE TABLE car_project.rent (
 	user_code   INT(11),
 	use_time    INT(11),
-	isInsurance BOOLEAN,
+	is_insurance VARCHAR(11),
 	day_start   DATE,
 	day_end     DATE,
 	final_price INT(20),
