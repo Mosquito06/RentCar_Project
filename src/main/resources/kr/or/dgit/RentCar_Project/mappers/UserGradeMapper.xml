@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="kr.or.dgit.RentCar_Project.dao.UserGradeDao">
+	
+	<resultMap id="UserGradeResult" type="UserGrade" >
+		<id property="grade" column="grade"/>
+		<result property="discount" column="discount"/>
+	</resultMap>
+	
+	<sql id="selectSql">
+		select grade, discount from user_grade
+	</sql>
+	<sql id="whereSql">
+		<where>
+			<if test ="grade != null">
+				where grade = #{grade}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="selectUserGradeByGrade">
+		<include refid="selectSql"/>
+		<include refid="whereSql"/>
+	</select>
+</mapper>

@@ -3,7 +3,7 @@ package kr.or.dgit.RentCar_Project.dto;
 import java.util.Arrays;
 
 public class User {
-	private String userCode;
+	private int userCode;
 	private String id;
 	private String pw;
 	private String userName;
@@ -13,7 +13,7 @@ public class User {
 	private Gender gender;
 	private UserGrade grade;
 
-	public User(String userCode, String id, String pw, String userName, byte[] userImg, String phone, String email,
+	public User(int userCode, String id, String pw, String userName, byte[] userImg, String phone, String email,
 			Gender gender, UserGrade grade) {
 		super();
 		this.userCode = userCode;
@@ -32,11 +32,11 @@ public class User {
 		// TODO Auto-generated constructor stub
 	}
 
-	public String getUserCode() {
+	public int getUserCode() {
 		return userCode;
 	}
 
-	public void setUserCode(String userCode) {
+	public void setUserCode(int userCode) {
 		this.userCode = userCode;
 	}
 

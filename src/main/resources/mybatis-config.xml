@@ -27,6 +27,7 @@
 		</environment>
 	</environments>
 	<mappers>
-		<!-- <mapper resource="kr/or/dgit/mabatis_dev/mappers/StudentMapper.xml"/> -->
+		<mapper resource="kr/or/dgit/RentCar_Project/mappers/UserGradeMapper.xml"/>
+		<mapper resource="kr/or/dgit/RentCar_Project/mappers/UserMapper.xml"/>
 	</mappers>
 </configuration>
