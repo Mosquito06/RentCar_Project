@@ -26,10 +26,13 @@ import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
+import kr.or.dgit.RentCar_Project.content.CarModelContent;
+import kr.or.dgit.RentCar_Project.content.FuelManagerContent;
+import kr.or.dgit.RentCar_Project.content.ManufacturerManagerContent;
+import kr.or.dgit.RentCar_Project.content.RentalPriceManagerContent;
 
 public class AdminMainCarManager extends JPanel {
 	private JTable table;
-	private JTextField tfPath;
 
 	public AdminMainCarManager() {
 		setBounds(0, 0, 974, 751);
@@ -52,163 +55,29 @@ public class AdminMainCarManager extends JPanel {
 		btnAllReset.setBounds(756, 726, 97, 23);
 		add(btnAllReset);
 		
-		JPanel carModelPanel = new JPanel();
+		CarModelContent carModelPanel = new CarModelContent();
 		carModelPanel.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.RAISED, null, null)), " \uCC28\uC885 \uAD00\uB9AC  ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		carModelPanel.setBounds(12, 10, 597, 143);
+		carModelPanel.setBounds(12, 10, 574, 143);
 		add(carModelPanel);
 		carModelPanel.setLayout(null);
 		
-		kr.or.dgit.RentCar_Project.component.TextFieldComponent carModelCodePanel = new kr.or.dgit.RentCar_Project.component.TextFieldComponent("차종 코드");
-		carModelCodePanel.setBounds(5, 30, 230, 30);
-		carModelPanel.add(carModelCodePanel);
-		
-		kr.or.dgit.RentCar_Project.component.TextFieldComponent carModelNamePanel = new kr.or.dgit.RentCar_Project.component.TextFieldComponent("차종");
-		carModelNamePanel.setBounds(5, 80, 230, 30);
-		carModelPanel.add(carModelNamePanel);
-		
-		JButton btnCancelcm = new JButton("취소");
-		btnCancelcm.setBounds(501, 110, 66, 23);
-		carModelPanel.add(btnCancelcm);
-		
-		JButton btnAddcm = new JButton("추가");
-		btnAddcm.setBounds(501, 15, 66, 23);
-		carModelPanel.add(btnAddcm);
-		
-		JButton btnUpdatecm = new JButton("수정");
-		btnUpdatecm.setBounds(501, 40, 66, 23);
-		carModelPanel.add(btnUpdatecm);
-		
-		JButton btnDeletecm = new JButton("삭제");
-		btnDeletecm.setBounds(501, 65, 66, 23);
-		carModelPanel.add(btnDeletecm);
-		
-		JPanel panel = new JPanel();
-		panel.setBounds(248, 30, 224, 82);
-		carModelPanel.add(panel);
-		panel.setLayout(null);
-		
-		tfPath = new JTextField();
-		tfPath.setBounds(55, 10, 169, 29);
-		panel.add(tfPath);
-		tfPath.setColumns(10);
-		
-		JButton btnImgDelete = new JButton("이미지 삭제");
-		btnImgDelete.setBounds(112, 49, 112, 29);
-		panel.add(btnImgDelete);
-		
-		JButton btnImaAdd = new JButton("이미지 추가");
-		btnImaAdd.setBounds(0, 49, 112, 29);
-		panel.add(btnImaAdd);
-		
-		JLabel lblNewLabel = new JLabel("경로");
-		lblNewLabel.setBounds(0, 10, 47, 29);
-		panel.add(lblNewLabel);
-		
-		JPanel manufacturerPanel = new JPanel();
-		manufacturerPanel.setBounds(621, 10, 341, 143);
+		ManufacturerManagerContent manufacturerPanel = new ManufacturerManagerContent();
+		manufacturerPanel.setBounds(608, 10, 354, 143);
 		add(manufacturerPanel);
 		manufacturerPanel.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.RAISED, null, null)), " \uC81C\uC870\uD68C\uC0AC  ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		manufacturerPanel.setLayout(null);
 		
-		kr.or.dgit.RentCar_Project.component.TextFieldComponent companyCodePanel = new kr.or.dgit.RentCar_Project.component.TextFieldComponent("제조회사 코드");
-		companyCodePanel.setBounds(5, 30, 230, 30);
-		manufacturerPanel.add(companyCodePanel);
-		
-		kr.or.dgit.RentCar_Project.component.TextFieldComponent companyNamePanel = new kr.or.dgit.RentCar_Project.component.TextFieldComponent("제조사 이름");
-		companyNamePanel.setBounds(5, 70, 230, 30);
-		manufacturerPanel.add(companyNamePanel);
-		
-		JButton btnAddcp = new JButton("추가");
-		btnAddcp.setBounds(247, 15, 66, 23);
-		manufacturerPanel.add(btnAddcp);
-		
-		JButton btnUpdatecp = new JButton("수정");
-		btnUpdatecp.setBounds(247, 40, 66, 23);
-		manufacturerPanel.add(btnUpdatecp);
-		
-		JButton btnDeletecp = new JButton("삭제");
-		btnDeletecp.setBounds(247, 65, 66, 23);
-		manufacturerPanel.add(btnDeletecp);
-		
-		JButton btnCancelcp = new JButton("취소");
-		btnCancelcp.setBounds(247, 110, 66, 23);
-		manufacturerPanel.add(btnCancelcp);
-		
-		JPanel pricePanel = new JPanel();
-		pricePanel.setBounds(12, 163, 597, 167);
+		RentalPriceManagerContent pricePanel = new RentalPriceManagerContent();
+		pricePanel.setBounds(12, 163, 574, 167);
 		add(pricePanel);
 		pricePanel.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.RAISED, null, null)), " \uB300\uC5EC \uB2E8\uAC00 \uAD00\uB9AC  ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		pricePanel.setLayout(null);
 		
-		ComboBoxComponent priceCodePanel = new ComboBoxComponent("차 코드");
-		priceCodePanel.setBounds(5, 28, 230, 30);
-		pricePanel.add(priceCodePanel);
-		
-		TextFieldComponent basicPricePanel = new TextFieldComponent("기본가격");
-		basicPricePanel.setBounds(5, 68, 230, 30);
-		pricePanel.add(basicPricePanel);
-		
-		TextFieldComponent useTimePanel = new TextFieldComponent("사용시간");
-		useTimePanel.setBounds(5, 108, 230, 30);
-		pricePanel.add(useTimePanel);
-		
-		TextFieldComponent basicTimePricePanel = new TextFieldComponent("기본시간단가");
-		basicTimePricePanel.setBounds(247, 68, 230, 30);
-		pricePanel.add(basicTimePricePanel);
-		
-		TextFieldComponent exceedTimePricePanel = new TextFieldComponent("초과시간단가");
-		exceedTimePricePanel.setBounds(247, 108, 230, 30);
-		pricePanel.add(exceedTimePricePanel);
-		
-		TextFieldComponent insurancePanel = new TextFieldComponent("보험료");
-		insurancePanel.setBounds(247, 28, 230, 30);
-		pricePanel.add(insurancePanel);
-		
-		JButton btnAddp = new JButton("추가");
-		btnAddp.setBounds(503, 15, 66, 23);
-		pricePanel.add(btnAddp);
-		
-		JButton btnUpdatep = new JButton("수정");
-		btnUpdatep.setBounds(503, 40, 66, 23);
-		pricePanel.add(btnUpdatep);
-		
-		JButton btnDeletep = new JButton("삭제");
-		btnDeletep.setBounds(503, 65, 66, 23);
-		pricePanel.add(btnDeletep);
-		
-		JButton btnCancelp = new JButton("취소");
-		btnCancelp.setBounds(503, 131, 66, 23);
-		pricePanel.add(btnCancelp);
-		
-		JPanel oliPanel = new JPanel();
-		oliPanel.setBounds(621, 163, 341, 164);
+		FuelManagerContent oliPanel = new FuelManagerContent();
+		oliPanel.setBounds(608, 163, 354, 167);
 		add(oliPanel);
 		oliPanel.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.RAISED, null, null)), " \uC5F0\uB8CC\uAD00\uB9AC ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		oliPanel.setLayout(null);
-		
-		TextFieldComponent oliCodePanel = new TextFieldComponent("연료 코드");
-		oliCodePanel.setBounds(5, 30, 230, 30);
-		oliPanel.add(oliCodePanel);
-		
-		TextFieldComponent oliTypePanel = new TextFieldComponent("연료 타입");
-		oliTypePanel.setBounds(5, 80, 230, 30);
-		oliPanel.add(oliTypePanel);
-		
-		JButton btnAddo = new JButton("추가");
-		btnAddo.setBounds(247, 15, 66, 23);
-		oliPanel.add(btnAddo);
-		
-		JButton btnUpdateo = new JButton("수정");
-		btnUpdateo.setBounds(247, 40, 66, 23);
-		oliPanel.add(btnUpdateo);
-		
-		JButton btnDeleteo = new JButton("삭제");
-		btnDeleteo.setBounds(247, 65, 66, 23);
-		oliPanel.add(btnDeleteo);
-		
-		JButton btnCancelo = new JButton("취소");
-		btnCancelo.setBounds(247, 131, 66, 23);
-		oliPanel.add(btnCancelo);
 		
 		JPanel carPanel = new JPanel();
 		carPanel.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.RAISED, null, null)), " \uCC28\uB7C9 \uAD00\uB9AC  ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
