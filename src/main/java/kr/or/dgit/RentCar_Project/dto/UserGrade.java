@@ -24,6 +24,5 @@ public class UserGrade {
 	public String toString() {
 		return String.format("%s, %s", grade, discount);
 	}
-	
-	
+
 }
