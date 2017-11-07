@@ -9,5 +9,5 @@ public interface UserDao {
 	void updateUser(User user);
 	void deleteUser(String userCode);
 	User findUserByUserCode(String userCode);
-	List<User> selectFuelByAll();
+	List<User> selectUserByAll();
 }
