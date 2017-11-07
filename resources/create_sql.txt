@@ -36,7 +36,7 @@ CREATE TABLE car_project.fuel (
 CREATE TABLE car_project.car_data (
 	car_code          VARCHAR(11) primary key,
 	car_name          VARCHAR(20),
-	car_image         BLOB,
+	car_image         LONGBLOB,
 	car_old           INT(11),
 	car_number        INT(11),
 	is_auto           VARCHAR(11),
@@ -63,11 +63,11 @@ CREATE TABLE car_project.rental_price (
 
 -- 고객정보 테이블
 CREATE TABLE car_project.user (
-	user_code VARCHAR(11) primary key,
+	user_code INT(11) primary key auto_increment,
 	id        VARCHAR(20),
 	pw        VARCHAR(20),
 	user_name VARCHAR(11),
-	user_image BLOB,
+	user_image LONGBLOB,
 	phone     VARCHAR(11),
 	email     VARCHAR(11),
 	gender    VARCHAR(5),
@@ -77,7 +77,7 @@ CREATE TABLE car_project.user (
 
 -- 대여관리 테이블
 CREATE TABLE car_project.rent (
-	user_code   VARCHAR(11),
+	user_code   INT(11),
 	use_time    INT(11),
 	isInsurance BOOLEAN,
 	day_start   DATE,
