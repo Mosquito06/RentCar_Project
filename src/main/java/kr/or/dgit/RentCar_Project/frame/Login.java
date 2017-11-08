@@ -9,6 +9,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,6 +26,9 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 
+import kr.or.dgit.RentCar_Project.dao.UserDao;
+import kr.or.dgit.RentCar_Project.dto.User;
+import kr.or.dgit.RentCar_Project.service.UserService;
 import kr.or.dgit.RentCar_Setting.DBSettingHome;
 
 public class Login extends JFrame {
@@ -35,6 +39,7 @@ public class Login extends JFrame {
 	private ImageIcon idimg;
 	private ImageIcon pwimg;
 	private JCheckBox adminLoginBox;
+	private UserDao userDao;
 
 	public static void main(String[] args) {
 				
@@ -63,6 +68,7 @@ public class Login extends JFrame {
 	}
 
 	public Login() {
+		this.userDao = UserService.getInstance();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 666, 520);
 		contentPane = new JPanel();
@@ -141,7 +147,7 @@ public class Login extends JFrame {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				// 비밀번호 정규표현식
-				Pattern p = Pattern.compile("(^[a-zA-Z0-9!@#$%^&*()]{10,15}$)");
+				Pattern p = Pattern.compile("(^[a-zA-Z0-9!@#$%^&*()]{9,15}$)");
 				Matcher m = p.matcher(PwField.getText());
 
 				if (m.find()) {
@@ -182,7 +188,6 @@ public class Login extends JFrame {
 					return;
 				}
 
-				
 				if (adminLoginBox.isSelected()) {
 					JOptionPane.showMessageDialog(null, "관리자모드를 시작합니다.");
 					AdminMain frame = AdminMain.getInstance();
@@ -191,13 +196,35 @@ public class Login extends JFrame {
 					setVisible(false);
 					return;
 				} 
-				
-				
+								
 				if (idCheck > 0 || pwCheck > 0) {
 					JOptionPane.showMessageDialog(null, "아이디, 비밀번호를 확인해주세요.");
 				} else {
 					String Id = IdField.getText();
-					JOptionPane.showMessageDialog(null, Id + "님 환영합니다.");
+					String Pw = PwField.getText();
+					String ConfirmId = null;
+					String ConfirmPw = null;
+					List<User> list = userDao.selectUserByAll();
+					
+					for(User u : list) {
+						if(Id.equals(u.getId())) {
+							ConfirmId = u.getId();
+							if(Pw.equals(u.getPw())) {
+								ConfirmPw = u.getPw();
+								break;
+							}else {
+								JOptionPane.showMessageDialog(null, "비밀번호를 다시 확인해주세요.");
+								return;
+							}				
+						}
+					}
+					
+					if(ConfirmId == null) {
+						JOptionPane.showMessageDialog(null, "등록되지 않은 아이디입니다.");	
+						return;
+					}
+					
+					JOptionPane.showMessageDialog(null, Id + "님 환영합니다!");
 					UserMain frame = UserMain.getInstance();
 					frame.getContentPane().add(new UserMainHome(), BorderLayout.CENTER);
 					frame.setVisible(true);

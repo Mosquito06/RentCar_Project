@@ -7,7 +7,7 @@
 		<result property="id" column="id"/>
 		<result property="pw" column="pw"/>
 		<result property="userName" column="user_name"/>
-		<result property="userImg" column="user_img"/>
+		<result property="userImg" column="user_image"/>
 		<result property="phone" column="phone"/>
 		<result property="email" column="email"/>
 		<result property="grade.grade" column="grade"/>		
