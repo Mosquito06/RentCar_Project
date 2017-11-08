@@ -46,7 +46,7 @@ public class UserMainUpdate extends JPanel {
 		// DB에서 이미지 가져오기 테스트
 		UserDao userDao = UserService.getInstance();
 		User userCode = new User();
-		userCode.setUserCode(8);
+		userCode.setUserCode(21);
 		User findUser = userDao.selectUserByUserCode(userCode);
 		
 		
