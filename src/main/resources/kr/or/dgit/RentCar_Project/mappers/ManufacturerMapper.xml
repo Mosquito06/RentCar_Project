@@ -18,8 +18,39 @@
 		</where>
 	</sql>
 	
+	<sql id="insertSql">
+		insert into manufacturer 
+		values(#{manufacturerCode}, #{manufacturerName})
+	</sql>
+	
+	<sql id="updateSql">
+		update manufacturer set manufacturer_code = #{manufacturerCode}, manufacturer_name = #{manufacturerName}
+	</sql>
+	
+	<sql id="deleteSql">
+		delete from manufacturer
+	</sql>
+	
 	<select id="selectManufacturerByManufacturerCode" resultMap="ManufacturerResult">
 		<include refid="selectSql"/>
 		<include refid="whereSql"/>
 	</select>
+	
+	<select id="selectManufacturerByAll" resultMap="ManufacturerResult">
+		<include refid="selectSql"/>
+	</select>
+	
+	<insert id="insertManufacturer" parameterType="Manufacturer">
+		<include refid="insertSql"/>
+	</insert>
+	
+	<update id="updateManufacturer" parameterType="Manufacturer">
+		<include refid="updateSql"/>
+		<include refid="whereSql"/>
+	</update>
+	
+	<delete id="deleteManufacturer" parameterType="Manufacturer">
+		<include refid="deleteSql"/>
+		<include refid="whereSql"/>
+	</delete>
 </mapper>

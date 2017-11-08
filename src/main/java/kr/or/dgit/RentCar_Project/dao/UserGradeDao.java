@@ -8,7 +8,7 @@ public interface UserGradeDao {
 	
 	void insertUserGrade(UserGrade userGrade);
 	void updateUserGrade(UserGrade userGrade);
-	void deleteUserGrade(UserGrade userGrade);
-	UserGrade selectUserGradeByGrade(UserGrade grade);
+	void deleteUserGrade(UserGrade userGradeCode);
+	UserGrade selectUserGradeByGrade(UserGrade userGradeCode);
 	List<UserGrade> selectUserGradeByAll();
 }
