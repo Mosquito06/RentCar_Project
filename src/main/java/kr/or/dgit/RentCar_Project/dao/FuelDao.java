@@ -8,7 +8,7 @@ public interface FuelDao {
 	
 	void insertFuel(Fuel fuel);
 	void updateFuel(Fuel fuel);
-	void deleteFule(int fuelCode);
+	void deleteFule(Fuel fuelCode);
 	Fuel selectFuelByFuelCode(Fuel fuelCode);
 	List<Fuel> selectFuelByAll();
 }

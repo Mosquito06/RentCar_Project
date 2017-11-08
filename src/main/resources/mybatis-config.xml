@@ -29,5 +29,7 @@
 	<mappers>
 		<mapper resource="kr/or/dgit/RentCar_Project/mappers/UserGradeMapper.xml"/>
 		<mapper resource="kr/or/dgit/RentCar_Project/mappers/UserMapper.xml"/>
+		<mapper resource="kr/or/dgit/RentCar_Project/mappers/FuelMapper.xml"/>
+		<mapper resource="kr/or/dgit/RentCar_Project/mappers/RentMapper.xml"/>
 	</mappers>
 </configuration>

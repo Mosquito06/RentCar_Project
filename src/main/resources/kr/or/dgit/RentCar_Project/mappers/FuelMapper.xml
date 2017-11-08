@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.dgit.RentCar_Project.dao.FuelDao">
+	
+	<resultMap type="Fuel" id="FuelResult">
+		<id property="fuelCode" column="fuel_code"/>
+		<result property = "fuelName" column="fuel_type"/>
+	</resultMap>
+	
+	<sql id="selectSql">
+		select fuel_code, fuel_type as fuelName from fuel
+	</sql>
+	
+	<sql id="insertSql">
+		insert into fuel(fuel_code, fuel_type) 
+		values(#{fuelCode}, #{fuelName})
+	</sql>
+	
+	<sql id="updateSql">
+		update fuel set fuel_type=#{fuelName}
+		where fuel_code = #{fuelCode}
+	</sql>
+	
+	<sql id="deleteSql">
+		delete from fuel where fuel_code = #{fuelCode}
+	</sql>
+	<select id="selectFuelByAll" resultMap="FuelResult">
+		<include refid="selectSql"></include>
+	</select>
+	
+	<insert id="insertFuel" parameterType="Fuel">
+		<include refid="insertSql"></include>
+	</insert>
+	
+	<update id="updateFuel" parameterType="Fuel">
+		<include refid="updateSql"></include>
+	</update>
+	
+	<delete id="deleteFule">
+		<include refid="deleteSql"></include>
+	</delete>
+	
+</mapper>
