@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.dgit.RentCar_Project.dao.CarModelDao">
+	
+	<resultMap id="CarModelResult" type="CarModel" >
+		<id property="carModelCode" column="car_model_code"/>
+		<result property="carModel" column="car_model"/>
+	</resultMap>
+	
+	<sql id="selectSql">
+		select car_model_code, car_model from car_model
+	</sql>
+	<sql id="whereSql">
+		<where>
+			<if test ="carModelCode != null">
+				car_model_code = #{carModelCode}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="selectCarModelByCarModelCode" resultMap="CarModelResult">
+		<include refid="selectSql"/>
+		<include refid="whereSql"/>
+	</select>
+</mapper>
