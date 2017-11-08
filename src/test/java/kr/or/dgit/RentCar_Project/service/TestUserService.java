@@ -51,7 +51,41 @@ public class TestUserService {
 		
 	}
 	
-	private byte[] getImg() {
+	@Test
+	public void test2FindSelectUserByUserCode() {
+		User user = new User();
+		user.setUserCode(1);
+		
+		User findUser = userService.selectUserByUserCode(user);
+		Assert.assertNotNull(findUser);
+	}
+	
+	@Test
+	public void test3FindSelectUserByAll() {
+		List<User> list = userService.selectUserByAll();
+		Assert.assertNotNull(list);
+	}
+	
+	@Test
+	public void test4UpdeteUserByUserCode() {
+		UserGrade userGrade = new UserGrade();
+		userGrade.setGrade("C");
+		
+		User user = new User(3, "RENTHAJO003", "1111111111", "김동환", getImg(), "010-1111-2222", "김동환@naver.com", Gender.MALE, userGrade);
+		userService.updateUser(user);
+		
+	}
+	
+	@Test
+	public void test5DeleteUserByUserCode() {
+		User user = new User();
+		user.setUserCode(5);
+		
+		userService.deleteUser(user);
+		
+	}
+	
+	public byte[] getImg() {
 		byte[] img = null;
 		File file = new File(System.getProperty("user.dir") + "\\images\\userBig\\user1.png");
 		try {
@@ -68,21 +102,6 @@ public class TestUserService {
 		}
 		
 		return img;
-	}
-
-	@Test
-	public void test2FindSelectUserByUserCode() {
-		User user = new User();
-		user.setUserCode(1);
-		
-		User findUser = userService.selectUserByUserCode(user);
-		Assert.assertNotNull(findUser);
-	}
-	
-	@Test
-	public void test3FindSelectUserByAll() {
-		List<User> list = userService.selectUserByAll();
-		Assert.assertNotNull(list);
 	}
 
 }
