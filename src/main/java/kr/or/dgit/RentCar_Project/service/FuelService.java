@@ -9,11 +9,11 @@ import kr.or.dgit.RentCar_Project.dto.Fuel;
 import kr.or.dgit.RentCar_Project.util.MyBatisSqlSessionFactory;
 
 public class FuelService implements FuelDao {
-	private static final FuelService instance = new FuelService();
+	private static final FuelService INSTANCE = new FuelService();
 	private FuelDao fuelDao;
 	
 	public static FuelService getInstance() {
-		return instance;
+		return INSTANCE;
 	}
 	
 	private FuelService() {}

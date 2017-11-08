@@ -55,7 +55,7 @@ public class TestManufacturerService {
 	}
 
 	@Test
-	public void test5test5DeleteManufacturerByManufacturerCode() {
+	public void test5DeleteManufacturerByManufacturerCode() {
 		Manufacturer manufacturer = new Manufacturer("BZ", "벤또");
 		manufacturerService.deleteManufacturer(manufacturer);
 	}

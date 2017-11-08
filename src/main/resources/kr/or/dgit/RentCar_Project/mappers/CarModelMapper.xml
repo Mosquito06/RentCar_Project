@@ -18,8 +18,39 @@
 		</where>
 	</sql>
 	
+	<sql id="insertSql">
+		insert into car_model 
+		values(#{carModelCode}, #{carModel})
+	</sql>
+	
+	<sql id="updateSql">
+		update car_model set car_model_code = #{carModelCode}, car_model = #{carModel}
+	</sql>
+	
+	<sql id="deleteSql">
+		delete from car_model
+	</sql>
+	
 	<select id="selectCarModelByCarModelCode" resultMap="CarModelResult">
 		<include refid="selectSql"/>
 		<include refid="whereSql"/>
 	</select>
+	
+	<select id="selectCarModelByAll" resultMap="CarModelResult">
+		<include refid="selectSql"/>
+	</select>
+	
+	<insert id="insertCarModel" parameterType="CarModel">
+		<include refid="insertSql"/>
+	</insert>
+	
+	<update id="updateCarModel" parameterType="CarModel">
+		<include refid="updateSql"/>
+		<include refid="whereSql"/>
+	</update>
+	
+	<delete id="deleteCarModel" parameterType="CarModel">
+		<include refid="deleteSql"/>
+		<include refid="whereSql"/>
+	</delete>
 </mapper>

@@ -65,7 +65,7 @@ public class TestUserGradeService {
 	@Test
 	public void test5DeleteUserGradeByGrade() {
 		UserGrade userGrade = new UserGrade();
-		userGrade.setGrade("D");
+		userGrade.setGrade("E");
 	
 		userGradeService.deleteUserGrade(userGrade);
 	}
