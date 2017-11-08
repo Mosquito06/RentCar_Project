@@ -22,6 +22,7 @@ import javax.swing.border.TitledBorder;
 import kr.or.dgit.RentCar_Project.content.ReserveAddCarContent;
 import kr.or.dgit.RentCar_Project.content.ReserveHeaderContent;
 import kr.or.dgit.RentCar_Project.content.ReserveLeftContent;
+import javax.swing.ImageIcon;
 
 @SuppressWarnings("serial")
 public class UserMainReserve extends JPanel {
@@ -45,15 +46,21 @@ public class UserMainReserve extends JPanel {
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane.getVerticalScrollBar().setUnitIncrement(10);
 		rightPanel.add(scrollPane);
 		
 		JPanel carList = new JPanel();
 		scrollPane.setViewportView(carList);
 		carList.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("날짜를 입력해 주세요");
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\DGIT3-10\\Desktop\\if_BT_c3angle_905667.png"));
+		lblNewLabel_1.setBounds(65, 0, 522, 590);
+		carList.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel = new JLabel("날짜를 입력하세요");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(88, 136, 496, 171);
+		lblNewLabel.setBounds(24, 40, 210, 101);
 		carList.add(lblNewLabel);
 		
 		ReserveHeaderContent header = new ReserveHeaderContent();
@@ -105,9 +112,4 @@ public class UserMainReserve extends JPanel {
 		btnG.setBounds(888, 79, 74, 29);
 		add(btnG);
 	}
-	
-	
-	
-	
-	
 }

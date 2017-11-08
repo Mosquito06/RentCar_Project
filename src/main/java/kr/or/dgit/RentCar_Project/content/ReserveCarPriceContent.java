@@ -25,7 +25,7 @@ public class ReserveCarPriceContent extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public ReserveCarPriceContent() {
+	public ReserveCarPriceContent(String name) {
 		setBorder(new LineBorder(new Color(0, 0, 0)));
 		setLayout(new BorderLayout(0, 0));
 
@@ -58,12 +58,12 @@ public class ReserveCarPriceContent extends JPanel {
 		add(carValuePanel, BorderLayout.NORTH);
 		carValuePanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
-		JLabel lblCarName = new JLabel("소나타");
+		JLabel lblCarName = new JLabel(name);
 		lblCarName.setFont(new Font("굴림", Font.BOLD, 17));
 		lblCarName.setHorizontalAlignment(SwingConstants.CENTER);
 		carValuePanel.add(lblCarName);
 
-		JLabel lblCaValue = new JLabel("오토/휘발유");
+		JLabel lblCaValue = new JLabel();
 		carValuePanel.add(lblCaValue);
 
 	}
