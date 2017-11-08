@@ -18,8 +18,38 @@
 		</where>
 	</sql>
 	
+	<sql id="insertSql">
+		insert into user_grade values(#{grade}, #{discount})
+	</sql>
+	
+	<sql id="updateSql">
+		update user_grade set grade = #{grade}, discount = #{discount}
+	</sql>
+	
+	<sql id="deleteSql">
+		delete from user_grade
+	</sql>
+	
 	<select id="selectUserGradeByGrade" resultMap="UserGradeResult">
 		<include refid="selectSql"/>
 		<include refid="whereSql"/>
 	</select>
+	
+	<select id="selectUserGradeByAll" resultMap="UserGradeResult">
+		<include refid="selectSql"/>
+	</select>
+	
+	<insert id="insertUserGrade" parameterType="UserGrade">
+		<include refid="insertSql"/>
+	</insert>
+	
+	<update id="updateUserGrade">
+		<include refid="updateSql"/>
+		<include refid="whereSql"/>
+	</update>
+	
+	<delete id="deleteUserGrade">
+		<include refid="deleteSql"/>
+		<include refid="whereSql"/>
+	</delete>
 </mapper>

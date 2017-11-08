@@ -26,19 +26,31 @@ public class UserGradeService implements UserGradeDao {
 	
 	@Override
 	public void insertUserGrade(UserGrade userGrade) {
-		// TODO Auto-generated method stub
+		try(SqlSession sqlsession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();){
+			userGradeDao = sqlsession.getMapper(UserGradeDao.class);
+			userGradeDao.insertUserGrade(userGrade);
+			sqlsession.commit();
+		}
 
 	}
 
 	@Override
 	public void updateUserGrade(UserGrade userGrade) {
-		// TODO Auto-generated method stub
+		try(SqlSession sqlsession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();){
+			userGradeDao = sqlsession.getMapper(UserGradeDao.class);
+			userGradeDao.updateUserGrade(userGrade);
+			sqlsession.commit();
+		}
 
 	}
 
 	@Override
-	public void deleteUserGrade(String grade) {
-		// TODO Auto-generated method stub
+	public void deleteUserGrade(UserGrade userGrade) {
+		try(SqlSession sqlsession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();){
+			userGradeDao = sqlsession.getMapper(UserGradeDao.class);
+			userGradeDao.deleteUserGrade(userGrade);
+			sqlsession.commit();
+		}
 
 	}
 
@@ -52,8 +64,10 @@ public class UserGradeService implements UserGradeDao {
 
 	@Override
 	public List<UserGrade> selectUserGradeByAll() {
-		// TODO Auto-generated method stub
-		return null;
+		try(SqlSession sqlsession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();){
+			userGradeDao = sqlsession.getMapper(UserGradeDao.class);
+			return userGradeDao.selectUserGradeByAll();
+		}
 	}
 
 }

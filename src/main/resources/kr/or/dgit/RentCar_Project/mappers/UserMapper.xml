@@ -52,12 +52,12 @@
 		<include refid="insertSql"/>
 	</insert>
 	
-	<update id="updateUser">
+	<update id="updateUser" parameterType="User">
 		<include refid="updateSql"/>
 		<include refid="whereSql"/>
 	</update>
 	
-	<delete id="deleteUser">
+	<delete id="deleteUser" parameterType="User">
 		<include refid="deleteSql"/>
 		<include refid="whereSql"/>
 	</delete>

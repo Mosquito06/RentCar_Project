@@ -1,5 +1,7 @@
 package kr.or.dgit.RentCar_Project.service;
 
+import java.util.List;
+
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -25,12 +27,48 @@ public class TestUserGradeService {
 	}
 
 	@Test
-	public void test1FindSelectUserGradeByGrade() {
+	public void test1InsertUserGrade() {
+		UserGrade userGrade = new UserGrade();
+		userGrade.setGrade("E");
+		userGrade.setDiscount(1);
+		
+		userGradeService.insertUserGrade(userGrade);
+		
+	}
+	
+	
+	@Test
+	public void test2FindSelectUserGradeByGrade() {
 		UserGrade userGrade = new UserGrade();
 		userGrade.setGrade("C");
 		
 		UserGrade findUserGrade = userGradeService.selectUserGradeByGrade(userGrade);
 		Assert.assertNotNull(findUserGrade);
 	}
+	
+	@Test
+	public void test3FindSelectUserGradeByAll() {
+		List<UserGrade> list = userGradeService.selectUserGradeByAll();
+		Assert.assertNotNull(list);
+		
+	}
+	
+	@Test
+	public void test4UpdeteUserGradeByGrade() {
+		UserGrade userGrade = new UserGrade();
+		userGrade.setGrade("E");
+		userGrade.setDiscount(0);
+		
+		userGradeService.updateUserGrade(userGrade);
+	}
+	
+	@Test
+	public void test5DeleteUserGradeByGrade() {
+		UserGrade userGrade = new UserGrade();
+		userGrade.setGrade("D");
+	
+		userGradeService.deleteUserGrade(userGrade);
+	}
+	
 
 }
