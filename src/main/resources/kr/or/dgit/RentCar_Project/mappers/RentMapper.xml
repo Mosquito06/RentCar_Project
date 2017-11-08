@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.dgit.RentCar_Project.dao.RentDao">
+	<resultMap type="Rent" id="RentResult">
+		<result property="userCode.userCode" column="user_code"/>
+		<result property="userTime" column="use_time"/>
+		<result property="dayStart" column="day_start"/>
+		<result property="dayEnd" column="day_end"/>
+		<result property="finalPrice" column="final_price"/>
+		<result property="carCode.carCode" column="car_code"/>
+	</resultMap>
+	
+	<sql id="whereSql">
+		<where>
+			<if test="userCode.userCode !=null">
+				user_code = #{userCode.userCode}
+			</if>
+		</where>
+	</sql>
+	
+	<sql id="selectSql">
+		select user_code, use_time, isInsurance, day_start, day_end, final_price, car_code
+		from rent
+	</sql>
+	<sql id="insertSql">
+		insert into rent(user_code, use_time, isInsurance, day_start, day_end, final_price, car_code)
+		values(#{userCode.userCode}, #{userTime}, #{isInsurance}, #{dayStart}, #{dayEnd}, #{finalPrice}, #{carCode.carCode})
+	</sql>
+	<sql id="updateSql">
+		update rent
+		set user_code=#{userCode.userCode}, use_time=#{userTime}, isInsurance=#{isInsurance}, day_start=#{dayStart}, day_end=#{dayEnd}, final_price=#{finalPrice}, car_code=#{carCode.carCode}
+	</sql>
+	<sql id="deleteSql">
+		delete from rent
+	</sql>
+	
+	<select id="selectRentByUserCode" resultMap="RentResult">
+		<include refid="selectSql"/>
+		<include refid="whereSql"/>
+	</select>
+	<select id="selectRentByAll" resultMap="RentResult">
+		<include refid="selectSql"></include>
+	</select>
+	<insert id="insertRent" parameterType="Rent">
+		<include refid="insertSql"></include>
+	</insert>
+	<update id="updateRent">
+		<include refid="updateSql"/>
+		<include refid="whereSql"/>
+	</update>
+	<delete id="deleteRent">
+		<include refid="deleteSql"/>
+		<include refid="whereSql"/>
+	</delete>
+	
+</mapper>
