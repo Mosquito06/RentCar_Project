@@ -34,13 +34,21 @@ public class UserService implements UserDao {
 
 	@Override
 	public void updateUser(User user) {
-		// TODO Auto-generated method stub
+		try(SqlSession sqlsession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();){
+			userDao = sqlsession.getMapper(UserDao.class);
+			userDao.updateUser(user);
+			sqlsession.commit();
+		}
 
 	}
 
 	@Override
 	public void deleteUser(User user) {
-		// TODO Auto-generated method stub
+		try(SqlSession sqlsession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();){
+			userDao = sqlsession.getMapper(UserDao.class);
+			userDao.deleteUser(user);
+			sqlsession.commit();
+		}
 
 	}
 
