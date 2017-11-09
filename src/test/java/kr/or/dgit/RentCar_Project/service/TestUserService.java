@@ -49,7 +49,7 @@ public class TestUserService {
 		
 		userService.insertUser(user);
 		
-	}*/
+	}
 	
 	@Test
 	public void test2FindSelectUserByUserCode() {
@@ -58,34 +58,35 @@ public class TestUserService {
 		
 		User findUser = userService.selectUserByUserCode(user);
 		Assert.assertNotNull(findUser);
-	}
+	}*/
 	
 	/*@Test
 	public void test3FindSelectUserByAll() {
 		List<User> list = userService.selectUserByAll();
 		Assert.assertNotNull(list);
-	}*/
+	}
 	
-	/*@Test
+	@Test
 	public void test4UpdeteUserByUserCode() {
 		UserGrade userGrade = new UserGrade();
 		userGrade.setGrade("A");
 		
 		User user = new User();
 		user.setGrade(userGrade);
-		user.setUserCode(userCode);
+		user.setGender(gender);
+		user.setUserCode(3);
 		userService.updateUser(user);
 		
 	}*/
 	
-	/*@Test
+	@Test
 	public void test5DeleteUserByUserCode() {
 		User user = new User();
-		user.setUserCode(5);
+		user.setUserCode(13);
 		
 		userService.deleteUser(user);
 		
-	}*/
+	}
 	
 	public byte[] getImg() {
 		byte[] img = null;

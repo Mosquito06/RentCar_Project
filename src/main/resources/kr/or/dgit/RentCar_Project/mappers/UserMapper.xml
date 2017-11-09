@@ -17,7 +17,7 @@
 		select user_code, id, pw, user_name, user_image, phone, email, gender, grade from user
 	</sql>
 	
-	<sql id="whereSql">
+	<sql id="whereAllSql">
 		<where>
 			<if test="userCode != null">
 				user_code = #{userCode}
@@ -49,6 +49,14 @@
 		</where>
 	</sql>
 	
+	<sql id="wherePrimarySql">
+		<where>
+			<if test="userCode != null">
+				user_code = #{userCode}
+			</if>
+		</where>
+	</sql>
+	
 	<sql id="insertSql">
 		insert into user(id, pw, user_name, user_image, phone, email, gender, grade) 
 		values(#{id}, #{pw}, #{userName}, #{userImg}, #{phone}, #{email}, #{gender}, #{grade.grade})
@@ -60,7 +68,7 @@
 	
 	<select id="selectUserByUserCode" parameterType="User" resultMap="UserResult">
 		<include refid="selectSql"/>
-		<include refid="whereSql"/>
+		<include refid="wherePrimarySql"/>
 	</select>
 	
 	<select id="selectUserByAll" resultMap="UserResult">
@@ -102,11 +110,11 @@
 					grade = #{grade.grade},
 				</if>
 			</set>
-		<include refid="whereSql"/>
+		<include refid="wherePrimarySql"/>
 	</update>
 	
 	<delete id="deleteUser" parameterType="User">
 		<include refid="deleteSql"/>
-		<include refid="whereSql"/>
+		<include refid="wherePrimarySql"/>
 	</delete>
 </mapper>
