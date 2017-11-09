@@ -31,7 +31,7 @@ public class TestRentService {
 		rentService=null;
 	}
 
-	@Test
+/*	@Test
 	public void test1InsertRent() {
 		Rent rent = new Rent();
 		
@@ -83,7 +83,7 @@ public class TestRentService {
 		user.setUserCode(4);
 		rent.setUserCode(user);
 		rentService.deleteRent(rent);
-	}
+	}*/
 	
 	@Test
 	public void test3SelectRentByAll(){
