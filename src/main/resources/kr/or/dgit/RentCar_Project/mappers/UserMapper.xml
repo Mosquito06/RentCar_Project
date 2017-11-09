@@ -19,8 +19,32 @@
 	
 	<sql id="whereSql">
 		<where>
-			<if test ="userCode !=null">
+			<if test="userCode != null">
 				user_code = #{userCode}
+			</if>
+			<if test="id != null">
+				and id = #{id}
+			</if>
+			<if test="pw != null">
+				and pw = #{pw}
+			</if>
+			<if test="userName != null">
+				and user_name = #{userName}
+			</if>
+			<if test="userImg != null">
+				and user_image = #{userImg}
+			</if>
+			<if test="phone != null">
+				and phone = #{phone}
+			</if>
+			<if test="email != null">
+				and email = #{email}
+			</if>
+			<if test="gender != null">
+				and gender = #{gender}
+			</if>
+			<if test="grade.grade != null">
+				and grade = #{grade.grade}
 			</if>
 		</where>
 	</sql>
@@ -29,12 +53,7 @@
 		insert into user(id, pw, user_name, user_image, phone, email, gender, grade) 
 		values(#{id}, #{pw}, #{userName}, #{userImg}, #{phone}, #{email}, #{gender}, #{grade.grade})
 	</sql>
-	
-	<sql id="updateSql">
-		update user set id = #{id}, pw = #{pw}, user_name = #{userName}, user_image = #{userImg}, 
-		phone = #{phone}, email = #{email}, gender = #{gender}, grade = #{grade.grade}
-	</sql>
-	
+		
 	<sql id="deleteSql">
 		delete from user
 	</sql>
@@ -53,7 +72,36 @@
 	</insert>
 	
 	<update id="updateUser" parameterType="User">
-		<include refid="updateSql"/>
+		update user 
+			<set>
+				<if test="userCode != null">
+					user_code = #{userCode},
+				</if>
+				<if test="id != null">
+					id = #{id},
+				</if>
+				<if test="pw != null">
+					pw = #{pw},
+				</if>
+				<if test="userName != null">
+					user_name = #{userName},
+				</if>
+				<if test="userImg != null">
+					user_image = #{userImg},
+				</if>
+				<if test="phone != null">
+					phone = #{phone},
+				</if>
+				<if test="email != null">
+					email = #{email},
+				</if>
+				<if test="gender != null">
+					gender = #{gender},
+				</if>
+				<if test="grade.grade != null">
+					grade = #{grade.grade},
+				</if>
+			</set>
 		<include refid="whereSql"/>
 	</update>
 	

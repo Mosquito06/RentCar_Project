@@ -33,7 +33,7 @@ public class TestUserService {
 		userService = null;
 	}
 
-	@Test
+	/*@Test
 	public void test1InsertUser() {
 		User user = new User();
 		user.setId("RENTHAJO004");
@@ -49,7 +49,7 @@ public class TestUserService {
 		
 		userService.insertUser(user);
 		
-	}
+	}*/
 	
 	@Test
 	public void test2FindSelectUserByUserCode() {
@@ -60,30 +60,32 @@ public class TestUserService {
 		Assert.assertNotNull(findUser);
 	}
 	
-	@Test
+	/*@Test
 	public void test3FindSelectUserByAll() {
 		List<User> list = userService.selectUserByAll();
 		Assert.assertNotNull(list);
-	}
+	}*/
 	
-	@Test
+	/*@Test
 	public void test4UpdeteUserByUserCode() {
 		UserGrade userGrade = new UserGrade();
-		userGrade.setGrade("C");
+		userGrade.setGrade("A");
 		
-		User user = new User(3, "RENTHAJO003", "1111111111", "김동환", getImg(), "010-1111-2222", "김동환@naver.com", Gender.MALE, userGrade);
+		User user = new User();
+		user.setGrade(userGrade);
+		user.setUserCode(userCode);
 		userService.updateUser(user);
 		
-	}
+	}*/
 	
-	@Test
+	/*@Test
 	public void test5DeleteUserByUserCode() {
 		User user = new User();
 		user.setUserCode(5);
 		
 		userService.deleteUser(user);
 		
-	}
+	}*/
 	
 	public byte[] getImg() {
 		byte[] img = null;
