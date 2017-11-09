@@ -7,26 +7,37 @@ public class CarData {
 	private String carName;
 	private byte[] carImage;
 	private int carOld;
-	private int carNumder;
+	private int carNumber;
 	private IsAuto isAuto;
 	private String carSeater;
 	private CarModel carModelCode;
 	private Manufacturer manufacturerCode;
 	private Fuel fuelCode;
 
-	public CarData(String carCode, String carName, byte[] carImage, int carOld, int carNumder, IsAuto isAuto,
+	public CarData(String carCode, String carName, byte[] carImage, int carOld, int carNumber, IsAuto isAuto,
 			String carSeater, CarModel carModelCode, Manufacturer manufacturerCode, Fuel fuelCode) {
 		super();
 		this.carCode = carCode;
 		this.carName = carName;
 		this.carImage = carImage;
 		this.carOld = carOld;
-		this.carNumder = carNumder;
+		this.carNumber = carNumber;
 		this.isAuto = isAuto;
 		this.carSeater = carSeater;
 		this.carModelCode = carModelCode;
 		this.manufacturerCode = manufacturerCode;
 		this.fuelCode = fuelCode;
+	}
+
+	public CarData(String carCode) {
+		super();
+		this.carCode = carCode;
+	}
+
+	public CarData(String carCode, String carName) {
+		super();
+		this.carCode = carCode;
+		this.carName = carName;
 	}
 
 	public CarData() {
@@ -66,12 +77,12 @@ public class CarData {
 		this.carOld = carOld;
 	}
 
-	public int getCarNumder() {
-		return carNumder;
+	public int getCarNumber() {
+		return carNumber;
 	}
 
-	public void setCarNumder(int carNumder) {
-		this.carNumder = carNumder;
+	public void setCarNumber(int carNumber) {
+		this.carNumber = carNumber;
 	}
 
 	public IsAuto getIsAuto() {
@@ -117,8 +128,8 @@ public class CarData {
 	@Override
 	public String toString() {
 		return String.format(
-				"CarData [carCode=%s, carName=%s, carImage=%s, carOld=%s, carNumder=%s, isAuto=%s, carSeater=%s, carModelCode=%s, manufacturerCode=%s, fuelCode=%s]",
-				carCode, carName, Arrays.toString(carImage), carOld, carNumder, isAuto, carSeater, carModelCode,
+				"CarData [carCode=%s, carName=%s, carImage=%s, carOld=%s, carNumber=%s, isAuto=%s, carSeater=%s, carModelCode=%s, manufacturerCode=%s, fuelCode=%s]",
+				carCode, carName, Arrays.toString(carImage), carOld, carNumber, isAuto, carSeater, carModelCode,
 				manufacturerCode, fuelCode);
 	}
 

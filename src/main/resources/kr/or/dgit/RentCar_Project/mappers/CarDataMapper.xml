@@ -7,16 +7,16 @@
 		<result property="carName" column="car_name"/>
 		<result property="carImage" column="car_image"/>
 		<result property="carOld" column="car_old"/>
-		<result property="carNumder" column="car_numder"/>
+		<result property="carNumber" column="car_number"/>
 		<result property="isAuto" column="is_auto"/>
 		<result property="carSeater" column="car_seater"/>
-		<result property="carModelCode" column="car_model_code"/>
-		<result property="manufacturerCode" column="manufacturer_code"/>
-		<result property="fuelCode" column="fuel_code"/>
+		<result property="carModelCode.carModelCode" column="car_model_code"/>
+		<result property="manufacturerCode.manufacturerCode" column="manufacturer_code"/>
+		<result property="fuelCode.fuelCode" column="fuel_code"/>
 	</resultMap>
 	
 	<sql id="selectSql">
-		select car_code, car_name, car_image, car_old, car_numder, is_auto,
+		select car_code, car_name, car_image, car_old, car_number, is_auto,
 		car_seater, car_model_code, manufacturer_code, fuel_code from car_data
 	</sql>
 	
@@ -24,7 +24,7 @@
 	<sql id="whereSql">
 		<where>
 			<if test ="carCode != null">
-				and car_code = #{carCode}
+				car_code = #{carCode}
 			</if>
 			<if test ="carName != null">
 			 	and car_name = #{carName}
@@ -35,8 +35,8 @@
 			<if test ="carOld != null">
 				and car_old = #{carOld}
 			</if>
-			<if test ="carNumder != null">
-				and car_numder = #{carNumder}
+			<if test ="carNumber != null">
+				and car_number = #{carNumber}
 			</if>
 			<if test ="isAuto != null">
 				and is_auto = #{isAuto}
@@ -57,19 +57,20 @@
 		</where>
 	</sql>
 	
-	<sql id="insertSql">
-		insert into car_data
-	</sql>
+	<!-- <sql id="insertSql">
+		insert into car_data values(#{carCode}, #{carName},#{carImage},#{carOld},#{carNumber},#{isAuto},#{carSeater}
+		,#{carModelCode},#{manufacturerCode},#{fuelCode})
+	</sql> -->
 	
 	<sql id="updateSql">
 		update car_data
 	</sql>
 	
 	<sql id="deleteSql">
-		delete from car_model
+		delete from car_data
 	</sql>
 	
-	<select id="selectCarModelByCarDataCode" resultMap="CarDataResult">
+	<select id="selectCarDataByCarDataCode" resultMap="CarDataResult">
 		<include refid="selectSql"/>
 		<include refid="whereSql"/>
 	</select>
@@ -78,12 +79,12 @@
 		<include refid="selectSql"/>
 	</select>
 	
-	<insert id="insertCarModel" parameterType="CarData">
+	<!-- <insert id="insertCarData" parameterType="CarData">
 		<include refid="insertSql"/>
-	</insert>
+	</insert> -->
 	
 	
-	<update id="updateSql" parameterType="CarData">
+	<update id="updateCarData" parameterType="CarData">
 		<include refid="updateSql"/>
 		<set>
 			<if test ="carCode != null">
@@ -98,8 +99,8 @@
 			<if test ="carOld != null">
 				car_old = #{carOld},
 			</if>
-			<if test ="carNumder != null">
-				car_numder = #{carNumder},
+			<if test ="carNumber != null">
+				car_number = #{carNumber},
 			</if>
 			<if test ="isAuto != null">
 				is_auto = #{isAuto},
