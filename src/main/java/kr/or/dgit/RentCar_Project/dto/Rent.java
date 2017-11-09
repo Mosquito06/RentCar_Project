@@ -20,6 +20,7 @@ public class Rent {
 		this.dayStart = dayStart;
 		this.dayEnd = dayEnd;
 		this.finalPrice = finalPrice;
+		
 		this.carCode = carCode;
 	}
 
