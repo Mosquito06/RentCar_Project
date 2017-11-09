@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.dgit.RentCar_Project.dao.CarDataDao">
+	
+	<resultMap id="CarDataResult" type="CarData" >
+		<id property="carCode" column="car_code"/>
+		<result property="carName" column="car_name"/>
+		<result property="carImage" column="car_image"/>
+		<result property="carOld" column="car_old"/>
+		<result property="carNumder" column="car_numder"/>
+		<result property="isAuto" column="is_auto"/>
+		<result property="carSeater" column="car_seater"/>
+		<result property="carModelCode" column="car_model_code"/>
+		<result property="manufacturerCode" column="manufacturer_code"/>
+		<result property="fuelCode" column="fuel_code"/>
+	</resultMap>
+	
+	<sql id="selectSql">
+		select car_code, car_name, car_image, car_old, car_numder, is_auto,
+		car_seater, car_model_code, manufacturer_code, fuel_code from car_data
+	</sql>
+	
+	
+	<sql id="whereSql">
+		<where>
+			<if test ="carCode != null">
+				and car_code = #{carCode}
+			</if>
+			<if test ="carName != null">
+			 	and car_name = #{carName}
+			</if>
+			<if test ="carImage != null">
+				and car_image = #{carImage}
+			</if>
+			<if test ="carOld != null">
+				and car_old = #{carOld}
+			</if>
+			<if test ="carNumder != null">
+				and car_numder = #{carNumder}
+			</if>
+			<if test ="isAuto != null">
+				and is_auto = #{isAuto}
+			</if>
+			<if test ="carSeater != null">
+				and car_seater = #{carSeater}
+			</if>
+			<if test ="carModelCode != null">
+				and car_model_code = #{carModelCode}
+			</if>
+			<if test ="manufacturerCode != null">
+				and manufacturer_code = #{manufacturerCode}
+			</if>
+			<if test ="fuelCode != null">
+				and fuel_code = #{fuelCode}
+			</if>
+			
+		</where>
+	</sql>
+	
+	<sql id="insertSql">
+		insert into car_data
+	</sql>
+	
+	<sql id="updateSql">
+		update car_data
+	</sql>
+	
+	<sql id="deleteSql">
+		delete from car_model
+	</sql>
+	
+	<select id="selectCarModelByCarDataCode" resultMap="CarDataResult">
+		<include refid="selectSql"/>
+		<include refid="whereSql"/>
+	</select>
+	
+	<select id="selectCarDataByAll" resultMap="CarDataResult">
+		<include refid="selectSql"/>
+	</select>
+	
+	<insert id="insertCarModel" parameterType="CarData">
+		<include refid="insertSql"/>
+	</insert>
+	
+	
+	<update id="updateSql" parameterType="CarData">
+		<include refid="updateSql"/>
+		<set>
+			<if test ="carCode != null">
+				car_code = #{carCode},
+			</if>
+			<if test ="carName != null">
+			 	car_name = #{carName},
+			</if>
+			<if test ="carImage != null">
+				car_image = #{carImage},
+			</if>
+			<if test ="carOld != null">
+				car_old = #{carOld},
+			</if>
+			<if test ="carNumder != null">
+				car_numder = #{carNumder},
+			</if>
+			<if test ="isAuto != null">
+				is_auto = #{isAuto},
+			</if>
+			<if test ="carSeater != null">
+				car_seater = #{carSeater},
+			</if>
+			<if test ="carModelCode != null">
+				car_model_code = #{carModelCode},
+			</if>
+			<if test ="manufacturerCode != null">
+				manufacturer_code = #{manufacturerCode},
+			</if>
+			<if test ="fuelCode != null">
+				fuel_code = #{fuelCode},
+			</if>
+		</set>
+		<include refid="whereSql"/>
+	</update>
+	
+	<delete id="deleteCarData" parameterType="CarData">
+		<include refid="deleteSql"/>
+		<include refid="whereSql"/>
+	</delete>
+</mapper>
