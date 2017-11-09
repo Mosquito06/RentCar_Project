@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class CarData {
 	private String carCode;
 	private String carName;
-	private byte[] carImg;
+	private byte[] carImage;
 	private int carOld;
 	private int carNumder;
 	private IsAuto isAuto;
@@ -14,12 +14,12 @@ public class CarData {
 	private Manufacturer manufacturerCode;
 	private Fuel fuelCode;
 
-	public CarData(String carCode, String carName, byte[] carImg, int carOld, int carNumder, IsAuto isAuto,
+	public CarData(String carCode, String carName, byte[] carImage, int carOld, int carNumder, IsAuto isAuto,
 			String carSeater, CarModel carModelCode, Manufacturer manufacturerCode, Fuel fuelCode) {
 		super();
 		this.carCode = carCode;
 		this.carName = carName;
-		this.carImg = carImg;
+		this.carImage = carImage;
 		this.carOld = carOld;
 		this.carNumder = carNumder;
 		this.isAuto = isAuto;
@@ -50,12 +50,12 @@ public class CarData {
 		this.carName = carName;
 	}
 
-	public byte[] getCarImg() {
-		return carImg;
+	public byte[] getCarImage() {
+		return carImage;
 	}
 
-	public void setCarImg(byte[] carImg) {
-		this.carImg = carImg;
+	public void setCarImage(byte[] carImage) {
+		this.carImage = carImage;
 	}
 
 	public int getCarOld() {
@@ -74,11 +74,11 @@ public class CarData {
 		this.carNumder = carNumder;
 	}
 
-	public IsAuto isAuto() {
+	public IsAuto getIsAuto() {
 		return isAuto;
 	}
 
-	public void setAuto(IsAuto isAuto) {
+	public void setIsAuto(IsAuto isAuto) {
 		this.isAuto = isAuto;
 	}
 
@@ -116,9 +116,10 @@ public class CarData {
 
 	@Override
 	public String toString() {
-		return String.format("CarData %s, %s, %s, %s, %s, %s, %s, %s, %s, %s", carCode, carName,
-				Arrays.toString(carImg), carOld, carNumder, isAuto, carSeater, carModelCode, manufacturerCode,
-				fuelCode);
+		return String.format(
+				"CarData [carCode=%s, carName=%s, carImage=%s, carOld=%s, carNumder=%s, isAuto=%s, carSeater=%s, carModelCode=%s, manufacturerCode=%s, fuelCode=%s]",
+				carCode, carName, Arrays.toString(carImage), carOld, carNumder, isAuto, carSeater, carModelCode,
+				manufacturerCode, fuelCode);
 	}
 
 }
