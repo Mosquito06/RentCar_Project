@@ -230,9 +230,13 @@ public class Login extends JFrame {
 						return;
 					}
 					
-					JOptionPane.showMessageDialog(null, Id + "님 환영합니다!");
+					JOptionPane.showMessageDialog(null, ConfirmId + "님 환영합니다!");
 					UserMain frame = UserMain.getInstance();
-					frame.getContentPane().add(new UserMainHome(), BorderLayout.CENTER);
+					UserMainHome userMainHome = new UserMainHome();
+					userMainHome.setList(list);
+					userMainHome.setUserId(ConfirmId);
+					userMainHome.setUserPw(ConfirmPw);
+					frame.getContentPane().add(userMainHome, BorderLayout.CENTER);
 					frame.setVisible(true);
 					setVisible(false);
 				}
