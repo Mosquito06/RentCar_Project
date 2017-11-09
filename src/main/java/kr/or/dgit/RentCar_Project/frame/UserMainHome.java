@@ -12,15 +12,17 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import kr.or.dgit.RentCar_Project.dao.UserDao;
 import kr.or.dgit.RentCar_Project.dto.User;
+import kr.or.dgit.RentCar_Project.service.UserService;
 
 public class UserMainHome extends JPanel {
-	private List<User> list;
+	private User ComfirmUser;
 	private String UserId;
 	private String UserPw;
 
-	public void setList(List<User> list) {
-		this.list = list;
+	public void setComfirmUser(User comfirmUser) {
+		this.ComfirmUser = comfirmUser;
 	}
 
 	public void setUserId(String userId) {
@@ -74,14 +76,16 @@ public class UserMainHome extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				// 비밀번호 재확인
 				String Pwcheck;
-				// 비밀번호 재확인(추후 코드 추가)
 				do {
 					Pwcheck = JOptionPane.showInputDialog(null, "비밀번호를 입력해주세요.");
 					if (Pwcheck.equals(UserPw)) {
 						JFrame frame = UserMain.getInstance();
 						frame.getContentPane().removeAll();
-						frame.getContentPane().add(new UserMainUpdate(), BorderLayout.CENTER);
+						UserMainUpdate userMainUpdate = new UserMainUpdate();
+						userMainUpdate.setComfirmUser(ComfirmUser);
+						frame.getContentPane().add(userMainUpdate, BorderLayout.CENTER);
 						frame.setVisible(true);
 						break;
 					} else {

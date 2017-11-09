@@ -182,6 +182,7 @@ public class Login extends JFrame {
 				String Pw = PwField.getText();
 				String ConfirmId = null;
 				String ConfirmPw = null;
+				User ComfirmUser = null;
 				List<User> list = userDao.selectUserByAll();
 				
 				try {
@@ -217,6 +218,7 @@ public class Login extends JFrame {
 							ConfirmId = u.getId();
 							if(Pw.equals(u.getPw())) {
 								ConfirmPw = u.getPw();
+								ComfirmUser = u;
 								break;
 							}else {
 								JOptionPane.showMessageDialog(null, "비밀번호를 다시 확인해주세요.");
@@ -233,7 +235,7 @@ public class Login extends JFrame {
 					JOptionPane.showMessageDialog(null, ConfirmId + "님 환영합니다!");
 					UserMain frame = UserMain.getInstance();
 					UserMainHome userMainHome = new UserMainHome();
-					userMainHome.setList(list);
+					userMainHome.setComfirmUser(ComfirmUser);
 					userMainHome.setUserId(ConfirmId);
 					userMainHome.setUserPw(ConfirmPw);
 					frame.getContentPane().add(userMainHome, BorderLayout.CENTER);

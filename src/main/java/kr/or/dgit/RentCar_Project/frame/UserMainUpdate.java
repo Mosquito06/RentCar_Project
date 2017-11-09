@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -24,13 +25,16 @@ import kr.or.dgit.RentCar_Project.service.UserService;
 
 @SuppressWarnings("serial")
 public class UserMainUpdate extends JPanel {
-
+	private User ComfirmUser;
 	private JLabel userImg;
 	private JPanel labelPanel;
 
+	public void setComfirmUser(User comfirmUser) {
+		this.ComfirmUser = comfirmUser;
+	}
+
 	public UserMainUpdate() {
 		setLayout(null);
-
 		JPanel upPanel = new JPanel();
 		upPanel.setBounds(0, 0, 974, 363);
 		add(upPanel);
@@ -42,18 +46,12 @@ public class UserMainUpdate extends JPanel {
 		upPanel.add(labelPanel);
 		labelPanel.setLayout(null);
 		
-		
-		// DB에서 이미지 가져오기 테스트
-		UserDao userDao = UserService.getInstance();
-		User userCode = new User();
-		userCode.setUserCode(3);
-		User findUser = userDao.selectUserByUserCode(userCode);
-		
-		
-		userImg = new JLabel("");
+		JOptionPane.showMessageDialog(null, ComfirmUser);
+		// 해당 유저의 프로필 이미지 가져오기
+		/*userImg = new JLabel("");
 		userImg.setBounds(72, 10, 327, 337);
 		labelPanel.add(userImg);
-		userImg.setIcon(new ImageIcon(findUser.getUserImg()));
+		userImg.setIcon(new ImageIcon(ComfirmUser.getUserImg()));*/
 		
 		UpdateProfileContent imgPanel = new UpdateProfileContent();
 		imgPanel.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.LOWERED, null, null)), "\uC774\uBBF8\uC9C0 \uC120\uD0DD", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
