@@ -2,7 +2,7 @@ package kr.or.dgit.RentCar_Setting;
 
 public class Config {
 	public static final String DB_NAME = "car_project";
-	public static final String[] TABLE_NAME = { "user_grade", "car_model", "manufacturer", "fuel", "car_data" , "rental_price", "user", "rent" };
+	public static final String[] TABLE_NAME = { "rent", "user_grade", "car_model", "manufacturer", "fuel", "car_data" , "rental_price", "user"};
 	
 	private static final String USER_DIR = System.getProperty("user.dir") + "\\";
 	

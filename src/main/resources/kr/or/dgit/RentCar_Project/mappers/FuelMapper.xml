@@ -11,33 +11,50 @@
 		select fuel_code, fuel_type as fuelName from fuel
 	</sql>
 	
+	<sql id="whereSql">
+		<where>
+			<if test ="fuelCode != null">
+				fuel_code = #{fuelCode}
+			</if>
+		</where>
+	</sql>
+	
 	<sql id="insertSql">
 		insert into fuel(fuel_code, fuel_type) 
 		values(#{fuelCode}, #{fuelName})
 	</sql>
 	
 	<sql id="updateSql">
-		update fuel set fuel_type=#{fuelName}
-		where fuel_code = #{fuelCode}
+		update fuel set fuel_code=#{fuelCode}, fuel_type=#{fuelName}
 	</sql>
 	
 	<sql id="deleteSql">
-		delete from fuel where fuel_code = #{fuelCode}
+		delete from fuel
 	</sql>
+	
+	<select id="selectFuelByFuelCode" resultMap="FuelResult">
+		<include refid="selectSql"/>
+		<include refid="whereSql"/>
+	</select>
+	
+	
 	<select id="selectFuelByAll" resultMap="FuelResult">
-		<include refid="selectSql"></include>
+		<include refid="selectSql"/>
 	</select>
 	
 	<insert id="insertFuel" parameterType="Fuel">
-		<include refid="insertSql"></include>
+		<include refid="insertSql"/>
+		<include refid="whereSql"/>
 	</insert>
 	
 	<update id="updateFuel" parameterType="Fuel">
-		<include refid="updateSql"></include>
+		<include refid="updateSql"/>
+		<include refid="whereSql"/>
 	</update>
 	
-	<delete id="deleteFule">
-		<include refid="deleteSql"></include>
+	<delete id="deleteFule" parameterType="Fuel">
+		<include refid="deleteSql"/>
+		<include refid="whereSql"/>
 	</delete>
 	
 </mapper>

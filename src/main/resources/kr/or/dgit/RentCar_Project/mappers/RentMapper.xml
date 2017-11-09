@@ -4,6 +4,7 @@
 	<resultMap type="Rent" id="RentResult">
 		<result property="userCode.userCode" column="user_code"/>
 		<result property="userTime" column="use_time"/>
+		<result property="isInsurance" column="is_insurance"/>
 		<result property="dayStart" column="day_start"/>
 		<result property="dayEnd" column="day_end"/>
 		<result property="finalPrice" column="final_price"/>
@@ -19,19 +20,18 @@
 	</sql>
 	
 	<sql id="selectSql">
-		select user_code, use_time, isInsurance, day_start, day_end, final_price, car_code
-		from rent
+		select user_code, use_time, is_insurance, day_start, day_end, final_price, car_code from rent
 	</sql>
 	<sql id="insertSql">
-		insert into rent(user_code, use_time, isInsurance, day_start, day_end, final_price, car_code)
+		insert into rent(user_code, use_time, is_insurance, day_start, day_end, final_price, car_code)
 		values(#{userCode.userCode}, #{userTime}, #{isInsurance}, #{dayStart}, #{dayEnd}, #{finalPrice}, #{carCode.carCode})
 	</sql>
 	<sql id="updateSql">
-		update rent
-		set user_code=#{userCode.userCode}, use_time=#{userTime}, isInsurance=#{isInsurance}, day_start=#{dayStart}, day_end=#{dayEnd}, final_price=#{finalPrice}, car_code=#{carCode.carCode}
+		update rent	set user_code=#{userCode.userCode}, use_time=#{userTime}, is_insurance=#{isInsurance}, 
+		day_start=#{dayStart}, day_end=#{dayEnd}, final_price=#{finalPrice}, car_code = #{carCode.carCode}
 	</sql>
 	<sql id="deleteSql">
-		delete from rent
+		delete from rent	
 	</sql>
 	
 	<select id="selectRentByUserCode" resultMap="RentResult">
