@@ -10,6 +10,9 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import kr.or.dgit.RentCar_Project.dto.CarData;
+import kr.or.dgit.RentCar_Project.dto.CarModel;
+import kr.or.dgit.RentCar_Project.dto.Fuel;
+import kr.or.dgit.RentCar_Project.dto.Manufacturer;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestCarDataService {
@@ -25,12 +28,16 @@ public class TestCarDataService {
 		carDataService = null;
 	}
 
-/*	@Test
+	@Test
 	public void test1InsertCarData() {
-		CarData carData = new CarData("aa");
+		CarData carData = new CarData();
+		carData.setCarCode("aaaaa");
+		carData.setCarModelCode(new CarModel("RUV", "스포티지"));
+		carData.setManufacturerCode(new Manufacturer("K", "KIA"));
+		carData.setFuelCode(new Fuel("G", "가솔린"));
 		carDataService.insertCarData(carData);
 	}
-	*/
+	
 	@Test
 	public void test2FindSelectCarDataByCarDataCode() {
 		CarData carData = new CarData("CC-K-G-001");
@@ -52,7 +59,8 @@ public class TestCarDataService {
 	
 	@Test
 	public void test5DeletCarDataByCarDataCode() {
-		CarData carData = new CarData("CC-H-G-006","i30");
+		CarData carData = new CarData();
+		carData.setCarCode("aaaaa");
 		carDataService.deleteCarData(carData);
 	}
 

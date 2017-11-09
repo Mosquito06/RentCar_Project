@@ -15,13 +15,7 @@
 		<result property="fuelCode.fuelCode" column="fuel_code"/>
 	</resultMap>
 	
-	<sql id="selectSql">
-		select car_code, car_name, car_image, car_old, car_number, is_auto,
-		car_seater, car_model_code, manufacturer_code, fuel_code from car_data
-	</sql>
-	
-	
-	<sql id="whereSql">
+	<sql id="whereAllSql">
 		<where>
 			<if test ="carCode != null">
 				car_code = #{carCode}
@@ -45,22 +39,25 @@
 				and car_seater = #{carSeater}
 			</if>
 			<if test ="carModelCode != null">
-				and car_model_code = #{carModelCode}
+				and car_model_code = #{carModelCode.carModelCode}
 			</if>
 			<if test ="manufacturerCode != null">
-				and manufacturer_code = #{manufacturerCode}
+				and manufacturer_code = #{manufacturerCode.manufacturerCode}
 			</if>
 			<if test ="fuelCode != null">
-				and fuel_code = #{fuelCode}
+				and fuel_code = #{fuelCode.fuelCode}
 			</if>
 			
 		</where>
 	</sql>
 	
-	<!-- <sql id="insertSql">
-		insert into car_data values(#{carCode}, #{carName},#{carImage},#{carOld},#{carNumber},#{isAuto},#{carSeater}
-		,#{carModelCode},#{manufacturerCode},#{fuelCode})
-	</sql> -->
+	<sql id="wherePrimarySql">
+		<where>
+			<if test="carCode != null">
+				car_code = #{carCode}
+			</if>
+		</where>
+	</sql>
 	
 	<sql id="updateSql">
 		update car_data
@@ -70,20 +67,25 @@
 		delete from car_data
 	</sql>
 	
+	<sql id="selectSql">
+		select car_code, car_name, car_image, car_old, car_number, is_auto,
+		car_seater, car_model_code, manufacturer_code, fuel_code from car_data
+	</sql>
+	
 	<select id="selectCarDataByCarDataCode" resultMap="CarDataResult">
 		<include refid="selectSql"/>
-		<include refid="whereSql"/>
+		<include refid="wherePrimarySql"/>
 	</select>
 	
 	<select id="selectCarDataByAll" resultMap="CarDataResult">
 		<include refid="selectSql"/>
 	</select>
 	
-	<!-- <insert id="insertCarData" parameterType="CarData">
-		<include refid="insertSql"/>
-	</insert> -->
-	
-	
+	<insert id="insertCarData" parameterType="CarData">
+		insert into car_data values(#{carCode}, #{carName}, #{carImage}, #{carOld}, #{carNumber}, #{isAuto},
+		#{carSeater}, #{carModelCode.carModelCode}, #{manufacturerCode.manufacturerCode}, #{fuelCode.fuelCode})
+	</insert>
+			
 	<update id="updateCarData" parameterType="CarData">
 		<include refid="updateSql"/>
 		<set>
@@ -109,20 +111,21 @@
 				car_seater = #{carSeater},
 			</if>
 			<if test ="carModelCode != null">
-				car_model_code = #{carModelCode},
+				car_model_code = #{carModelCode.carModelCode},
 			</if>
 			<if test ="manufacturerCode != null">
-				manufacturer_code = #{manufacturerCode},
+				manufacturer_code = #{manufacturerCode.manufacturerCode},
 			</if>
 			<if test ="fuelCode != null">
-				fuel_code = #{fuelCode},
+				fuel_code = #{fuelCode.fuelCode},
 			</if>
 		</set>
-		<include refid="whereSql"/>
+		<include refid="wherePrimarySql"/>
 	</update>
 	
 	<delete id="deleteCarData" parameterType="CarData">
 		<include refid="deleteSql"/>
-		<include refid="whereSql"/>
+		<include refid="wherePrimarySql"/>
 	</delete>
+
 </mapper>
