@@ -173,12 +173,17 @@ public class Login extends JFrame {
 		
 		// 로그인 버튼 리스너
 		btnLogin.addActionListener(new ActionListener() {
-
-			private int idCheck;
-			private int pwCheck;
-
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				int idCheck;
+				int pwCheck;
+				String Id = IdField.getText();
+				String Pw = PwField.getText();
+				String ConfirmId = null;
+				String ConfirmPw = null;
+				List<User> list = userDao.selectUserByAll();
+				
 				try {
 					idCheck = idimg.getDescription().indexOf("false");
 					pwCheck = pwimg.getDescription().indexOf("false");
@@ -189,23 +194,24 @@ public class Login extends JFrame {
 				}
 
 				if (adminLoginBox.isSelected()) {
-					JOptionPane.showMessageDialog(null, "관리자모드를 시작합니다.");
-					AdminMain frame = AdminMain.getInstance();
-					frame.getContentPane().add(new AdminMainHome(), BorderLayout.CENTER);
-					frame.setVisible(true);
-					setVisible(false);
-					return;
+					if(Id.equals("RENTADMINISTER")) {
+						if(Pw.equals("1234567890")) {
+							JOptionPane.showMessageDialog(null, "관리자모드를 시작합니다.");
+							AdminMain frame = AdminMain.getInstance();
+							frame.getContentPane().add(new AdminMainHome(), BorderLayout.CENTER);
+							frame.setVisible(true);
+							setVisible(false);
+							return;
+						}else {
+							JOptionPane.showMessageDialog(null, "비밀번호를 확인해주세요.");
+							return;
+						}
+					}
 				} 
 								
 				if (idCheck > 0 || pwCheck > 0) {
 					JOptionPane.showMessageDialog(null, "아이디, 비밀번호를 확인해주세요.");
 				} else {
-					String Id = IdField.getText();
-					String Pw = PwField.getText();
-					String ConfirmId = null;
-					String ConfirmPw = null;
-					List<User> list = userDao.selectUserByAll();
-					
 					for(User u : list) {
 						if(Id.equals(u.getId())) {
 							ConfirmId = u.getId();
@@ -230,7 +236,6 @@ public class Login extends JFrame {
 					frame.setVisible(true);
 					setVisible(false);
 				}
-
 			}
 		});
 
