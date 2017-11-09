@@ -57,4 +57,13 @@ public class TestFuelService {
 		Assert.assertNotNull(list);
 	} 
 	
+	@Test
+	public void test5FindSelectUserByFuelCode() {
+		Fuel fuel = new Fuel("D" , "경유");
+		
+		
+		Fuel fuelCode = fuelService.selectFuelByFuelCode(fuel);
+		Assert.assertNotNull(fuelCode);
+	} 
+	
 }
