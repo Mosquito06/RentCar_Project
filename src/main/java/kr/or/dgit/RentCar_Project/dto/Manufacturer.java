@@ -33,7 +33,11 @@ public class Manufacturer {
 
 	@Override
 	public String toString() {
-		return String.format("Manufacturer %s, %s", manufacturerCode, manufacturerName);
+		return String.format("%s, %s", manufacturerCode, manufacturerName);
+	}
+	
+	public String toWrite(){
+		return String.format("%s",manufacturerName);
 	}
 
 }
