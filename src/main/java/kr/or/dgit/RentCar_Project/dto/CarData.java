@@ -127,6 +127,12 @@ public class CarData {
 
 	@Override
 	public String toString() {
+		if(isAuto==null) {
+			return String.format(
+					"%s %s %s %s %s %s %s %s %s %s",
+					carCode, carName, Arrays.toString(carImage), carOld, carNumber, isAuto, carSeater, carModelCode,
+					manufacturerCode, fuelCode);
+		}
 		return String.format(
 				"%s %s %s %s %s %s %s %s %s %s",
 				carCode, carName, Arrays.toString(carImage), carOld, carNumber, isAuto, carSeater, carModelCode,

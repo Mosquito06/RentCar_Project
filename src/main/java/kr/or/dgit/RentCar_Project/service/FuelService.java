@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import kr.or.dgit.RentCar_Project.dao.FuelDao;
-import kr.or.dgit.RentCar_Project.dao.ManufacturerDao;
 import kr.or.dgit.RentCar_Project.dto.Fuel;
 import kr.or.dgit.RentCar_Project.util.MyBatisSqlSessionFactory;
 
@@ -63,8 +62,7 @@ public class FuelService implements FuelDao {
 		try(SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession()){
 			fuelDao = sqlSession.getMapper(FuelDao.class);
 			return fuelDao.selectFuelByAll();
-		}
-	
+		}	
 	}
 
 }

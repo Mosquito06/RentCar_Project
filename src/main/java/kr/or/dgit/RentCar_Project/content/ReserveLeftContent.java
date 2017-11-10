@@ -85,6 +85,8 @@ public class ReserveLeftContent extends JPanel {
 	public void setManufacturerBoxModel() {
 		ManufacturerService manufacturerService = ManufacturerService.getInstance();
 		List<Manufacturer> lists = manufacturerService.selectManufacturerByAll();
+		
+		
 		Vector<Manufacturer> manufacturer = new Vector<>(lists);
 		comboBoxManufacturer.setComboBoxModel(manufacturer);
 	}
@@ -117,9 +119,6 @@ public class ReserveLeftContent extends JPanel {
 		Vector<CarData> carData = new Vector<>(lists);
 		comboBoxCarName.setComboBoxModel(carData);
 	}
-	
-	
-	
 }
 
 

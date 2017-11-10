@@ -33,7 +33,20 @@ public class Fuel {
 
 	@Override
 	public String toString() {
-		return String.format("%s %s", fuelCode, fuelType);
+		return String.format("%s", getToString());
+	}
+
+	private Object getToString() {
+		if(fuelCode==null) {
+			return fuelType;
+		}else if(fuelType == null){
+			return fuelCode;
+		}else {
+			
+		}
+		
+		
+		return null;
 	}
 
 }
