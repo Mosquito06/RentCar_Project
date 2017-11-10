@@ -10,7 +10,19 @@
 	<sql id="selectSql">
 		select manufacturer_code, manufacturer_name from manufacturer
 	</sql>
-	<sql id="whereSql">
+	
+	<sql id="whereAllSql">
+		<where>
+			<if test="manufacturerCode != null">
+				manufacturer_code = #{manufacturerCode}
+			</if>
+			<if test="manufacturerName != null">
+				and manufacturer_name = #{manufacturerName}
+			</if>
+		</where>
+	</sql>
+	
+	<sql id="wherePrimarySql">
 		<where>
 			<if test ="manufacturerCode != null">
 				manufacturer_code = #{manufacturerCode}
@@ -24,7 +36,7 @@
 	</sql>
 	
 	<sql id="updateSql">
-		update manufacturer set manufacturer_code = #{manufacturerCode}, manufacturer_name = #{manufacturerName}
+		update manufacturer 
 	</sql>
 	
 	<sql id="deleteSql">
@@ -33,7 +45,7 @@
 	
 	<select id="selectManufacturerByManufacturerCode" resultMap="ManufacturerResult">
 		<include refid="selectSql"/>
-		<include refid="whereSql"/>
+		<include refid="wherePrimarySql"/>
 	</select>
 	
 	<select id="selectManufacturerByAll" resultMap="ManufacturerResult">
@@ -46,11 +58,19 @@
 	
 	<update id="updateManufacturer" parameterType="Manufacturer">
 		<include refid="updateSql"/>
-		<include refid="whereSql"/>
+			<set>
+				<if test="manufacturerCode != null">
+					manufacturer_code = #{manufacturerCode},
+				</if>
+				<if test="manufacturerName != null">
+					manufacturer_name = #{manufacturerName},
+				</if>
+			</set>
+		<include refid="wherePrimarySql"/>
 	</update>
 	
 	<delete id="deleteManufacturer" parameterType="Manufacturer">
 		<include refid="deleteSql"/>
-		<include refid="whereSql"/>
+		<include refid="wherePrimarySql"/>
 	</delete>
 </mapper>

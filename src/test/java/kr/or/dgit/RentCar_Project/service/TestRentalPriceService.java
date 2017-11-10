@@ -27,8 +27,8 @@ public class TestRentalPriceService {
 		rentalPriceService = null;
 	}
 
-	//@Test
-/*	public void test1InsertRentalPrice() {
+	@Test
+	public void test1InsertRentalPrice() {
 		CarData carDate = new CarData();
 		carDate.setCarCode("HC-H-G-003");
 		
@@ -41,8 +41,10 @@ public class TestRentalPriceService {
 		rentalPrice.setInsurance(5000);
 		
 		rentalPriceService.insertRentalPrice(rentalPrice);
-	}*/
-/*	public void test1updateRentalPrice() {
+	}
+	
+	@Test
+	public void test1updateRentalPrice() {
 		CarData carDate = new CarData();
 		carDate.setCarCode("HC-H-G-003");
 		
@@ -61,12 +63,14 @@ public class TestRentalPriceService {
 		RentalPrice rentalPrice = new RentalPrice();
 		rentalPrice.setCarCode(carDate);
 		rentalPriceService.deleteRentalPrice(rentalPrice);
-	}*/
+	}
+	
 	@Test
 	public void test3SelectRentalPriceByAll() {
 		List<RentalPrice> list = rentalPriceService.selectRentalPriceByAll();
 		Assert.assertNotNull(list);
 	}
+	
 	@Test
 	public void test4SelectRentalPriceByCarCode() {
 		CarData carData = new CarData();
