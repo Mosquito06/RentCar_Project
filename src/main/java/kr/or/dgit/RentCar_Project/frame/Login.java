@@ -236,8 +236,6 @@ public class Login extends JFrame {
 					UserMain frame = UserMain.getInstance();
 					UserMainHome userMainHome = new UserMainHome();
 					userMainHome.setComfirmUser(ComfirmUser);
-					userMainHome.setUserId(ConfirmId);
-					userMainHome.setUserPw(ConfirmPw);
 					frame.getContentPane().add(userMainHome, BorderLayout.CENTER);
 					frame.setVisible(true);
 					setVisible(false);
