@@ -18,20 +18,12 @@ import kr.or.dgit.RentCar_Project.service.UserService;
 
 public class UserMainHome extends JPanel {
 	private User ComfirmUser;
-	private String UserId;
-	private String UserPw;
-
+	
 	public void setComfirmUser(User comfirmUser) {
 		this.ComfirmUser = comfirmUser;
 	}
-
-	public void setUserId(String userId) {
-		UserId = userId;
-	}
-
-	public void setUserPw(String userPw) {
-		UserPw = userPw;
-	}
+	
+	
 
 	public UserMainHome() {
 		setLayout(null);
@@ -78,20 +70,30 @@ public class UserMainHome extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				// 비밀번호 재확인
 				String Pwcheck;
+				String ComfirmPw = null;
+				UserDao userDao = UserService.getInstance();
+				List<User> list = userDao.selectUserByAll();
+						
+				for(User u : list) {
+					if(u.getId().equals(ComfirmUser.getId())) {
+						ComfirmPw = u.getPw();
+						ComfirmUser = u;
+						break;
+					}
+				}
 				do {
 					Pwcheck = JOptionPane.showInputDialog(null, "비밀번호를 입력해주세요.");
-					if (Pwcheck.equals(UserPw)) {
+					if (Pwcheck.equals(ComfirmPw)) {
 						JFrame frame = UserMain.getInstance();
 						frame.getContentPane().removeAll();
-						UserMainUpdate userMainUpdate = new UserMainUpdate();
-						userMainUpdate.setComfirmUser(ComfirmUser);
+						UserMainUpdate userMainUpdate = new UserMainUpdate(ComfirmUser);
 						frame.getContentPane().add(userMainUpdate, BorderLayout.CENTER);
 						frame.setVisible(true);
 						break;
 					} else {
 						JOptionPane.showMessageDialog(null, "비밀번호를 확인해주세요");
 					}
-				} while (Pwcheck == null || Pwcheck != UserPw);
+				} while (Pwcheck == null || !Pwcheck.equals(ComfirmPw));
 			}
 		});
 		btnUpdate.setBounds(12, 171, 193, 44);

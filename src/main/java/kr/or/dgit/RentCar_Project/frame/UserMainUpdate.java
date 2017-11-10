@@ -4,6 +4,11 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -25,15 +30,15 @@ import kr.or.dgit.RentCar_Project.service.UserService;
 
 @SuppressWarnings("serial")
 public class UserMainUpdate extends JPanel {
-	private User ComfirmUser;
 	private JLabel userImg;
 	private JPanel labelPanel;
-
+	private User ComfirmUser;
+	
 	public void setComfirmUser(User comfirmUser) {
-		this.ComfirmUser = comfirmUser;
+		ComfirmUser = comfirmUser;
 	}
-
-	public UserMainUpdate() {
+	
+	public UserMainUpdate(User ComfirmUser) {
 		setLayout(null);
 		JPanel upPanel = new JPanel();
 		upPanel.setBounds(0, 0, 974, 363);
@@ -46,12 +51,12 @@ public class UserMainUpdate extends JPanel {
 		upPanel.add(labelPanel);
 		labelPanel.setLayout(null);
 		
-		JOptionPane.showMessageDialog(null, ComfirmUser);
+		
 		// 해당 유저의 프로필 이미지 가져오기
-		/*userImg = new JLabel("");
+		userImg = new JLabel("");
 		userImg.setBounds(72, 10, 327, 337);
 		labelPanel.add(userImg);
-		userImg.setIcon(new ImageIcon(ComfirmUser.getUserImg()));*/
+		userImg.setIcon(new ImageIcon(ComfirmUser.getUserImg()));
 		
 		UpdateProfileContent imgPanel = new UpdateProfileContent();
 		imgPanel.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.LOWERED, null, null)), "\uC774\uBBF8\uC9C0 \uC120\uD0DD", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -71,8 +76,27 @@ public class UserMainUpdate extends JPanel {
 					userImg.setBounds(72, 10, 327, 337);
 					labelPanel.add(userImg);
 					userImg.setIcon(new ImageIcon(System.getProperty("user.dir") + "\\Images\\userBig\\" + selectString + ".png"));
+					ComfirmUser.setUserImg(getImage(selectString));
+					UserService.getInstance().updateUser(ComfirmUser);
 					JOptionPane.showMessageDialog(null, "변경이 완료되었습니다.");
 				}
+			}
+
+			private byte[] getImage(String imgName) {
+				byte[] img = null;
+				File file = new File(System.getProperty("user.dir") + "\\images\\userBig\\" + imgName + ".png");
+				try {
+					InputStream is = new FileInputStream(file);
+					img = new byte[is.available()];
+					is.read(img);
+					is.close();
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+				return img;
 			}
 		});
 		
@@ -98,11 +122,14 @@ public class UserMainUpdate extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				JFrame frame = UserMain.getInstance();
 				frame.getContentPane().removeAll();
-				frame.getContentPane().add(new UserMainHome(), BorderLayout.CENTER);
+				UserMainHome userMainHome = new UserMainHome();
+				userMainHome.setComfirmUser(ComfirmUser);
+				frame.getContentPane().add(userMainHome, BorderLayout.CENTER);
 				frame.setVisible(true);
 				
 			}
 		});
 		
 	}
+
 }
