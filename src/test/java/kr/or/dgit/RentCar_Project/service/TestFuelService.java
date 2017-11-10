@@ -26,7 +26,7 @@ public class TestFuelService {
 		fuelService = null;
 	}
 
-/*	@Test
+	@Test
 	public void test1insertFuel() {
 		Fuel fuel = new Fuel();
 		fuel.setFuelCode("test1");
@@ -38,32 +38,34 @@ public class TestFuelService {
 	@Test
 	public void test2updateFuel() {
 		Fuel fuel = new Fuel();
-		fuel.setFuelCode("test");
+		fuel.setFuelCode("test2");
 		fuel.setFuelName("test1");
 		
 		fuelService.updateFuel(fuel);
-	}*/
-/*	
-	@Test
-	public void test3deleteFuel() {
-		Fuel fuel = new Fuel();
-		fuel.setFuelCode("test1");
-		fuelService.deleteFule(fuel);
-	}*/
+	}
 	
 	@Test
-	public void test4FindSelectUserByAll() {
-		List<Fuel> list = fuelService.selectFuelByAll();
-		Assert.assertNotNull(list);
-	} 
-	
-	@Test
-	public void test5FindSelectUserByFuelCode() {
+	public void test3FindSelectUserByFuelCode() {
 		Fuel fuel = new Fuel("D" , "경유");
 		
 		
 		Fuel fuelCode = fuelService.selectFuelByFuelCode(fuel);
 		Assert.assertNotNull(fuelCode);
 	} 
+	
+	@Test
+	public void test4FindSelectUserByAll() {
+		List<Fuel> list = fuelService.selectFuelByAll();
+		Assert.assertNotNull(list);
+	}
+	
+	@Test
+	public void test5deleteFuel() {
+		Fuel fuel = new Fuel();
+		fuel.setFuelCode("test1");
+		fuelService.deleteFule(fuel);
+	}
+	
+	
 	
 }
