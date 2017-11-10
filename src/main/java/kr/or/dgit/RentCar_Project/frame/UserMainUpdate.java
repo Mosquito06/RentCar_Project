@@ -130,11 +130,9 @@ public class UserMainUpdate extends JPanel {
 					JOptionPane.showMessageDialog(null, "변경이 완료되었습니다.");
 					updatepwcontent.clear();
 				}
-				
 			}
 		});
-		
-		
+				
 		// 나가기 버튼 리스너
 		updatepwcontent.getBtnExit().addActionListener(new ActionListener() {
 			

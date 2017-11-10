@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -22,11 +23,17 @@ import javax.swing.border.TitledBorder;
 import kr.or.dgit.RentCar_Project.content.ReserveAddCarContent;
 import kr.or.dgit.RentCar_Project.content.ReserveHeaderContent;
 import kr.or.dgit.RentCar_Project.content.ReserveLeftContent;
+import kr.or.dgit.RentCar_Project.dto.User;
+
 import javax.swing.ImageIcon;
 
 @SuppressWarnings("serial")
 public class UserMainReserve extends JPanel {
+	private User ComfirmUser;
 	
+	public void setComfirmUser(User comfirmUser) {
+		this.ComfirmUser = comfirmUser;
+	}
 
 	public UserMainReserve() {
 
@@ -83,7 +90,6 @@ public class UserMainReserve extends JPanel {
 			}
 		});
 		
-		
 		JButton btnB = new JButton("소형");
 		btnB.setBounds(402, 79, 74, 29);
 		add(btnB);
@@ -111,5 +117,21 @@ public class UserMainReserve extends JPanel {
 		JButton btnG = new JButton("승합차");
 		btnG.setBounds(888, 79, 74, 29);
 		add(btnG);
+		
+		
+		leftPanel.getBtnExit().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JFrame frame = UserMain.getInstance();
+				frame.getContentPane().removeAll();
+				UserMainHome userMainHome = new UserMainHome();
+				userMainHome.setComfirmUser(ComfirmUser);
+				frame.getContentPane().add(userMainHome, BorderLayout.CENTER);
+				frame.setVisible(true);
+			}
+		});
+		
+		
 	}
 }

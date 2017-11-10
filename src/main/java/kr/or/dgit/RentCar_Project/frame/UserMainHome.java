@@ -40,7 +40,9 @@ public class UserMainHome extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				JFrame frame = UserMain.getInstance();
 				frame.getContentPane().removeAll();
-				frame.getContentPane().add(new UserMainReserve(), BorderLayout.CENTER);
+				UserMainReserve userMainReserve = new UserMainReserve();
+				userMainReserve.setComfirmUser(ComfirmUser);
+				frame.getContentPane().add(userMainReserve, BorderLayout.CENTER);
 				frame.setVisible(true);
 			}
 		});
@@ -55,7 +57,9 @@ public class UserMainHome extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				JFrame frame = UserMain.getInstance();
 				frame.getContentPane().removeAll();
-				frame.getContentPane().add(new UserMainHistory(), BorderLayout.CENTER);
+				UserMainHistory userMainHistory = new UserMainHistory();
+				userMainHistory.setComfirmUser(ComfirmUser);
+				frame.getContentPane().add(userMainHistory, BorderLayout.CENTER);
 				frame.setVisible(true);
 			}
 		});
