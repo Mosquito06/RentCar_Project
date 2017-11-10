@@ -10,7 +10,19 @@
 	<sql id="selectSql">
 		select grade, discount from user_grade
 	</sql>
-	<sql id="whereSql">
+	
+	<sql id="whereAllSql">
+		<where>
+			<if test="grade != null">
+				grade = #{grade}
+			</if>
+			<if test="discount != null">
+				and discount = #{discount}
+			</if>
+		</where>
+	</sql>
+	
+	<sql id="wherePrimarySql">
 		<where>
 			<if test ="grade != null">
 				grade = #{grade}
@@ -23,7 +35,7 @@
 	</sql>
 	
 	<sql id="updateSql">
-		update user_grade set grade = #{grade}, discount = #{discount}
+		update user_grade
 	</sql>
 	
 	<sql id="deleteSql">
@@ -32,7 +44,7 @@
 	
 	<select id="selectUserGradeByGrade" resultMap="UserGradeResult">
 		<include refid="selectSql"/>
-		<include refid="whereSql"/>
+		<include refid="wherePrimarySql"/>
 	</select>
 	
 	<select id="selectUserGradeByAll" resultMap="UserGradeResult">
@@ -45,11 +57,19 @@
 	
 	<update id="updateUserGrade">
 		<include refid="updateSql"/>
-		<include refid="whereSql"/>
+			<set>
+				<if test="grade != null">
+					grade = #{grade},
+				</if>
+				<if test="discount != null">
+					discount = #{discount},
+				</if>		
+			</set>
+		<include refid="wherePrimarySql"/>
 	</update>
 	
 	<delete id="deleteUserGrade">
 		<include refid="deleteSql"/>
-		<include refid="whereSql"/>
+		<include refid="wherePrimarySql"/>
 	</delete>
 </mapper>
