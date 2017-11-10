@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Vector;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import kr.or.dgit.RentCar_Project.component.ComboBoxComponent;
@@ -14,6 +15,8 @@ import kr.or.dgit.RentCar_Project.dto.Manufacturer;
 import kr.or.dgit.RentCar_Project.service.CarDataService;
 import kr.or.dgit.RentCar_Project.service.FuelService;
 import kr.or.dgit.RentCar_Project.service.ManufacturerService;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
 public class ReserveLeftContent extends JPanel {
@@ -34,10 +37,21 @@ public class ReserveLeftContent extends JPanel {
 		setLayout(null);
 		
 		comboBoxManufacturer = new ComboBoxComponent<>("제조회사  ");
+		comboBoxManufacturer.getComboBox().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, comboBoxManufacturer.getComboboxValue().getManufacturerCode());
+			}
+		});
 		comboBoxManufacturer.setBounds(45, 59, 191, 36);
 		add(comboBoxManufacturer);
 		
 		comboBoxFuel = new ComboBoxComponent<>("연료종류  ");
+		comboBoxFuel.getComboBox().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, comboBoxFuel.getComboboxValue().getFuelCode());
+				
+			}
+		});
 		comboBoxFuel.setBounds(45, 131, 191, 36);
 		add(comboBoxFuel);
 		
@@ -70,31 +84,32 @@ public class ReserveLeftContent extends JPanel {
 		setCarDataOldBoxModel();
 		setCarDataSeaterBoxModel();
 		
+		
 	}
 	
 	public void setManufacturerBoxModel() {
-	/*	ManufacturerService manufacturerService = ManufacturerService.getInstance();
+		ManufacturerService manufacturerService = ManufacturerService.getInstance();
 		List<Manufacturer> lists = manufacturerService.selectManufacturerByAll();
 		Vector<Manufacturer> manufacturer = new Vector<>(lists);
-		comboBoxManufacturer.setComboBoxModel(manufacturer);*/
+		comboBoxManufacturer.setComboBoxModel(manufacturer);
 	}
 	
 	
 	
 	
 	public void setFuelBoxModel() {
-		FuelService fuelService = FuelService.getInstance();
+	/*	FuelService fuelService = FuelService.getInstance();
 		List<Fuel> lists = fuelService.selectFuelByAll();
 		Vector<String> carData = new Vector<>();
 		String test = null;
 		for(Fuel f : lists) {
 			test = f.toWrite();
-			/*test.replace(",", "testing now");*/
+			test.replace(",", "testing now");
 			carData.add(test);
 		}
-		/*Vector<Fuel> carData = new Vector<>(lists);*/
+//		Vector<Fuel> carData = new Vector<>(lists);
 		
-		comboBoxFuel.setComboBoxModel(carData);
+		comboBoxFuel.setComboBoxModel(carData);*/
 	}
 	
 	

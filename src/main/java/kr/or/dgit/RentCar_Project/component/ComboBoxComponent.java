@@ -1,7 +1,6 @@
 package kr.or.dgit.RentCar_Project.component;
 
 import java.awt.GridLayout;
-import java.util.List;
 import java.util.Vector;
 
 import javax.swing.ComboBoxModel;
@@ -10,9 +9,6 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-
-import kr.or.dgit.RentCar_Project.dto.Manufacturer;
-import kr.or.dgit.RentCar_Project.service.ManufacturerService;
 
 @SuppressWarnings("serial")
 public class ComboBoxComponent<T> extends JPanel {
@@ -41,15 +37,11 @@ public class ComboBoxComponent<T> extends JPanel {
 		this.comboBox = comboBox;
 	}
 	
-/*	public void setComboBoxModel(Vector<T> lists) {
+	public void setComboBoxModel(Vector<T> lists) {
 		ComboBoxModel<T> model = new DefaultComboBoxModel<>(lists);
 		comboBox.setModel(model);
-	}*/
-
-	public void setComboBoxModel(Vector<String> lists) {
-		ComboBoxModel<String> model = new DefaultComboBoxModel<>(lists);
-		comboBox.setModel((ComboBoxModel<T>) model);
 	}
+
 
 	public T getComboboxValue() {
 		return (T) comboBox.getSelectedItem();
