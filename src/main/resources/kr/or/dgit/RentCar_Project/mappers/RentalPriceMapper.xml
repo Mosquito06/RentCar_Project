@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.dgit.RentCar_Project.dao.RentalPriceDao">
+	
 	<resultMap type="RentalPrice" id="RentalPriceResult">
 		<id property="carCode.carCode" column="car_code"/>
 		<result property="basicPrice" column="basic_price"/>
@@ -10,7 +11,31 @@
 		<result property="insurance" column="insurance"/>
 	</resultMap>
 	
-	<sql id="whereSql">
+	<sql id="whereAllSql">
+		<where>
+			<if test="carCode.carCode != null">
+				car_code = #{carCode.carCode}
+			</if>
+			<if test="basicPrice != null">
+				and basic_price = #{basicPrice}
+			</if>
+			<if test="basicTime != null">
+				and basic_time = #{basicTime}
+			</if>
+			<if test="basicTimePrice != null">
+				and basic_time_price = #{basicTimePrice}
+			</if>
+			<if test="overPrice != null">
+				and over_price = #{overPrice}
+			</if>
+			<if test="insurance != null">
+				and insurance = #{insurance}
+			</if>
+		</where>
+	</sql>
+	
+	
+	<sql id="wherePrimarySql">
 		<where>
 			<if test="carCode.carCode !=null">
 				car_code = #{carCode.carCode}
@@ -19,8 +44,8 @@
 	</sql>
 	
 	<sql id="selectSql">
-		select car_code, basic_price, basic_time, basic_time_price, over_price, insurance
-		from rental_price
+		select car_code, basic_price, basic_time, basic_time_price, 
+		over_price, insurance from rental_price
 	</sql>
 	
 	<sql id="insertSql">
@@ -30,7 +55,6 @@
 	
 	<sql id="updateSql">
 		update rental_price 
-		set car_code=#{carCode.carCode}, basic_price=#{basicPrice}, basic_time=#{basicTime}, basic_time_price = #{basicTimePrice}, over_price =#{overPrice}, insurance=#{insurance}
 	</sql>
 	
 	<sql id="deleteSql">
@@ -39,7 +63,7 @@
 	
 	<select id="selectRentalPriceByCarCode" resultMap="RentalPriceResult">
 		<include refid="selectSql"/>
-		<include refid="whereSql"/>
+		<include refid="wherePrimarySql"/>
 	</select>
 	
 	<select id="selectRentalPriceByAll" resultMap="RentalPriceResult">
@@ -52,11 +76,31 @@
 	
 	<update id="updateRentalPrice" parameterType="RentalPrice">
 		<include refid="updateSql"/>
-		<include refid="whereSql"/>
+			<set>
+				<if test="carCode.carCode != null">
+					car_code = #{carCode.carCode},
+				</if>
+				<if test="basicPrice != null">
+					 basic_price = #{basicPrice},
+				</if>
+				<if test="basicTime != null">
+					 basic_time = #{basicTime},
+				</if>
+				<if test="basicTimePrice != null">
+					 basic_time_price = #{basicTimePrice},
+				</if>
+				<if test="overPrice != null">
+					 over_price = #{overPrice},
+				</if>
+				<if test="insurance != null">
+					 insurance = #{insurance},
+				</if>
+			</set>
+		<include refid="wherePrimarySql"/>
 	</update>
 	
 	<delete id="deleteRentalPrice" parameterType="RentalPrice">
 		<include refid="deleteSql"/>
-		<include refid="whereSql"/>
+		<include refid="wherePrimarySql"/>
 	</delete>
 </mapper>

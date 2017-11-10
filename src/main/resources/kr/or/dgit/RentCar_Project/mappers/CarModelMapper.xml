@@ -10,7 +10,19 @@
 	<sql id="selectSql">
 		select car_model_code, car_model from car_model
 	</sql>
-	<sql id="whereSql">
+	
+	<sql id="whereAllSql">
+		<where>
+			<if test="carModelCode != null">
+				car_model_code = #{carModelCode}
+			</if>
+			<if test="carModel != null">
+				and car_model = #{carModel}
+			</if>
+		</where>
+	</sql>
+		
+	<sql id="wherePrimarySql">
 		<where>
 			<if test ="carModelCode != null">
 				car_model_code = #{carModelCode}
@@ -24,7 +36,7 @@
 	</sql>
 	
 	<sql id="updateSql">
-		update car_model set car_model_code = #{carModelCode}, car_model = #{carModel}
+		update car_model
 	</sql>
 	
 	<sql id="deleteSql">
@@ -33,7 +45,7 @@
 	
 	<select id="selectCarModelByCarModelCode" resultMap="CarModelResult">
 		<include refid="selectSql"/>
-		<include refid="whereSql"/>
+		<include refid="wherePrimarySql"/>
 	</select>
 	
 	<select id="selectCarModelByAll" resultMap="CarModelResult">
@@ -46,11 +58,19 @@
 	
 	<update id="updateCarModel" parameterType="CarModel">
 		<include refid="updateSql"/>
-		<include refid="whereSql"/>
+			<set>
+				<if test="carModelCode != null">
+					car_model_code = #{carModelCode},
+				</if>
+				<if test="carModel != null">
+					car_model = #{carModel},
+				</if>
+			</set>
+		<include refid="wherePrimarySql"/>
 	</update>
 	
 	<delete id="deleteCarModel" parameterType="CarModel">
 		<include refid="deleteSql"/>
-		<include refid="whereSql"/>
+		<include refid="wherePrimarySql"/>
 	</delete>
 </mapper>

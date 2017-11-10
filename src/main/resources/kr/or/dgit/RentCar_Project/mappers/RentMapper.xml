@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.dgit.RentCar_Project.dao.RentDao">
+	
 	<resultMap type="Rent" id="RentResult">
 		<result property="userCode.userCode" column="user_code"/>
 		<result property="userTime" column="use_time"/>
@@ -11,7 +12,33 @@
 		<result property="carCode.carCode" column="car_code"/>
 	</resultMap>
 	
-	<sql id="whereSql">
+	<sql id="whereAllSql">
+		<where>
+			<if test="userCode.userCode != null">
+				user_code = #{userCode.userCode}
+			</if>
+			<if test="userTime != null">
+				and use_time = #{userTime}
+			</if>
+			<if test="isInsurance != null">
+				and is_insurance = #{isInsurance}
+			</if>
+			<if test="dayStart != null">
+				and day_start = #{dayStart}
+			</if>
+			<if test="dayEnd != null">
+				and day_end = #{dayEnd}
+			</if>
+			<if test="finalPrice != null">
+				and final_price = #{finalPrice}
+			</if>
+			<if test="carCode.carCode != null">
+				and car_code = #{carCode.carCode}
+			</if>
+		</where>
+	</sql>
+	
+	<sql id="wherePrimarySql">
 		<where>
 			<if test="userCode.userCode !=null">
 				user_code = #{userCode.userCode}
@@ -36,7 +63,7 @@
 	
 	<select id="selectRentByUserCode" resultMap="RentResult">
 		<include refid="selectSql"/>
-		<include refid="whereSql"/>
+		<include refid="wherePrimarySql"/>
 	</select>
 	<select id="selectRentByAll" resultMap="RentResult">
 		<include refid="selectSql"></include>
@@ -46,11 +73,11 @@
 	</insert>
 	<update id="updateRent">
 		<include refid="updateSql"/>
-		<include refid="whereSql"/>
+		<include refid="wherePrimarySql"/>
 	</update>
 	<delete id="deleteRent">
 		<include refid="deleteSql"/>
-		<include refid="whereSql"/>
+		<include refid="wherePrimarySql"/>
 	</delete>
 	
 </mapper>

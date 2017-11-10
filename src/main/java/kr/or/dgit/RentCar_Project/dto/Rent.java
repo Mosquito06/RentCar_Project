@@ -11,24 +11,6 @@ public class Rent {
 	private int finalPrice;
 	private CarData carCode;
 
-	public Rent(User userCode, String userTime, IsInsurance isInsurance, Date dayStart, Date dayEnd, int finalPrice,
-			CarData carCode) {
-		super();
-		this.userCode = userCode;
-		this.userTime = userTime;
-		this.isInsurance = isInsurance;
-		this.dayStart = dayStart;
-		this.dayEnd = dayEnd;
-		this.finalPrice = finalPrice;
-		
-		this.carCode = carCode;
-	}
-
-	public Rent() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
 	public User getUserCode() {
 		return userCode;
 	}
@@ -87,7 +69,8 @@ public class Rent {
 
 	@Override
 	public String toString() {
-		return String.format("Rent %s, %s, %s, %s, %s, %s", userCode, userTime, dayStart, dayEnd, finalPrice, carCode);
+		return String.format("Rent %s, %s, %s, %s, %s, %s, %s", userCode, userTime, isInsurance, dayStart, dayEnd,
+				finalPrice, carCode);
 	}
 
 }

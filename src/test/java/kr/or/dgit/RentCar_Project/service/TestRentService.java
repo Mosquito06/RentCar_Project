@@ -31,7 +31,7 @@ public class TestRentService {
 		rentService=null;
 	}
 
-/*	@Test
+	@Test
 	public void test1InsertRent() {
 		Rent rent = new Rent();
 		
@@ -77,15 +77,6 @@ public class TestRentService {
 	}
 	
 	@Test
-	public void test2DeleteRent() {
-		Rent rent = new Rent();
-		User user= new User();
-		user.setUserCode(4);
-		rent.setUserCode(user);
-		rentService.deleteRent(rent);
-	}*/
-	
-	@Test
 	public void test3SelectRentByAll(){
 		List<Rent> list = rentService.selectRentByAll();
 		Assert.assertNotNull(list);
@@ -100,5 +91,14 @@ public class TestRentService {
 		rent.setUserCode(user);
 		
 		rentService.selectRentByUserCode(rent);
+	}
+	
+	@Test
+	public void test5DeleteRent() {
+		Rent rent = new Rent();
+		User user= new User();
+		user.setUserCode(4);
+		rent.setUserCode(user);
+		rentService.deleteRent(rent);
 	}
 }
