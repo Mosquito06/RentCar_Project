@@ -66,4 +66,5 @@ public class ManufacturerService implements ManufacturerDao {
 		}
 	}
 
+
 }

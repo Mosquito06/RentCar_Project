@@ -12,7 +12,7 @@ public class Manufacturer {
 
 	public Manufacturer() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public String getManufacturerCode() {
@@ -30,12 +30,13 @@ public class Manufacturer {
 	public void setManufacturerName(String manufacturerName) {
 		this.manufacturerName = manufacturerName;
 	}
-
+	
 	@Override
 	public String toString() {
-		return String.format("%s, %s", manufacturerCode, manufacturerName);
+		return String.format("%s %s", manufacturerCode, manufacturerName);
 	}
 	
+
 	public String toWrite(){
 		return String.format("%s",manufacturerName);
 	}

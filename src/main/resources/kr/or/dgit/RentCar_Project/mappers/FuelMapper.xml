@@ -4,11 +4,11 @@
 	
 	<resultMap type="Fuel" id="FuelResult">
 		<id property="fuelCode" column="fuel_code"/>
-		<result property = "fuelName" column="fuel_type"/>
+		<result property = "fuelType" column="fuel_type"/>
 	</resultMap>
 	
 	<sql id="selectSql">
-		select fuel_code, fuel_type as fuelName from fuel
+		select fuel_code, fuel_type from fuel
 	</sql>
 	
 	<sql id="whereSql">
@@ -21,11 +21,11 @@
 	
 	<sql id="insertSql">
 		insert into fuel(fuel_code, fuel_type) 
-		values(#{fuelCode}, #{fuelName})
+		values(#{fuelCode}, #{fuelType})
 	</sql>
 	
 	<sql id="updateSql">
-		update fuel set fuel_code=#{fuelCode}, fuel_type=#{fuelName}
+		update fuel set fuel_code=#{fuelCode}, fuel_type=#{fuelType}
 	</sql>
 	
 	<sql id="deleteSql">

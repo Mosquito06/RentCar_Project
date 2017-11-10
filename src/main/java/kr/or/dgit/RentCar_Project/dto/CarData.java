@@ -128,7 +128,7 @@ public class CarData {
 	@Override
 	public String toString() {
 		return String.format(
-				"CarData [carCode=%s, carName=%s, carImage=%s, carOld=%s, carNumber=%s, isAuto=%s, carSeater=%s, carModelCode=%s, manufacturerCode=%s, fuelCode=%s]",
+				"%s %s %s %s %s %s %s %s %s %s",
 				carCode, carName, Arrays.toString(carImage), carOld, carNumber, isAuto, carSeater, carModelCode,
 				manufacturerCode, fuelCode);
 	}

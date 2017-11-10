@@ -2,12 +2,12 @@ package kr.or.dgit.RentCar_Project.dto;
 
 public class Fuel {
 	private String fuelCode;
-	private String fuelName;
+	private String fuelType;
 
-	public Fuel(String fuelCode, String fuelName) {
+	public Fuel(String fuelCode, String fuelType) {
 		super();
 		this.fuelCode = fuelCode;
-		this.fuelName = fuelName;
+		this.fuelType = fuelType;
 	}
 
 	public Fuel() {
@@ -23,17 +23,17 @@ public class Fuel {
 		this.fuelCode = fuelCode;
 	}
 
-	public String getFuelName() {
-		return fuelName;
+	public String getFuelType() {
+		return fuelType;
 	}
 
-	public void setFuelName(String fuelName) {
-		this.fuelName = fuelName;
+	public void setFuelType(String fuelType) {
+		this.fuelType = fuelType;
 	}
 
 	@Override
 	public String toString() {
-		return String.format("Fuel %s, %s", fuelCode, fuelName);
+		return String.format("%s %s", fuelCode, fuelType);
 	}
 
 }

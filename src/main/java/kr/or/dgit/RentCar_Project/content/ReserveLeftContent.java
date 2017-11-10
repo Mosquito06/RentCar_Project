@@ -12,9 +12,13 @@ import javax.swing.JPanel;
 
 import kr.or.dgit.RentCar_Project.component.ComboBoxComponent;
 import kr.or.dgit.RentCar_Project.component.RadioComponent;
+import kr.or.dgit.RentCar_Project.dto.CarData;
+import kr.or.dgit.RentCar_Project.dto.Fuel;
 import kr.or.dgit.RentCar_Project.dto.Manufacturer;
 import kr.or.dgit.RentCar_Project.frame.UserMain;
 import kr.or.dgit.RentCar_Project.frame.UserMainHome;
+import kr.or.dgit.RentCar_Project.service.CarDataService;
+import kr.or.dgit.RentCar_Project.service.FuelService;
 import kr.or.dgit.RentCar_Project.service.ManufacturerService;
 
 @SuppressWarnings("serial")
@@ -22,7 +26,11 @@ public class ReserveLeftContent extends JPanel {
 
 
 	private ComboBoxComponent<Manufacturer> comboBoxManufacturer;
-
+	private ComboBoxComponent<Fuel> comboBoxFuel;
+	private ComboBoxComponent<CarData> comboBoxOld;
+	private ComboBoxComponent<CarData> comboBoxSeater;
+	private ComboBoxComponent<CarData> comboBoxCarName;
+	
 	public ReserveLeftContent() {
 		setBorder(null);
 		setLayout(null);
@@ -31,19 +39,19 @@ public class ReserveLeftContent extends JPanel {
 		comboBoxManufacturer.setBounds(45, 59, 191, 36);
 		add(comboBoxManufacturer);
 		
-		ComboBoxComponent comboBoxFuel = new ComboBoxComponent("연료종류  ");
+		comboBoxFuel = new ComboBoxComponent<>("연료종류  ");
 		comboBoxFuel.setBounds(45, 131, 191, 36);
 		add(comboBoxFuel);
 		
-		ComboBoxComponent comboBoxOld = new ComboBoxComponent("연식  ");
+		comboBoxOld = new ComboBoxComponent<>("연식  ");
 		comboBoxOld.setBounds(45, 210, 191, 36);
 		add(comboBoxOld);
 		
-		ComboBoxComponent comboBoxSeater = new ComboBoxComponent("인승  ");
+		comboBoxSeater = new ComboBoxComponent<>("인승  ");
 		comboBoxSeater.setBounds(45, 290, 191, 36);
 		add(comboBoxSeater);
 		
-		ComboBoxComponent comboBoxCarName = new ComboBoxComponent("상세 차 검색  ");
+		comboBoxCarName = new ComboBoxComponent<>("상세 차 검색  ");
 		comboBoxCarName.setBounds(45, 369, 191, 36);
 		add(comboBoxCarName);
 		
@@ -66,15 +74,48 @@ public class ReserveLeftContent extends JPanel {
 		});
 		btnNewButton.setBounds(62, 594, 167, 53);
 		add(btnNewButton);
-		setBoxModel(); 
+		setManufacturerBoxModel(); 
+		setCarDataNameBoxModel();
+		setFuelBoxModel();
+		setCarDataOldBoxModel();
+		setCarDataSeaterBoxModel();
+		
 	}
 	
-	public void setBoxModel() {
+	public void setManufacturerBoxModel() {
 		ManufacturerService manufacturerService = ManufacturerService.getInstance();
 		List<Manufacturer> lists = manufacturerService.selectManufacturerByAll();
 		Vector<Manufacturer> manufacturer = new Vector<>(lists);
-
 		comboBoxManufacturer.setComboBoxModel(manufacturer);
+	}
+	
+	public void setFuelBoxModel() {
+		FuelService fuelService = FuelService.getInstance();
+		List<Fuel> lists = fuelService.selectFuelByAll();
+		Vector<Fuel> carData = new Vector<>(lists);
+		comboBoxFuel.setComboBoxModel(carData);
+	}
+	
+	public void setCarDataOldBoxModel() {
+		CarDataService carDataService = CarDataService.getInstance();
+		List<CarData> lists = carDataService.selectCarDataByAll();
+		Vector<CarData> carData = new Vector<>(lists);
+		comboBoxOld.setComboBoxModel(carData);
+	}
+	
+	public void setCarDataSeaterBoxModel() {
+		CarDataService carDataService = CarDataService.getInstance();
+		List<CarData> lists = carDataService.selectCarDataByAll();
+		Vector<CarData> carData = new Vector<>(lists);
+		comboBoxSeater.setComboBoxModel(carData);
+	}
+	
+	
+	public void setCarDataNameBoxModel() {
+		CarDataService carDataService = CarDataService.getInstance();
+		List<CarData> lists = carDataService.selectCarDataByAll();
+		Vector<CarData> carData = new Vector<>(lists);
+		comboBoxCarName.setComboBoxModel(carData);
 	}
 	
 	
