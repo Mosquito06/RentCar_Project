@@ -91,12 +91,21 @@ public class ReserveLeftContent extends JPanel {
 		comboBoxManufacturer.setComboBoxModel(manufacturer);
 	}
 	
+	
+	
+	
 	public void setFuelBoxModel() {
 		FuelService fuelService = FuelService.getInstance();
 		List<Fuel> lists = fuelService.selectFuelByAll();
 		Vector<Fuel> carData = new Vector<>(lists);
 		comboBoxFuel.setComboBoxModel(carData);
 	}
+	
+	
+	
+	
+	
+	
 	
 	public void setCarDataOldBoxModel() {
 		CarDataService carDataService = CarDataService.getInstance();
