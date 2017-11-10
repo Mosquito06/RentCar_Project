@@ -73,10 +73,10 @@ public class ReserveLeftContent extends JPanel {
 	}
 	
 	public void setManufacturerBoxModel() {
-		ManufacturerService manufacturerService = ManufacturerService.getInstance();
+	/*	ManufacturerService manufacturerService = ManufacturerService.getInstance();
 		List<Manufacturer> lists = manufacturerService.selectManufacturerByAll();
 		Vector<Manufacturer> manufacturer = new Vector<>(lists);
-		comboBoxManufacturer.setComboBoxModel(manufacturer);
+		comboBoxManufacturer.setComboBoxModel(manufacturer);*/
 	}
 	
 	
@@ -85,7 +85,15 @@ public class ReserveLeftContent extends JPanel {
 	public void setFuelBoxModel() {
 		FuelService fuelService = FuelService.getInstance();
 		List<Fuel> lists = fuelService.selectFuelByAll();
-		Vector<Fuel> carData = new Vector<>(lists);
+		Vector<String> carData = new Vector<>();
+		String test = null;
+		for(Fuel f : lists) {
+			test = f.toWrite();
+			/*test.replace(",", "testing now");*/
+			carData.add(test);
+		}
+		/*Vector<Fuel> carData = new Vector<>(lists);*/
+		
 		comboBoxFuel.setComboBoxModel(carData);
 	}
 	
@@ -96,25 +104,25 @@ public class ReserveLeftContent extends JPanel {
 	
 	
 	public void setCarDataOldBoxModel() {
-		CarDataService carDataService = CarDataService.getInstance();
+	/*	CarDataService carDataService = CarDataService.getInstance();
 		List<CarData> lists = carDataService.selectCarDataByAll();
 		Vector<CarData> carData = new Vector<>(lists);
-		comboBoxOld.setComboBoxModel(carData);
+		comboBoxOld.setComboBoxModel(carData);*/
 	}
 	
 	public void setCarDataSeaterBoxModel() {
-		CarDataService carDataService = CarDataService.getInstance();
+		/*CarDataService carDataService = CarDataService.getInstance();
 		List<CarData> lists = carDataService.selectCarDataByAll();
 		Vector<CarData> carData = new Vector<>(lists);
-		comboBoxSeater.setComboBoxModel(carData);
+		comboBoxSeater.setComboBoxModel(carData);*/
 	}
 	
 	
 	public void setCarDataNameBoxModel() {
-		CarDataService carDataService = CarDataService.getInstance();
+	/*	CarDataService carDataService = CarDataService.getInstance();
 		List<CarData> lists = carDataService.selectCarDataByAll();
 		Vector<CarData> carData = new Vector<>(lists);
-		comboBoxCarName.setComboBoxModel(carData);
+		comboBoxCarName.setComboBoxModel(carData);*/
 	}
 }
 
