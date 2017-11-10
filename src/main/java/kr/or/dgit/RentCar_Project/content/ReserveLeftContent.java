@@ -24,13 +24,17 @@ import kr.or.dgit.RentCar_Project.service.ManufacturerService;
 @SuppressWarnings("serial")
 public class ReserveLeftContent extends JPanel {
 
-
 	private ComboBoxComponent<Manufacturer> comboBoxManufacturer;
 	private ComboBoxComponent<Fuel> comboBoxFuel;
 	private ComboBoxComponent<CarData> comboBoxOld;
 	private ComboBoxComponent<CarData> comboBoxSeater;
 	private ComboBoxComponent<CarData> comboBoxCarName;
+	private JButton btnExit;
 	
+	public JButton getBtnExit() {
+		return btnExit;
+	}
+
 	public ReserveLeftContent() {
 		setBorder(null);
 		setLayout(null);
@@ -63,17 +67,9 @@ public class ReserveLeftContent extends JPanel {
 		radioComponent.setBounds(40, 506, 205, 70);
 		add(radioComponent);
 		
-		JButton btnNewButton = new JButton("나가기");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JFrame frame = UserMain.getInstance();
-				frame.getContentPane().removeAll();
-				frame.getContentPane().add(new UserMainHome(), BorderLayout.CENTER);
-				frame.setVisible(true);
-			}
-		});
-		btnNewButton.setBounds(62, 594, 167, 53);
-		add(btnNewButton);
+		btnExit = new JButton("나가기");
+		btnExit.setBounds(62, 594, 167, 53);
+		add(btnExit);
 		setManufacturerBoxModel(); 
 		setCarDataNameBoxModel();
 		setFuelBoxModel();

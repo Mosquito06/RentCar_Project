@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import kr.or.dgit.RentCar_Project.content.HistorySearchContent;
+import kr.or.dgit.RentCar_Project.dto.User;
 import kr.or.dgit.RentCar_Project.list.UserHistoryTable;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.LineBorder;
@@ -16,7 +17,13 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
 public class UserMainHistory extends JPanel {
-
+	private User ComfirmUser;
+	
+	public void setComfirmUser(User comfirmUser) {
+		this.ComfirmUser = comfirmUser;
+	}
+	
+	
 	public UserMainHistory() {
 		setLayout(null);
 		
@@ -32,7 +39,9 @@ public class UserMainHistory extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				JFrame frame = UserMain.getInstance();
 				frame.getContentPane().removeAll();
-				frame.getContentPane().add(new UserMainHome(), BorderLayout.CENTER);
+				UserMainHome userMainHome = new UserMainHome();
+				userMainHome.setComfirmUser(ComfirmUser);
+				frame.getContentPane().add(userMainHome, BorderLayout.CENTER);
 				frame.setVisible(true);
 				
 			}
