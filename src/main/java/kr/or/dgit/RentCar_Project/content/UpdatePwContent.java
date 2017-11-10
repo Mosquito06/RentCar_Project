@@ -8,21 +8,26 @@ import javax.swing.JPanel;
 import kr.or.dgit.RentCar_Project.component.RadioComponent;
 import kr.or.dgit.RentCar_Project.component.TextFieldComponent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
 public class UpdatePwContent extends JPanel {
 
-	private TextFieldComponent confirmPwPanel;
 	private TextFieldComponent nowPwPanel;
 	private TextFieldComponent changePwPanel;
+	private TextFieldComponent confirmPwPanel;
 	private JPanel btnPanel;
 	private JButton btnUpdate;
 	private JButton btnExit;
 
+	public JButton getBtnUpdate() {
+		return btnUpdate;
+	}
+
 	public JButton getBtnExit() {
 		return btnExit;
 	}
-	
+
 	public UpdatePwContent() {
 		setLayout(new GridLayout(0, 1, 0, 5));
 
@@ -49,16 +54,17 @@ public class UpdatePwContent extends JPanel {
 
 	}
 
-	/*
-	 * public Coffee getContent() {
-	 * 
-	 * return new Coffee(pCode, pName, pPrice, pTotal, pMargin); }
-	 */
-
-	public void setContent() {
-
+	
+	public String getContent() {
+		String changePw = changePwPanel.getTextValue();
+		String ConfirmPw = confirmPwPanel.getTextValue();
+		 
+		if(changePw.equals(ConfirmPw)) {
+			return changePw;
+		}
+		return null;
 	}
-
+	
 	public void isEmptyCheck() throws Exception {
 		confirmPwPanel.isEmptyCheck();
 		changePwPanel.isEmptyCheck();

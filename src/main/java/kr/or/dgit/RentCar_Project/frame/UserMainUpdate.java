@@ -115,6 +115,26 @@ public class UserMainUpdate extends JPanel {
 		updatepwcontent.setBounds(483, 0, 488, 232);
 		bottomPanel.add(updatepwcontent);
 		
+		updatepwcontent.getBtnUpdate().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String changePw = updatepwcontent.getContent();
+				
+				if(changePw == null) {
+					JOptionPane.showMessageDialog(null, "비밀번호가 일치하도록 입력해주세요");
+					return;
+				}else {
+					ComfirmUser.setPw(changePw);
+					UserService.getInstance().updateUser(ComfirmUser);
+					JOptionPane.showMessageDialog(null, "변경이 완료되었습니다.");
+					updatepwcontent.clear();
+				}
+				
+			}
+		});
+		
+		
 		// 나가기 버튼 리스너
 		updatepwcontent.getBtnExit().addActionListener(new ActionListener() {
 			
