@@ -41,13 +41,16 @@ public class ComboBoxComponent<T> extends JPanel {
 		this.comboBox = comboBox;
 	}
 	
-	public void setComboBoxModel(Vector<T> lists) {
+/*	public void setComboBoxModel(Vector<T> lists) {
 		ComboBoxModel<T> model = new DefaultComboBoxModel<>(lists);
 		comboBox.setModel(model);
+	}*/
+
+	public void setComboBoxModel(Vector<String> lists) {
+		ComboBoxModel<String> model = new DefaultComboBoxModel<>(lists);
+		comboBox.setModel((ComboBoxModel<T>) model);
 	}
 
-
-	
 	public T getComboboxValue() {
 		return (T) comboBox.getSelectedItem();
 	}
