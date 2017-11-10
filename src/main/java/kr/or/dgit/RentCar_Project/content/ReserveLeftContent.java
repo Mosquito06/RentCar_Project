@@ -1,13 +1,9 @@
 package kr.or.dgit.RentCar_Project.content;
 
-import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Vector;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import kr.or.dgit.RentCar_Project.component.ComboBoxComponent;
@@ -15,8 +11,6 @@ import kr.or.dgit.RentCar_Project.component.RadioComponent;
 import kr.or.dgit.RentCar_Project.dto.CarData;
 import kr.or.dgit.RentCar_Project.dto.Fuel;
 import kr.or.dgit.RentCar_Project.dto.Manufacturer;
-import kr.or.dgit.RentCar_Project.frame.UserMain;
-import kr.or.dgit.RentCar_Project.frame.UserMainHome;
 import kr.or.dgit.RentCar_Project.service.CarDataService;
 import kr.or.dgit.RentCar_Project.service.FuelService;
 import kr.or.dgit.RentCar_Project.service.ManufacturerService;
@@ -81,8 +75,6 @@ public class ReserveLeftContent extends JPanel {
 	public void setManufacturerBoxModel() {
 		ManufacturerService manufacturerService = ManufacturerService.getInstance();
 		List<Manufacturer> lists = manufacturerService.selectManufacturerByAll();
-		
-		
 		Vector<Manufacturer> manufacturer = new Vector<>(lists);
 		comboBoxManufacturer.setComboBoxModel(manufacturer);
 	}
