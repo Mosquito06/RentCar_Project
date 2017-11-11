@@ -12,6 +12,7 @@ import kr.or.dgit.RentCar_Project.component.RadioComponent;
 import kr.or.dgit.RentCar_Project.component.TextFieldComponent;
 import kr.or.dgit.RentCar_Project.dto.Gender;
 import kr.or.dgit.RentCar_Project.dto.User;
+import kr.or.dgit.RentCar_Project.dto.UserGrade;
 
 public class UpdateContent extends JPanel {
 
@@ -78,9 +79,28 @@ public class UpdateContent extends JPanel {
 	}
 
 	public User getContent() {
-
-		return new User(1, null, null, panelName.getTextValue(), null, null,
-				panelEmail.getTextValue(), null, null);
+		
+		// 성별 값 가져오기
+		Gender genderValue = null;
+		String selectGender = panelRadio.getSelectText();
+		if(selectGender.equals("남")) {
+			genderValue = Gender.MALE;
+		}else {
+			genderValue = Gender.FEMALE;
+		}
+			
+		// 유저 등급 가져오기
+		UserGrade userGrade = new UserGrade();
+		userGrade.setGrade(panelGrade.getTextValue());
+		
+		// 전화번호 가져오기
+		String num1 = panelInPhone.getTextValueNum1();
+		String num2 = panelInPhone.getTextValueNum2();
+		String num3 = panelInPhone.getTextValueNum3();
+		String Phone = num1 + "- " + num2 + "- " + num3;
+		
+		return new User(1, panelId.getTextValue(), null, panelName.getTextValue(), null, Phone,
+				panelEmail.getTextValue(), genderValue, userGrade);
 	}
 
 	public void setContent(User user) {
@@ -108,6 +128,7 @@ public class UpdateContent extends JPanel {
 	public void isEmptyCheck() throws Exception {
 		panelId.isEmptyCheck();
 		panelName.isEmptyCheck();
+		panelEmail.isEmptyCheck();
 		panelGrade.isEmptyCheck();
 		panelInPhone.isEmptyCheck();
 	}
@@ -116,6 +137,7 @@ public class UpdateContent extends JPanel {
 		panelId.setTextValue("");
 		panelName.setTextValue("");
 		panelGrade.setTextValue("");
+		panelEmail.setTextValue("");
 		panelInPhone.setTextValueNum1("");
 		panelInPhone.setTextValueNum1("");
 		panelInPhone.setTextValueNum1("");

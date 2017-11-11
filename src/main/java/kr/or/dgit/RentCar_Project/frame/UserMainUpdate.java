@@ -115,8 +115,13 @@ public class UserMainUpdate extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				
+				User UpdateUser = updatecontent.getContent();
+				ComfirmUser.setUserName(UpdateUser.getUserName());
+				ComfirmUser.setGender(UpdateUser.getGender());
+				ComfirmUser.setEmail(UpdateUser.getEmail());
+				ComfirmUser.setPhone(UpdateUser.getPhone());
+				UserService.getInstance().updateUser(ComfirmUser);
+				JOptionPane.showMessageDialog(null, "수정을 완료하였습니다");
 			}
 		});
 		
