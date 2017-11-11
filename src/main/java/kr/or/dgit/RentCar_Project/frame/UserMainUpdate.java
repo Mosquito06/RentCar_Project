@@ -33,6 +33,7 @@ public class UserMainUpdate extends JPanel {
 	private JLabel userImg;
 	private JPanel labelPanel;
 	private User ComfirmUser;
+	private UpdateContent updatecontent;
 	
 	public void setComfirmUser(User comfirmUser) {
 		ComfirmUser = comfirmUser;
@@ -78,7 +79,8 @@ public class UserMainUpdate extends JPanel {
 					userImg.setIcon(new ImageIcon(System.getProperty("user.dir") + "\\Images\\userBig\\" + selectString + ".png"));
 					ComfirmUser.setUserImg(getImage(selectString));
 					UserService.getInstance().updateUser(ComfirmUser);
-					JOptionPane.showMessageDialog(null, "변경이 완료되었습니다.");
+					updatecontent.setContent(ComfirmUser);
+					JOptionPane.showMessageDialog(null, "수정되었습니다.");
 				}
 			}
 
@@ -105,8 +107,7 @@ public class UserMainUpdate extends JPanel {
 		add(bottomPanel);
 		bottomPanel.setLayout(null);
 		
-		// 정보 수정하기 컨텐트 및 수정하기 버튼 리스너
-		UpdateContent updatecontent = new UpdateContent();
+		updatecontent = new UpdateContent();
 		updatecontent.setContent(ComfirmUser);
 		updatecontent.setBounds(0, 0, 477, 377);
 		bottomPanel.add(updatecontent);
@@ -121,7 +122,7 @@ public class UserMainUpdate extends JPanel {
 				ComfirmUser.setEmail(UpdateUser.getEmail());
 				ComfirmUser.setPhone(UpdateUser.getPhone());
 				UserService.getInstance().updateUser(ComfirmUser);
-				JOptionPane.showMessageDialog(null, "수정을 완료하였습니다");
+				JOptionPane.showMessageDialog(null, "수정되었습니다");
 			}
 		});
 		
@@ -143,7 +144,7 @@ public class UserMainUpdate extends JPanel {
 				}else {
 					ComfirmUser.setPw(changePw);
 					UserService.getInstance().updateUser(ComfirmUser);
-					JOptionPane.showMessageDialog(null, "변경이 완료되었습니다.");
+					JOptionPane.showMessageDialog(null, "수정되었습니다.");
 					updatepwcontent.clear();
 				}
 			}
