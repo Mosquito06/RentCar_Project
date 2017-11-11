@@ -89,7 +89,7 @@ public class UserMainHome extends JPanel {
 				
 				do {
 					pwdField = new JPasswordField();
-					if(JOptionPane.showConfirmDialog(null, pwdField, "비밂번호를 입력해주세요.", JOptionPane.OK_CANCEL_OPTION) == JOptionPane.YES_OPTION) {
+					if(JOptionPane.showConfirmDialog(null, pwdField, "비밀번호를 입력해주세요.", JOptionPane.OK_CANCEL_OPTION) == JOptionPane.YES_OPTION) {
 						if(pwdField.getText().equals(ComfirmPw)) {
 							JFrame frame = UserMain.getInstance();
 							frame.getContentPane().removeAll();
