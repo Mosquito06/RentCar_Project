@@ -35,10 +35,6 @@ public class UserMainUpdate extends JPanel {
 	private User ComfirmUser;
 	private UpdateContent updatecontent;
 	
-	public void setComfirmUser(User comfirmUser) {
-		ComfirmUser = comfirmUser;
-	}
-	
 	public UserMainUpdate(User ComfirmUser) {
 		setLayout(null);
 		JPanel upPanel = new JPanel();
@@ -107,6 +103,7 @@ public class UserMainUpdate extends JPanel {
 		add(bottomPanel);
 		bottomPanel.setLayout(null);
 		
+		// 기본정보 수정하기 리스너
 		updatecontent = new UpdateContent();
 		updatecontent.setContent(ComfirmUser);
 		updatecontent.setBounds(0, 0, 477, 377);

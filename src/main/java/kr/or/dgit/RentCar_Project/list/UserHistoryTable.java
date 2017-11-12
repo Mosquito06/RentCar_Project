@@ -9,9 +9,10 @@ import kr.or.dgit.RentCar_Project.dto.User;
 import kr.or.dgit.RentCar_Project.service.RentService;
 
 public class UserHistoryTable extends AbstractTable {
-
-	public UserHistoryTable() {
-
+	private Rent rent;
+		
+	public UserHistoryTable(Rent getRent) {
+		this.rent = getRent;
 	}
 
 	@Override
@@ -22,25 +23,7 @@ public class UserHistoryTable extends AbstractTable {
 
 	@Override
 	protected Object[][] getData() {
-		User user = new User();
-		user.setUserCode(1);
-		Rent rent = new Rent();
-		rent.setUserCode(user);
-				
-		
-		List<Rent> findRent = RentService.getInstance().selectRentByUserCode(rent);
-		
-		Calendar dayStart = GregorianCalendar.getInstance();
-		dayStart.set(2017, 10, 9);
-		
-		Calendar dayEnd = GregorianCalendar.getInstance();
-		dayEnd.set(2017, 10, 25);
-		
-		findRent.get(0).setDayStart(dayStart.getTime());
-		findRent.get(0).setDayEnd(dayEnd.getTime());
-		
-		List<Rent> list = RentService.getInstance().selectRentJoinCarData(findRent.get(0));
-		
+		List<Rent> list = RentService.getInstance().selectRentJoinCarData(rent);
 		Object[][] datas = new Object[list.size()][];
 		
 		for(int i = 0; i < list.size(); i++){
@@ -49,6 +32,7 @@ public class UserHistoryTable extends AbstractTable {
 		}
 		
 		return datas;
+		
 	}
 
 	@Override
