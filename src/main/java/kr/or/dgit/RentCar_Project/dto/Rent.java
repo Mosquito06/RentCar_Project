@@ -73,4 +73,9 @@ public class Rent {
 				finalPrice, carCode);
 	}
 
+	public Object[] toArray() {
+		return new Object[] {carCode.getCarCode(), carCode.getCarName(), carCode.getCarOld(), carCode.getIsAuto(), 
+				carCode.getCarSeater(), carCode.getFuelCode(), userTime, isInsurance, dayStart, dayEnd, finalPrice};
+	}
+
 }
