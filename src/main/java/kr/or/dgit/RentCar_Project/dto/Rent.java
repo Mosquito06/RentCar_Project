@@ -1,5 +1,6 @@
 package kr.or.dgit.RentCar_Project.dto;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Rent {
@@ -74,8 +75,11 @@ public class Rent {
 	}
 
 	public Object[] toArray() {
+		// 날짜 표기를 위한 SimpleDateFormat
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+		
 		return new Object[] {carCode.getCarCode(), carCode.getCarName(), carCode.getCarOld(), carCode.getIsAuto(), 
-				carCode.getCarSeater(), carCode.getFuelCode(), userTime, isInsurance, dayStart, dayEnd, finalPrice};
+				carCode.getCarSeater(), carCode.getFuelCode(), userTime, isInsurance, sdf.format(dayStart), sdf.format(dayEnd), finalPrice};
 	}
 
 }

@@ -62,4 +62,6 @@ public abstract class AbstractTable extends JPanel {
 	protected abstract Object[][] getData();
 	
 	protected abstract Object[] getcolumnNames();
+	
+	protected abstract Object getSelectedItem();
 }

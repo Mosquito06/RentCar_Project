@@ -56,6 +56,12 @@ public class UserHistoryTable extends AbstractTable {
 		return new String[] {"차량코드", "차량명", "연식", "오토유무", "인승", "연료타입", "이용시간", "보험 가입 유무", "대여일", "반납일", "최종가격"};
 	}
 
+	@Override
+	protected Object getSelectedItem() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 	
 }
