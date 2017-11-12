@@ -18,6 +18,7 @@ import javax.swing.border.TitledBorder;
 
 public class UserMainHistory extends JPanel {
 	private User ComfirmUser;
+	private UserHistoryTable historyTable;
 	
 	public void setComfirmUser(User comfirmUser) {
 		this.ComfirmUser = comfirmUser;
@@ -28,6 +29,16 @@ public class UserMainHistory extends JPanel {
 		setLayout(null);
 		
 		HistorySearchContent searchContent = new HistorySearchContent();
+		
+		// 검색 버튼 리스너
+		searchContent.getBtnSearch().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+			
+				
+			}
+		});
 		searchContent.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.LOWERED, null, null)), "\uAC80\uC0C9\uC870\uAC74", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		searchContent.setBounds(0, 5, 974, 97);
 		add(searchContent);
@@ -47,7 +58,7 @@ public class UserMainHistory extends JPanel {
 			}
 		});
 		
-		UserHistoryTable historyTable = new UserHistoryTable();
+		historyTable = new UserHistoryTable();
 		historyTable.setBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.LOWERED, null, null)));
 		historyTable.setBounds(0, 116, 974, 635);
 		historyTable.loadDate();
