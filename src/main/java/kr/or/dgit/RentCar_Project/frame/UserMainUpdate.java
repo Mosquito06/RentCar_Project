@@ -33,10 +33,7 @@ public class UserMainUpdate extends JPanel {
 	private JLabel userImg;
 	private JPanel labelPanel;
 	private User ComfirmUser;
-	
-	public void setComfirmUser(User comfirmUser) {
-		ComfirmUser = comfirmUser;
-	}
+	private UpdateContent updatecontent;
 	
 	public UserMainUpdate(User ComfirmUser) {
 		setLayout(null);
@@ -78,7 +75,8 @@ public class UserMainUpdate extends JPanel {
 					userImg.setIcon(new ImageIcon(System.getProperty("user.dir") + "\\Images\\userBig\\" + selectString + ".png"));
 					ComfirmUser.setUserImg(getImage(selectString));
 					UserService.getInstance().updateUser(ComfirmUser);
-					JOptionPane.showMessageDialog(null, "변경이 완료되었습니다.");
+					updatecontent.setContent(ComfirmUser);
+					JOptionPane.showMessageDialog(null, "수정되었습니다.");
 				}
 			}
 
@@ -105,16 +103,32 @@ public class UserMainUpdate extends JPanel {
 		add(bottomPanel);
 		bottomPanel.setLayout(null);
 		
-		UpdateContent updatecontent = new UpdateContent();
+		// 기본정보 수정하기 리스너
+		updatecontent = new UpdateContent();
+		updatecontent.setContent(ComfirmUser);
 		updatecontent.setBounds(0, 0, 477, 377);
 		bottomPanel.add(updatecontent);
 		updatecontent.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.LOWERED, null, null)), "\uAE30\uBCF8\uC815\uBCF4 \uC218\uC815", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-
+		updatecontent.getBtnUpdate().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				User UpdateUser = updatecontent.getContent();
+				ComfirmUser.setUserName(UpdateUser.getUserName());
+				ComfirmUser.setGender(UpdateUser.getGender());
+				ComfirmUser.setEmail(UpdateUser.getEmail());
+				ComfirmUser.setPhone(UpdateUser.getPhone());
+				UserService.getInstance().updateUser(ComfirmUser);
+				JOptionPane.showMessageDialog(null, "수정되었습니다");
+			}
+		});
+		
+		
+		// 비밀번호 컨텐트 및 수정하기 버튼 리스너
 		UpdatePwContent updatepwcontent = new UpdatePwContent();
 		updatepwcontent.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.LOWERED, null, null)), "\uBE44\uBC00\uBC88\uD638 \uC218\uC815", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		updatepwcontent.setBounds(483, 0, 488, 232);
 		bottomPanel.add(updatepwcontent);
-		
 		updatepwcontent.getBtnUpdate().addActionListener(new ActionListener() {
 			
 			@Override
@@ -122,12 +136,12 @@ public class UserMainUpdate extends JPanel {
 				String changePw = updatepwcontent.getContent();
 				
 				if(changePw == null) {
-					JOptionPane.showMessageDialog(null, "비밀번호가 일치하도록 입력해주세요");
+					JOptionPane.showMessageDialog(null, "비밀번호가 일치하도록 입력해주세요.");
 					return;
 				}else {
 					ComfirmUser.setPw(changePw);
 					UserService.getInstance().updateUser(ComfirmUser);
-					JOptionPane.showMessageDialog(null, "변경이 완료되었습니다.");
+					JOptionPane.showMessageDialog(null, "수정되었습니다.");
 					updatepwcontent.clear();
 				}
 			}

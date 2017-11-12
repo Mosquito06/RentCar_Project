@@ -90,7 +90,13 @@ public class ReserveLeftContent extends JPanel {
 	public void setManufacturerBoxModel() {
 		ManufacturerService manufacturerService = ManufacturerService.getInstance();
 		List<Manufacturer> lists = manufacturerService.selectManufacturerByAll();
-		Vector<Manufacturer> manufacturer = new Vector<>(lists);
+		Vector<Manufacturer> manufacturer = new Vector<>();
+		
+		for(Manufacturer mf : lists) {
+			mf.setComboType(0);
+			manufacturer.add(mf);
+		}
+		
 		comboBoxManufacturer.setComboBoxModel(manufacturer);
 	}
 	
@@ -100,6 +106,7 @@ public class ReserveLeftContent extends JPanel {
 	public void setFuelBoxModel() {
 	/*	FuelService fuelService = FuelService.getInstance();
 		List<Fuel> lists = fuelService.selectFuelByAll();
+
 		Vector<String> carData = new Vector<>();
 		String test = null;
 		for(Fuel f : lists) {
@@ -110,6 +117,10 @@ public class ReserveLeftContent extends JPanel {
 //		Vector<Fuel> carData = new Vector<>(lists);
 		
 		comboBoxFuel.setComboBoxModel(carData);*/
+
+	/*	Vector<Fuel> carData = new Vector<>(lists);
+		comboBoxFuel.setComboBoxModel(carData);*/
+
 	}
 	
 	

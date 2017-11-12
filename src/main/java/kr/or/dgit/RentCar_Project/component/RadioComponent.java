@@ -1,8 +1,11 @@
 package kr.or.dgit.RentCar_Project.component;
 
 import java.awt.GridLayout;
+import java.util.Enumeration;
 
+import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
+import javax.swing.ButtonModel;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -12,26 +15,28 @@ import javax.swing.SwingConstants;
 public class RadioComponent extends JPanel {
 	private JRadioButton rdbtnLeft;
 	private JRadioButton rdbtnRight;
+	private ButtonGroup group;
 
-	public RadioComponent(String srt,String srt1,String srt2) {
+	public RadioComponent(String Title, String FirstRadioName, String LastRadioName) {
 		setLayout(new GridLayout(1, 0, 0, 0));
-		
-		JLabel lbl = new JLabel(srt);
+
+		JLabel lbl = new JLabel(Title);
 		lbl.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lbl);
-		
-		rdbtnLeft = new JRadioButton(srt1);
+
+		rdbtnLeft = new JRadioButton(FirstRadioName);
 		rdbtnLeft.setSelected(true);
 		rdbtnLeft.setHorizontalAlignment(SwingConstants.CENTER);
 		add(rdbtnLeft);
-		
-		rdbtnRight = new JRadioButton(srt2);
+
+		rdbtnRight = new JRadioButton(LastRadioName);
 		rdbtnRight.setHorizontalAlignment(SwingConstants.CENTER);
 		add(rdbtnRight);
-		
-		ButtonGroup group = new ButtonGroup();
+
+		group = new ButtonGroup();
 		group.add(rdbtnLeft);
 		group.add(rdbtnRight);
+		
 	}
 
 	public JRadioButton getRdbtnLeft() {
@@ -50,10 +55,25 @@ public class RadioComponent extends JPanel {
 		this.rdbtnRight = rdbtnRight;
 	}
 
+	public String getSelectText() {
+		Enumeration<AbstractButton> button = group.getElements();
+		while (button.hasMoreElements()) {
+			JRadioButton jb = (JRadioButton) button.nextElement();
+			if (jb.isSelected()) {
+				return jb.getText();
+			}
+		}
+		return null;
+	}
 	
-	
-	
-	
-	
+	public void setSelect(boolean selected) {
+		if(selected) {
+			rdbtnLeft.setSelected(true);
+			rdbtnRight.setSelected(false);
+		}else {
+			rdbtnRight.setSelected(true);
+			rdbtnLeft.setSelected(false);
+		}
+	}
 
 }

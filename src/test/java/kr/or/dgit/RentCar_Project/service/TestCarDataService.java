@@ -28,7 +28,7 @@ public class TestCarDataService {
 		carDataService = null;
 	}
 
-	@Test
+	/*@Test
 	public void test1InsertCarData() {
 		CarData carData = new CarData();
 		carData.setCarCode("aaaaa");
@@ -62,6 +62,6 @@ public class TestCarDataService {
 		CarData carData = new CarData();
 		carData.setCarCode("aaaaa");
 		carDataService.deleteCarData(carData);
-	}
+	}*/
 
 }

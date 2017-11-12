@@ -8,6 +8,7 @@ public interface RentDao {
 	void insertRent(Rent rent);
 	void updateRent(Rent rent);
 	void deleteRent(Rent rent);
-	Rent selectRentByUserCode(Rent rent);
+	List<Rent> selectRentByUserCode(Rent rent);
 	List<Rent> selectRentByAll();
+	List<Rent> selectRentJoinCarData(Rent rent);
 }

@@ -50,7 +50,7 @@ public class RentService implements RentDao {
 	}
 
 	@Override
-	public Rent selectRentByUserCode(Rent rent) {
+	public List<Rent> selectRentByUserCode(Rent rent) {
 		try(SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession()){
 			rentDao = sqlSession.getMapper(RentDao.class);
 			return rentDao.selectRentByUserCode(rent);
@@ -62,6 +62,15 @@ public class RentService implements RentDao {
 		try(SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession()){
 			rentDao = sqlSession.getMapper(RentDao.class);
 			return rentDao.selectRentByAll();
+		}
+	}
+
+
+	@Override
+	public List<Rent> selectRentJoinCarData(Rent rent) {
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession()){
+			rentDao = sqlSession.getMapper(RentDao.class);
+			return rentDao.selectRentJoinCarData(rent);
 		}
 	}
 

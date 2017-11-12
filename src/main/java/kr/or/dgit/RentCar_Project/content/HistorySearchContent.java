@@ -29,6 +29,14 @@ public class HistorySearchContent extends JPanel {
 	private Date startDate;
 	private Date lastDate;
 
+	public JTextField getFirstDateField() {
+		return FirstDateField;
+	}
+
+	public JTextField getLastDateField() {
+		return LastDateField;
+	}
+
 	public JButton getBtnSearch() {
 		return btnSearch;
 	}

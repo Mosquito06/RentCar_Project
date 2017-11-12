@@ -11,8 +11,6 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import kr.or.dgit.RentCar_Project.dto.CarData;
-import kr.or.dgit.RentCar_Project.dto.IsInsurance;
 import kr.or.dgit.RentCar_Project.dto.Rent;
 import kr.or.dgit.RentCar_Project.dto.User;
 
@@ -31,7 +29,7 @@ public class TestRentService {
 		rentService=null;
 	}
 
-	@Test
+	/*@Test
 	public void test1InsertRent() {
 		Rent rent = new Rent();
 		
@@ -100,5 +98,26 @@ public class TestRentService {
 		user.setUserCode(4);
 		rent.setUserCode(user);
 		rentService.deleteRent(rent);
+	}*/
+	
+	@Test
+	public void test6SelectRentJoinCarData(){
+		User user = new User();
+		user.setUserCode(1);
+		Rent rent = new Rent();
+		
+		Calendar dayStart = GregorianCalendar.getInstance();
+		dayStart.set(2017, 10, 9);
+		
+		Calendar dayEnd = GregorianCalendar.getInstance();
+		dayEnd.set(2017, 10, 25);
+		
+		
+		rent.setUserCode(user);
+		rent.setDayStart(dayStart.getTime());
+		rent.setDayEnd(dayEnd.getTime());
+		
+		List<Rent> list = rentService.selectRentJoinCarData(rent);
+		Assert.assertNotNull(list);
 	}
 }

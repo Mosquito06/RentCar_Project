@@ -11,8 +11,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 
 import kr.or.dgit.RentCar_Project.dao.UserDao;
+import kr.or.dgit.RentCar_Project.dto.Rent;
 import kr.or.dgit.RentCar_Project.dto.User;
 import kr.or.dgit.RentCar_Project.service.UserService;
 
@@ -73,7 +75,7 @@ public class UserMainHome extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// 비밀번호 재확인
-				String Pwcheck;
+				JPasswordField pwdField;
 				String ComfirmPw = null;
 				UserDao userDao = UserService.getInstance();
 				List<User> list = userDao.selectUserByAll();
@@ -85,19 +87,22 @@ public class UserMainHome extends JPanel {
 						break;
 					}
 				}
+				
 				do {
-					Pwcheck = JOptionPane.showInputDialog(null, "비밀번호를 입력해주세요.");
-					if (Pwcheck.equals(ComfirmPw)) {
-						JFrame frame = UserMain.getInstance();
-						frame.getContentPane().removeAll();
-						UserMainUpdate userMainUpdate = new UserMainUpdate(ComfirmUser);
-						frame.getContentPane().add(userMainUpdate, BorderLayout.CENTER);
-						frame.setVisible(true);
-						break;
-					} else {
-						JOptionPane.showMessageDialog(null, "비밀번호를 확인해주세요");
+					pwdField = new JPasswordField();
+					if(JOptionPane.showConfirmDialog(null, pwdField, "비밀번호를 입력해주세요.", JOptionPane.OK_CANCEL_OPTION) == JOptionPane.YES_OPTION) {
+						if(pwdField.getText().equals(ComfirmPw)) {
+							JFrame frame = UserMain.getInstance();
+							frame.getContentPane().removeAll();
+							UserMainUpdate userMainUpdate = new UserMainUpdate(ComfirmUser);
+							frame.getContentPane().add(userMainUpdate, BorderLayout.CENTER);
+							frame.setVisible(true);
+							break;
+						}else {
+							JOptionPane.showMessageDialog(null, "비밀번호를 확인해주세요");
+						}
 					}
-				} while (Pwcheck == null || !Pwcheck.equals(ComfirmPw));
+				} while (pwdField == null || !pwdField.equals(ComfirmPw));
 			}
 		});
 		btnUpdate.setBounds(12, 171, 193, 44);
