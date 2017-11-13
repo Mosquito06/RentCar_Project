@@ -62,14 +62,25 @@ public class UserMainHistory extends JPanel {
 				findRent.get(0).setDayStart(dayStart.getTime());
 				findRent.get(0).setDayEnd(dayEnd.getTime());
 				
-				
-				
+				historyTable.setRent(findRent.get(0));
+				historyTable.loadDate();
+				JOptionPane.showMessageDialog(null, "불러오기가 완료되었습니다");
 				
 			}
 		});
 		searchContent.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.LOWERED, null, null)), "\uAC80\uC0C9\uC870\uAC74", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		searchContent.setBounds(0, 5, 974, 97);
 		add(searchContent);
+		
+		// 취소하기 버튼 리스너
+		searchContent.getBtnCancel().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				
+			}
+		});
 		
 		// 나가기 버튼 리스너
 		searchContent.getBtnExit().addActionListener(new ActionListener() {
@@ -82,11 +93,10 @@ public class UserMainHistory extends JPanel {
 				userMainHome.setComfirmUser(ComfirmUser);
 				frame.getContentPane().add(userMainHome, BorderLayout.CENTER);
 				frame.setVisible(true);
-				
 			}
 		});
 		
-		historyTable = new UserHistoryTable(rent);
+		historyTable = new UserHistoryTable();
 		historyTable.setBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.LOWERED, null, null)));
 		historyTable.setBounds(0, 116, 974, 635);
 		historyTable.loadDate();
