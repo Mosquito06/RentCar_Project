@@ -3,7 +3,6 @@ package kr.or.dgit.RentCar_Project.content;
 import java.awt.FlowLayout;
 import java.util.List;
 
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import kr.or.dgit.RentCar_Project.dto.CarData;
@@ -22,22 +21,21 @@ public class ReserveAddCarContent extends JPanel {
 		setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		CarDataService carDataService = CarDataService.getInstance();
-		List<CarData> lists = carDataService.selectCarDataByAll();
-		
+		UserGradeService userGradeService = UserGradeService.getInstance();
 		RentalPriceService rentalPriceService = RentalPriceService.getInstance();
-		
+		List<RentalPrice> lists = rentalPriceService.selectRentalPriceByAll();
 		
 		for(int i=0;i<lists.size();i++) {
-			String carCode=lists.get(i).getCarCode();
-			RentalPrice rentalPrice=rentalPriceService.selectRentalPriceByCarCodeString(carCode);
-			String carName = lists.get(i).getCarName();
+			CarData carCode=lists.get(i).getCarCode();
+			RentalPrice rentalPrice=rentalPriceService.selectRentalPriceByCarCodeString(carCode.getCarCode());
+			String carName = carDataService.selectCarDataByCarDataCode(carCode).getCarName();
 			int price = rentalPrice.getBasicPrice();
 			int iPrice = rentalPrice.getInsurance();
 			int btPrice = rentalPrice.getBasicTimePrice();
 			int otPrice = rentalPrice.getOverPrice();
 			int bTime = rentalPrice.getBasicTime();
 			UserGrade user = comfirmUser.getGrade();
-			UserGradeService userGradeService = UserGradeService.getInstance();
+			
 			int dPrice= userGradeService.selectUserGradeByGrade(user).getDiscount();
 			
 			int dTotalPrice =((price+btPrice*bTime+otPrice*(time-bTime))*(dPrice))/100;

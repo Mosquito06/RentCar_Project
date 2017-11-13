@@ -1,5 +1,4 @@
 B	BMW
-BM	BMW MINI
 C	쉐보레
 H	현대
 K	기아
