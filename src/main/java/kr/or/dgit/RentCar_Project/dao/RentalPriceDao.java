@@ -9,5 +9,6 @@ public interface RentalPriceDao {
 	void updateRentalPrice(RentalPrice rentalPrice);
 	void deleteRentalPrice(RentalPrice rentalPrice);
 	RentalPrice selectRentalPriceByCarCode(RentalPrice rentalPrice);
+	RentalPrice selectRentalPriceByCarCodeString(String code);
 	List<RentalPrice> selectRentalPriceByAll();
 }

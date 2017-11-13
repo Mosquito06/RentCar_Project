@@ -66,4 +66,12 @@ public class RentalPriceService implements RentalPriceDao {
 		}
 	}
 
+	@Override
+	public RentalPrice selectRentalPriceByCarCodeString(String code) {
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession()){
+			rentalPriceDao = sqlSession.getMapper(RentalPriceDao.class);
+			return rentalPriceDao.selectRentalPriceByCarCodeString(code);
+		}
+	}
+
 }

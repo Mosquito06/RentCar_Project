@@ -70,6 +70,12 @@
 		<include refid="selectSql"/>
 	</select>
 	
+	<select id="selectRentalPriceByCarCodeString" resultMap="RentalPriceResult">
+		 select car_code, basic_price, basic_time, basic_time_price, 
+		over_price, insurance from rental_price where car_code = #{carCode}
+		
+	</select>
+	
 	<insert id="insertRentalPrice" parameterType="RentalPrice">
 		<include refid="insertSql"></include>
 	</insert>

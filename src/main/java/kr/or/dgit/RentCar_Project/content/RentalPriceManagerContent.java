@@ -1,56 +1,80 @@
 package kr.or.dgit.RentCar_Project.content;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
 import javax.swing.JPanel;
+
 import kr.or.dgit.RentCar_Project.component.ComboBoxComponent;
 import kr.or.dgit.RentCar_Project.component.TextFieldComponent;
-import javax.swing.JButton;
+import kr.or.dgit.RentCar_Project.dto.RentalPrice;
 
 @SuppressWarnings("serial")
 public class RentalPriceManagerContent extends JPanel {
-
-
+	
+	private ComboBoxComponent<RentalPrice> carCode;
+	private TextFieldComponent bPrice;
+	private TextFieldComponent useTime;
+	private TextFieldComponent oPrice;
+	private TextFieldComponent btPrice;
+	private TextFieldComponent insurance;
+	
 	public RentalPriceManagerContent() {
 		setLayout(null);
 		
-		ComboBoxComponent carCodePanel = new ComboBoxComponent("차 코드");
-		carCodePanel.setBounds(5, 23, 230, 30);
-		add(carCodePanel);
+		carCode = new ComboBoxComponent<>("차 코드");
+		carCode.setBounds(5, 23, 230, 30);
+		add(carCode);
 		
-		TextFieldComponent bPricePanel = new TextFieldComponent("기본가격");
-		bPricePanel.setBounds(5, 63, 230, 30);
-		add(bPricePanel);
+		bPrice = new TextFieldComponent("기본가격");
+		bPrice.setBounds(5, 63, 230, 30);
+		add(bPrice);
 		
-		TextFieldComponent useTimePanel = new TextFieldComponent("사용시간");
-		useTimePanel.setBounds(5, 103, 230, 30);
-		add(useTimePanel);
+		useTime = new TextFieldComponent("사용시간");
+		useTime.setBounds(5, 103, 230, 30);
+		add(useTime);
 		
-		TextFieldComponent atPricePanel = new TextFieldComponent("초과시간단가");
-		atPricePanel.setBounds(242, 103, 230, 30);
-		add(atPricePanel);
+		oPrice = new TextFieldComponent("초과시간단가");
+		oPrice.setBounds(5, 223, 230, 30);
+		add(oPrice);
 		
-		TextFieldComponent btPricePanel = new TextFieldComponent("기본시간단가");
-		btPricePanel.setBounds(242, 63, 230, 30);
-		add(btPricePanel);
+		btPrice = new TextFieldComponent("기본시간단가");
+		btPrice.setBounds(5, 183, 230, 30);
+		add(btPrice);
 		
-		TextFieldComponent insurancePanel = new TextFieldComponent("보험료");
-		insurancePanel.setBounds(242, 23, 230, 30);
-		add(insurancePanel);
-		
-		JButton btnAdd = new JButton("추가");
-		btnAdd.setBounds(498, 20, 66, 23);
-		add(btnAdd);
+		insurance = new TextFieldComponent("보험료");
+		insurance.setBounds(5, 143, 230, 30);
+		add(insurance);
 		
 		JButton btnUpdate = new JButton("수정");
-		btnUpdate.setBounds(498, 45, 66, 23);
+		btnUpdate.setBounds(25, 267, 66, 23);
 		add(btnUpdate);
 		
 		JButton btnDelete = new JButton("삭제");
-		btnDelete.setBounds(498, 70, 66, 23);
+		btnDelete.setBounds(91, 267, 66, 23);
 		add(btnDelete);
 		
 		JButton btnCancel = new JButton("취소");
-		btnCancel.setBounds(498, 126, 66, 23);
+		btnCancel.setBounds(169, 267, 66, 23);
+		btnCancel.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setRentalPriceValueClear();
+				
+			}
+		});
 		add(btnCancel);
 
+	}
+	
+	public void setRentalPriceValueClear() {
+		carCode.setComboBoxModelClear();
+		bPrice.setTextValue("");
+		useTime.setTextValue("");
+		oPrice.setTextValue("");
+		btPrice.setTextValue("");
+		insurance.setTextValue("");
 	}
 }
