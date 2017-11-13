@@ -21,7 +21,7 @@ public class VTextFieldComponent extends JPanel {
 		add(lblNewLabel);
 		
 		textField = new JTextField();
-		textField.setEnabled(false);
+		textField.setFocusable(false);
 		textField.setHorizontalAlignment(SwingConstants.CENTER);
 		add(textField);
 		textField.setColumns(10);

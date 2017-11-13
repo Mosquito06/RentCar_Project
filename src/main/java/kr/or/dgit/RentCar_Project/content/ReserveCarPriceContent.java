@@ -19,21 +19,16 @@ import kr.or.dgit.RentCar_Project.service.CarDataService;
 
 @SuppressWarnings("serial")
 public class ReserveCarPriceContent extends JPanel {
-	private JLabel carImg;
 	private JPanel carReservePanel;
 	private JPanel carValuePanel;
 
 	/**
 	 * Create the panel.
 	 */
-	public ReserveCarPriceContent(String name,String cPrice,String iPrice,String dPrice,String fPrice,String img) {
+	public ReserveCarPriceContent(String name,String cPrice,String iPrice,String dPrice,String fPrice,String img,
+			String old,String seater,String auto,String fuel) {
 		setBorder(new LineBorder(new Color(0, 0, 0)));
 		setLayout(new BorderLayout(0, 0));
-
-		carImg = new JLabel("");
-		carImg.setHorizontalAlignment(SwingConstants.CENTER);
-		carImg.setIcon(new ImageIcon(System.getProperty("user.dir")+"\\images\\car\\"+img));
-		add(carImg);
 
 		carReservePanel = new JPanel();
 		carReservePanel.setBorder(new EmptyBorder(0, 5, 0, 5));
@@ -71,15 +66,38 @@ public class ReserveCarPriceContent extends JPanel {
 		JLabel lblCarValue = new JLabel();
 		carValuePanel.add(lblCarValue);
 		
+		JPanel panel = new JPanel();
+		add(panel, BorderLayout.CENTER);
+		panel.setLayout(new BorderLayout(0, 0));
 		
-		setCarPrice();
+		JLabel carImg = new JLabel(new ImageIcon(System.getProperty("user.dir")+"\\images\\car\\"+img));
+		carImg.setHorizontalAlignment(SwingConstants.CENTER);
+		panel.add(carImg, BorderLayout.CENTER);
+		
+		JPanel carValue = new JPanel();
+		panel.add(carValue, BorderLayout.SOUTH);
+		
+		VTextFieldComponent carOldTf = new VTextFieldComponent("연식");
+		carOldTf.getTextField().setText(old);
+		carValue.add(carOldTf);
+		
+		VTextFieldComponent fuelTf = new VTextFieldComponent("연료종류");
+		fuelTf.getTextField().setText(fuel);
+		carValue.add(fuelTf);
+		
+		VTextFieldComponent seaterTf = new VTextFieldComponent("인승");
+		seaterTf.getTextField().setText(seater);
+		carValue.add(seaterTf);
+		
+		VTextFieldComponent autoTf = new VTextFieldComponent("오토유무");
+		autoTf.getTextField().setText(auto);
+		carValue.add(autoTf);
+		
+		
+		
 	}
 
-	private void setCarPrice() {
-		CarDataService carDataService = CarDataService.getInstance();
-		
-		
-	}
+
 	
 	
 	
