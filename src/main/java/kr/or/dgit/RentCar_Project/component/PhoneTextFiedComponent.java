@@ -74,5 +74,11 @@ public class PhoneTextFiedComponent extends JPanel {
 			return false;
 		}return true;
 	}
+	
+	public void setTextValueClear() {
+		tfNum1.setText("");
+		tfNum2.setText("");
+		tfNum3.setText("");
+	}
 
 }
