@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import kr.or.dgit.RentCar_Project.component.EmailTextFiedComponent;
 import kr.or.dgit.RentCar_Project.component.PhoneTextFiedComponent;
 import kr.or.dgit.RentCar_Project.component.RadioComponent;
 import kr.or.dgit.RentCar_Project.component.TextFieldComponent;
@@ -125,12 +126,10 @@ public class UpdateContent extends JPanel {
 		
 	}
 
-	public void isEmptyCheck() throws Exception {
-		panelId.isEmptyCheck();
-		panelName.isEmptyCheck();
-		panelEmail.isEmptyCheck();
-		panelGrade.isEmptyCheck();
-		panelInPhone.isEmptyCheck();
+	public boolean isEmptyCheck(){
+		if(!panelName.isEmptyCheck() || !panelEmail.isEmptyCheck() || !panelInPhone.isEmptyCheck()) {
+			return false;
+		}return true;
 	}
 
 	public void clear() {

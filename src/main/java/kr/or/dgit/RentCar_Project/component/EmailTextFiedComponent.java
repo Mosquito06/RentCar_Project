@@ -16,6 +16,7 @@ import java.awt.event.ActionEvent;
 public class EmailTextFiedComponent extends JPanel {
 	private JTextField tfEmailId;
 	private JTextField tfEmailAddr;
+	private JComboBox<String> cbEmailAddr;
 
 
 	public EmailTextFiedComponent(String title) {
@@ -48,7 +49,7 @@ public class EmailTextFiedComponent extends JPanel {
 		emailPanel3.add(tfEmailAddr, BorderLayout.WEST);
 		tfEmailAddr.setColumns(10);
 		
-		JComboBox<String> cbEmailAddr = new JComboBox<>();
+		cbEmailAddr = new JComboBox<>();
 		
 		cbEmailAddr.addActionListener(new ActionListener() {
 			
@@ -87,9 +88,16 @@ public class EmailTextFiedComponent extends JPanel {
 		tfEmailAddr.setText(value);
 	}
 	
-	public void isEmptyChech() throws Exception{
+	public boolean isEmptyChech(){
 		if(getTextVauleId().equals("")||getTextValueEmailAddr().equals("")) {
 			tfEmailId.requestFocus();
-		}
+			return false;
+		}return true;
+	}
+	
+	public void setEmailValueClear() {
+		tfEmailId.setText("");
+		tfEmailAddr.setText("");
+		cbEmailAddr.setSelectedIndex(0);
 	}
 }

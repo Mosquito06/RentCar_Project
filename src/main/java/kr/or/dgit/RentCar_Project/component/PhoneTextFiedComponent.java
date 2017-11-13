@@ -68,10 +68,17 @@ public class PhoneTextFiedComponent extends JPanel {
 		tfNum3.setText(value);
 	}
 	
-	public void isEmptyCheck() throws Exception{
+	public boolean isEmptyCheck(){
 		if(getTextValueNum1().equals("")||getTextValueNum2().equals("")||getTextValueNum3().equals("")) {
 			tfNum1.requestFocus();
-		}
+			return false;
+		}return true;
+	}
+	
+	public void setTextValueClear() {
+		tfNum1.setText("");
+		tfNum2.setText("");
+		tfNum3.setText("");
 	}
 
 }
