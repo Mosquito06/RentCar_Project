@@ -30,6 +30,9 @@ dependencies {
 	// LookAndFeel 파일 추가(jar 파일 추가)
 	compile files('libs/liquidlnf.jar')
 	
+	// JChartLib 파일 추가(jar 파일 추가)
+	compile files('libs/JChartLib.jar')
+	
     testImplementation 'junit:junit:4.12'
 }
 
