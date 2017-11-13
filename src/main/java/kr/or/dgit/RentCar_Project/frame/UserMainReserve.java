@@ -29,10 +29,10 @@ import javax.swing.ImageIcon;
 
 @SuppressWarnings("serial")
 public class UserMainReserve extends JPanel {
-	private User ComfirmUser;
+	private User comfirmUser;
 	
 	public void setComfirmUser(User comfirmUser) {
-		this.ComfirmUser = comfirmUser;
+		this.comfirmUser = comfirmUser;
 	}
 
 	public UserMainReserve() {
@@ -83,7 +83,9 @@ public class UserMainReserve extends JPanel {
 					JOptionPane.showMessageDialog(null, "날짜를 정확하게 입력하세요");
 					return;
 				}
-				ReserveAddCarContent addCar = new ReserveAddCarContent();
+				
+				int totalTime = Integer.parseInt(header.getTotalTimePanel().getTextValue());
+				ReserveAddCarContent addCar = new ReserveAddCarContent(totalTime,comfirmUser);
 				scrollPane.setViewportView(addCar);
 				addCar.setLayout(new GridLayout(0, 1, 0, 0));
 				
@@ -126,7 +128,7 @@ public class UserMainReserve extends JPanel {
 				JFrame frame = UserMain.getInstance();
 				frame.getContentPane().removeAll();
 				UserMainHome userMainHome = new UserMainHome();
-				userMainHome.setComfirmUser(ComfirmUser);
+				userMainHome.setComfirmUser(comfirmUser);
 				frame.getContentPane().add(userMainHome, BorderLayout.CENTER);
 				frame.setVisible(true);
 			}

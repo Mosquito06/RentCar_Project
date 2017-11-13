@@ -14,6 +14,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 import kr.or.dgit.RentCar_Project.component.VTextFieldComponent;
+import kr.or.dgit.RentCar_Project.dao.CarDataDao;
+import kr.or.dgit.RentCar_Project.service.CarDataService;
 
 
 @SuppressWarnings("serial")
@@ -25,7 +27,7 @@ public class ReserveCarPriceContent extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public ReserveCarPriceContent(String name) {
+	public ReserveCarPriceContent(String name,String cPrice,String iPrice,String dPrice,String fPrice) {
 		setBorder(new LineBorder(new Color(0, 0, 0)));
 		setLayout(new BorderLayout(0, 0));
 
@@ -40,15 +42,19 @@ public class ReserveCarPriceContent extends JPanel {
 		carReservePanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
 		VTextFieldComponent carPrice = new VTextFieldComponent("차량요금");
+		carPrice.getTextField().setText(cPrice);
 		carReservePanel.add(carPrice);
 
 		VTextFieldComponent insurance = new VTextFieldComponent("보험료");
+		insurance.getTextField().setText(iPrice);
 		carReservePanel.add(insurance);
 
 		VTextFieldComponent discountPrice = new VTextFieldComponent("할인금액");
+		discountPrice.getTextField().setText(dPrice);
 		carReservePanel.add(discountPrice);
 
 		VTextFieldComponent finalPrice = new VTextFieldComponent("총 결제금액");
+		finalPrice.getTextField().setText(fPrice);
 		carReservePanel.add(finalPrice);
 
 		JButton btnReserve = new JButton("예약");
@@ -63,9 +69,22 @@ public class ReserveCarPriceContent extends JPanel {
 		lblCarName.setHorizontalAlignment(SwingConstants.CENTER);
 		carValuePanel.add(lblCarName);
 
-		JLabel lblCaValue = new JLabel();
-		carValuePanel.add(lblCaValue);
-
+		JLabel lblCarValue = new JLabel();
+		carValuePanel.add(lblCarValue);
+		
+		
+		setCarPrice();
 	}
+
+	private void setCarPrice() {
+		CarDataService carDataService = CarDataService.getInstance();
+		
+		
+	}
+	
+	
+	
+	
+	
 
 }
