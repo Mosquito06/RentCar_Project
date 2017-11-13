@@ -18,7 +18,7 @@
 		<result property="dayStart" column="day_start"/>
 		<result property="dayEnd" column="day_end"/>
 		<result property="finalPrice" column="final_price"/>
-		<association property="carCode" resultMap="kr.or.dgit.RentCar_Project.dao.CarDataDao.RentJoinCarData"></association>
+		<association property="carCode" resultMap="kr.or.dgit.RentCar_Project.dao.CarDataDao.RentJoinCarData"/>
 	</resultMap>
 	
 	<sql id="whereAllSql">

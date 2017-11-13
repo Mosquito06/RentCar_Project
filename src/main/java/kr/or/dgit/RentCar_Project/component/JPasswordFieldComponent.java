@@ -1,23 +1,28 @@
 package kr.or.dgit.RentCar_Project.component;
 
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.GridLayout;
 import javax.swing.SwingConstants;
 
-public class TextFieldComponent extends JPanel {
-	private JTextField textField;
+public class JPasswordFieldComponent extends JPanel {
+	private JPasswordField textField;
 
-	public TextFieldComponent(String title) {
+	public JPasswordField getTextField() {
+		return textField;
+	}
+	
+	public JPasswordFieldComponent(String title) {
 		setLayout(new GridLayout(0, 2, 5, 0));
 
 		JLabel lblNewLabel = new JLabel(title);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lblNewLabel);
 
-		textField = new JTextField();
+		textField = new JPasswordField();
 		textField.setHorizontalAlignment(SwingConstants.CENTER);
 		add(textField);
 		textField.setColumns(10);
@@ -42,11 +47,4 @@ public class TextFieldComponent extends JPanel {
 			return false;
 		}return true;
 	}
-
-	public JTextField getTextField() {
-		return textField;
-	}
-	
-	
-
 }
