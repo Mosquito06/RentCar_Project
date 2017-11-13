@@ -137,5 +137,4 @@
 		<include refid="deleteSql"/>
 		<include refid="wherePrimarySql"/>
 	</delete>
-
 </mapper>

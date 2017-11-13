@@ -35,6 +35,8 @@ public class ReserveAddCarContent extends JPanel {
 			int otPrice = rentalPrice.getOverPrice();
 			int bTime = rentalPrice.getBasicTime();
 			UserGrade user = comfirmUser.getGrade();
+			String img = carDataService.selectCarDataByCarDataCode(carCode).getCarImage();
+			
 			
 			int dPrice= userGradeService.selectUserGradeByGrade(user).getDiscount();
 			
@@ -44,19 +46,19 @@ public class ReserveAddCarContent extends JPanel {
 			if(time<=bTime) {
 				ReserveCarPriceContent panel = new ReserveCarPriceContent(carName,
 						String.valueOf(price)+"원",String.valueOf(iPrice)+"원",
-						String.valueOf(0)+"원",String.valueOf(price+iPrice+btPrice*time)+"원");
+						String.valueOf(0)+"원",String.valueOf(price+iPrice+btPrice*time)+"원",img);
 				add(panel);
 			}else if(time>(bTime*1.2)) {
 				ReserveCarPriceContent panel = new ReserveCarPriceContent(carName,
 						String.valueOf(price)+"원",String.valueOf(iPrice)+"원",
 						String.valueOf(dTotalPrice)+"원",
-						String.valueOf(oTotalPrice-dTotalPrice)+"원");
+						String.valueOf(oTotalPrice-dTotalPrice)+"원",img);
 				add(panel);	
 			}else {
 				ReserveCarPriceContent panel = new ReserveCarPriceContent(carName,
 						String.valueOf(price)+"원",String.valueOf(iPrice)+"원",
 						String.valueOf(0)+"원",
-						String.valueOf(oTotalPrice)+"원");
+						String.valueOf(oTotalPrice)+"원",img);
 				add(panel);
 			}
 			

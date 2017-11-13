@@ -14,7 +14,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 import kr.or.dgit.RentCar_Project.component.VTextFieldComponent;
-import kr.or.dgit.RentCar_Project.dao.CarDataDao;
 import kr.or.dgit.RentCar_Project.service.CarDataService;
 
 
@@ -27,13 +26,13 @@ public class ReserveCarPriceContent extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public ReserveCarPriceContent(String name,String cPrice,String iPrice,String dPrice,String fPrice) {
+	public ReserveCarPriceContent(String name,String cPrice,String iPrice,String dPrice,String fPrice,String img) {
 		setBorder(new LineBorder(new Color(0, 0, 0)));
 		setLayout(new BorderLayout(0, 0));
 
 		carImg = new JLabel("");
 		carImg.setHorizontalAlignment(SwingConstants.CENTER);
-		carImg.setIcon(new ImageIcon("C:\\Users\\DGIT3-10\\Desktop\\차-1\\impala.jpg"));
+		carImg.setIcon(new ImageIcon(System.getProperty("user.dir")+"\\images\\car\\"+img));
 		add(carImg);
 
 		carReservePanel = new JPanel();

@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class CarData {
 	private String carCode;
 	private String carName;
-	private byte[] carImage;
+	private String carImage;
 	private int carOld;
 	private int carNumber;
 	private IsAuto isAuto;
@@ -21,7 +21,7 @@ public class CarData {
 		this.comboType = comboType;
 	}
 
-	public CarData(String carCode, String carName, byte[] carImage, int carOld, int carNumber, IsAuto isAuto,
+	public CarData(String carCode, String carName, String carImage, int carOld, int carNumber, IsAuto isAuto,
 			String carSeater, CarModel carModelCode, Manufacturer manufacturerCode, Fuel fuelCode) {
 		super();
 		this.carCode = carCode;
@@ -68,11 +68,11 @@ public class CarData {
 		this.carName = carName;
 	}
 
-	public byte[] getCarImage() {
+	public String getCarImage() {
 		return carImage;
 	}
 
-	public void setCarImage(byte[] carImage) {
+	public void setCarImage(String carImage) {
 		this.carImage = carImage;
 	}
 
@@ -145,7 +145,7 @@ public class CarData {
 		}else {
 			return String.format(
 					"%s %s %s %s %s %s %s %s %s %s %s",
-					carCode, carName, Arrays.toString(carImage), carOld, carNumber, isAuto, carSeater, carModelCode,
+					carCode, carName, carImage, carOld, carNumber, isAuto, carSeater, carModelCode,
 					manufacturerCode, fuelCode, comboType);
 		}
 	}
