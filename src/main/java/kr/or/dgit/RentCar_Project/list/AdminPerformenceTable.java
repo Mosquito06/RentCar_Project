@@ -20,7 +20,7 @@ public class AdminPerformenceTable extends AbstractTable {
 	}
 
 	@Override
-	protected Object getSelectedItem() {
+	public Object getSelectedItem() {
 		// TODO Auto-generated method stub
 		return null;
 	}

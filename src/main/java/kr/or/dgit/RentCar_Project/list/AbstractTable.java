@@ -15,7 +15,7 @@ import javax.swing.table.TableColumnModel;
 
 
 public abstract class AbstractTable extends JPanel {
-	private JTable table;
+	protected JTable table;
 		
 	public AbstractTable() {
 		setLayout(new BorderLayout(0, 0));
@@ -63,5 +63,5 @@ public abstract class AbstractTable extends JPanel {
 	
 	protected abstract Object[] getcolumnNames();
 	
-	protected abstract Object getSelectedItem();
+	public abstract Object getSelectedItem();
 }
