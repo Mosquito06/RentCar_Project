@@ -2,18 +2,21 @@ package kr.or.dgit.RentCar_Project.content;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
+import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import kr.or.dgit.RentCar_Project.component.ComboBoxComponent;
 import kr.or.dgit.RentCar_Project.component.TextFieldComponent;
-import kr.or.dgit.RentCar_Project.dto.RentalPrice;
+import kr.or.dgit.RentCar_Project.dto.CarData;
+import kr.or.dgit.RentCar_Project.service.CarDataService;
 
 @SuppressWarnings("serial")
 public class RentalPriceManagerContent extends JPanel {
 	
-	private ComboBoxComponent<RentalPrice> carCode;
+	private ComboBoxComponent<CarData> carCode;
 	private TextFieldComponent bPrice;
 	private TextFieldComponent useTime;
 	private TextFieldComponent oPrice;
@@ -66,9 +69,18 @@ public class RentalPriceManagerContent extends JPanel {
 			}
 		});
 		add(btnCancel);
-
+		setCarCodeComboModel();
 	}
-	
+	public void setCarCodeComboModel() {
+		CarDataService carDataService = CarDataService.getInstance();
+		List<CarData> lists = carDataService.selectCarDataByAll();
+		Vector<CarData> carDataCode = new Vector<>();
+		for(CarData cd:lists) {
+			cd.setComboType(0);
+			carDataCode.add(cd);
+		}
+		carCode.setComboBoxModel(carDataCode);
+	}
 	public void setRentalPriceValueClear() {
 		carCode.setComboBoxModelClear();
 		bPrice.setTextValue("");

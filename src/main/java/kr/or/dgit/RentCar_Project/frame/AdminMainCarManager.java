@@ -1,39 +1,55 @@
 package kr.or.dgit.RentCar_Project.frame;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
+import java.util.Vector;
 
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
+import kr.or.dgit.RentCar_Project.component.ComboBoxComponent;
 import kr.or.dgit.RentCar_Project.component.JspinnerComponent;
 import kr.or.dgit.RentCar_Project.component.RadioComponent;
 import kr.or.dgit.RentCar_Project.component.TextFieldComponent;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-
-import kr.or.dgit.RentCar_Project.component.ComboBoxComponent;
-import java.awt.BorderLayout;
-import javax.swing.JScrollPane;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JTable;
-import javax.swing.ScrollPaneConstants;
-import java.awt.GridLayout;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JTextField;
 import kr.or.dgit.RentCar_Project.content.CarModelContent;
 import kr.or.dgit.RentCar_Project.content.FuelManagerContent;
 import kr.or.dgit.RentCar_Project.content.ManufacturerManagerContent;
 import kr.or.dgit.RentCar_Project.content.RentalPriceManagerContent;
+import kr.or.dgit.RentCar_Project.dto.CarData;
+import kr.or.dgit.RentCar_Project.dto.CarModel;
+import kr.or.dgit.RentCar_Project.dto.Fuel;
+import kr.or.dgit.RentCar_Project.dto.Manufacturer;
+import kr.or.dgit.RentCar_Project.service.CarDataService;
+import kr.or.dgit.RentCar_Project.service.CarModelService;
+import kr.or.dgit.RentCar_Project.service.FuelService;
+import kr.or.dgit.RentCar_Project.service.ManufacturerService;
 
+@SuppressWarnings("serial")
 public class AdminMainCarManager extends JPanel {
 	private JTable table;
-
+	
+	private TextFieldComponent carCode;
+	private TextFieldComponent carName;
+	private TextFieldComponent carOld;
+	private TextFieldComponent seater;
+	private RadioComponent isAuto;
+	private JspinnerComponent carNumber;
+	private ComboBoxComponent<CarModel> cmCode;
+	private ComboBoxComponent<Manufacturer> mfCode;
+	private ComboBoxComponent<Fuel> fCode;
+	private ComboBoxComponent<CarData> searchCarCode;
+	
 	public AdminMainCarManager() {
 		setBounds(0, 0, 974, 751);
 		setLayout(null);
@@ -85,57 +101,64 @@ public class AdminMainCarManager extends JPanel {
 		add(carPanel);
 		carPanel.setLayout(null);
 		
-		TextFieldComponent carCodPanelc = new TextFieldComponent("차 코드");
-		carCodPanelc.setBounds(5, 20, 230, 30);
-		carPanel.add(carCodPanelc);
+		carCode = new TextFieldComponent("차 코드");
+		carCode.setBounds(5, 20, 230, 30);
+		carPanel.add(carCode);
 		
-		TextFieldComponent carNamePanel = new TextFieldComponent("차 이름");
-		carNamePanel.setBounds(5, 60, 230, 30);
-		carPanel.add(carNamePanel);
+		carName = new TextFieldComponent("차 이름");
+		carName.setBounds(5, 60, 230, 30);
+		carPanel.add(carName);
 		
-		TextFieldComponent modelYearPanel = new TextFieldComponent("연식");
-		modelYearPanel.setBounds(5, 100, 230, 30);
-		carPanel.add(modelYearPanel);
+		carOld = new TextFieldComponent("연식");
+		carOld.setBounds(5, 100, 230, 30);
+		carPanel.add(carOld);
 		
-		TextFieldComponent seaterPanel = new TextFieldComponent("인승");
-		seaterPanel.setBounds(5, 220, 230, 30);
-		carPanel.add(seaterPanel);
+		seater = new TextFieldComponent("인승");
+		seater.setBounds(5, 220, 230, 30);
+		carPanel.add(seater);
 		
-		RadioComponent autoPanel = new RadioComponent("오토유무","yes", "no");
-		autoPanel.setBounds(15, 180, 255, 30);
-		carPanel.add(autoPanel);
+		isAuto = new RadioComponent("오토유무","yes", "no");
+		isAuto.setBounds(15, 180, 255, 30);
+		carPanel.add(isAuto);
 		
-		JspinnerComponent carCountPanel = new JspinnerComponent("차량대수");
-		carCountPanel.setBounds(5, 140, 230, 30);
-		carPanel.add(carCountPanel);
+		carNumber = new JspinnerComponent("차량대수");
+		carNumber.setBounds(5, 140, 230, 30);
+		carPanel.add(carNumber);
 		
-		ComboBoxComponent carModelCodePanelc = new ComboBoxComponent("차종코드");
-		carModelCodePanelc.setBounds(5, 260, 230, 30);
-		carPanel.add(carModelCodePanelc);
+		cmCode = new ComboBoxComponent<>("차종코드");
+		cmCode.setBounds(5, 260, 230, 30);
+		carPanel.add(cmCode);
 		
-		ComboBoxComponent cpCodePanel = new ComboBoxComponent("제조회사코드");
-		cpCodePanel.setBounds(5, 300, 230, 30);
-		carPanel.add(cpCodePanel);
+		mfCode = new ComboBoxComponent<>("제조회사코드");
+		mfCode.setBounds(5, 300, 230, 30);
+		carPanel.add(mfCode);
 		
-		ComboBoxComponent oCodePanel = new ComboBoxComponent("연료코드");
-		oCodePanel.setBounds(5, 339, 230, 30);
-		carPanel.add(oCodePanel);
+		fCode = new ComboBoxComponent<>("연료코드");
+		fCode.setBounds(5, 339, 230, 30);
+		carPanel.add(fCode);
 		
-		JButton button_8 = new JButton("삭제");
-		button_8.setBounds(412, 346, 66, 23);
-		carPanel.add(button_8);
+		JButton btnDelete = new JButton("삭제");
+		btnDelete.setBounds(412, 346, 66, 23);
+		carPanel.add(btnDelete);
 		
-		JButton button_7 = new JButton("수정");
-		button_7.setBounds(346, 346, 66, 23);
-		carPanel.add(button_7);
+		JButton btnUpdate = new JButton("수정");
+		btnUpdate.setBounds(346, 346, 66, 23);
+		carPanel.add(btnUpdate);
 		
-		JButton button_10 = new JButton("추가");
-		button_10.setBounds(279, 346, 66, 23);
-		carPanel.add(button_10);
+		JButton btnAdd = new JButton("추가");
+		btnAdd.setBounds(279, 346, 66, 23);
+		carPanel.add(btnAdd);
 		
-		JButton button_9 = new JButton("취소");
-		button_9.setBounds(520, 346, 66, 23);
-		carPanel.add(button_9);
+		JButton btnClear = new JButton("취소");
+		btnClear.setBounds(520, 346, 66, 23);
+		btnClear.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setRentalPriceValueClear();
+			}
+		});
+		carPanel.add(btnClear);
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(279, 20, 307, 310);
@@ -151,9 +174,9 @@ public class AdminMainCarManager extends JPanel {
 		btnNewButton_5.setBounds(252, 517, 81, 23);
 		searchPanel.add(btnNewButton_5);
 		
-		ComboBoxComponent searchCombo = new ComboBoxComponent("차 코드");
-		searchCombo.setBounds(12, 10, 246, 30);
-		searchPanel.add(searchCombo);
+		searchCarCode = new ComboBoxComponent<>("차 코드");
+		searchCarCode.setBounds(12, 10, 246, 30);
+		searchPanel.add(searchCarCode);
 		
 		JPanel listPanel = new JPanel();
 		listPanel.setBounds(12, 50, 321, 457);
@@ -170,5 +193,65 @@ public class AdminMainCarManager extends JPanel {
 		JButton btnSearch = new JButton("검색");
 		btnSearch.setBounds(267, 17, 66, 23);
 		searchPanel.add(btnSearch);
+		setSearchCarCodeComboModel();
+		setCarModelComboModel();
+		setManufacturerComboModel();
+		setFuelComboModel();
+		
+	}
+	public void setSearchCarCodeComboModel() {
+		CarDataService carDataService = CarDataService.getInstance();
+		List<CarData> lists = carDataService.selectCarDataByAll();
+		Vector<CarData> carData = new Vector<>();
+		for(CarData cd : lists) {
+			cd.setComboType(0);
+			carData.add(cd);
+		}
+		searchCarCode.setComboBoxModel(carData);
+	}
+	
+	public  void setCarModelComboModel() {
+		CarModelService carModelService = CarModelService.getInstance();
+		List<CarModel> lists = carModelService.selectCarModelByAll();
+		Vector<CarModel> carModel = new Vector<>();
+		for(CarModel cm:lists) {
+			cm.setComboType(0);
+			carModel.add(cm);
+		}
+		cmCode.setComboBoxModel(carModel);
+	}
+	public void setManufacturerComboModel() {
+		ManufacturerService manufacturerService = ManufacturerService.getInstance();
+		List<Manufacturer> lists = manufacturerService.selectManufacturerByAll();
+		Vector<Manufacturer> manufacturer = new Vector<>();
+		for(Manufacturer mf:lists) {
+			mf.setComboType(1);
+			manufacturer.add(mf);
+		}
+		mfCode.setComboBoxModel(manufacturer);
+		
+	}
+	
+	public void setFuelComboModel() {
+		FuelService fuelService = FuelService.getInstance();
+		List<Fuel> lists = fuelService.selectFuelByAll();
+		Vector<Fuel> fuelCode = new Vector<>();
+		for(Fuel f:lists) {
+			f.setComboType(1);
+			fuelCode.add(f);
+		}
+		fCode.setComboBoxModel(fuelCode);
+		
+	}
+	public void setRentalPriceValueClear() {
+		carCode.setTextValue("");
+		carName.setTextValue("");
+		carOld.setTextValue("");
+		seater.setTextValue("");
+		isAuto.setSelect(true);
+		carNumber.setSpinValue(1);
+		cmCode.setComboBoxModelClear();
+		mfCode.setComboBoxModelClear();
+		fCode.setComboBoxModelClear();
 	}
 }

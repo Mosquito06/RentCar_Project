@@ -3,7 +3,8 @@ package kr.or.dgit.RentCar_Project.dto;
 public class CarModel {
 	private String carModelCode;
 	private String carModel;
-
+	private int comboType=0;
+	
 	public CarModel(String carModelCode, String carModel) {
 		super();
 		this.carModelCode = carModelCode;
@@ -30,10 +31,17 @@ public class CarModel {
 	public void setCarModel(String carModel) {
 		this.carModel = carModel;
 	}
-
+	public void setComboType(int comboType) {
+		this.comboType = comboType;
+	}
 	@Override
 	public String toString() {
-		return String.format("CarModel %s, %s", carModelCode, carModel);
+		if(comboType==0) {
+			return String.format("%s", carModelCode);
+		}else {
+			return String.format("CarModel %s, %s", carModelCode, carModel);
+		}
+		
 	}
 
 }

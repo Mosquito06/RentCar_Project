@@ -23,7 +23,7 @@ public class JspinnerComponent extends JPanel {
 		
 		spinner = new JSpinner();
 		add(spinner);
-
+		setDefaultValue(1, 1, 100, 1);
 	}
 	
 	public JSpinner getComponent() {
