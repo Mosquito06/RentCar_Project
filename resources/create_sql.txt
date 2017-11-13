@@ -36,7 +36,7 @@ CREATE TABLE car_project.fuel (
 CREATE TABLE car_project.car_data (
 	car_code          VARCHAR(50) primary key,
 	car_name          VARCHAR(20),
-	car_image         LONGBLOB,
+	car_image         VARCHAR(20),
 	car_old           INT(11),
 	car_number        INT(11),
 	is_auto           VARCHAR(11),
