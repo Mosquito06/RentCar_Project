@@ -87,9 +87,10 @@ public class EmailTextFiedComponent extends JPanel {
 		tfEmailAddr.setText(value);
 	}
 	
-	public void isEmptyChech() throws Exception{
+	public boolean isEmptyChech(){
 		if(getTextVauleId().equals("")||getTextValueEmailAddr().equals("")) {
 			tfEmailId.requestFocus();
-		}
+			return false;
+		}return true;
 	}
 }
