@@ -12,7 +12,8 @@ public class User {
 	private String email;
 	private Gender gender;
 	private UserGrade grade;
-
+	private int comboType = 0;
+	
 	public User(int userCode, String id, String pw, String userName, byte[] userImg, String phone, String email,
 			Gender gender, UserGrade grade) {
 		super();
@@ -103,11 +104,21 @@ public class User {
 	public void setGrade(UserGrade grade) {
 		this.grade = grade;
 	}
+	
+	public void setComboType(int comboType) {
+		this.comboType = comboType;
+	}
 
 	@Override
 	public String toString() {
-		return String.format("User %s, %s, %s, %s, %s, %s, %s, %s, %s", userCode, id, pw, userName,
-				Arrays.toString(userImg), phone, email, gender, grade);
+		if(comboType==0) {
+			return String.format("User %s, %s, %s, %s, %s, %s, %s, %s, %s", userCode, id, pw, userName,
+					Arrays.toString(userImg), phone, email, gender, grade);
+		}else{
+			return String.format("%s", userCode);
+		}
+	
 	}
 
+	
 }

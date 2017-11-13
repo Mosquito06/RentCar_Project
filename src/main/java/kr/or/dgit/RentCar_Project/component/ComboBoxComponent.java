@@ -25,6 +25,7 @@ public class ComboBoxComponent<T> extends JPanel {
 		comboBox = new JComboBox<>();
 		add(comboBox);
 
+
 	}
 
 
@@ -48,7 +49,9 @@ public class ComboBoxComponent<T> extends JPanel {
 		return (T) comboBox.getSelectedItem();
 	}
 	
-	
+	public void setComboBoxModelClear() {
+		comboBox.setSelectedIndex(0);
+	}
 	
 	
 }
