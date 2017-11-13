@@ -3,6 +3,11 @@ package kr.or.dgit.RentCar_Project.dto;
 public class Fuel {
 	private String fuelCode;
 	private String fuelType;
+	private int comboType = 0;
+
+	public void setComboType(int comboType) {
+		this.comboType = comboType;
+	}
 
 	public Fuel(String fuelCode, String fuelType) {
 		super();
@@ -33,12 +38,15 @@ public class Fuel {
 
 	@Override
 	public String toString() {
-		return String.format("%s %s",fuelCode, fuelType);
+		if(comboType==0) {
+			return String.format("%s",fuelType);
+		}else {
+			return String.format("%s",fuelCode);
+		}
+		
 	}
 	
-	public String toWrite(){
-		return String.format("%s",fuelType);
-	}
+	
 
 
 }
