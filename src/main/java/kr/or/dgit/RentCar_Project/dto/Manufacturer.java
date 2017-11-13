@@ -3,7 +3,7 @@ package kr.or.dgit.RentCar_Project.dto;
 public class Manufacturer {
 	private String manufacturerCode;
 	private String manufacturerName;
-	private int ComboType = 0;
+	private int comboType = 0;
 
 	public Manufacturer(String manufacturerCode, String manufacturerName) {
 		super();
@@ -17,7 +17,7 @@ public class Manufacturer {
 	}
 
 	public void setComboType(int comboType) {
-		ComboType = comboType;
+		this.comboType = comboType;
 	}
 
 	public String getManufacturerCode() {
@@ -38,15 +38,12 @@ public class Manufacturer {
 
 	@Override
 	public String toString() {
-		if (ComboType == 1) {
+		if (comboType == 1) {
 			return String.format("%s", manufacturerCode);
 		}else {
 			return String.format("%s", manufacturerName);
 		}
 	}
 
-	public String toWrite() {
-		return String.format("%s", manufacturerName);
-	}
 
 }

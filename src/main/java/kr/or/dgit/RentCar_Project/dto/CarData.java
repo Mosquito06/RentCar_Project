@@ -13,6 +13,13 @@ public class CarData {
 	private CarModel carModelCode;
 	private Manufacturer manufacturerCode;
 	private Fuel fuelCode;
+	private int comboType = 0;
+	
+	
+
+	public void setComboType(int comboType) {
+		this.comboType = comboType;
+	}
 
 	public CarData(String carCode, String carName, byte[] carImage, int carOld, int carNumber, IsAuto isAuto,
 			String carSeater, CarModel carModelCode, Manufacturer manufacturerCode, Fuel fuelCode) {
@@ -127,16 +134,22 @@ public class CarData {
 
 	@Override
 	public String toString() {
-		if(isAuto==null) {
+		if(comboType==0) {
+			return String.format("%s",carCode);
+		}else if(comboType==1) {
+			return String.format("%s",carName);
+		}else if(comboType==2) {
+			return String.format("%s",carOld);
+		}else if(comboType==3) {
+			return String.format("%s",carSeater);
+		}else {
 			return String.format(
-					"%s %s %s %s %s %s %s %s %s %s",
+					"%s %s %s %s %s %s %s %s %s %s %s",
 					carCode, carName, Arrays.toString(carImage), carOld, carNumber, isAuto, carSeater, carModelCode,
-					manufacturerCode, fuelCode);
+					manufacturerCode, fuelCode, comboType);
 		}
-		return String.format(
-				"%s %s %s %s %s %s %s %s %s %s",
-				carCode, carName, Arrays.toString(carImage), carOld, carNumber, isAuto, carSeater, carModelCode,
-				manufacturerCode, fuelCode);
 	}
+
+
 
 }
