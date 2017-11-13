@@ -5,20 +5,24 @@ import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import kr.or.dgit.RentCar_Project.component.RadioComponent;
-import kr.or.dgit.RentCar_Project.component.TextFieldComponent;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.SwingConstants;
+import kr.or.dgit.RentCar_Project.component.JPasswordFieldComponent;
 
 public class UpdatePwContent extends JPanel {
 
-	private TextFieldComponent nowPwPanel;
-	private TextFieldComponent changePwPanel;
-	private TextFieldComponent confirmPwPanel;
+	private JPasswordFieldComponent nowPwPanel;
+	private JPasswordFieldComponent changePwPanel;
+	private JPasswordFieldComponent confirmPwPanel;
 	private JPanel btnPanel;
 	private JButton btnUpdate;
 	private JButton btnExit;
+
+	public JPasswordFieldComponent getChangePwPanel() {
+		return changePwPanel;
+	}
+
+	public JPasswordFieldComponent getNowPwPanel() {
+		return nowPwPanel;
+	}
 
 	public JButton getBtnUpdate() {
 		return btnUpdate;
@@ -31,13 +35,13 @@ public class UpdatePwContent extends JPanel {
 	public UpdatePwContent() {
 		setLayout(new GridLayout(0, 1, 0, 5));
 
-		nowPwPanel = new TextFieldComponent("현재 비밀번호");
+		nowPwPanel = new JPasswordFieldComponent("현재 비밀번호");
 		add(nowPwPanel);
 
-		changePwPanel = new TextFieldComponent("변경할 비밀번호");
+		changePwPanel = new JPasswordFieldComponent("변경할 비밀번호");
 		add(changePwPanel);
 
-		confirmPwPanel = new TextFieldComponent("비밀번호 확인");
+		confirmPwPanel = new JPasswordFieldComponent("비밀번호 확인");
 		add(confirmPwPanel);
 
 		btnPanel = new JPanel();
@@ -54,21 +58,24 @@ public class UpdatePwContent extends JPanel {
 
 	}
 
-	
 	public String getContent() {
 		String changePw = changePwPanel.getTextValue();
-		String ConfirmPw = confirmPwPanel.getTextValue();
-		 
-		if(changePw.equals(ConfirmPw)) {
+		String confirmPw = confirmPwPanel.getTextValue();
+		
+		if(changePw.equals("") || confirmPw.equals("")) {
+			return null;
+		}
+				
+		if (changePw.equals(confirmPw)) {
 			return changePw;
 		}
 		return null;
 	}
-	
-	public void isEmptyCheck() throws Exception {
-		confirmPwPanel.isEmptyCheck();
-		changePwPanel.isEmptyCheck();
-		nowPwPanel.isEmptyCheck();
+
+	public boolean isEmptyCheck() {
+		if(!nowPwPanel.isEmptyCheck() || !changePwPanel.isEmptyCheck() || !confirmPwPanel.isEmptyCheck()) {
+			return false;
+		}return true;
 
 	}
 

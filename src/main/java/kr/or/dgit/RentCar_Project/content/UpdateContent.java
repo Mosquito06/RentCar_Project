@@ -125,12 +125,10 @@ public class UpdateContent extends JPanel {
 		
 	}
 
-	public void isEmptyCheck() throws Exception {
-		panelId.isEmptyCheck();
-		panelName.isEmptyCheck();
-		panelEmail.isEmptyCheck();
-		panelGrade.isEmptyCheck();
-		panelInPhone.isEmptyCheck();
+	public boolean isEmptyCheck(){
+		if(!panelName.isEmptyCheck() || !panelEmail.isEmptyCheck() || !panelInPhone.isEmptyCheck()) {
+			return false;
+		}return true;
 	}
 
 	public void clear() {

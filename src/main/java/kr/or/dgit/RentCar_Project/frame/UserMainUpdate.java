@@ -10,6 +10,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -113,6 +115,11 @@ public class UserMainUpdate extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				if(!updatecontent.isEmptyCheck()) {
+					JOptionPane.showMessageDialog(null, "정보를 모두 입력해주세요");
+					return;
+				}
+								
 				User UpdateUser = updatecontent.getContent();
 				ComfirmUser.setUserName(UpdateUser.getUserName());
 				ComfirmUser.setGender(UpdateUser.getGender());
@@ -133,17 +140,38 @@ public class UserMainUpdate extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				if(!updatepwcontent.isEmptyCheck()) {
+					JOptionPane.showMessageDialog(null, "자료를 모두 입력해주세요");
+					return;
+				}
+								
 				String changePw = updatepwcontent.getContent();
+				String nowPw = updatepwcontent.getNowPwPanel().getTextValue();
+				
+				if(!nowPw.equals(ComfirmUser.getPw())){
+					JOptionPane.showMessageDialog(null, "현재 비밀번호를 확인해주세요.");
+					updatepwcontent.getNowPwPanel().requestFocus();
+					return;
+				}
 				
 				if(changePw == null) {
 					JOptionPane.showMessageDialog(null, "비밀번호가 일치하도록 입력해주세요.");
+					updatepwcontent.getChangePwPanel().requestFocus();
 					return;
-				}else {
+				}
+								
+				Pattern p = Pattern.compile("(^[a-zA-Z0-9!@#$%^&*()]{9,15}$)");
+				Matcher m = p.matcher(changePw);
+
+				if (m.find()) {
 					ComfirmUser.setPw(changePw);
 					UserService.getInstance().updateUser(ComfirmUser);
 					JOptionPane.showMessageDialog(null, "수정되었습니다.");
 					updatepwcontent.clear();
+				}else {
+					JOptionPane.showMessageDialog(null, "비밀번호 양식에 맞게 입력해주세요");
 				}
+				
 			}
 		});
 				
