@@ -53,10 +53,6 @@
 		<include refid="wherePrimarySql"/>
 	</select>
 	
-	<select id="selectFuelByFuelCodeString" resultMap="FuelResult">
-		select fuel_code, fuel_type from fuel where fuel_code = #{fuelCode}
-	</select>
-	
 	<select id="selectFuelByAll" resultMap="FuelResult">
 		<include refid="selectSql"/>
 	</select>

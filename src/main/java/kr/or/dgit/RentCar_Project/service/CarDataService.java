@@ -61,6 +61,18 @@ public class CarDataService implements CarDataDao {
 			return carDataDao.selectCarDataByAll();
 		}
 	}
+
+	@Override
+	public List<CarData> selectCarDataByCarModelCode(String carModelCode) {
+		try(SqlSession sqlsession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();){
+			carDataDao = sqlsession.getMapper(CarDataDao.class);
+			return carDataDao.selectCarDataByCarModelCode(carModelCode);
+		}
+	}
+
+	
+
+
 	
 	
 

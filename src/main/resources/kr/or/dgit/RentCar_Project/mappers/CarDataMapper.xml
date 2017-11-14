@@ -90,6 +90,11 @@
 		<include refid="selectSql"/>
 	</select>
 	
+	<select id="selectCarDataByCarModelCode" resultMap="CarDataResult">
+		<include refid="selectSql"/>
+		where car_model_code = #{carModelCode}
+	</select>
+	
 	<insert id="insertCarData" parameterType="CarData">
 		insert into car_data values(#{carCode}, #{carName}, #{carImage}, #{carOld}, #{carNumber}, #{isAuto},
 		#{carSeater}, #{carModelCode.carModelCode}, #{manufacturerCode.manufacturerCode}, #{fuelCode.fuelCode})

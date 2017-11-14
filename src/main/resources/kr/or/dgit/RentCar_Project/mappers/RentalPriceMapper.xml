@@ -68,7 +68,6 @@
 	
 	<select id="selectRentalPriceByAll" resultMap="RentalPriceResult">
 		<include refid="selectSql"/>
-		order by  basic_price
 	</select>
 	
 	<select id="selectRentalPriceByCarCodeString" resultMap="RentalPriceResult">

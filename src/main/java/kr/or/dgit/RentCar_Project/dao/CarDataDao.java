@@ -10,4 +10,5 @@ public interface CarDataDao {
 	void deleteCarData(CarData carDataCode);
 	CarData selectCarDataByCarDataCode(CarData carDataCode);
 	List<CarData> selectCarDataByAll();
+	List<CarData> selectCarDataByCarModelCode(String carModelCode);
 }
