@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Vector;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import kr.or.dgit.RentCar_Project.component.ComboBoxComponent;
@@ -64,7 +65,8 @@ public class RentalPriceManagerContent extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				setRentalPriceValueClear();
+				int clear = JOptionPane.showConfirmDialog(null, "입력 데이터를 취소하시겠습니까?", "확인창", JOptionPane.OK_CANCEL_OPTION);
+				if(clear==0)setRentalPriceValueClear();
 				
 			}
 		});

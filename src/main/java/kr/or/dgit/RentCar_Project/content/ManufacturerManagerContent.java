@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 public class ManufacturerManagerContent extends JPanel {
 	
@@ -30,7 +31,8 @@ public class ManufacturerManagerContent extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				setManufacturerTextValueClear();
+				int clear = JOptionPane.showConfirmDialog(null, "입력 데이터를 취소하시겠습니까?", "확인창", JOptionPane.OK_CANCEL_OPTION);
+				if(clear==0)setManufacturerTextValueClear();
 				
 			}
 		});

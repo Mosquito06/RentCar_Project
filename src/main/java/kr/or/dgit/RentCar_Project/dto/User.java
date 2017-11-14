@@ -112,12 +112,16 @@ public class User {
 	@Override
 	public String toString() {
 		if(comboType==0) {
+			return String.format("%s", userCode);
+		}else {
 			return String.format("User %s, %s, %s, %s, %s, %s, %s, %s, %s", userCode, id, pw, userName,
 					Arrays.toString(userImg), phone, email, gender, grade);
-		}else{
-			return String.format("%s", userCode);
 		}
 	
+	}
+
+	public Object[] toArray() {
+		return new Object[] {userCode,id,userName,phone,email,gender,grade.getGrade()};
 	}
 
 	
