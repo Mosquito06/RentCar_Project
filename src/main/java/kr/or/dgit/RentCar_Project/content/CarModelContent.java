@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 @SuppressWarnings("serial")
 public class CarModelContent extends JPanel {
@@ -43,8 +44,8 @@ public class CarModelContent extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				setCarModelValueClear();
-				
+				int clear = JOptionPane.showConfirmDialog(null, "입력 데이터를 취소하시겠습니까?", "확인창", JOptionPane.OK_CANCEL_OPTION);
+				if(clear==0)setCarModelValueClear();
 			}
 		});
 		add(btnCancel);

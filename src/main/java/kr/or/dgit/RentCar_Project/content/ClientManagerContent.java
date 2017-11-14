@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Vector;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
@@ -90,7 +91,8 @@ public class ClientManagerContent extends JPanel {
 		JButton btnCancel = new JButton("취소");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setClearAll();
+				int clear = JOptionPane.showConfirmDialog(null, "입력 데이터를 취소하시겠습니까?", "확인창", JOptionPane.OK_CANCEL_OPTION);
+				if(clear==0)setClearAll();
 			}
 		});
 		btnCancel.setBounds(480, 283, 97, 23);

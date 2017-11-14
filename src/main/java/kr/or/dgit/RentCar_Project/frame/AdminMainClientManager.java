@@ -19,11 +19,11 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 import kr.or.dgit.RentCar_Project.content.ClientManagerContent;
+import kr.or.dgit.RentCar_Project.list.ClientListTable;
 
 @SuppressWarnings("serial")
 public class AdminMainClientManager extends JPanel {
-	private JTable table;
-	private JTable table_1;
+	private ClientListTable clientListTable;
 
 	public AdminMainClientManager() {
 		setBounds(100, 100, 974, 751);
@@ -41,12 +41,6 @@ public class AdminMainClientManager extends JPanel {
 		add(useListPanel);
 		useListPanel.setLayout(new BorderLayout(0, 0));
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		useListPanel.add(scrollPane, BorderLayout.CENTER);
-		
-		table = new JTable();
-		scrollPane.setViewportView(table);
 		
 		JPanel btnPanel = new JPanel();
 		btnPanel.setBorder(new EmptyBorder(4, 0, 0, 9));
@@ -71,13 +65,6 @@ public class AdminMainClientManager extends JPanel {
 		add(clientListPanel);
 		clientListPanel.setLayout(new BorderLayout(0, 0));
 		
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		clientListPanel.add(scrollPane_1, BorderLayout.CENTER);
-		
-		table_1 = new JTable();
-		scrollPane_1.setViewportView(table_1);
-		
 		JPanel lblPanel = new JPanel();
 		lblPanel.setBorder(new EmptyBorder(5, 0, 5, 10));
 		clientListPanel.add(lblPanel, BorderLayout.SOUTH);
@@ -94,6 +81,15 @@ public class AdminMainClientManager extends JPanel {
 		
 		JPanel emptyPanel6 = new JPanel();
 		clientListPanel.add(emptyPanel6, BorderLayout.EAST);
+		
+		JPanel panel = new JPanel();
+		clientListPanel.add(panel, BorderLayout.CENTER);
+		panel.setLayout(new BorderLayout(0, 0));
+		clientListTable = new ClientListTable();
+		clientListTable.loadDate();
+		panel.add(clientListTable,BorderLayout.CENTER);
+		
+		
 		
 		JButton btnBack = new JButton("나가기");
 		btnBack.addActionListener(new ActionListener() {
