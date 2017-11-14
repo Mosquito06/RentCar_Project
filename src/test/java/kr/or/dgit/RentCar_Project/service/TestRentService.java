@@ -2,17 +2,15 @@ package kr.or.dgit.RentCar_Project.service;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.List;
 
 import org.junit.AfterClass;
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import kr.or.dgit.RentCar_Project.dto.CarData;
 import kr.or.dgit.RentCar_Project.dto.Rent;
-import kr.or.dgit.RentCar_Project.dto.User;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestRentService {
@@ -100,7 +98,7 @@ public class TestRentService {
 		rentService.deleteRent(rent);
 	}*/
 	
-	@Test
+	/*@Test
 	public void test6SelectRentJoinCarData(){
 		User user = new User();
 		user.setUserCode(3);
@@ -125,5 +123,18 @@ public class TestRentService {
 		for(Rent r : list) {
 			System.out.println(r.getCarCode().getFuelCode().getFuelCode()); 
 		}
+	}*/
+	
+	@Test
+	public void test7UserHistoryDelete() {
+		Rent rent = new Rent();
+		CarData carDate = new CarData();
+		carDate.setCarCode("IC-BM-G-001");
+		
+		rent.setCarCode(carDate);
+		rent.setFinalPrice(360000);
+		rent.setUserTime("30");
+		
+		rentService.UserHistoryDelete(rent);
 	}
 }

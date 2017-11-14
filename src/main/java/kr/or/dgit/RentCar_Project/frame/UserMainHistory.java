@@ -64,7 +64,7 @@ public class UserMainHistory extends JPanel {
 				
 				historyTable.setRent(findRent.get(0));
 				historyTable.loadDate();
-				JOptionPane.showMessageDialog(null, "불러오기가 완료되었습니다");
+				JOptionPane.showMessageDialog(null, "불러오기가 완료되었습니다.");
 				
 			}
 		});
@@ -77,7 +77,15 @@ public class UserMainHistory extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				Rent selectItem = (Rent) historyTable.getSelectedItem();
+				if(selectItem.getCarCode() == null || selectItem.getFinalPrice() == 0 || selectItem.getUserTime() == null) {
+					JOptionPane.showMessageDialog(null, "취소할 데이터를 찾지 못했습니다.");
+					return;
+				}
 				
+				RentService.getInstance().UserHistoryDelete(selectItem);
+				historyTable.loadDate();
+				JOptionPane.showMessageDialog(null, "예약을 취소하였습니다.");
 				
 			}
 		});
@@ -91,7 +99,7 @@ public class UserMainHistory extends JPanel {
 				frame.getContentPane().removeAll();
 				UserMainHome userMainHome = new UserMainHome();
 				userMainHome.setComfirmUser(ComfirmUser);
-				frame.getContentPane().add(userMainHome, BorderLayout.CENTER);
+				frame.getContentPane() .add(userMainHome, BorderLayout.CENTER);
 				frame.setVisible(true);
 			}
 		});
