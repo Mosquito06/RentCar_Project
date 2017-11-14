@@ -1,7 +1,6 @@
-B	BMW
-BM	BMW MINI
-C	쉐보레
-H	현대
-K	기아
-LS	르노삼성
-SY	쌍용
+B	BMW
+C	쉐보레
+H	현대
+K	기아
+LS	르노삼성
+SY	쌍용

@@ -1,4 +1,1 @@
-D	경유
-EV	전기
-G	휘발유
-L	LPG
+D,경유EV,전기G,휘발유L,LPG
