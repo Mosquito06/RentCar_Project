@@ -118,7 +118,7 @@ public class ClientManagerContent extends JPanel {
 		List<User> lists = userService.selectUserByAll();
 		Vector<User> userCode = new Vector<>();
 		for(User u:lists) {
-			u.setComboType(1);
+			u.setComboType(0);
 			userCode.add(u);
 		}
 		comboUserCode.setComboBoxModel(userCode);
