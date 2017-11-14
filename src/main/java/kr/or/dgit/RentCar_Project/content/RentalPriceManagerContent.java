@@ -12,7 +12,9 @@ import javax.swing.JPanel;
 import kr.or.dgit.RentCar_Project.component.ComboBoxComponent;
 import kr.or.dgit.RentCar_Project.component.TextFieldComponent;
 import kr.or.dgit.RentCar_Project.dto.CarData;
+import kr.or.dgit.RentCar_Project.dto.RentalPrice;
 import kr.or.dgit.RentCar_Project.service.CarDataService;
+import kr.or.dgit.RentCar_Project.service.RentalPriceService;
 
 @SuppressWarnings("serial")
 public class RentalPriceManagerContent extends JPanel {
@@ -28,6 +30,21 @@ public class RentalPriceManagerContent extends JPanel {
 		setLayout(null);
 		
 		carCode = new ComboBoxComponent<>("차 코드");
+		carCode.getComboBox().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RentalPriceService rentalPriceService = RentalPriceService.getInstance();
+				
+				String code = carCode.getComboBox().getSelectedItem().toString();
+				RentalPrice rentalPrice = rentalPriceService.selectRentalPriceByCarCodeString(code);
+				
+				bPrice.setTextValue(String.format("%,d", rentalPrice.getBasicPrice()));
+				useTime.setTextValue(String.valueOf(rentalPrice.getBasicTime()));
+				btPrice.setTextValue(String.format("%,d", rentalPrice.getBasicTimePrice()));
+				oPrice.setTextValue(String.format("%,d",rentalPrice.getOverPrice()));
+				insurance.setTextValue(String.format("%,d",rentalPrice.getInsurance()));
+				
+			}
+		});
 		carCode.setBounds(5, 23, 230, 30);
 		add(carCode);
 		
@@ -52,6 +69,12 @@ public class RentalPriceManagerContent extends JPanel {
 		add(insurance);
 		
 		JButton btnUpdate = new JButton("수정");
+		btnUpdate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RentalPriceService rentalPriceService = RentalPriceService.getInstance();
+				/*rentalPriceService.updateRentalPrice(rentalPrice);*/
+			}
+		});
 		btnUpdate.setBounds(25, 267, 66, 23);
 		add(btnUpdate);
 		
