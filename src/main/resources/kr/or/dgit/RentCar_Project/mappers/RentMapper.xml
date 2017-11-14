@@ -49,7 +49,7 @@
 	
 	<sql id="wherePrimarySql">
 		<where>
-			<if test="userCode.userCode !=null">
+			<if test="userCode.userCode != null">
 				user_code = #{userCode.userCode}
 			</if>
 		</where>
@@ -74,16 +74,20 @@
 		<include refid="selectSql"/>
 		<include refid="wherePrimarySql"/>
 	</select>
+	
 	<select id="selectRentByAll" resultMap="RentResult">
 		<include refid="selectSql"></include>
 	</select>
+	
 	<insert id="insertRent" parameterType="Rent">
 		<include refid="insertSql"></include>
 	</insert>
+	
 	<update id="updateRent">
 		<include refid="updateSql"/>
 		<include refid="wherePrimarySql"/>
 	</update>
+	
 	<delete id="deleteRent">
 		<include refid="deleteSql"/>
 		<include refid="wherePrimarySql"/>
@@ -95,4 +99,8 @@
 		where user_code = #{userCode.userCode} and day_start &gt;= #{dayStart} and day_end &lt;= #{dayEnd}
 	</select>
 	
+	<delete id="UserHistoryDelete">
+		<include refid="deleteSql"/>
+		where use_time = #{userTime} and final_price = #{finalPrice} and car_code = #{carCode.carCode}
+	</delete>
 </mapper>
