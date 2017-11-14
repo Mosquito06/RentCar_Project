@@ -103,14 +103,14 @@ public class TestRentService {
 	@Test
 	public void test6SelectRentJoinCarData(){
 		User user = new User();
-		user.setUserCode(1);
+		user.setUserCode(3);
 		Rent rent = new Rent();
 		
 		Calendar dayStart = GregorianCalendar.getInstance();
-		dayStart.set(2017, 10, 9);
+		dayStart.set(2017, 10, 1);
 		
 		Calendar dayEnd = GregorianCalendar.getInstance();
-		dayEnd.set(2017, 10, 25);
+		dayEnd.set(2017, 10, 30);
 		
 		
 		rent.setUserCode(user);
@@ -119,5 +119,11 @@ public class TestRentService {
 		
 		List<Rent> list = rentService.selectRentJoinCarData(rent);
 		Assert.assertNotNull(list);
+		
+		System.out.println(list.size());
+		
+		for(Rent r : list) {
+			System.out.println(r.getCarCode().getFuelCode().getFuelCode()); 
+		}
 	}
 }

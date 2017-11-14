@@ -1,5 +1,6 @@
 package kr.or.dgit.RentCar_Project.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import kr.or.dgit.RentCar_Project.dto.Rent;

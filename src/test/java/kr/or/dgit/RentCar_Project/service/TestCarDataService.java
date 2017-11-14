@@ -43,15 +43,19 @@ public class TestCarDataService {
 		CarData carData = new CarData("CC-K-G-001");
 		CarData findCarData = carDataService.selectCarDataByCarDataCode(carData);
 		
-	}
+	}*/
 	
 	@Test
 	public void test3FindSelectCarDataByAll() {
 		List<CarData> list = carDataService.selectCarDataByAll();
 		Assert.assertNotNull(list);
+	
+		for(CarData cd : list) {
+			System.out.println(cd.getFuelCode().getFuelCode());
+		}
 	}
 	
-	@Test
+	/*@Test
 	public void test4UpdeteCarDataByCarDataCode() {
 		CarData carData = new CarData("CC-H-G-006","aa");
 		carDataService.updateCarData(carData);

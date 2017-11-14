@@ -47,11 +47,6 @@ public class ImportService implements DbService {
 				}return;
 			}
 			
-			if(tableName.equals("car_date")) {
-				
-				return;
-			}
-			
 			DatabaseDao.getInstance().executeUpdateSQL(String.format("LOAD DATA LOCAL INFILE '%s' INTO TABLE %s ",
 					Config.getFilePath(tableName, false), tableName));
 		}

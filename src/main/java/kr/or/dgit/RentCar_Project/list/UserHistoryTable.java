@@ -40,7 +40,6 @@ public class UserHistoryTable extends AbstractTable {
 		}
 
 		return datas;
-
 	}
 
 	@Override
