@@ -25,8 +25,9 @@ public class UserHistoryTable extends AbstractTable {
 
 	@Override
 	protected void setAlignWidth() {
-		setAlign(SwingConstants.CENTER, 0, 1, 2, 3, 4);
-		setCellwidth(90, 115, 65, 65, 30);
+		setAlign(SwingConstants.CENTER, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+		setAlign(SwingConstants.RIGHT, 10);
+		setCellwidth(90, 115, 55, 55, 30, 50, 50, 70, 80, 80 ,80);
 	}
 
 	@Override
@@ -54,26 +55,16 @@ public class UserHistoryTable extends AbstractTable {
 		
 		int selectIndex = table.getSelectedRow();
 		String carCode= (String) table.getValueAt(selectIndex, 0);
-		
-		String startDay = (String) table.getValueAt(selectIndex, 8);
-		String[] FirstDate = startDay.split("/");
-		
-		String endDay = (String) table.getValueAt(selectIndex, 9);
-		String[] LastDate = endDay.split("/");
+		String userTime = (String) table.getValueAt(selectIndex, 6);
+		int finalPrice = (int) table.getValueAt(selectIndex, 10);
 		
 		CarData carDate = new CarData();
 		carDate.setCarCode(carCode);
-		
-		Calendar dayStart = GregorianCalendar.getInstance();
-		dayStart.set(Integer.parseInt(FirstDate[0]), Integer.parseInt(FirstDate[1])-1, Integer.parseInt(FirstDate[2]));
-		
-		Calendar dayEnd = GregorianCalendar.getInstance();
-		dayEnd.set(Integer.parseInt(LastDate[0]), Integer.parseInt(LastDate[1])-1, Integer.parseInt(LastDate[2]));
-		
+				
 		Rent selectRent = new Rent();
 		selectRent.setCarCode(carDate);
-		selectRent.setDayStart(dayStart.getTime());
-		selectRent.setDayEnd(dayEnd.getTime());
+		selectRent.setFinalPrice(finalPrice);
+		selectRent.setUserTime(userTime);
 		
 		return selectRent;
 	}

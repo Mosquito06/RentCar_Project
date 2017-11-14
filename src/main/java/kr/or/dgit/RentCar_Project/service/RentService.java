@@ -75,4 +75,15 @@ public class RentService implements RentDao {
 		}
 	}
 
+
+	@Override
+	public void UserHistoryDelete(Rent rent) {
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession()){
+			rentDao = sqlSession.getMapper(RentDao.class);
+			rentDao.UserHistoryDelete(rent);
+			sqlSession.commit();
+		}
+		
+	}
+
 }
