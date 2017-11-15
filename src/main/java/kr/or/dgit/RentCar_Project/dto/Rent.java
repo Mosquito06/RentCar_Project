@@ -3,7 +3,10 @@ package kr.or.dgit.RentCar_Project.dto;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.swing.JOptionPane;
+
 public class Rent {
+	private Situation situation;
 	private User userCode;
 	private String userTime;
 	private IsInsurance isInsurance;
@@ -30,6 +33,14 @@ public class Rent {
 
 	public User getUserCode() {
 		return userCode;
+	}
+
+	public Situation getSituation() {
+		return situation;
+	}
+
+	public void setSituation(Situation situation) {
+		this.situation = situation;
 	}
 
 	public void setUserCode(User userCode) {
@@ -82,76 +93,40 @@ public class Rent {
 
 	public void setCarCode(CarData carCode) {
 		this.carCode = carCode;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((carCode == null) ? 0 : carCode.hashCode());
-		result = prime * result + ((dayEnd == null) ? 0 : dayEnd.hashCode());
-		result = prime * result + ((dayStart == null) ? 0 : dayStart.hashCode());
-		result = prime * result + finalPrice;
-		result = prime * result + ((isInsurance == null) ? 0 : isInsurance.hashCode());
-		result = prime * result + ((userCode == null) ? 0 : userCode.hashCode());
-		result = prime * result + ((userTime == null) ? 0 : userTime.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Rent other = (Rent) obj;
-		if (carCode == null) {
-			if (other.carCode != null)
-				return false;
-		} else if (!carCode.equals(other.carCode))
-			return false;
-		if (dayEnd == null) {
-			if (other.dayEnd != null)
-				return false;
-		} else if (!dayEnd.equals(other.dayEnd))
-			return false;
-		if (dayStart == null) {
-			if (other.dayStart != null)
-				return false;
-		} else if (!dayStart.equals(other.dayStart))
-			return false;
-		if (finalPrice != other.finalPrice)
-			return false;
-		if (isInsurance != other.isInsurance)
-			return false;
-		if (userCode == null) {
-			if (other.userCode != null)
-				return false;
-		} else if (!userCode.equals(other.userCode))
-			return false;
-		if (userTime == null) {
-			if (other.userTime != null)
-				return false;
-		} else if (!userTime.equals(other.userTime))
-			return false;
-		return true;
+		
 	}
 
 	@Override
 	public String toString() {
-		return String.format("Rent %s, %s, %s, %s, %s, %s, %s", userCode, userTime, isInsurance, dayStart, dayEnd,
+		return String.format("Rent %s, %s, %s, %s, %s, %s, %s, %s", situation, userCode, userTime, isInsurance, dayStart, dayEnd,
 				finalPrice, carCode);
 	}
 
-	public Object[] toArray() {
+	public Object[] toArray(Date rent) {
 		// 날짜 표기를 위한 SimpleDateFormat
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-
-		return new Object[] { carCode.getCarCode(), carCode.getCarName(), carCode.getCarOld(), carCode.getIsAuto(),
-				carCode.getCarSeater(), carCode.getFuelCode().getFuelCode(), userTime, isInsurance, sdf.format(dayStart),
-				sdf.format(dayEnd), finalPrice };
+		
+		return new Object[] {getSituationTostring(rent), carCode.getCarCode(), carCode.getCarName(), carCode.getCarOld(), carCode.getIsAuto(),
+				carCode.getCarSeater(), carCode.getFuelCode().getFuelCode(), userTime, isInsurance,
+				sdf.format(dayStart), sdf.format(dayEnd), finalPrice };
 	}
+
+	private Object getSituationTostring(Date startDate) {
+		Date CurrentDate = new Date();
+		int CompareDate = startDate.compareTo(CurrentDate);
+		
+		if(situation.equals(Situation.RESERVATION)) {
+			if(CompareDate > 0) {
+				return "예약";
+			}else {
+				return "완료";
+			}
+		}else if(situation.equals(Situation.COMPLETION)) {
+			return "완료";
+		}else {
+			return "취소";
+		}
+	}
+	
 
 }

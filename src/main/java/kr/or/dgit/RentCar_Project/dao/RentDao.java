@@ -9,6 +9,7 @@ public interface RentDao {
 	void updateRent(Rent rent);
 	void deleteRent(Rent rent);
 	void UserHistoryDelete(Rent rent);
+	void UserHistoryUpdate(Rent rent);
 	List<Rent> selectRentByUserCode(Rent rent);
 	List<Rent> selectRentByAll();
 	List<Rent> selectRentJoinCarData(Rent rent);

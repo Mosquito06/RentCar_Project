@@ -80,5 +80,10 @@ public class PhoneTextFiedComponent extends JPanel {
 		tfNum2.setText("");
 		tfNum3.setText("");
 	}
-
+	
+	public void setActive(boolean active) {
+		tfNum1.setEnabled(active);
+		tfNum2.setEnabled(active);
+		tfNum3.setEnabled(active);
+	}
 }

@@ -20,7 +20,7 @@ public class EmailTextFiedComponent extends JPanel {
 
 
 	public EmailTextFiedComponent(String title) {
-		setLayout(new BorderLayout(5, 0));
+		setLayout(new BorderLayout(15, 0));
 		
 		JLabel lblEmail = new JLabel(title);
 		lblEmail.setHorizontalAlignment(SwingConstants.CENTER);
@@ -99,5 +99,10 @@ public class EmailTextFiedComponent extends JPanel {
 		tfEmailId.setText("");
 		tfEmailAddr.setText("");
 		cbEmailAddr.setSelectedIndex(0);
+	}
+
+	public void setActive(boolean active) {
+		tfEmailId.setEnabled(active);
+		tfEmailAddr.setEnabled(active);
 	}
 }

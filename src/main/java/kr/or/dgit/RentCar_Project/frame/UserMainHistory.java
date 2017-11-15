@@ -19,6 +19,7 @@ import javax.swing.border.TitledBorder;
 
 import kr.or.dgit.RentCar_Project.content.HistorySearchContent;
 import kr.or.dgit.RentCar_Project.dto.Rent;
+import kr.or.dgit.RentCar_Project.dto.Situation;
 import kr.or.dgit.RentCar_Project.dto.User;
 import kr.or.dgit.RentCar_Project.list.UserHistoryTable;
 import kr.or.dgit.RentCar_Project.service.RentService;
@@ -40,18 +41,19 @@ public class UserMainHistory extends JPanel {
 		
 		// 검색하기 버튼 리스너
 		searchContent.getBtnSearch().addActionListener(new ActionListener() {
-			
-			
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String[] FirstDate = searchContent.getFirstDateField().getText().split("/");
-				String[] LastDate = searchContent.getLastDateField().getText().split("/");
-				
 				rent = new Rent();
 				rent.setUserCode(ComfirmUser);
 				
 				List<Rent> findRent = RentService.getInstance().selectRentByUserCode(rent);
+				if(findRent.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "이용내역이 존재하지 않습니다.");
+					return;
+				}
+				
+				String[] FirstDate = searchContent.getFirstDateField().getText().split("/");
+				String[] LastDate = searchContent.getLastDateField().getText().split("/");
 				
 				Calendar dayStart = GregorianCalendar.getInstance();
 				dayStart.set(Integer.parseInt(FirstDate[0]), Integer.parseInt(FirstDate[1])-1, Integer.parseInt(FirstDate[2]));
@@ -78,15 +80,22 @@ public class UserMainHistory extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Rent selectItem = (Rent) historyTable.getSelectedItem();
-				if(selectItem.getCarCode() == null || selectItem.getFinalPrice() == 0 || selectItem.getUserTime() == null) {
-					JOptionPane.showMessageDialog(null, "취소할 데이터를 찾지 못했습니다.");
-					return;
+				
+				Date CurrentDate = new Date();
+				int CompareDate = selectItem.getDayStart().compareTo(CurrentDate);
+				
+				if(CompareDate > 0) {
+					int Confirm = JOptionPane.showConfirmDialog(null, "정말로 예약을 취소하시겠습니까?");
+					if(Confirm == JOptionPane.YES_OPTION) {
+						selectItem.setSituation(Situation.CANCELLATION);
+						selectItem.setUserCode(ComfirmUser);
+						RentService.getInstance().UserHistoryUpdate(selectItem);
+						historyTable.loadDate();
+						JOptionPane.showMessageDialog(null, "예약을 취소하였습니다.");
+					}
+				}else {
+					JOptionPane.showMessageDialog(null, "취소할 수 없는 내역입니다");
 				}
-				
-				RentService.getInstance().UserHistoryDelete(selectItem);
-				historyTable.loadDate();
-				JOptionPane.showMessageDialog(null, "예약을 취소하였습니다.");
-				
 			}
 		});
 		
@@ -99,7 +108,7 @@ public class UserMainHistory extends JPanel {
 				frame.getContentPane().removeAll();
 				UserMainHome userMainHome = new UserMainHome();
 				userMainHome.setComfirmUser(ComfirmUser);
-				frame.getContentPane() .add(userMainHome, BorderLayout.CENTER);
+				frame.getContentPane().add(userMainHome, BorderLayout.CENTER);
 				frame.setVisible(true);
 			}
 		});

@@ -77,6 +77,7 @@ CREATE TABLE car_project.user (
 
 -- 대여관리 테이블
 CREATE TABLE car_project.rent (
+	situation   VARCHAR(20),
 	user_code   INT(11),
 	use_time    INT(11),
 	is_insurance VARCHAR(11),
