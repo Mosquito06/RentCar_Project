@@ -2,26 +2,24 @@ package kr.or.dgit.RentCar_Project.frame;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.UIManager;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 import kr.or.dgit.RentCar_Project.content.PerformenceContent;
 import kr.or.dgit.RentCar_Project.list.AdminPerformenceTable;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EtchedBorder;
 
+@SuppressWarnings("serial")
 public class AdminMainPerformence extends JPanel {
 
 	public AdminMainPerformence() {

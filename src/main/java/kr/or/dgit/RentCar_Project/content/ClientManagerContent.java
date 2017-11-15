@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Vector;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.CompoundBorder;
@@ -22,6 +23,9 @@ import kr.or.dgit.RentCar_Project.component.RadioComponent;
 import kr.or.dgit.RentCar_Project.component.TextFieldComponent;
 import kr.or.dgit.RentCar_Project.dto.User;
 import kr.or.dgit.RentCar_Project.dto.UserGrade;
+import kr.or.dgit.RentCar_Project.frame.AdminMain;
+import kr.or.dgit.RentCar_Project.frame.AdminMainClientManager;
+import kr.or.dgit.RentCar_Project.frame.AdminMainClientManagerUseList;
 import kr.or.dgit.RentCar_Project.service.UserGradeService;
 import kr.or.dgit.RentCar_Project.service.UserService;
 
@@ -131,9 +135,17 @@ public class ClientManagerContent extends JPanel {
 		btnCancel.setBounds(815, 275, 97, 23);
 		add(btnCancel);
 		
-		JButton button = new JButton("이용내역 조회");
-		button.setBounds(775, 44, 124, 23);
-		add(button);
+		JButton btnUseList = new JButton("이용내역 조회");
+		btnUseList.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFrame frame = AdminMain.getInstance();
+				frame.getContentPane().removeAll();
+				frame.getContentPane().add(new AdminMainClientManagerUseList(), BorderLayout.CENTER);
+				frame.setVisible(true);
+			}
+		});
+		btnUseList.setBounds(775, 44, 124, 23);
+		add(btnUseList);
 		
 		setUserGradeComboBoxModel();
 		setUserComboBoxModel();

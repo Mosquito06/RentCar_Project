@@ -16,30 +16,31 @@ public class FuelManagerContent extends JPanel {
 	private TextFieldComponent fuelType;
 	
 	public FuelManagerContent() {
+		setBounds(100, 100, 333, 171);
 		setLayout(null);
 		
 		fuelCode = new TextFieldComponent("연료 코드");
-		fuelCode.setBounds(5, 35, 230, 30);
+		fuelCode.setBounds(3, 25, 276, 30);
 		add(fuelCode);
 		
 		fuelType = new TextFieldComponent("연료 타입");
-		fuelType.setBounds(5, 80, 230, 30);
+		fuelType.setBounds(3, 65, 276, 30);
 		add(fuelType);
 		
 		JButton btnAdd = new JButton("추가");
-		btnAdd.setBounds(250, 20, 66, 23);
+		btnAdd.setBounds(33, 117, 66, 23);
 		add(btnAdd);
 		
 		JButton btnUpdate = new JButton("수정");
-		btnUpdate.setBounds(250, 45, 66, 23);
+		btnUpdate.setBounds(98, 117, 66, 23);
 		add(btnUpdate);
 		
 		JButton btnDelete = new JButton("삭제");
-		btnDelete.setBounds(250, 70, 66, 23);
+		btnDelete.setBounds(163, 117, 66, 23);
 		add(btnDelete);
 		
 		JButton btnCancel = new JButton("취소");
-		btnCancel.setBounds(250, 105, 66, 23);
+		btnCancel.setBounds(253, 117, 66, 23);
 		btnCancel.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

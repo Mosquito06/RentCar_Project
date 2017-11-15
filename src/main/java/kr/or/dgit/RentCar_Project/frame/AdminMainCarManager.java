@@ -35,10 +35,11 @@ import kr.or.dgit.RentCar_Project.service.CarDataService;
 import kr.or.dgit.RentCar_Project.service.CarModelService;
 import kr.or.dgit.RentCar_Project.service.FuelService;
 import kr.or.dgit.RentCar_Project.service.ManufacturerService;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 @SuppressWarnings("serial")
 public class AdminMainCarManager extends JPanel {
-	private JTable table;
 	
 	private TextFieldComponent carCode;
 	private TextFieldComponent carName;
@@ -49,7 +50,11 @@ public class AdminMainCarManager extends JPanel {
 	private ComboBoxComponent<CarModel> cmCode;
 	private ComboBoxComponent<Manufacturer> mfCode;
 	private ComboBoxComponent<Fuel> fCode;
-	private ComboBoxComponent<CarData> searchCarCode;
+	private JPanel listTablePanel;
+	private JLabel lblNum;
+	private JButton btnNewButton;
+	private ComboBoxComponent<CarData> searchPanel;
+	private JButton btnChart;
 	
 	public AdminMainCarManager() {
 		setBounds(0, 0, 974, 751);
@@ -68,37 +73,9 @@ public class AdminMainCarManager extends JPanel {
 		btnBack.setBounds(862, 728, 97, 23);
 		add(btnBack);
 		
-		JButton btnAllReset = new JButton("전체 초기화");
-		btnAllReset.setBounds(750, 728, 97, 23);
-		add(btnAllReset);
-		
-		CarModelContent carModelPanel = new CarModelContent();
-		carModelPanel.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), " \uCC28\uC885 \uAD00\uB9AC  ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		carModelPanel.setBounds(278, 422, 327, 143);
-		add(carModelPanel);
-		carModelPanel.setLayout(null);
-		
-		ManufacturerManagerContent manufacturerPanel = new ManufacturerManagerContent();
-		manufacturerPanel.setBounds(630, 575, 332, 143);
-		add(manufacturerPanel);
-		manufacturerPanel.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), " \uC81C\uC870\uD68C\uC0AC  ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		manufacturerPanel.setLayout(null);
-		
-		RentalPriceManagerContent pricePanel = new RentalPriceManagerContent();
-		pricePanel.setBounds(12, 422, 246, 297);
-		add(pricePanel);
-		pricePanel.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), " \uB300\uC5EC \uB2E8\uAC00 \uAD00\uB9AC  ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		pricePanel.setLayout(null);
-		
-		FuelManagerContent oliPanel = new FuelManagerContent();
-		oliPanel.setBounds(278, 575, 327, 143);
-		add(oliPanel);
-		oliPanel.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), " \uC5F0\uB8CC\uAD00\uB9AC ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		oliPanel.setLayout(null);
-		
 		JPanel carPanel = new JPanel();
 		carPanel.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.RAISED, null, null)), " \uCC28\uB7C9 \uAD00\uB9AC  ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		carPanel.setBounds(12, 10, 598, 382);
+		carPanel.setBounds(12, 10, 950, 382);
 		add(carPanel);
 		carPanel.setLayout(null);
 		
@@ -139,19 +116,19 @@ public class AdminMainCarManager extends JPanel {
 		carPanel.add(fCode);
 		
 		JButton btnDelete = new JButton("삭제");
-		btnDelete.setBounds(412, 346, 66, 23);
+		btnDelete.setBounds(701, 86, 66, 23);
 		carPanel.add(btnDelete);
 		
 		JButton btnUpdate = new JButton("수정");
-		btnUpdate.setBounds(346, 346, 66, 23);
+		btnUpdate.setBounds(701, 53, 66, 23);
 		carPanel.add(btnUpdate);
 		
 		JButton btnAdd = new JButton("추가");
-		btnAdd.setBounds(279, 346, 66, 23);
+		btnAdd.setBounds(701, 20, 66, 23);
 		carPanel.add(btnAdd);
 		
 		JButton btnClear = new JButton("취소");
-		btnClear.setBounds(520, 346, 66, 23);
+		btnClear.setBounds(701, 346, 66, 23);
 		btnClear.addActionListener(new ActionListener() {
 			
 			@Override
@@ -163,38 +140,68 @@ public class AdminMainCarManager extends JPanel {
 		carPanel.add(btnClear);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(279, 20, 307, 310);
+		panel.setBounds(282, 20, 400, 349);
 		carPanel.add(panel);
 		
-		JPanel searchPanel = new JPanel();
-		searchPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		searchPanel.setBounds(617, 15, 345, 550);
-		add(searchPanel);
-		searchPanel.setLayout(null);
+		JButton btnDetail = new JButton("세부사항관리");
+		btnDetail.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String[] details = {"선택하세요","대여단가 관리","차종&제조회사 관리","연료&고객등급 관리"};
+				Object selected = JOptionPane.showInputDialog(null, "세부관리 사항을 선택하세요", "세부관리", JOptionPane.QUESTION_MESSAGE, null, details, details[0]);
+				if(selected==details[0]) {
+					
+						JOptionPane.showMessageDialog(null, "세부사향을 선택하세요");
+						JOptionPane.showInputDialog(null, "세부관리 사항을 선택하세요", "세부관리", JOptionPane.QUESTION_MESSAGE, null, details, details[0]);
+					
+					
+				}else if(selected==details[1]) {
+					JFrame frame = AdminMain.getInstance();
+					frame.getContentPane().removeAll();
+					frame.getContentPane().add(new AdminMainCarManagerRentalPrice(), BorderLayout.CENTER);
+					frame.setVisible(true);
+				}else if(selected==details[2]) {
+					JFrame frame = AdminMain.getInstance();
+					frame.getContentPane().removeAll();
+					frame.getContentPane().add(new AdminMainCarManagerCarModel_Manufacturer(), BorderLayout.CENTER);
+					frame.setVisible(true);
+				}else {
+					JFrame frame = AdminMain.getInstance();
+					frame.getContentPane().removeAll();
+					frame.getContentPane().add(new AdminMainCarManagerFuel_UserGrade(), BorderLayout.CENTER);
+					frame.setVisible(true);
+				}
+			}
+		});
+		btnDetail.setBounds(783, 20, 144, 23);
+		carPanel.add(btnDetail);
 		
-		JButton btnNewButton_5 = new JButton("차트보기");
-		btnNewButton_5.setBounds(252, 517, 81, 23);
-		searchPanel.add(btnNewButton_5);
+		JPanel carListPanel = new JPanel();
+		carListPanel.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.RAISED, null, null)), " \uCC28\uB7C9 \uB9AC\uC2A4\uD2B8 ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		carListPanel.setBounds(12, 402, 950, 322);
+		add(carListPanel);
+		carListPanel.setLayout(null);
 		
-		searchCarCode = new ComboBoxComponent<>("차 코드");
-		searchCarCode.setBounds(12, 10, 246, 30);
-		searchPanel.add(searchCarCode);
+		lblNum = new JLabel("New label");
+		lblNum.setBounds(867, 300, 76, 15);
+		carListPanel.add(lblNum);
+		lblNum.setHorizontalAlignment(SwingConstants.RIGHT);
 		
-		JPanel listPanel = new JPanel();
-		listPanel.setBounds(12, 50, 321, 457);
-		searchPanel.add(listPanel);
-		listPanel.setLayout(new BorderLayout(0, 0));
+		listTablePanel = new JPanel();
+		listTablePanel.setBounds(12, 54, 931, 245);
+		carListPanel.add(listTablePanel);
+		listTablePanel.setLayout(new BorderLayout(0, 0));
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		listPanel.add(scrollPane, BorderLayout.CENTER);
+		btnNewButton = new JButton("검색");
+		btnNewButton.setBounds(600, 21, 97, 23);
+		carListPanel.add(btnNewButton);
 		
-		table = new JTable();
-		scrollPane.setViewportView(table);
+		searchPanel = new ComboBoxComponent<>("차 코드");
+		searchPanel.setBounds(272, 16, 316, 28);
+		carListPanel.add(searchPanel);
 		
-		JButton btnSearch = new JButton("검색");
-		btnSearch.setBounds(267, 17, 66, 23);
-		searchPanel.add(btnSearch);
+		btnChart = new JButton("차트보기");
+		btnChart.setBounds(841, 21, 97, 23);
+		carListPanel.add(btnChart);
 		setSearchCarCodeComboModel();
 		setCarModelComboModel();
 		setManufacturerComboModel();
@@ -209,7 +216,7 @@ public class AdminMainCarManager extends JPanel {
 			cd.setComboType(0);
 			carData.add(cd);
 		}
-		searchCarCode.setComboBoxModel(carData);
+		searchPanel.setComboBoxModel(carData);
 	}
 	
 	public  void setCarModelComboModel() {

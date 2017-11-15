@@ -4,14 +4,12 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.ScrollPaneConstants;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
@@ -19,7 +17,9 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 import kr.or.dgit.RentCar_Project.content.ClientManagerContent;
+import kr.or.dgit.RentCar_Project.dto.User;
 import kr.or.dgit.RentCar_Project.list.ClientListTable;
+import kr.or.dgit.RentCar_Project.service.UserService;
 
 @SuppressWarnings("serial")
 public class AdminMainClientManager extends JPanel {
@@ -46,7 +46,8 @@ public class AdminMainClientManager extends JPanel {
 		clientListPanel.add(lblPanel, BorderLayout.SOUTH);
 		lblPanel.setLayout(new BorderLayout(0, 0));
 		
-		JLabel lblListCount = new JLabel("1/10");
+		
+		JLabel lblListCount = new JLabel("/"+totalList());
 		lblPanel.add(lblListCount, BorderLayout.EAST);
 		
 		JPanel emptyPanel4 = new JPanel();
@@ -79,5 +80,10 @@ public class AdminMainClientManager extends JPanel {
 		});
 		btnBack.setBounds(865, 717, 97, 23);
 		add(btnBack);
+	}
+
+	public int totalList() {
+		List<User> lists =  UserService.getInstance().selectUserByAll();
+		return lists.size();
 	}
 }

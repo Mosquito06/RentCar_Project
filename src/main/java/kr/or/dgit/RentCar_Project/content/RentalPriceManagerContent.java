@@ -27,6 +27,7 @@ public class RentalPriceManagerContent extends JPanel {
 	private TextFieldComponent insurance;
 	
 	public RentalPriceManagerContent() {
+		setBounds(100, 100, 267, 489);
 		setLayout(null);
 		
 		carCode = new ComboBoxComponent<>("차 코드");
@@ -45,27 +46,27 @@ public class RentalPriceManagerContent extends JPanel {
 				
 			}
 		});
-		carCode.setBounds(5, 23, 230, 30);
+		carCode.setBounds(5, 35, 230, 30);
 		add(carCode);
 		
 		bPrice = new TextFieldComponent("기본가격");
-		bPrice.setBounds(5, 63, 230, 30);
+		bPrice.setBounds(5, 100, 230, 30);
 		add(bPrice);
 		
 		useTime = new TextFieldComponent("사용시간");
-		useTime.setBounds(5, 103, 230, 30);
+		useTime.setBounds(5, 165, 230, 30);
 		add(useTime);
 		
 		oPrice = new TextFieldComponent("초과시간단가");
-		oPrice.setBounds(5, 223, 230, 30);
+		oPrice.setBounds(5, 360, 230, 30);
 		add(oPrice);
 		
 		btPrice = new TextFieldComponent("기본시간단가");
-		btPrice.setBounds(5, 183, 230, 30);
+		btPrice.setBounds(5, 295, 230, 30);
 		add(btPrice);
 		
 		insurance = new TextFieldComponent("보험료");
-		insurance.setBounds(5, 143, 230, 30);
+		insurance.setBounds(5, 230, 230, 30);
 		add(insurance);
 		
 		JButton btnUpdate = new JButton("수정");
@@ -75,15 +76,15 @@ public class RentalPriceManagerContent extends JPanel {
 				/*rentalPriceService.updateRentalPrice(rentalPrice);*/
 			}
 		});
-		btnUpdate.setBounds(25, 267, 66, 23);
+		btnUpdate.setBounds(21, 456, 66, 23);
 		add(btnUpdate);
 		
 		JButton btnDelete = new JButton("삭제");
-		btnDelete.setBounds(91, 267, 66, 23);
+		btnDelete.setBounds(99, 456, 66, 23);
 		add(btnDelete);
 		
 		JButton btnCancel = new JButton("취소");
-		btnCancel.setBounds(169, 267, 66, 23);
+		btnCancel.setBounds(177, 456, 66, 23);
 		btnCancel.addActionListener(new ActionListener() {
 			
 			@Override

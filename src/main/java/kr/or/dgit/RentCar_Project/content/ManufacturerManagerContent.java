@@ -15,18 +15,19 @@ public class ManufacturerManagerContent extends JPanel {
 	private TextFieldComponent mfName;
 	
 	public ManufacturerManagerContent() {
+		setBounds(100, 100, 333, 171);
 		setLayout(null);
 		
 		mfCode = new TextFieldComponent("제조회사 코드");
-		mfCode.setBounds(10, 30, 230, 30);
+		mfCode.setBounds(3, 25, 276, 30);
 		add(mfCode);
 		
 		mfName = new TextFieldComponent("제조사 이름");
-		mfName.setBounds(10, 70, 230, 30);
+		mfName.setBounds(3, 65, 276, 30);
 		add(mfName);
 		
 		JButton btnCancel = new JButton("취소");
-		btnCancel.setBounds(260, 105, 66, 23);
+		btnCancel.setBounds(253, 117, 66, 23);
 		btnCancel.addActionListener(new ActionListener() {
 			
 			@Override
@@ -37,18 +38,21 @@ public class ManufacturerManagerContent extends JPanel {
 			}
 		});
 		add(btnCancel);
-		
-		JButton btnDelete = new JButton("삭제");
-		btnDelete.setBounds(260, 65, 66, 23);
-		add(btnDelete);
+
+		JButton btnAdd = new JButton("추가");
+		btnAdd.setBounds(33, 117, 66, 23);
+		add(btnAdd);
 		
 		JButton btnUpdate = new JButton("수정");
-		btnUpdate.setBounds(260, 40, 66, 23);
+		btnUpdate.setBounds(98, 117, 66, 23);
 		add(btnUpdate);
 		
-		JButton btnAdd = new JButton("추가");
-		btnAdd.setBounds(260, 15, 66, 23);
-		add(btnAdd);
+		JButton btnDelete = new JButton("삭제");
+		btnDelete.setBounds(163, 117, 66, 23);
+		add(btnDelete);
+		
+		
+		
 
 	}
 	public void setManufacturerTextValueClear() {
