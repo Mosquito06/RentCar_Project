@@ -41,7 +41,7 @@ public class ClientManagerContent extends JPanel {
 		setLayout(null);
 		
 		JPanel searchPanel = new JPanel();
-		searchPanel.setBounds(110, 19, 325, 55);
+		searchPanel.setBounds(310, 26, 354, 55);
 		searchPanel.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0), 1, true), new EmptyBorder(5, 5, 5, 5)), " \uAC80\uC0C9 ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		add(searchPanel);
 		searchPanel.setLayout(new BorderLayout(0, 0));
@@ -50,56 +50,94 @@ public class ClientManagerContent extends JPanel {
 		searchPanel.add(comboUserCode, BorderLayout.CENTER);
 		
 		JButton btnOk = new JButton("확인");
+		btnOk.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "고객을 검색합니다.");
+				setActive(true);
+				
+				User user  = comboUserCode.getComboboxValue();
+				
+				
+				clientId.setTextValue(user.getId());
+				clientCode.setTextValue(String.valueOf(user.getUserCode()));
+				clientName.setTextValue(user.getUserName());
+				phoneNum.setTextValueNum1(user.getPhone().substring(0,3));
+				phoneNum.setTextValueNum2(user.getPhone().substring(4,8));
+				phoneNum.setTextValueNum3(user.getPhone().substring(9));
+				email.setTextValueId(user.getEmail().substring(0,user.getEmail().indexOf('@')));
+				email.setTextValueEmailAddr(user.getEmail().substring(user.getEmail().indexOf('@')+1));
+				gradeComboBoxSelected(user.getGrade().getGrade());
+				genderRadioSelected(user.getGender().name());
+				
+			}
+
+			
+		});
 		searchPanel.add(btnOk, BorderLayout.EAST);
 		
 		JButton btnUpdate = new JButton("수정");
-		btnUpdate.setBounds(447, 26, 69, 22);
+		btnUpdate.setBounds(680, 29, 69, 22);
 		add(btnUpdate);
 		
 		JButton btnDelete = new JButton("삭제");
-		btnDelete.setBounds(447, 52, 69, 22);
+		btnDelete.setBounds(680, 57, 69, 22);
 		add(btnDelete);
 		
+		JPanel panel = new JPanel();
+		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panel.setBounds(23, 29, 240, 269);
+		add(panel);
+		
 		clientId = new TextFieldComponent("아이디");
-		clientId.setBounds(12, 97, 278, 29);
+		clientId.setBounds(234, 95, 278, 29);
 		add(clientId);
 		
 		comboUserCodeGrade = new ComboBoxComponent<>("고객등급");
-		comboUserCodeGrade.setBounds(272, 97, 305, 29);
+		comboUserCodeGrade.setBounds(505, 95, 305, 29);
 		add(comboUserCodeGrade);
 		
 		clientCode = new TextFieldComponent("고객 코드");
-		clientCode.setBounds(12, 148, 278, 29);
+		clientCode.setBounds(234, 145, 278, 29);
 		add(clientCode);
 		
 		gender = new RadioComponent("성별", "남자", "여자");
-		gender.setBounds(287, 148, 290, 29);
+		gender.setBounds(531, 145, 290, 29);
 		add(gender);
 		
 		clientName = new TextFieldComponent("고객명");
-		clientName.setBounds(12, 198, 278, 29);
+		clientName.setBounds(234, 195, 278, 29);
 		add(clientName);
 		
 		phoneNum = new PhoneTextFiedComponent("연락처");
-		phoneNum.setBounds(183, 198, 394, 29);
+		phoneNum.setBounds(390, 195, 462, 29);
 		add(phoneNum);
 		
 		email = new EmailTextFiedComponent("이메일");
-		email.setBounds(14, 244, 469, 29);
+		email.setBounds(253, 248, 469, 29);
 		add(email);
 		
 		JButton btnCancel = new JButton("취소");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int clear = JOptionPane.showConfirmDialog(null, "입력 데이터를 취소하시겠습니까?", "확인창", JOptionPane.OK_CANCEL_OPTION);
-				if(clear==0)setClearAll();
+				if(clear==0) {
+					setClearAll();
+					setActive(false);
+				}
 			}
 		});
-		btnCancel.setBounds(480, 283, 97, 23);
+		btnCancel.setBounds(815, 275, 97, 23);
 		add(btnCancel);
+		
+		JButton button = new JButton("이용내역 조회");
+		button.setBounds(775, 44, 124, 23);
+		add(button);
 		
 		setUserGradeComboBoxModel();
 		setUserComboBoxModel();
+		setActive(false);
 	}
 	
 	public void setUserGradeComboBoxModel() {
@@ -133,5 +171,33 @@ public class ClientManagerContent extends JPanel {
 		gender.setSelect(true);
 		comboUserCode.setComboBoxModelClear();
 		comboUserCodeGrade.setComboBoxModelClear();
+	}
+	
+	public void setActive(boolean active) {
+		
+		clientId.getTextField().setEnabled(active);
+		clientCode.getTextField().setEnabled(active);
+		clientName.getTextField().setEnabled(active);
+		phoneNum.setActive(active);
+		comboUserCode.setEnabled(active);
+		email.setActive(active);
+	}
+	public void gradeComboBoxSelected(String grade) {
+		if(grade.equals("A")) {
+			comboUserCodeGrade.getComboBox().setSelectedIndex(0);
+		}else if(grade.equals("B")) {
+			comboUserCodeGrade.getComboBox().setSelectedIndex(1);
+		}else {
+			comboUserCodeGrade.getComboBox().setSelectedIndex(2);
+		}
+		
+	}
+	public void  genderRadioSelected(String selected) {
+		if(selected.equals("MALE")) {
+			gender.setSelect(true);
+		}else {
+			gender.setSelect(false);
+		}
+		
 	}
 }
