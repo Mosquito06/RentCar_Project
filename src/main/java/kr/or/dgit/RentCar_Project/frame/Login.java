@@ -207,6 +207,9 @@ public class Login extends JFrame {
 							JOptionPane.showMessageDialog(null, "비밀번호를 확인해주세요.");
 							return;
 						}
+					}else {
+						JOptionPane.showMessageDialog(null, "관리자 아이디 및 비밀번호를 확인해주세요.");
+						return;
 					}
 				} 
 								
