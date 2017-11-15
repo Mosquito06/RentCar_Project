@@ -14,6 +14,7 @@
 	</resultMap>
 	
 	<resultMap type="Rent" id="RentJoinCarDataResult">
+		<result property="situation" column="situation"/>
 		<result property="userTime" column="use_time"/>
 		<result property="isInsurance" column="is_insurance"/>
 		<result property="dayStart" column="day_start"/>
