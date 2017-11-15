@@ -52,7 +52,11 @@ public class UserMainHistory extends JPanel {
 				rent.setUserCode(ComfirmUser);
 				
 				List<Rent> findRent = RentService.getInstance().selectRentByUserCode(rent);
-				
+				if(findRent.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "이용내역이 존재하지 않습니다.");
+					return;
+				}
+								
 				Calendar dayStart = GregorianCalendar.getInstance();
 				dayStart.set(Integer.parseInt(FirstDate[0]), Integer.parseInt(FirstDate[1])-1, Integer.parseInt(FirstDate[2]));
 				
@@ -78,14 +82,22 @@ public class UserMainHistory extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Rent selectItem = (Rent) historyTable.getSelectedItem();
-				if(selectItem.getCarCode() == null || selectItem.getFinalPrice() == 0 || selectItem.getUserTime() == null) {
-					JOptionPane.showMessageDialog(null, "취소할 데이터를 찾지 못했습니다.");
-					return;
-				}
 				
-				RentService.getInstance().UserHistoryDelete(selectItem);
-				historyTable.loadDate();
-				JOptionPane.showMessageDialog(null, "예약을 취소하였습니다.");
+				Date CurrentDate = new Date();
+				int CompareDate = selectItem.getDayStart().compareTo(CurrentDate);
+				
+				if(CompareDate > 0) {
+					int Confirm = JOptionPane.showConfirmDialog(null, "정말로 예약을 취소하시겠습니까?");
+					if(Confirm == JOptionPane.YES_OPTION) {
+						RentService.getInstance().UserHistoryDelete(selectItem);
+						historyTable.loadDate();
+						JOptionPane.showMessageDialog(null, "예약을 취소하였습니다.");
+					}
+				}else {
+					JOptionPane.showMessageDialog(null, "취소할 수 없는 내역입니다");
+				}
+						
+				
 				
 			}
 		});

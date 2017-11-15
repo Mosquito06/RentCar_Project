@@ -69,61 +69,6 @@ public class Rent {
 	}
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((carCode == null) ? 0 : carCode.hashCode());
-		result = prime * result + ((dayEnd == null) ? 0 : dayEnd.hashCode());
-		result = prime * result + ((dayStart == null) ? 0 : dayStart.hashCode());
-		result = prime * result + finalPrice;
-		result = prime * result + ((isInsurance == null) ? 0 : isInsurance.hashCode());
-		result = prime * result + ((userCode == null) ? 0 : userCode.hashCode());
-		result = prime * result + ((userTime == null) ? 0 : userTime.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Rent other = (Rent) obj;
-		if (carCode == null) {
-			if (other.carCode != null)
-				return false;
-		} else if (!carCode.equals(other.carCode))
-			return false;
-		if (dayEnd == null) {
-			if (other.dayEnd != null)
-				return false;
-		} else if (!dayEnd.equals(other.dayEnd))
-			return false;
-		if (dayStart == null) {
-			if (other.dayStart != null)
-				return false;
-		} else if (!dayStart.equals(other.dayStart))
-			return false;
-		if (finalPrice != other.finalPrice)
-			return false;
-		if (isInsurance != other.isInsurance)
-			return false;
-		if (userCode == null) {
-			if (other.userCode != null)
-				return false;
-		} else if (!userCode.equals(other.userCode))
-			return false;
-		if (userTime == null) {
-			if (other.userTime != null)
-				return false;
-		} else if (!userTime.equals(other.userTime))
-			return false;
-		return true;
-	}
-
-	@Override
 	public String toString() {
 		return String.format("Rent %s, %s, %s, %s, %s, %s, %s", userCode, userTime, isInsurance, dayStart, dayEnd,
 				finalPrice, carCode);

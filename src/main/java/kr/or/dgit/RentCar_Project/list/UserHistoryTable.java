@@ -56,6 +56,13 @@ public class UserHistoryTable extends AbstractTable {
 		int selectIndex = table.getSelectedRow();
 		String carCode= (String) table.getValueAt(selectIndex, 0);
 		String userTime = (String) table.getValueAt(selectIndex, 6);
+		String date = (String) table.getValueAt(selectIndex, 8);
+		String[] selectDate = date.split("/");
+		
+		Calendar dayStart = GregorianCalendar.getInstance();
+		dayStart.set(Integer.parseInt(selectDate[0]), Integer.parseInt(selectDate[1])-1, Integer.parseInt(selectDate[2]));
+		
+		
 		int finalPrice = (int) table.getValueAt(selectIndex, 10);
 		
 		CarData carDate = new CarData();
@@ -65,6 +72,7 @@ public class UserHistoryTable extends AbstractTable {
 		selectRent.setCarCode(carDate);
 		selectRent.setFinalPrice(finalPrice);
 		selectRent.setUserTime(userTime);
+		selectRent.setDayStart(dayStart.getTime());
 		
 		return selectRent;
 	}
