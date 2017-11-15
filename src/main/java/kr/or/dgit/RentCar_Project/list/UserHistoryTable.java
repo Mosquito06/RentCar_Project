@@ -37,7 +37,7 @@ public class UserHistoryTable extends AbstractTable {
 
 		for (int i = 0; i < list.size(); i++) {
 			Rent rentObject = list.get(i);
-			datas[i] = rentObject.toArray(rent.getDayStart());
+			datas[i] = rentObject.toArray(list.get(i).getDayStart());
 		}
 
 		return datas;

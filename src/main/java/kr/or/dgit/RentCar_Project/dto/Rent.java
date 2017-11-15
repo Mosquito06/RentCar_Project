@@ -3,6 +3,8 @@ package kr.or.dgit.RentCar_Project.dto;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.swing.JOptionPane;
+
 public class Rent {
 	private Situation situation;
 	private User userCode;
