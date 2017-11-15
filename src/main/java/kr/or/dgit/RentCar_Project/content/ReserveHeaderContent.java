@@ -45,6 +45,16 @@ public class ReserveHeaderContent extends JPanel {
 	private Date date2;
 	private Date date3;
 
+	
+	
+	public TextFieldComponent getStartPanel() {
+		return startPanel;
+	}
+
+	public TextFieldComponent getFinalPanel() {
+		return finalPanel;
+	}
+
 	public JButton getBtnSearch() {
 		return btnSearch;
 	}

@@ -38,6 +38,9 @@ public class UserMainReserve extends JPanel {
 	private CarDataService carDataService = CarDataService.getInstance();
 	CarModelService carModelService = CarModelService.getInstance();
 	private List<CarData> lists;
+	private String sDay;
+	private String fDay;
+
 
 	public void setComfirmUser(User comfirmUser) {
 		this.comfirmUser = comfirmUser;
@@ -86,7 +89,8 @@ public class UserMainReserve extends JPanel {
 				new EtchedBorder(EtchedBorder.LOWERED, null, null)));
 		header.setBounds(3, 3, 968, 72);
 		add(header);
-
+		sDay = header.getStartPanel().getTextValue();
+		fDay = header.getFinalPanel().getTextValue();
 		header.getBtnSearch().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -94,6 +98,7 @@ public class UserMainReserve extends JPanel {
 					JOptionPane.showMessageDialog(null, "날짜를 정확하게 입력하세요");
 					return;
 				}
+				
 				lists = carDataService.selectCarDataByAll();
 				setScrollPaneAddList(scrollPane, header);
 			}
@@ -132,7 +137,6 @@ public class UserMainReserve extends JPanel {
 				frame.setVisible(true);
 			}
 		});
-
 	}
 
 	private void setScrollPaneAddList(JScrollPane scrollPane, ReserveHeaderContent header) {
@@ -142,7 +146,8 @@ public class UserMainReserve extends JPanel {
 			return;
 		}
 		scrollPane.getViewport().removeAll();
-		ReserveAddCarContent addCar = new ReserveAddCarContent(totalTime, comfirmUser, lists);
+		ReserveAddCarContent addCar = new ReserveAddCarContent(totalTime, comfirmUser, lists,
+				sDay,fDay);
 		scrollPane.setViewportView(addCar);
 		addCar.setLayout(new GridLayout(0, 1, 0, 0));
 	}

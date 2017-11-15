@@ -17,7 +17,7 @@ import kr.or.dgit.RentCar_Project.service.UserGradeService;
 @SuppressWarnings("serial")
 public class ReserveAddCarContent extends JPanel {
 
-	public ReserveAddCarContent(int time, User comfirmUser, List<CarData> lists) {
+	public ReserveAddCarContent(int time, User comfirmUser, List<CarData> lists,String sDay,String fDay) {
 		setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
 		UserGradeService userGradeService = UserGradeService.getInstance();
@@ -50,18 +50,18 @@ public class ReserveAddCarContent extends JPanel {
 				ReserveCarPriceContent panel = new ReserveCarPriceContent(carName, String.valueOf(price) + "원",
 						String.valueOf(iPrice) + "원", String.valueOf(0) + "원",
 						String.valueOf(price + iPrice + btPrice * time) + "원", img, String.valueOf(old), seater, auto,
-						fuelType);
+						fuelType,sDay,fDay,time,carCode,comfirmUser);
 				add(panel);
 			} else if (time > (bTime * 1.2)) {
 				ReserveCarPriceContent panel = new ReserveCarPriceContent(carName, String.valueOf(price) + "원",
 						String.valueOf(iPrice) + "원", String.valueOf(dTotalPrice) + "원",
 						String.valueOf(oTotalPrice - dTotalPrice) + "원", img, String.valueOf(old), seater, auto,
-						fuelType);
+						fuelType,sDay,fDay,time,carCode,comfirmUser);
 				add(panel);
 			} else {
 				ReserveCarPriceContent panel = new ReserveCarPriceContent(carName, String.valueOf(price) + "원",
 						String.valueOf(iPrice) + "원", String.valueOf(0) + "원", String.valueOf(oTotalPrice) + "원", img,
-						String.valueOf(old), seater, auto, fuelType);
+						String.valueOf(old), seater, auto, fuelType,sDay,fDay,time,carCode,comfirmUser);
 				add(panel);
 			}
 

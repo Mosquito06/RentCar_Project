@@ -12,6 +12,22 @@ public class Rent {
 	private int finalPrice;
 	private CarData carCode;
 
+	public Rent() {
+		super();
+	}
+
+	public Rent(User userCode, String userTime, IsInsurance isInsurance, Date dayStart, Date dayEnd, int finalPrice,
+			CarData carCode) {
+		super();
+		this.userCode = userCode;
+		this.userTime = userTime;
+		this.isInsurance = isInsurance;
+		this.dayStart = dayStart;
+		this.dayEnd = dayEnd;
+		this.finalPrice = finalPrice;
+		this.carCode = carCode;
+	}
+
 	public User getUserCode() {
 		return userCode;
 	}
