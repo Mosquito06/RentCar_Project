@@ -89,8 +89,7 @@ public class UserMainReserve extends JPanel {
 				new EtchedBorder(EtchedBorder.LOWERED, null, null)));
 		header.setBounds(3, 3, 968, 72);
 		add(header);
-		sDay = header.getStartPanel().getTextValue();
-		fDay = header.getFinalPanel().getTextValue();
+		
 		header.getBtnSearch().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -146,6 +145,8 @@ public class UserMainReserve extends JPanel {
 			return;
 		}
 		scrollPane.getViewport().removeAll();
+		sDay = header.getStartPanel().getTextValue();
+		fDay = header.getFinalPanel().getTextValue();
 		ReserveAddCarContent addCar = new ReserveAddCarContent(totalTime, comfirmUser, lists,
 				sDay,fDay);
 		scrollPane.setViewportView(addCar);

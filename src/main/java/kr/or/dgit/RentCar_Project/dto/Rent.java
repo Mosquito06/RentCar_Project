@@ -19,9 +19,12 @@ public class Rent {
 		super();
 	}
 
-	public Rent(User userCode, String userTime, IsInsurance isInsurance, Date dayStart, Date dayEnd, int finalPrice,
-			CarData carCode) {
+ 
+
+	public Rent(Situation situation, User userCode, String userTime, IsInsurance isInsurance, Date dayStart,
+			Date dayEnd, int finalPrice, CarData carCode) {
 		super();
+		this.situation = situation;
 		this.userCode = userCode;
 		this.userTime = userTime;
 		this.isInsurance = isInsurance;
@@ -30,6 +33,8 @@ public class Rent {
 		this.finalPrice = finalPrice;
 		this.carCode = carCode;
 	}
+
+
 
 	public User getUserCode() {
 		return userCode;

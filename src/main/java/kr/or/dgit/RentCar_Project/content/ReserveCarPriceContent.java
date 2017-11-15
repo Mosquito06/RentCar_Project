@@ -19,6 +19,7 @@ import kr.or.dgit.RentCar_Project.component.VTextFieldComponent;
 import kr.or.dgit.RentCar_Project.dto.CarData;
 import kr.or.dgit.RentCar_Project.dto.IsInsurance;
 import kr.or.dgit.RentCar_Project.dto.Rent;
+import kr.or.dgit.RentCar_Project.dto.Situation;
 import kr.or.dgit.RentCar_Project.dto.User;
 import kr.or.dgit.RentCar_Project.service.RentService;
 
@@ -84,9 +85,14 @@ public class ReserveCarPriceContent extends JPanel {
 							e1.printStackTrace();
 						}
 						
-						Rent rent = new Rent(comfirmUser, String.valueOf(time), isInsurance, dayStart, dayEnd, Integer.parseInt(fPrice), carCode);
+						Rent rent = new Rent(Situation.RESERVATION,comfirmUser, String.valueOf(time),
+								isInsurance, dayStart, dayEnd, Integer.parseInt(fPrice.replace("원", "")), carCode);
 						rentService.insertRent(rent);
-						JOptionPane.showMessageDialog(null, "예약완료");
+						int yes = JOptionPane.showOptionDialog(null, comfirmUser.getUserName()+" 님   "+sDay+"~"+fDay+" 예약완료", "예약완료",
+								JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null,null);
+						if(yes==0) {
+							checkFram.setVisible(false);
+						}
 					}
 				});
 			}
