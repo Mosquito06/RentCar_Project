@@ -31,37 +31,13 @@ public class AdminMainClientManager extends JPanel {
 		
 		ClientManagerContent inputPanel = new ClientManagerContent();
 		inputPanel.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.RAISED, null, null)), " \uACE0\uAC1D \uAD00\uB9AC  ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		inputPanel.setBounds(12, 26, 624, 319);
+		inputPanel.setBounds(27, 26, 924, 319);
 		add(inputPanel);
 		inputPanel.setLayout(null);
 		
-		JPanel useListPanel = new JPanel();
-		useListPanel.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.RAISED, null, null)), " \uC774\uC6A9 \uB0B4\uC5ED  ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		useListPanel.setBounds(648, 26, 314, 319);
-		add(useListPanel);
-		useListPanel.setLayout(new BorderLayout(0, 0));
-		
-		
-		JPanel btnPanel = new JPanel();
-		btnPanel.setBorder(new EmptyBorder(4, 0, 0, 9));
-		useListPanel.add(btnPanel, BorderLayout.SOUTH);
-		btnPanel.setLayout(new BorderLayout(0, 0));
-		
-		JButton btnNewButton = new JButton("차트 보기");
-		btnPanel.add(btnNewButton, BorderLayout.EAST);
-		
-		JPanel emptyPanel1 = new JPanel();
-		useListPanel.add(emptyPanel1, BorderLayout.NORTH);
-		
-		JPanel emptyPanel2 = new JPanel();
-		useListPanel.add(emptyPanel2, BorderLayout.WEST);
-		
-		JPanel emptyPanel3 = new JPanel();
-		useListPanel.add(emptyPanel3, BorderLayout.EAST);
-		
 		JPanel clientListPanel = new JPanel();
 		clientListPanel.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.RAISED, null, null)), " \uACE0\uAC1D \uB9AC\uC2A4\uD2B8  ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		clientListPanel.setBounds(12, 358, 950, 349);
+		clientListPanel.setBounds(25, 358, 924, 349);
 		add(clientListPanel);
 		clientListPanel.setLayout(new BorderLayout(0, 0));
 		
