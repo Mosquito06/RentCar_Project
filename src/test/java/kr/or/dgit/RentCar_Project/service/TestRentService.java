@@ -2,15 +2,20 @@ package kr.or.dgit.RentCar_Project.service;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import kr.or.dgit.RentCar_Project.dto.CarData;
+import kr.or.dgit.RentCar_Project.dto.IsInsurance;
 import kr.or.dgit.RentCar_Project.dto.Rent;
+import kr.or.dgit.RentCar_Project.dto.Situation;
+import kr.or.dgit.RentCar_Project.dto.User;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestRentService {
@@ -32,7 +37,7 @@ public class TestRentService {
 		Rent rent = new Rent();
 		
 		User user = new User();
-		user.setUserCode(4);
+		user.setUserCode(3);
 		
 		Calendar dayStart = GregorianCalendar.getInstance();
 		dayStart.set(2017, 11, 8);
@@ -40,6 +45,7 @@ public class TestRentService {
 		CarData carDate = new CarData();
 		carDate.setCarCode("CC-H-G-002");
 		
+		rent.setSituation(Situation.RESERVATION);
 		rent.setUserCode(user);
 		rent.setUserTime("30");
 		rent.setIsInsurance(IsInsurance.FALSE);
@@ -55,7 +61,7 @@ public class TestRentService {
 		Rent rent = new Rent();
 		
 		User user = new User();
-		user.setUserCode(4);
+		user.setUserCode(3);
 		
 		Calendar dayStart = GregorianCalendar.getInstance();
 		dayStart.set(2017, 11, 8);
@@ -63,6 +69,7 @@ public class TestRentService {
 		CarData carDate = new CarData();
 		carDate.setCarCode("CC-H-G-002");
 		
+		rent.setSituation(Situation.CANCELLATION);
 		rent.setUserCode(user);
 		rent.setUserTime("30");
 		rent.setIsInsurance(IsInsurance.TRUE);
@@ -87,21 +94,21 @@ public class TestRentService {
 		rent.setUserCode(user);
 		
 		rentService.selectRentByUserCode(rent);
-	}
+	}*/
 	
 	@Test
 	public void test5DeleteRent() {
 		Rent rent = new Rent();
 		User user= new User();
-		user.setUserCode(4);
+		user.setUserCode(3);
 		rent.setUserCode(user);
 		rentService.deleteRent(rent);
-	}*/
+	}
 	
-	/*@Test
+	@Test
 	public void test6SelectRentJoinCarData(){
 		User user = new User();
-		user.setUserCode(3);
+		user.setUserCode(2);
 		Rent rent = new Rent();
 		
 		Calendar dayStart = GregorianCalendar.getInstance();
@@ -123,9 +130,9 @@ public class TestRentService {
 		for(Rent r : list) {
 			System.out.println(r.getCarCode().getFuelCode().getFuelCode()); 
 		}
-	}*/
+	}
 	
-	@Test
+	/*@Test
 	public void test7UserHistoryDelete() {
 		Rent rent = new Rent();
 		CarData carDate = new CarData();
@@ -136,5 +143,5 @@ public class TestRentService {
 		rent.setUserTime("30");
 		
 		rentService.UserHistoryDelete(rent);
-	}
+	}*/
 }

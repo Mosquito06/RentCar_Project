@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Rent {
+	private Situation situation;
 	private User userCode;
 	private String userTime;
 	private IsInsurance isInsurance;
@@ -14,6 +15,14 @@ public class Rent {
 
 	public User getUserCode() {
 		return userCode;
+	}
+
+	public Situation getSituation() {
+		return situation;
+	}
+
+	public void setSituation(Situation situation) {
+		this.situation = situation;
 	}
 
 	public void setUserCode(User userCode) {
@@ -66,21 +75,22 @@ public class Rent {
 
 	public void setCarCode(CarData carCode) {
 		this.carCode = carCode;
+		
 	}
 
 	@Override
 	public String toString() {
-		return String.format("Rent %s, %s, %s, %s, %s, %s, %s", userCode, userTime, isInsurance, dayStart, dayEnd,
+		return String.format("Rent %s, %s, %s, %s, %s, %s, %s, %s", situation, userCode, userTime, isInsurance, dayStart, dayEnd,
 				finalPrice, carCode);
 	}
 
 	public Object[] toArray() {
 		// 날짜 표기를 위한 SimpleDateFormat
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-
-		return new Object[] { carCode.getCarCode(), carCode.getCarName(), carCode.getCarOld(), carCode.getIsAuto(),
-				carCode.getCarSeater(), carCode.getFuelCode().getFuelCode(), userTime, isInsurance, sdf.format(dayStart),
-				sdf.format(dayEnd), finalPrice };
+		
+		return new Object[] { situation, carCode.getCarCode(), carCode.getCarName(), carCode.getCarOld(), carCode.getIsAuto(),
+				carCode.getCarSeater(), carCode.getFuelCode().getFuelCode(), userTime, isInsurance,
+				sdf.format(dayStart), sdf.format(dayEnd), finalPrice };
 	}
 
 }
