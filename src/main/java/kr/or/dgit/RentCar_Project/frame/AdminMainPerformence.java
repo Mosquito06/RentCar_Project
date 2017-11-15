@@ -46,17 +46,17 @@ public class AdminMainPerformence extends JPanel {
 		
 		
 		// 검색조건 선택 패널 리스너
-		PerformenceContent perform = new PerformenceContent();
-		perform.getBtnSearch().addActionListener(new ActionListener() {
+		PerformenceContent performenceContent = new PerformenceContent();
+		performenceContent.getBtnSearch().addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Object item = perform.selectGetComboBox().getSelectedItem();
+				Object item = performenceContent.selectGetComboBox().getSelectedItem();
 				JOptionPane.showMessageDialog(null, item);
 			}
 		});
-		perform.setBounds(12, 22, 349, 354);
-		searchPanel.add(perform);
+		performenceContent.setBounds(12, 22, 349, 354);
+		searchPanel.add(performenceContent);
 				
 		JPanel chartPanel = new JPanel();
 		chartPanel.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.LOWERED, null, null)), "\uACB0\uACFC\uC694\uC57D", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -87,11 +87,6 @@ public class AdminMainPerformence extends JPanel {
 		});
 		btnExit.setBounds(188, 8, 139, 23);
 		chartBtnPanel.add(btnExit);
-		
-		JLabel chartImg = new JLabel("");
-		chartImg.setIcon(new ImageIcon(System.getProperty("user.dir") + "\\Images\\chart2.png"));
-		chartImg.setBounds(12, 0, 348, 334);
-		chartPanel.add(chartImg);
 		
 	}
 }

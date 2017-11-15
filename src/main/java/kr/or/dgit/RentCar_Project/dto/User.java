@@ -113,6 +113,8 @@ public class User {
 	public String toString() {
 		if(comboType==0) {
 			return String.format("%s", userCode);
+		}else if(comboType==1){
+			return String.format("%s", gender);
 		}else {
 			return String.format("User %s, %s, %s, %s, %s, %s, %s, %s, %s", userCode, id, pw, userName,
 					Arrays.toString(userImg), phone, email, gender, grade);

@@ -91,7 +91,7 @@ public class UserMainHistory extends JPanel {
 						selectItem.setUserCode(ComfirmUser);
 						RentService.getInstance().UserHistoryUpdate(selectItem);
 						historyTable.loadDate();
-						JOptionPane.showMessageDialog(null, "예약을 취소하였습니다.");
+						JOptionPane.showMessageDialog(null, "예약을 취소하였습니다.");  
 					}
 				}else {
 					JOptionPane.showMessageDialog(null, "취소할 수 없는 내역입니다");

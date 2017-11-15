@@ -38,6 +38,8 @@ public class CarModel {
 	public String toString() {
 		if(comboType==0) {
 			return String.format("%s", carModelCode);
+		}else if(comboType==1){
+			return String.format("%s", carModel);
 		}else {
 			return String.format("CarModel %s, %s", carModelCode, carModel);
 		}
