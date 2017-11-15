@@ -108,4 +108,11 @@
 		<include refid="deleteSql"/>
 		where use_time = #{userTime} and final_price = #{finalPrice} and car_code = #{carCode.carCode}
 	</delete>
+	
+	<update id="UserHistoryUpdate">
+		<include refid="updateSql"/>
+		where user_code = #{userCode.userCode} 
+		and use_time = #{userTime} and is_insurance = #{isInsurance} 
+		and final_price = #{finalPrice} and car_code = #{carCode.carCode}
+	</update>
 </mapper>

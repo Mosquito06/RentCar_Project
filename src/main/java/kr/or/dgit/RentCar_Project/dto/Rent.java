@@ -84,23 +84,31 @@ public class Rent {
 				finalPrice, carCode);
 	}
 
-	public Object[] toArray() {
+	public Object[] toArray(Date rent) {
 		// 날짜 표기를 위한 SimpleDateFormat
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 		
-		return new Object[] { getSituationTostring(), carCode.getCarCode(), carCode.getCarName(), carCode.getCarOld(), carCode.getIsAuto(),
+		return new Object[] {getSituationTostring(rent), carCode.getCarCode(), carCode.getCarName(), carCode.getCarOld(), carCode.getIsAuto(),
 				carCode.getCarSeater(), carCode.getFuelCode().getFuelCode(), userTime, isInsurance,
 				sdf.format(dayStart), sdf.format(dayEnd), finalPrice };
 	}
 
-	private Object getSituationTostring() {
+	private Object getSituationTostring(Date startDate) {
+		Date CurrentDate = new Date();
+		int CompareDate = startDate.compareTo(CurrentDate);
+		
 		if(situation.equals(Situation.RESERVATION)) {
-			return "예약";
+			if(CompareDate > 0) {
+				return "예약";
+			}else {
+				return "완료";
+			}
 		}else if(situation.equals(Situation.COMPLETION)) {
 			return "완료";
 		}else {
 			return "취소";
 		}
 	}
+	
 
 }
