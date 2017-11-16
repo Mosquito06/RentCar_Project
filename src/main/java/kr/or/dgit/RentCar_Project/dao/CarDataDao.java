@@ -12,4 +12,5 @@ public interface CarDataDao {
 	List<CarData> selectCarDataByAll();
 	List<CarData> selectCarDataByCarModelCode(String carModelCode);
 	List<CarData> selectCarDataByCarDataCodeList(CarData carDataCode);
+	List<CarData> selectCarDataByFuel(String fuel);
 }

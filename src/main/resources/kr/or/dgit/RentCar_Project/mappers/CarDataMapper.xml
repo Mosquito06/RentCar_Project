@@ -87,6 +87,11 @@
 		car_seater, car_model_code, manufacturer_code, fuel_code from car_data
 	</sql>
 	
+	<select id="selectCarDataByFuel" resultMap="CarDataResult">
+		<include refid="selectSql"/>
+		where fuel_code = #{fuelCode}
+	</select>
+	
 	<select id="selectCarDataByCarDataCode" resultMap="CarDataResult">
 		<include refid="selectSql"/>
 		<include refid="wherePrimarySql"/>

@@ -30,6 +30,7 @@ import kr.or.dgit.RentCar_Project.content.ReserveHeaderContent;
 import kr.or.dgit.RentCar_Project.content.ReserveLeftContent;
 import kr.or.dgit.RentCar_Project.dto.CarData;
 import kr.or.dgit.RentCar_Project.dto.CarModel;
+import kr.or.dgit.RentCar_Project.dto.Fuel;
 import kr.or.dgit.RentCar_Project.dto.User;
 import kr.or.dgit.RentCar_Project.service.CarDataService;
 import kr.or.dgit.RentCar_Project.service.CarModelService;
@@ -181,7 +182,16 @@ public class UserMainReserve extends JPanel {
 			}
 		});
 		
-		
+		leftPanel.getComboBoxFuel().getComboBox().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				Fuel fuel= leftPanel.getComboBoxFuel().getComboboxValue();
+				lists=carDataService.selectCarDataByFuel(fuel.getFuelCode());
+				setScrollPaneAddList(scrollPane, header, isInsurance);
+			}
+		});
 		
 		
 		

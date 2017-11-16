@@ -78,6 +78,14 @@ public class CarDataService implements CarDataDao {
 		}
 	}
 
+	@Override
+	public List<CarData> selectCarDataByFuel(String fuel) {
+		try(SqlSession sqlsession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();){
+			carDataDao = sqlsession.getMapper(CarDataDao.class);
+			return carDataDao.selectCarDataByFuel(fuel);
+		}
+	}
+
 
 
 	

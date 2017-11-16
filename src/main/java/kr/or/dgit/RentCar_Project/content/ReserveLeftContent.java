@@ -1,13 +1,10 @@
 package kr.or.dgit.RentCar_Project.content;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import kr.or.dgit.RentCar_Project.component.ComboBoxComponent;
@@ -68,21 +65,11 @@ public class ReserveLeftContent extends JPanel {
 		setLayout(null);
 
 		comboBoxManufacturer = new ComboBoxComponent<>("제조회사  ");
-		comboBoxManufacturer.getComboBox().addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, comboBoxManufacturer.getComboboxValue().getManufacturerCode());
-			}
-		});
 		comboBoxManufacturer.setBounds(45, 59, 191, 36);
 		add(comboBoxManufacturer);
 
 		comboBoxFuel = new ComboBoxComponent<>("연료종류  ");
-		comboBoxFuel.getComboBox().addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, comboBoxFuel.getComboboxValue().getFuelCode());
-
-			}
-		});
+		
 		comboBoxFuel.setBounds(45, 131, 191, 36);
 		add(comboBoxFuel);
 
