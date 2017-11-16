@@ -26,8 +26,8 @@ public class UserHistoryTable extends AbstractTable {
 	@Override
 	protected void setAlignWidth() {
 		setAlign(SwingConstants.CENTER, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
-		setAlign(SwingConstants.RIGHT, 11);
-		setCellwidth(55, 90, 115, 55, 55, 30, 50, 50, 70, 80, 80 ,80);
+		setAlign(SwingConstants.RIGHT, 11, 12);
+		setCellwidth(55, 90, 115, 55, 55, 30, 50, 50, 70, 80, 80 ,80, 80);
 	}
 
 	@Override
@@ -45,7 +45,7 @@ public class UserHistoryTable extends AbstractTable {
 
 	@Override
 	protected Object[] getcolumnNames() {
-		return new String[] {"상태", "차량코드", "차량명", "연식", "오토유무", "인승", "연료타입", "이용시간", "보험 가입 유무", "대여일", "반납일", "최종가격" };
+		return new String[] {"상태", "차량코드", "차량명", "연식", "오토유무", "인승", "연료타입", "이용시간", "보험 가입 유무", "대여일", "반납일", "할인요금", "최종가격" };
 	}
 
 	@Override

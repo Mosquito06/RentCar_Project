@@ -20,6 +20,7 @@
 		<result property="isInsurance" column="is_insurance"/>
 		<result property="dayStart" column="day_start"/>
 		<result property="dayEnd" column="day_end"/>
+		<result property="discountPrice" column="discount_Price"/>
 		<result property="finalPrice" column="final_price"/>
 		<association property="carCode" resultMap="kr.or.dgit.RentCar_Project.dao.CarDataDao.RentJoinCarData"/>
 	</resultMap>
@@ -62,15 +63,15 @@
 	</sql>
 	
 	<sql id="selectSql">
-		select situation, user_code, use_time, is_insurance, day_start, day_end, final_price, car_code from rent
+		select situation, user_code, use_time, is_insurance, day_start, day_end, discount_Price, final_price, car_code from rent
 	</sql>
 	<sql id="insertSql">
-		insert into rent(situation, user_code, use_time, is_insurance, day_start, day_end, final_price, car_code)
-		values(#{situation}, #{userCode.userCode}, #{userTime}, #{isInsurance}, #{dayStart}, #{dayEnd}, #{finalPrice}, #{carCode.carCode})
+		insert into rent(situation, user_code, use_time, is_insurance, day_start, day_end, discount_Price, final_price, car_code)
+		values(#{situation}, #{userCode.userCode}, #{userTime}, #{isInsurance}, #{dayStart}, #{dayEnd}, #{discountPrice}, #{finalPrice}, #{carCode.carCode})
 	</sql>
 	<sql id="updateSql">
 		update rent	set situation = #{situation}, user_code= #{userCode.userCode}, use_time= #{userTime}, is_insurance= #{isInsurance}, 
-		day_start= #{dayStart}, day_end= #{dayEnd}, final_price= #{finalPrice}, car_code = #{carCode.carCode}
+		day_start= #{dayStart}, day_end= #{dayEnd}, discount_Price= #{discountPrice}, final_price= #{finalPrice}, car_code = #{carCode.carCode}
 	</sql>
 	<sql id="deleteSql">
 		delete from rent	
@@ -101,7 +102,7 @@
 	
 	<select id="selectRentJoinCarData" parameterType="Rent" resultMap="RentJoinCarDataResult">
 		select situation, car_data.car_code, car_name, car_old, is_auto, car_seater, fuel_code, use_time, 
-		is_insurance, day_start, day_end, final_price from rent join car_data on rent.car_code = car_data.car_code
+		is_insurance, day_start, day_end, discount_Price, final_price from rent join car_data on rent.car_code = car_data.car_code
 		where user_code = #{userCode.userCode} and day_start &gt;= #{dayStart} and day_end &lt;= #{dayEnd} order by day_start
 	</select>
 	

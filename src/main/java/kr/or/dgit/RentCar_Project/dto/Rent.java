@@ -119,7 +119,7 @@ public class Rent {
 
 		return new Object[] { getSituationTostring(rent), carCode.getCarCode(), carCode.getCarName(),
 				carCode.getCarOld(), carCode.getIsAuto(), carCode.getCarSeater(), carCode.getFuelCode().getFuelCode(),
-				userTime, isInsurance, sdf.format(dayStart), sdf.format(dayEnd), DeciFormat.format(finalPrice) };
+				userTime, isInsurance, sdf.format(dayStart), sdf.format(dayEnd),  DeciFormat.format(discountPrice), DeciFormat.format(finalPrice) };
 	}
 
 	private Object getSituationTostring(Date endDate) {
