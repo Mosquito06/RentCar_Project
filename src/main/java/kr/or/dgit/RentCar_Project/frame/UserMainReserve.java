@@ -187,8 +187,16 @@ public class UserMainReserve extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				Fuel fuel= leftPanel.getComboBoxFuel().getComboboxValue();
-				lists=carDataService.selectCarDataByFuel(fuel.getFuelCode());
+				String fuelCode= leftPanel.getComboBoxFuel().getComboboxValue().getFuelCode();
+				int s=0;
+				for(int i=0;i<lists.size();i++) {
+					if(lists.get(i).getFuelCode().getFuelCode().equals(fuelCode)) {
+						s++;
+					}
+					
+				}
+				JOptionPane.showMessageDialog(null, s);
+				JOptionPane.showMessageDialog(null, lists.toString());
 				setScrollPaneAddList(scrollPane, header, isInsurance);
 			}
 		});
