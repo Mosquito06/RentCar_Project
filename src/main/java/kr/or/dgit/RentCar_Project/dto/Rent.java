@@ -1,9 +1,8 @@
 package kr.or.dgit.RentCar_Project.dto;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import javax.swing.JOptionPane;
 
 public class Rent {
 	private Situation situation;
@@ -110,10 +109,11 @@ public class Rent {
 	public Object[] toArray(Date rent) {
 		// 날짜 표기를 위한 SimpleDateFormat
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+		DecimalFormat DeciFormat = new DecimalFormat("#,##0");
 		
 		return new Object[] {getSituationTostring(rent), carCode.getCarCode(), carCode.getCarName(), carCode.getCarOld(), carCode.getIsAuto(),
 				carCode.getCarSeater(), carCode.getFuelCode().getFuelCode(), userTime, isInsurance,
-				sdf.format(dayStart), sdf.format(dayEnd), finalPrice };
+				sdf.format(dayStart), sdf.format(dayEnd), DeciFormat.format(finalPrice) };
 	}
 
 	private Object getSituationTostring(Date endDate) {
