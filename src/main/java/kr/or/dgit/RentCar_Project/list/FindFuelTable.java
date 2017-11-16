@@ -7,8 +7,14 @@ import javax.swing.SwingConstants;
 import kr.or.dgit.RentCar_Project.dto.Fuel;
 import kr.or.dgit.RentCar_Project.service.FuelService;
 
-public class FuelTable extends AbstractTable {
+@SuppressWarnings("serial")
+public class FindFuelTable extends AbstractTable {
+	private Fuel fuel;
 	
+	public void setFuel(Fuel fuel) {
+		this.fuel = fuel;
+	}
+
 	@Override
 	protected void setAlignWidth() {
 		setAlign(SwingConstants.CENTER, 0,1);
@@ -16,7 +22,8 @@ public class FuelTable extends AbstractTable {
 
 	@Override
 	protected Object[][] getData() {
-		List<Fuel> lists = FuelService.getInstance().selectFuelByAll();
+		
+		List<Fuel> lists = FuelService.getInstance().FindFuelByFuelCode(fuel);
 		Object[][] datas = new Object[lists.size()][];
 		
 		for(int i=0;i<lists.size();i++) {

@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 
 import kr.or.dgit.RentCar_Project.component.TextFieldComponent;
 
+@SuppressWarnings("serial")
 public class UserGradeContent extends JPanel {
 	
 	private TextFieldComponent userGrade;
@@ -51,6 +52,14 @@ public class UserGradeContent extends JPanel {
 		add(btnCancel);
 	}
 	
+	public TextFieldComponent getUserGrade() {
+		return userGrade;
+	}
+
+	public TextFieldComponent getDiscount() {
+		return discount;
+	}
+
 	public void setUserGradeTextValueClear() {
 		userGrade.setTextValue("");
 		discount.setTextValue("");

@@ -70,4 +70,12 @@ public class UserGradeService implements UserGradeDao {
 		}
 	}
 
+	@Override
+	public List<UserGrade> findUserGradeByGrade(UserGrade userGradeCode) {
+		try(SqlSession sqlsession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();){
+			userGradeDao = sqlsession.getMapper(UserGradeDao.class);
+			return userGradeDao.findUserGradeByGrade(userGradeCode);
+		}
+	}
+
 }

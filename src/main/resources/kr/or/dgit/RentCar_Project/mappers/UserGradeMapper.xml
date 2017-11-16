@@ -51,6 +51,11 @@
 		<include refid="selectSql"/>
 	</select>
 	
+	<select id="findUserGradeByGrade" resultMap="UserGradeResult">
+		<include refid="selectSql"/>
+		<include refid="wherePrimarySql"/>
+	</select>
+	
 	<insert id="insertUserGrade" parameterType="UserGrade">
 		<include refid="insertSql"/>
 	</insert>

@@ -11,4 +11,5 @@ public interface UserGradeDao {
 	void deleteUserGrade(UserGrade userGradeCode);
 	UserGrade selectUserGradeByGrade(UserGrade userGradeCode);
 	List<UserGrade> selectUserGradeByAll();
+	List<UserGrade> findUserGradeByGrade(UserGrade userGradeCode);
 }

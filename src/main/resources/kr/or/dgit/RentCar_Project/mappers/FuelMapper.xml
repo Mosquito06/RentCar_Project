@@ -57,6 +57,11 @@
 		<include refid="selectSql"/>
 	</select>
 	
+	<select id="FindFuelByFuelCode" resultMap="FuelResult">
+		<include refid="selectSql"/>
+		<include refid="wherePrimarySql"/>	
+	</select>
+	
 	<insert id="insertFuel" parameterType="Fuel">
 		<include refid="insertSql"/>
 	</insert>

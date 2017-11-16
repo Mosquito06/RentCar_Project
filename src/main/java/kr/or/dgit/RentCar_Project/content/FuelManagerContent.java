@@ -51,6 +51,14 @@ public class FuelManagerContent extends JPanel {
 		add(btnCancel);
 	}
 	
+	public TextFieldComponent getFuelCode() {
+		return fuelCode;
+	}
+
+	public TextFieldComponent getFuelType() {
+		return fuelType;
+	}
+
 	public void setFuelTextValueClear() {
 		fuelCode.setTextValue("");
 		fuelType.setTextValue("");
