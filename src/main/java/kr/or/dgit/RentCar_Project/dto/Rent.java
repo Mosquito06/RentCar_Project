@@ -127,7 +127,7 @@ public class Rent {
 	public Object[] PerformenceToTaltoArray() {
 		DecimalFormat DeciFormat = new DecimalFormat("#,##0");
 		
-		return new Object[] {carCode.getCarModelCode().getCarModel(), carCode.getManufacturerCode().getManufacturerName(),carCode.getCarName(), userTime, DeciFormat.format(discountPrice), DeciFormat.format(finalPrice)};
+		return new Object[] {carCode.getCarModelCode().getCarModel(), "-", "-", userTime, DeciFormat.format(discountPrice), DeciFormat.format(finalPrice)};
 	}
 	
 	private Object getSituationTostring(Date endDate) {
