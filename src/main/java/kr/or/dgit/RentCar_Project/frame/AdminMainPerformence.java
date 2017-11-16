@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -16,8 +17,14 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
+import com.bitagentur.renderer.JChartLibPanel;
+
+import kr.or.dgit.RentCar_Project.chart.AbstractPieChart;
+import kr.or.dgit.RentCar_Project.chart.AdminPerformencePieChart;
 import kr.or.dgit.RentCar_Project.content.PerformenceContent;
+import kr.or.dgit.RentCar_Project.dto.Rent;
 import kr.or.dgit.RentCar_Project.list.AdminPerformenceTable;
+import kr.or.dgit.RentCar_Project.service.RentService;
 
 @SuppressWarnings("serial")
 public class AdminMainPerformence extends JPanel {
@@ -27,7 +34,7 @@ public class AdminMainPerformence extends JPanel {
 		
 		AdminPerformenceTable adminTable = new AdminPerformenceTable();
 		adminTable.setBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.LOWERED, null, null)));
-		adminTable.setBounds(0, 80, 595, 671);
+		adminTable.setBounds(0, 80, 595, 293);
 		adminTable.loadDate();
 		add(adminTable);
 		
@@ -55,23 +62,29 @@ public class AdminMainPerformence extends JPanel {
 		});
 		performenceContent.setBounds(12, 22, 349, 354);
 		searchPanel.add(performenceContent);
+		
+		List<Rent> items = RentService.getInstance().selectPerformenceTotal();
+		AbstractPieChart<Rent> abstractPieChahrt = new AdminPerformencePieChart("성과분석", "", "", items);
+		JChartLibPanel jChart = abstractPieChahrt.getPieChart();
 				
 		JPanel chartPanel = new JPanel();
+		chartPanel.setLayout(new BorderLayout(0, 0));
 		chartPanel.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.LOWERED, null, null)), "\uACB0\uACFC\uC694\uC57D", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		chartPanel.setBounds(601, 380, 372, 371);
+		chartPanel.setBounds(0, 383, 595, 358);
+		chartPanel.add(jChart, BorderLayout.CENTER);
 		add(chartPanel);
-		chartPanel.setLayout(null);
 		
 		JPanel chartBtnPanel = new JPanel();
-		chartBtnPanel.setBounds(12, 331, 348, 37);
-		chartPanel.add(chartBtnPanel);
+		chartBtnPanel.setBounds(607, 717, 357, 34);
+		add(chartBtnPanel);
 		chartBtnPanel.setLayout(null);
 		
 		JButton btnSpecific = new JButton("자세히 보기");
-		btnSpecific.setBounds(25, 8, 139, 23);
+		btnSpecific.setBounds(9, 7, 163, 23);
 		chartBtnPanel.add(btnSpecific);
 		
 		JButton btnExit = new JButton("나가기");
+		btnExit.setBounds(185, 7, 163, 23);
 		btnExit.addActionListener(new ActionListener() {
 			
 			@Override
@@ -83,7 +96,6 @@ public class AdminMainPerformence extends JPanel {
 				
 			}
 		});
-		btnExit.setBounds(188, 8, 139, 23);
 		chartBtnPanel.add(btnExit);
 		
 	}
