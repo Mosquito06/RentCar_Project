@@ -119,8 +119,8 @@ public class Rent {
 		DecimalFormat DeciFormat = new DecimalFormat("#,##0");
 
 		return new Object[] { getSituationTostring(rent), carCode.getCarCode(), carCode.getCarName(),
-				carCode.getCarOld(), carCode.getIsAuto(), carCode.getCarSeater(), carCode.getFuelCode().getFuelCode(),
-				userTime, isInsurance, sdf.format(dayStart), sdf.format(dayEnd),  DeciFormat.format(discountPrice), DeciFormat.format(finalPrice) };
+				carCode.getCarOld(), carCode.getIsAuto(), carCode.getCarSeater(), getFuelTostring(),
+				userTime, getIsInsuranceTostring(), sdf.format(dayStart), sdf.format(dayEnd),  DeciFormat.format(discountPrice), DeciFormat.format(finalPrice) };
 	}
 
 	// 성과관리 토탈 ToArray
@@ -147,6 +147,27 @@ public class Rent {
 		}
 	}
 
+	private Object getIsInsuranceTostring() {
+		if(isInsurance.equals(IsInsurance.TRUE)) {
+			return "가입";
+		}else {
+			return "미가입";
+		}
+	}
 	
+	private Object getFuelTostring() {
+		String FuelType = carCode.getFuelCode().getFuelCode();
+		
+		if(FuelType.equals("D")) {
+			return "경유";
+		}else if(FuelType.equals("EV")) {
+			return "전기";
+		}else if(FuelType.equals("G")){
+			return "휘발유";
+		}else {
+			return "LPG";
+		}
+	}
 
+	
 }

@@ -58,7 +58,7 @@ public class UserHistoryTable extends AbstractTable {
 		String sSituation = (String) table.getValueAt(selectIndex, 0);
 		String carCode= (String) table.getValueAt(selectIndex, 1);
 		String userTime = (String) table.getValueAt(selectIndex, 7);
-		IsInsurance sIsInsurance = (IsInsurance) table.getValueAt(selectIndex, 8);
+		String sIsInsurance = (String) table.getValueAt(selectIndex, 8);
 		String sDate = (String) table.getValueAt(selectIndex, 9);
 		String eDate = (String) table.getValueAt(selectIndex, 10);
 		String discountPrice = (String) table.getValueAt(selectIndex, 11);
@@ -81,12 +81,20 @@ public class UserHistoryTable extends AbstractTable {
 		selectRent.setCarCode(carDate);
 		selectRent.setDiscountPrice(Integer.parseInt(discountPrice.replaceAll(",", "")));
 		selectRent.setFinalPrice(Integer.parseInt(finalPrice.replaceAll(",", "")));
-		selectRent.setIsInsurance(sIsInsurance);
+		selectRent.setIsInsurance(getIsInsurance(sIsInsurance));
 		selectRent.setUserTime(userTime);
 		selectRent.setDayStart(dayStart.getTime());
 		selectRent.setDayEnd(dayEnd.getTime());
 		
 		return selectRent;
+	}
+
+	private IsInsurance getIsInsurance(String sIsInsurance) {
+		if(sIsInsurance.equals("가입")) {
+			return IsInsurance.TRUE;
+		}else {
+			return IsInsurance.FALSE;
+		}
 	}
 
 	private Situation getSituation(String sSituation) {
