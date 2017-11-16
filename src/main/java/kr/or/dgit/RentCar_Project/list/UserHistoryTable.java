@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
 import kr.or.dgit.RentCar_Project.dto.CarData;
@@ -27,7 +28,7 @@ public class UserHistoryTable extends AbstractTable {
 	protected void setAlignWidth() {
 		setAlign(SwingConstants.CENTER, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 		setAlign(SwingConstants.RIGHT, 11, 12);
-		setCellwidth(55, 90, 115, 55, 55, 30, 50, 50, 70, 80, 80 ,80, 80);
+		setCellwidth(55, 90, 115, 45, 55, 30, 50, 50, 80, 80, 80 ,80, 80);
 	}
 
 	@Override
@@ -60,16 +61,17 @@ public class UserHistoryTable extends AbstractTable {
 		IsInsurance sIsInsurance = (IsInsurance) table.getValueAt(selectIndex, 8);
 		String sDate = (String) table.getValueAt(selectIndex, 9);
 		String eDate = (String) table.getValueAt(selectIndex, 10);
-		int finalPrice = (int) table.getValueAt(selectIndex, 11);
-		
+		String discountPrice = (String) table.getValueAt(selectIndex, 11);
+		String finalPrice = (String) table.getValueAt(selectIndex, 12);
+				
 		String[] selectSDate = sDate.split("/");
-		String[] selectEate = eDate.split("/");
+		String[] selectEDate = eDate.split("/");
 		
 		Calendar dayStart = GregorianCalendar.getInstance();
 		dayStart.set(Integer.parseInt(selectSDate[0]), Integer.parseInt(selectSDate[1])-1, Integer.parseInt(selectSDate[2]));
 		
 		Calendar dayEnd = GregorianCalendar.getInstance();
-		dayStart.set(Integer.parseInt(selectEate[0]), Integer.parseInt(selectEate[1])-1, Integer.parseInt(selectEate[2]));
+		dayEnd.set(Integer.parseInt(selectEDate[0]), Integer.parseInt(selectEDate[1])-1, Integer.parseInt(selectEDate[2]));
 		
 		CarData carDate = new CarData();
 		carDate.setCarCode(carCode);
@@ -77,7 +79,8 @@ public class UserHistoryTable extends AbstractTable {
 		Rent selectRent = new Rent();
 		selectRent.setSituation(getSituation(sSituation));
 		selectRent.setCarCode(carDate);
-		selectRent.setFinalPrice(finalPrice);
+		selectRent.setDiscountPrice(Integer.parseInt(discountPrice.replaceAll(",", "")));
+		selectRent.setFinalPrice(Integer.parseInt(finalPrice.replaceAll(",", "")));
 		selectRent.setIsInsurance(sIsInsurance);
 		selectRent.setUserTime(userTime);
 		selectRent.setDayStart(dayStart.getTime());
@@ -87,9 +90,9 @@ public class UserHistoryTable extends AbstractTable {
 	}
 
 	private Situation getSituation(String sSituation) {
-		if(sSituation.equals(Situation.RESERVATION)) {
+		if(sSituation.equals("예약")) {
 			return Situation.RESERVATION;
-		}else if(sSituation.equals(Situation.COMPLETION)) {
+		}else if(sSituation.equals("완료")) {
 			return Situation.COMPLETION;
 		}else {
 			return Situation.CANCELLATION;
