@@ -38,6 +38,14 @@ public class RadioComponent extends JPanel {
 		group.add(rdbtnRight);
 		
 	}
+	
+	
+	
+	public ButtonGroup getGroup() {
+		return group;
+	}
+
+
 
 	public JRadioButton getRdbtnLeft() {
 		return rdbtnLeft;

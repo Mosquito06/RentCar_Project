@@ -7,6 +7,8 @@ import java.awt.GridLayout;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -40,14 +42,15 @@ public class UserMainReserve extends JPanel {
 	private List<CarData> lists;
 	private String sDay;
 	private String fDay;
-
+	private ReserveAddCarContent addCar;
+	private Boolean isInsurance;
 
 	public void setComfirmUser(User comfirmUser) {
 		this.comfirmUser = comfirmUser;
 	}
 
 	public UserMainReserve() {
-
+		isInsurance=true;
 		setBounds(new Rectangle(0, 0, 500, 500));
 		setLayout(null);
 
@@ -99,7 +102,7 @@ public class UserMainReserve extends JPanel {
 				}
 				
 				lists = carDataService.selectCarDataByAll();
-				setScrollPaneAddList(scrollPane, header);
+				setScrollPaneAddList(scrollPane, header,isInsurance);
 			}
 		});
 
@@ -118,7 +121,7 @@ public class UserMainReserve extends JPanel {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					lists = carDataService.selectCarDataByCarModelCode(carModelCode);
-					setScrollPaneAddList(scrollPane, header);
+					setScrollPaneAddList(scrollPane, header,isInsurance);
 				}
 			});
 		}
@@ -136,9 +139,25 @@ public class UserMainReserve extends JPanel {
 				frame.setVisible(true);
 			}
 		});
+		
+		leftPanel.getIsInsurance().getRdbtnLeft().addItemListener(new ItemListener() {
+			
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				if(e.getStateChange()==1) {
+					isInsurance=true;
+					setScrollPaneAddList(scrollPane, header,isInsurance);
+				}else {
+					isInsurance=false;
+					setScrollPaneAddList(scrollPane, header,isInsurance);
+				}
+
+			}
+		});
+		
 	}
 
-	private void setScrollPaneAddList(JScrollPane scrollPane, ReserveHeaderContent header) {
+	private void setScrollPaneAddList(JScrollPane scrollPane, ReserveHeaderContent header,Boolean isInsurance) {
 		int totalTime = Integer.parseInt(header.getTotalTimePanel().getTextValue());
 		if (totalTime == 0) {
 			JOptionPane.showMessageDialog(null, "날짜를 입력하세요");
@@ -147,8 +166,8 @@ public class UserMainReserve extends JPanel {
 		scrollPane.getViewport().removeAll();
 		sDay = header.getStartPanel().getTextValue();
 		fDay = header.getFinalPanel().getTextValue();
-		ReserveAddCarContent addCar = new ReserveAddCarContent(totalTime, comfirmUser, lists,
-				sDay,fDay);
+		addCar = new ReserveAddCarContent(totalTime, comfirmUser, lists,
+				sDay,fDay,isInsurance);
 		scrollPane.setViewportView(addCar);
 		addCar.setLayout(new GridLayout(0, 1, 0, 0));
 	}

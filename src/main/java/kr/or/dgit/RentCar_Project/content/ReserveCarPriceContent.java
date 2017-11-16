@@ -62,7 +62,7 @@ public class ReserveCarPriceContent extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				
 				ReserveCheckFram checkFram = new ReserveCheckFram(name, img, old, seater, auto,fuel,sDay,fDay);
-				if(insurance.getTextField().getText().equals("0")) {
+				if(insurance.getTextField().getText().equals("0원")) {
 					checkFram.getTfInsurance().setTextValue("X");
 					isInsurance = IsInsurance.FALSE;
 				}else {

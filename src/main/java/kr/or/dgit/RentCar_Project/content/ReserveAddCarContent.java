@@ -17,7 +17,9 @@ import kr.or.dgit.RentCar_Project.service.UserGradeService;
 @SuppressWarnings("serial")
 public class ReserveAddCarContent extends JPanel {
 
-	public ReserveAddCarContent(int time, User comfirmUser, List<CarData> lists,String sDay,String fDay) {
+	private int iPrice;
+
+	public ReserveAddCarContent(int time, User comfirmUser, List<CarData> lists,String sDay,String fDay,Boolean isInsurance) {
 		setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
 		UserGradeService userGradeService = UserGradeService.getInstance();
@@ -29,7 +31,12 @@ public class ReserveAddCarContent extends JPanel {
 			RentalPrice rentalPrice = rentalPriceService.selectRentalPriceByCarCodeString(carCode.getCarCode());
 			String carName = carCode.getCarName();
 			int price = rentalPrice.getBasicPrice();
-			int iPrice = rentalPrice.getInsurance();
+			if(isInsurance) {
+				iPrice = rentalPrice.getInsurance();
+			}else {
+				iPrice =0;
+			}
+			
 			int btPrice = rentalPrice.getBasicTimePrice();
 			int otPrice = rentalPrice.getOverPrice();
 			int bTime = rentalPrice.getBasicTime();

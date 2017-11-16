@@ -6,6 +6,8 @@ import java.util.Vector;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import kr.or.dgit.RentCar_Project.component.ComboBoxComponent;
 import kr.or.dgit.RentCar_Project.component.RadioComponent;
@@ -16,6 +18,8 @@ import kr.or.dgit.RentCar_Project.service.CarDataService;
 import kr.or.dgit.RentCar_Project.service.FuelService;
 import kr.or.dgit.RentCar_Project.service.ManufacturerService;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 
@@ -28,6 +32,11 @@ public class ReserveLeftContent extends JPanel {
 	private ComboBoxComponent<CarData> comboBoxSeater;
 	private ComboBoxComponent<CarData> comboBoxCarName;
 	private JButton btnExit;
+	private RadioComponent isInsurance;
+
+	public RadioComponent getIsInsurance() {
+		return isInsurance;
+	}
 
 	public JButton getBtnExit() {
 		return btnExit;
@@ -68,13 +77,13 @@ public class ReserveLeftContent extends JPanel {
 		comboBoxCarName.setBounds(45, 369, 191, 36);
 		add(comboBoxCarName);
 
-		RadioComponent panel_2 = new RadioComponent("변속기", "오토", "수동");
-		panel_2.setBounds(40, 435, 205, 70);
-		add(panel_2);
+		RadioComponent isAuto = new RadioComponent("변속기", "오토", "수동");
+		isAuto.setBounds(40, 435, 205, 70);
+		add(isAuto);
 
-		RadioComponent radioComponent = new RadioComponent("자차 보험", "포함", "비포함");
-		radioComponent.setBounds(40, 506, 205, 70);
-		add(radioComponent);
+		isInsurance = new RadioComponent("자차 보험", "포함", "비포함");
+		isInsurance.setBounds(40, 506, 205, 70);
+		add(isInsurance);
 
 		btnExit = new JButton("나가기");
 		btnExit.setIcon(new ImageIcon(System.getProperty("user.dir")+"\\images\\esc.png"));
