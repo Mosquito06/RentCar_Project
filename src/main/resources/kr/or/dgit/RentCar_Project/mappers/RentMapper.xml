@@ -9,6 +9,7 @@
 		<result property="isInsurance" column="is_insurance"/>
 		<result property="dayStart" column="day_start"/>
 		<result property="dayEnd" column="day_end"/>
+		<result property="discountPrice" column="discount_Price"/>
 		<result property="finalPrice" column="final_price"/>
 		<result property="carCode.carCode" column="car_code"/>
 	</resultMap>

@@ -83,6 +83,7 @@ CREATE TABLE car_project.rent (
 	is_insurance VARCHAR(11),
 	day_start   DATE,
 	day_end     DATE,
+	discount_price INT(20),
 	final_price INT(20),
 	car_code    VARCHAR(11),
 	foreign key(user_code) references user(user_code),
