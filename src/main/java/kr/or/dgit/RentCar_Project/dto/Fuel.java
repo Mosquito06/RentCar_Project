@@ -45,6 +45,10 @@ public class Fuel {
 		}
 		
 	}
+
+	public Object[] toArray() {
+		return new Object[] {fuelCode,fuelType};
+	}
 	
 	
 

@@ -20,6 +20,7 @@ import kr.or.dgit.RentCar_Project.content.ClientManagerContent;
 import kr.or.dgit.RentCar_Project.dto.User;
 import kr.or.dgit.RentCar_Project.list.ClientListTable;
 import kr.or.dgit.RentCar_Project.service.UserService;
+import javax.swing.SwingConstants;
 
 @SuppressWarnings("serial")
 public class AdminMainClientManager extends JPanel {
@@ -52,6 +53,11 @@ public class AdminMainClientManager extends JPanel {
 		
 		JPanel emptyPanel4 = new JPanel();
 		clientListPanel.add(emptyPanel4, BorderLayout.NORTH);
+		emptyPanel4.setLayout(new BorderLayout(5, 5));
+		
+		JButton bntAll = new JButton("전체보기");
+		bntAll.setHorizontalAlignment(SwingConstants.RIGHT);
+		emptyPanel4.add(bntAll, BorderLayout.EAST);
 		
 		JPanel emptyPanel5 = new JPanel();
 		clientListPanel.add(emptyPanel5, BorderLayout.WEST);
@@ -61,7 +67,7 @@ public class AdminMainClientManager extends JPanel {
 		
 		JPanel panel = new JPanel();
 		clientListPanel.add(panel, BorderLayout.CENTER);
-		panel.setLayout(new BorderLayout(0, 0));
+		panel.setLayout(new BorderLayout(5, 5));
 		clientListTable = new ClientListTable();
 		clientListTable.loadDate();
 		panel.add(clientListTable,BorderLayout.CENTER);

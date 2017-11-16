@@ -36,6 +36,10 @@ public class UserGrade {
 		}
 	}
 
+	public Object[] toArray() {
+		return new Object[] {grade,discount};
+	}
+
 	
 
 }

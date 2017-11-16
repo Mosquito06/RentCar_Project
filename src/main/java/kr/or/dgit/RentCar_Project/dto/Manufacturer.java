@@ -45,5 +45,9 @@ public class Manufacturer {
 		}
 	}
 
+	public Object[] toArray() {
+		return new Object[] {manufacturerCode,manufacturerName};
+	}
+
 
 }
