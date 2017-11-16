@@ -86,7 +86,7 @@ public class ReserveCarPriceContent extends JPanel {
 						}
 						
 						Rent rent = new Rent(Situation.RESERVATION,comfirmUser, String.valueOf(time),
-								isInsurance, dayStart, dayEnd, Integer.parseInt(fPrice.replace("원", "")), carCode);
+								isInsurance, dayStart, dayEnd,Integer.parseInt(dPrice.replace("원", "")), Integer.parseInt(fPrice.replace("원", "")), carCode);
 						rentService.insertRent(rent);
 						int yes = JOptionPane.showOptionDialog(null, comfirmUser.getUserName()+" 님   "+sDay+"~"+fDay+" 예약완료", "예약완료",
 								JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null,null);

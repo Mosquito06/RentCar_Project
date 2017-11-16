@@ -21,6 +21,7 @@ import javax.swing.event.DocumentListener;
 
 import kr.or.dgit.RentCar_Project.component.TextFieldComponent;
 import kr.or.dgit.RentCar_Project.frame.CalendarFrame;
+import javax.swing.ImageIcon;
 
 @SuppressWarnings("serial")
 public class ReserveHeaderContent extends JPanel {
@@ -87,9 +88,10 @@ public class ReserveHeaderContent extends JPanel {
 		lblNewLabel.setBounds(765, 31, 68, 35);
 		add(lblNewLabel);
 
-		btnSearch = new JButton("차량검색");
+		btnSearch = new JButton("전체검색");
+		btnSearch.setIcon(new ImageIcon(System.getProperty("user.dir") + "\\images\\s.png"));
 
-		btnSearch.setBounds(833, 22, 122, 41);
+		btnSearch.setBounds(833, 22, 117, 41);
 		add(btnSearch);
 
 		finalPanel = new TextFieldComponent("반납일");

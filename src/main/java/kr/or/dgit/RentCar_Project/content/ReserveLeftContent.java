@@ -17,6 +17,7 @@ import kr.or.dgit.RentCar_Project.service.FuelService;
 import kr.or.dgit.RentCar_Project.service.ManufacturerService;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
 
 @SuppressWarnings("serial")
 public class ReserveLeftContent extends JPanel {
@@ -76,8 +77,14 @@ public class ReserveLeftContent extends JPanel {
 		add(radioComponent);
 
 		btnExit = new JButton("나가기");
-		btnExit.setBounds(62, 594, 167, 53);
+		btnExit.setIcon(new ImageIcon(System.getProperty("user.dir")+"\\images\\esc.png"));
+		btnExit.setBounds(108, 598, 137, 53);
 		add(btnExit);
+		
+		JButton btnNewButton = new JButton("");
+		btnNewButton.setIcon(new ImageIcon(System.getProperty("user.dir")+"\\images\\reset.png"));
+		btnNewButton.setBounds(40, 598, 56, 53);
+		add(btnNewButton);
 		setManufacturerBoxModel();
 		setCarDataNameBoxModel();
 		setFuelBoxModel();
