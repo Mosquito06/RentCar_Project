@@ -79,4 +79,8 @@ public class RentalPrice {
 				carCode, basicPrice, basicTime, basicTimePrice, overPrice, insurance);
 	}
 
+	public Object[] toArray() {
+		return new Object[] {carCode.getCarCode(),basicPrice,basicTime,basicTimePrice,overPrice,insurance};
+	}
+
 }

@@ -55,6 +55,8 @@ public class AdminMainCarManager extends JPanel {
 	private JButton btnNewButton;
 	private ComboBoxComponent<CarData> searchPanel;
 	private JButton btnChart;
+	private String[] details = {"선택하세요","대여단가 관리","차종&제조회사 관리","연료&고객등급 관리"};
+	private JButton btnAll;
 	
 	public AdminMainCarManager() {
 		setBounds(0, 0, 974, 751);
@@ -146,30 +148,9 @@ public class AdminMainCarManager extends JPanel {
 		JButton btnDetail = new JButton("세부사항관리");
 		btnDetail.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String[] details = {"선택하세요","대여단가 관리","차종&제조회사 관리","연료&고객등급 관리"};
 				Object selected = JOptionPane.showInputDialog(null, "세부관리 사항을 선택하세요", "세부관리", JOptionPane.QUESTION_MESSAGE, null, details, details[0]);
-				if(selected==details[0]) {
-					
-						JOptionPane.showMessageDialog(null, "세부사향을 선택하세요");
-						JOptionPane.showInputDialog(null, "세부관리 사항을 선택하세요", "세부관리", JOptionPane.QUESTION_MESSAGE, null, details, details[0]);
-					
-					
-				}else if(selected==details[1]) {
-					JFrame frame = AdminMain.getInstance();
-					frame.getContentPane().removeAll();
-					frame.getContentPane().add(new AdminMainCarManagerRentalPrice(), BorderLayout.CENTER);
-					frame.setVisible(true);
-				}else if(selected==details[2]) {
-					JFrame frame = AdminMain.getInstance();
-					frame.getContentPane().removeAll();
-					frame.getContentPane().add(new AdminMainCarManagerCarModel_Manufacturer(), BorderLayout.CENTER);
-					frame.setVisible(true);
-				}else {
-					JFrame frame = AdminMain.getInstance();
-					frame.getContentPane().removeAll();
-					frame.getContentPane().add(new AdminMainCarManagerFuel_UserGrade(), BorderLayout.CENTER);
-					frame.setVisible(true);
-				}
+				openDetailFrame(selected);
+				
 			}
 		});
 		btnDetail.setBounds(783, 20, 144, 23);
@@ -192,6 +173,13 @@ public class AdminMainCarManager extends JPanel {
 		listTablePanel.setLayout(new BorderLayout(0, 0));
 		
 		btnNewButton = new JButton("검색");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CarData carCode = searchPanel.getComboboxValue();
+				CarData lists = CarDataService.getInstance().selectCarDataByCarDataCode(carCode);
+				
+			}
+		});
 		btnNewButton.setBounds(600, 21, 97, 23);
 		carListPanel.add(btnNewButton);
 		
@@ -202,6 +190,10 @@ public class AdminMainCarManager extends JPanel {
 		btnChart = new JButton("차트보기");
 		btnChart.setBounds(841, 21, 97, 23);
 		carListPanel.add(btnChart);
+		
+		btnAll = new JButton("전체보기");
+		btnAll.setBounds(744, 21, 97, 23);
+		carListPanel.add(btnAll);
 		setSearchCarCodeComboModel();
 		setCarModelComboModel();
 		setManufacturerComboModel();
@@ -262,5 +254,29 @@ public class AdminMainCarManager extends JPanel {
 		cmCode.setComboBoxModelClear();
 		mfCode.setComboBoxModelClear();
 		fCode.setComboBoxModelClear();
+	}
+	private void openDetailFrame(Object selected) {
+		if(selected==details[0]){
+			JOptionPane.showMessageDialog(null, "세부사향을 선택하세요");
+			return;
+		}else if(selected==details[1]) {
+			JFrame frame = AdminMain.getInstance();
+			frame.getContentPane().removeAll();
+			frame.getContentPane().add(new AdminMainCarManagerRentalPrice(), BorderLayout.CENTER);
+			frame.setVisible(true);
+		}else if(selected==details[2]) {
+			JFrame frame = AdminMain.getInstance();
+			frame.getContentPane().removeAll();
+			frame.getContentPane().add(new AdminMainCarManagerCarModel_Manufacturer(), BorderLayout.CENTER);
+			frame.setVisible(true);
+		}else if(selected==details[3]){
+			JFrame frame = AdminMain.getInstance();
+			frame.getContentPane().removeAll();
+			frame.getContentPane().add(new AdminMainCarManagerFuel_UserGrade(), BorderLayout.CENTER);
+			frame.setVisible(true);
+		}else {
+			return;
+		}
+		
 	}
 }

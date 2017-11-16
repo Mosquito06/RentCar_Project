@@ -13,4 +13,5 @@ public interface RentDao {
 	List<Rent> selectRentByUserCode(Rent rent);
 	List<Rent> selectRentByAll();
 	List<Rent> selectRentJoinCarData(Rent rent);
+	List<Rent> selectPerformenceTotal();
 }

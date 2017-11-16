@@ -24,6 +24,12 @@
 		<result property="fuelCode.fuelCode" column="fuel_code"/>
 	</resultMap>
 	
+	<resultMap id="CarDataJoinCarModelAndManufacturer" type="CarData">
+		<result property="carName" column="car_name"/>
+		<association property="carModelCode" resultMap="kr.or.dgit.RentCar_Project.dao.CarModelDao.CarModelResult"/>
+		<association property="manufacturerCode" resultMap="kr.or.dgit.RentCar_Project.dao.ManufacturerDao.ManufacturerResult"/>
+	</resultMap>
+		
 	<sql id="whereAllSql">
 		<where>
 			<if test ="carCode != null">
