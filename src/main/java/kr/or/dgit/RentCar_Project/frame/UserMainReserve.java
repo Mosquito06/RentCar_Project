@@ -155,6 +155,47 @@ public class UserMainReserve extends JPanel {
 			}
 		});
 		
+		leftPanel.getIsAuto().getRdbtnLeft().addItemListener(new ItemListener() {
+			
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				if(e.getStateChange()==1) {
+					isInsurance=true;
+					setScrollPaneAddList(scrollPane, header,isInsurance);
+				}else {
+					isInsurance=false;
+					setScrollPaneAddList(scrollPane, header,isInsurance);
+				}
+
+			}
+		});
+		
+		leftPanel.getComboBoxCarName().getComboBox().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				CarData carData = leftPanel.getComboBoxCarName().getComboboxValue();
+				lists=carDataService.selectCarDataByCarDataCodeList(carData);
+				setScrollPaneAddList(scrollPane, header, isInsurance);
+			}
+		});
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	}
 
 	private void setScrollPaneAddList(JScrollPane scrollPane, ReserveHeaderContent header,Boolean isInsurance) {

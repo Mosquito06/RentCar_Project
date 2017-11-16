@@ -92,6 +92,11 @@
 		<include refid="wherePrimarySql"/>
 	</select>
 	
+	<select id="selectCarDataByCarDataCodeList" resultMap="CarDataResult">
+		<include refid="selectSql"/>
+		<include refid="wherePrimarySql"/>
+	</select>
+	
 	<select id="selectCarDataByAll" resultMap="CarDataResult">
 		<include refid="selectSql"/>
 	</select>

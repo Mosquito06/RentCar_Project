@@ -1,13 +1,14 @@
 package kr.or.dgit.RentCar_Project.content;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Vector;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 import kr.or.dgit.RentCar_Project.component.ComboBoxComponent;
 import kr.or.dgit.RentCar_Project.component.RadioComponent;
@@ -17,11 +18,6 @@ import kr.or.dgit.RentCar_Project.dto.Manufacturer;
 import kr.or.dgit.RentCar_Project.service.CarDataService;
 import kr.or.dgit.RentCar_Project.service.FuelService;
 import kr.or.dgit.RentCar_Project.service.ManufacturerService;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.awt.event.ActionEvent;
-import javax.swing.ImageIcon;
 
 @SuppressWarnings("serial")
 public class ReserveLeftContent extends JPanel {
@@ -33,6 +29,31 @@ public class ReserveLeftContent extends JPanel {
 	private ComboBoxComponent<CarData> comboBoxCarName;
 	private JButton btnExit;
 	private RadioComponent isInsurance;
+	private RadioComponent isAuto;
+
+	public ComboBoxComponent<Manufacturer> getComboBoxManufacturer() {
+		return comboBoxManufacturer;
+	}
+
+	public ComboBoxComponent<Fuel> getComboBoxFuel() {
+		return comboBoxFuel;
+	}
+
+	public ComboBoxComponent<CarData> getComboBoxOld() {
+		return comboBoxOld;
+	}
+
+	public ComboBoxComponent<CarData> getComboBoxSeater() {
+		return comboBoxSeater;
+	}
+
+	public ComboBoxComponent<CarData> getComboBoxCarName() {
+		return comboBoxCarName;
+	}
+
+	public RadioComponent getIsAuto() {
+		return isAuto;
+	}
 
 	public RadioComponent getIsInsurance() {
 		return isInsurance;
@@ -76,8 +97,9 @@ public class ReserveLeftContent extends JPanel {
 		comboBoxCarName = new ComboBoxComponent<>("상세 차 검색  ");
 		comboBoxCarName.setBounds(45, 369, 191, 36);
 		add(comboBoxCarName);
+		
 
-		RadioComponent isAuto = new RadioComponent("변속기", "오토", "수동");
+		isAuto = new RadioComponent("변속기", "오토", "수동");
 		isAuto.setBounds(40, 435, 205, 70);
 		add(isAuto);
 
@@ -106,7 +128,7 @@ public class ReserveLeftContent extends JPanel {
 		ManufacturerService manufacturerService = ManufacturerService.getInstance();
 		List<Manufacturer> lists = manufacturerService.selectManufacturerByAll();
 		Vector<Manufacturer> manufacturer = new Vector<>();
-
+		
 		for (Manufacturer mf : lists) {
 			mf.setComboType(0);
 			manufacturer.add(mf);
