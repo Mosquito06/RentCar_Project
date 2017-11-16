@@ -26,9 +26,9 @@
 	</resultMap>
 	
 	<resultMap type="Rent" id="JoinCarDataAndCarModelAndManufacturer">
-		<result property="userTime" column="use_time"/>
-		<result property="discountPrice" column="discount_Price"/>
-		<result property="finalPrice" column="final_price"/>
+		<result property="userTime" column="sum(use_time)"/>
+		<result property="discountPrice" column="sum(discount_price)"/>
+		<result property="finalPrice" column="sum(final_price)"/>
 		<association property="carCode" resultMap="kr.or.dgit.RentCar_Project.dao.CarDataDao.CarDataJoinCarModelAndManufacturer"/>
 	</resultMap>
 	

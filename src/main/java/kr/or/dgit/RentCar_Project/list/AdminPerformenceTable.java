@@ -1,17 +1,33 @@
 package kr.or.dgit.RentCar_Project.list;
 
+import java.util.List;
+
+import javax.swing.SwingConstants;
+
+import kr.or.dgit.RentCar_Project.dto.Rent;
+import kr.or.dgit.RentCar_Project.service.RentService;
+
 public class AdminPerformenceTable extends AbstractTable {
 
 	@Override
 	protected void setAlignWidth() {
-		// TODO Auto-generated method stub
+		setAlign(SwingConstants.CENTER, 0, 1, 2, 3);
+		setAlign(SwingConstants.RIGHT, 4, 5);
+		setCellwidth(40, 60, 100, 60, 60, 60);
 
 	}
 
 	@Override
 	protected Object[][] getData() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Rent> list = RentService.getInstance().selectPerformenceTotal();
+		Object[][] datas = new Object[list.size()][];
+
+		for (int i = 0; i < list.size(); i++) {
+			Rent rentObject = list.get(i);
+			datas[i] = rentObject.PerformenceToTaltoArray();
+		}
+
+		return datas;
 	}
 
 	@Override

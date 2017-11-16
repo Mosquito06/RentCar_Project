@@ -115,6 +115,7 @@ public class Rent {
 	public Object[] toArray(Date rent) {
 		// 날짜 표기를 위한 SimpleDateFormat
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+		// 숫자 표기를 위한 DecimalFormat;
 		DecimalFormat DeciFormat = new DecimalFormat("#,##0");
 
 		return new Object[] { getSituationTostring(rent), carCode.getCarCode(), carCode.getCarName(),
@@ -122,6 +123,13 @@ public class Rent {
 				userTime, isInsurance, sdf.format(dayStart), sdf.format(dayEnd),  DeciFormat.format(discountPrice), DeciFormat.format(finalPrice) };
 	}
 
+	// 성과관리 토탈 ToArray
+	public Object[] PerformenceToTaltoArray() {
+		DecimalFormat DeciFormat = new DecimalFormat("#,##0");
+		
+		return new Object[] {carCode.getCarModelCode().getCarModel(), carCode.getManufacturerCode().getManufacturerName(),carCode.getCarName(), userTime, DeciFormat.format(discountPrice), DeciFormat.format(finalPrice)};
+	}
+	
 	private Object getSituationTostring(Date endDate) {
 		Date CurrentDate = new Date();
 		int CompareDate = endDate.compareTo(CurrentDate);
@@ -138,5 +146,7 @@ public class Rent {
 			return "취소";
 		}
 	}
+
+	
 
 }
