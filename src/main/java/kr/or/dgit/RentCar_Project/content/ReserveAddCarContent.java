@@ -47,20 +47,20 @@ public class ReserveAddCarContent extends JPanel {
 			int oTotalPrice = price + iPrice + btPrice * bTime + otPrice * (time - bTime);
 
 			if (time <= bTime) {
-				ReserveCarPriceContent panel = new ReserveCarPriceContent(carName, String.valueOf(price) + "원",
-						String.valueOf(iPrice) + "원", String.valueOf(0) + "원",
-						String.valueOf(price + iPrice + btPrice * time) + "원", img, String.valueOf(old), seater, auto,
+				ReserveCarPriceContent panel = new ReserveCarPriceContent(carName, String.format("%,d",price) + "원",
+						String.format("%,d",iPrice) + "원", String.valueOf(0) + "원",
+						String.format("%,d",price + iPrice + btPrice * time) + "원", img, String.valueOf(old), seater, auto,
 						fuelType,sDay,fDay,time,carCode,comfirmUser);
 				add(panel);
 			} else if (time > (bTime * 1.2)) {
-				ReserveCarPriceContent panel = new ReserveCarPriceContent(carName, String.valueOf(price) + "원",
-						String.valueOf(iPrice) + "원", String.valueOf(dTotalPrice) + "원",
-						String.valueOf(oTotalPrice - dTotalPrice) + "원", img, String.valueOf(old), seater, auto,
+				ReserveCarPriceContent panel = new ReserveCarPriceContent(carName, String.format("%,d",price) + "원",
+						String.format("%,d",iPrice)  + "원", String.format("%,d",dTotalPrice) + "원",
+						String.format("%,d",oTotalPrice - dTotalPrice) + "원", img, String.valueOf(old), seater, auto,
 						fuelType,sDay,fDay,time,carCode,comfirmUser);
 				add(panel);
 			} else {
-				ReserveCarPriceContent panel = new ReserveCarPriceContent(carName, String.valueOf(price) + "원",
-						String.valueOf(iPrice) + "원", String.valueOf(0) + "원", String.valueOf(oTotalPrice) + "원", img,
+				ReserveCarPriceContent panel = new ReserveCarPriceContent(carName, String.format("%,d",price) + "원",
+						String.format("%,d",iPrice)  + "원", String.valueOf(0) + "원", String.format("%,d",oTotalPrice) + "원", img,
 						String.valueOf(old), seater, auto, fuelType,sDay,fDay,time,carCode,comfirmUser);
 				add(panel);
 			}
