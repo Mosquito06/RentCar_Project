@@ -46,4 +46,8 @@ public class CarModel {
 		
 	}
 
+	public Object[] toArray() {
+		return new Object[] {carModelCode,carModel};
+	}
+
 }
