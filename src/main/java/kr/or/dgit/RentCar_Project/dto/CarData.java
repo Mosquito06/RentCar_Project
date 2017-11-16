@@ -150,6 +150,19 @@ public class CarData {
 		}
 	}
 
+	public Object[] toArray() {
+		return new Object[] {carCode,
+							carName,
+							carOld,
+							carNumber,
+							isAuto,
+							carSeater,
+							carModelCode.getCarModelCode(),
+							manufacturerCode.getManufacturerCode(),
+							fuelCode.getFuelCode()};
+		}
+	
+
 
 
 }

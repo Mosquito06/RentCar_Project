@@ -80,7 +80,12 @@ public class RentalPrice {
 	}
 
 	public Object[] toArray() {
-		return new Object[] {carCode.getCarCode(),basicPrice,basicTime,basicTimePrice,overPrice,insurance};
+		return new Object[] {carCode.getCarCode(),
+							String.format("%,d", basicPrice),
+							basicTime,
+							String.format("%,d", basicTimePrice),
+							String.format("%,d",overPrice),
+							String.format("%,d",insurance)};
 	}
 
 }

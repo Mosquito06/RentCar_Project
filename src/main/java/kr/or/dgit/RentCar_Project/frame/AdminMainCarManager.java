@@ -9,11 +9,10 @@ import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
@@ -23,20 +22,16 @@ import kr.or.dgit.RentCar_Project.component.ComboBoxComponent;
 import kr.or.dgit.RentCar_Project.component.JspinnerComponent;
 import kr.or.dgit.RentCar_Project.component.RadioComponent;
 import kr.or.dgit.RentCar_Project.component.TextFieldComponent;
-import kr.or.dgit.RentCar_Project.content.CarModelContent;
-import kr.or.dgit.RentCar_Project.content.FuelManagerContent;
-import kr.or.dgit.RentCar_Project.content.ManufacturerManagerContent;
-import kr.or.dgit.RentCar_Project.content.RentalPriceManagerContent;
 import kr.or.dgit.RentCar_Project.dto.CarData;
 import kr.or.dgit.RentCar_Project.dto.CarModel;
 import kr.or.dgit.RentCar_Project.dto.Fuel;
 import kr.or.dgit.RentCar_Project.dto.Manufacturer;
+import kr.or.dgit.RentCar_Project.list.CarDataTable;
+import kr.or.dgit.RentCar_Project.list.RentalPriceTable;
 import kr.or.dgit.RentCar_Project.service.CarDataService;
 import kr.or.dgit.RentCar_Project.service.CarModelService;
 import kr.or.dgit.RentCar_Project.service.FuelService;
 import kr.or.dgit.RentCar_Project.service.ManufacturerService;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
 
 @SuppressWarnings("serial")
 public class AdminMainCarManager extends JPanel {
@@ -57,6 +52,7 @@ public class AdminMainCarManager extends JPanel {
 	private JButton btnChart;
 	private String[] details = {"선택하세요","대여단가 관리","차종&제조회사 관리","연료&고객등급 관리"};
 	private JButton btnAll;
+	private CarDataTable carDataTable;
 	
 	public AdminMainCarManager() {
 		setBounds(0, 0, 974, 751);
@@ -171,6 +167,9 @@ public class AdminMainCarManager extends JPanel {
 		listTablePanel.setBounds(12, 54, 931, 245);
 		carListPanel.add(listTablePanel);
 		listTablePanel.setLayout(new BorderLayout(0, 0));
+		carDataTable = new CarDataTable();
+		carDataTable.loadDate();
+		listTablePanel.add(carDataTable,BorderLayout.CENTER);
 		
 		btnNewButton = new JButton("검색");
 		btnNewButton.addActionListener(new ActionListener() {
