@@ -25,6 +25,13 @@
 		<association property="carCode" resultMap="kr.or.dgit.RentCar_Project.dao.CarDataDao.RentJoinCarData"/>
 	</resultMap>
 	
+	<resultMap type="Rent" id="JoinCarDataAndCarModelAndManufacturer">
+		<result property="userTime" column="use_time"/>
+		<result property="discountPrice" column="discount_Price"/>
+		<result property="finalPrice" column="final_price"/>
+		<association property="carCode" resultMap="kr.or.dgit.RentCar_Project.dao.CarDataDao.CarDataJoinCarModelAndManufacturer"/>
+	</resultMap>
+	
 	<sql id="whereAllSql">
 		<where>
 			<if test="situation != null">
@@ -117,4 +124,10 @@
 		and use_time = #{userTime} and is_insurance = #{isInsurance} 
 		and final_price = #{finalPrice} and car_code = #{carCode.carCode}
 	</update>
+	
+	<select id="selectPerformenceTotal" resultMap="JoinCarDataAndCarModelAndManufacturer">
+		select car_model, manufacturer_name, car_name, sum(use_time), sum(discount_price), 
+		sum(final_price) from car_data join manufacturer on car_data.manufacturer_code = manufacturer.manufacturer_code
+		join car_model on car_data.car_model_code = car_model.car_model_code join rent on car_data.car_code = rent.car_code group by car_model
+	</select>
 </mapper>

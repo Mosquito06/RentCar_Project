@@ -96,7 +96,7 @@ public class TestRentService {
 		rentService.selectRentByUserCode(rent);
 	}*/
 	
-	@Test
+	/*@Test
 	public void test5DeleteRent() {
 		Rent rent = new Rent();
 		User user= new User();
@@ -130,7 +130,7 @@ public class TestRentService {
 		for(Rent r : list) {
 			System.out.println(r.getCarCode().getFuelCode().getFuelCode()); 
 		}
-	}
+	}*/
 	
 	/*@Test
 	public void test7UserHistoryDelete() {
@@ -144,4 +144,10 @@ public class TestRentService {
 		
 		rentService.UserHistoryDelete(rent);
 	}*/
+	
+	@Test
+	public void test8SelectPerformenceTotal() {
+		List<Rent> list = rentService.selectPerformenceTotal();
+		Assert.assertNotNull(list);
+	}
 }
