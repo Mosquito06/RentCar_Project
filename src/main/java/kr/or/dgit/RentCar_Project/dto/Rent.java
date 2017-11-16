@@ -116,12 +116,12 @@ public class Rent {
 				sdf.format(dayStart), sdf.format(dayEnd), finalPrice };
 	}
 
-	private Object getSituationTostring(Date startDate) {
+	private Object getSituationTostring(Date endDate) {
 		Date CurrentDate = new Date();
-		int CompareDate = startDate.compareTo(CurrentDate);
+		int CompareDate = endDate.compareTo(CurrentDate);
 		
 		if(situation.equals(Situation.RESERVATION)) {
-			if(CompareDate > 0) {
+			if(CompareDate >= 0) {
 				return "예약";
 			}else {
 				return "완료";

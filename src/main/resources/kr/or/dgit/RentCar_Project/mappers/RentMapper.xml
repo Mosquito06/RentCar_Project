@@ -101,7 +101,7 @@
 	<select id="selectRentJoinCarData" parameterType="Rent" resultMap="RentJoinCarDataResult">
 		select situation, car_data.car_code, car_name, car_old, is_auto, car_seater, fuel_code, use_time, 
 		is_insurance, day_start, day_end, final_price from rent join car_data on rent.car_code = car_data.car_code
-		where user_code = #{userCode.userCode} and day_start &gt;= #{dayStart} and day_end &lt;= #{dayEnd}
+		where user_code = #{userCode.userCode} and day_start &gt;= #{dayStart} and day_end &lt;= #{dayEnd} order by day_start
 	</select>
 	
 	<delete id="UserHistoryDelete">
