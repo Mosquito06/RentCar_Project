@@ -199,27 +199,21 @@ public class AdminMainCarManagerFuel_UserGrade extends JPanel implements ActionL
 		searchFuel.setComboBoxModel(fuelCode);
 	}
 	private void openDetailFrame(Object selected) {
+		JFrame frame = AdminMain.getInstance();
+		frame.getContentPane().removeAll();
 		if(selected==details[0]) {
 			JOptionPane.showMessageDialog(null, "세부사항을 선택하세요");
+			return;
 		}
-		if(selected==details[1]) {
-			JFrame frame = AdminMain.getInstance();
-			frame.getContentPane().removeAll();
+		else if(selected==details[1]) {
 			frame.getContentPane().add(new AdminMainCarManagerRentalPrice(), BorderLayout.CENTER);
-			frame.setVisible(true);
 		}else if(selected==details[2]) {
-			JFrame frame = AdminMain.getInstance();
-			frame.getContentPane().removeAll();
 			frame.getContentPane().add(new AdminMainCarManagerCarModel_Manufacturer(), BorderLayout.CENTER);
-			frame.setVisible(true);
 		}else if(selected==details[3]) {
-			JFrame frame = AdminMain.getInstance();
-			frame.getContentPane().removeAll();
 			frame.getContentPane().add(new AdminMainCarManager(), BorderLayout.CENTER);
-			frame.setVisible(true);
 		}else {
 			return;
 		}
-		
+		frame.setVisible(true);
 	}
 }

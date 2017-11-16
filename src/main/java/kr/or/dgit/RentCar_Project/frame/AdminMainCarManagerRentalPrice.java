@@ -111,27 +111,20 @@ public class AdminMainCarManagerRentalPrice extends JPanel {
 	}
 	
 	private void openDetailFrame(Object selected) {
+		JFrame frame = AdminMain.getInstance();
+		frame.getContentPane().removeAll();
 		if(selected==details[0]){
 			JOptionPane.showMessageDialog(null, "세부사향을 선택하세요");
 			return;
-			
 		}else if(selected==details[1]) {
-			JFrame frame = AdminMain.getInstance();
-			frame.getContentPane().removeAll();
 			frame.getContentPane().add(new AdminMainCarManagerCarModel_Manufacturer(), BorderLayout.CENTER);
-			frame.setVisible(true);
 		}else if(selected==details[2]) {
-			JFrame frame = AdminMain.getInstance();
-			frame.getContentPane().removeAll();
 			frame.getContentPane().add(new AdminMainCarManagerFuel_UserGrade(), BorderLayout.CENTER);
-			frame.setVisible(true);
 		}else if(selected==details[3]) {
-			JFrame frame = AdminMain.getInstance();
-			frame.getContentPane().removeAll();
 			frame.getContentPane().add(new AdminMainCarManager(), BorderLayout.CENTER);
-			frame.setVisible(true);
 		}else {
 			return;
 		}
+		frame.setVisible(true);
 	}
 }
