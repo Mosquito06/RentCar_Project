@@ -187,16 +187,17 @@ public class UserMainReserve extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				String fuelCode= leftPanel.getComboBoxFuel().getComboboxValue().getFuelCode();
-				int s=0;
-				for(int i=0;i<lists.size();i++) {
-					if(lists.get(i).getFuelCode().getFuelCode().equals(fuelCode)) {
-						s++;
+				Fuel fuel= leftPanel.getComboBoxFuel().getComboboxValue();
+
+				for(int i=lists.size()-1;i>=0;i--) {
+					if(!lists.get(i).getFuelCode().getFuelCode().equals(fuel.getFuelCode())) {
+						lists.remove(i);
 					}
-					
 				}
-				JOptionPane.showMessageDialog(null, s);
-				JOptionPane.showMessageDialog(null, lists.toString());
+				if(lists.size()==0) {
+					JOptionPane.showMessageDialog(null, fuel.getFuelType()+" 연료가 존재하지 않습니다.");
+					return;
+				}
 				setScrollPaneAddList(scrollPane, header, isInsurance);
 			}
 		});
