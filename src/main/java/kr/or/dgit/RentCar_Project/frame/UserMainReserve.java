@@ -166,14 +166,18 @@ public class UserMainReserve extends JPanel {
 			}
 		});
 		
-		leftPanel.getIsAuto().getRdbtnLeft().addItemListener(new ItemListener() {
-
-			@Override
+		
+		
+		
+		
+		
+		leftPanel.getIsAuto().getGroup().getSelection().addItemListener(new ItemListener() {
+			
 			public void itemStateChanged(ItemEvent e) {
-				
-				JOptionPane.showMessageDialog(null, e.getStateChange());
+				int num = e.getStateChange();
+				JOptionPane.showMessageDialog(null, num);
 				newListAdd();
-				if (e.getStateChange() == 1) {
+				if (num == 1) {
 					auto = IsAuto.AUTO;
 					for (int i = lists.size() - 1; i >= 0; i--) {
 						if (!lists.get(i).getIsAuto().equals(auto)) {
@@ -200,11 +204,63 @@ public class UserMainReserve extends JPanel {
 						return;
 					}
 				}
-				
 				setScrollPaneAddList(scrollPane, header, isInsurance);
-				
 			}
 		});
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		/*leftPanel.getIsAuto().getRdbtnLeft().addItemListener(new ItemListener() {
+
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				int num = e.getStateChange();
+				JOptionPane.showMessageDialog(null, num);
+				newListAdd();
+				if (num == 1) {
+					auto = IsAuto.AUTO;
+					for (int i = lists.size() - 1; i >= 0; i--) {
+						if (!lists.get(i).getIsAuto().equals(auto)) {
+							lists.remove(i);
+						}
+					}
+					if (lists.size() == 0) {
+						lists = newLists;
+						JOptionPane.showMessageDialog(null, auto.toString() + " 의 렌트카가 존재하지 않습니다.");
+						leftPanel.getIsAuto().getRdbtnRight().setSelected(true);
+						return;
+					}
+				} else {
+					auto = IsAuto.MANUAL;
+					for (int i = lists.size() - 1; i >= 0; i--) {
+						if (!lists.get(i).getIsAuto().equals(auto)) {
+							lists.remove(i);
+						}
+					}
+					if (lists.size() == 0) {
+						lists = newLists;
+						JOptionPane.showMessageDialog(null, auto.toString() + " 의 렌트카가 존재하지 않습니다.");
+						leftPanel.getIsAuto().getRdbtnLeft().setSelected(true);
+						return;
+					}
+				}
+				setScrollPaneAddList(scrollPane, header, isInsurance);
+			}
+		});*/
 		
 		leftPanel.getComboBoxCarName().getComboBox().addActionListener(new ActionListener() {
 			
