@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -31,6 +32,7 @@ import kr.or.dgit.RentCar_Project.content.ReserveLeftContent;
 import kr.or.dgit.RentCar_Project.dto.CarData;
 import kr.or.dgit.RentCar_Project.dto.CarModel;
 import kr.or.dgit.RentCar_Project.dto.Fuel;
+import kr.or.dgit.RentCar_Project.dto.Manufacturer;
 import kr.or.dgit.RentCar_Project.dto.User;
 import kr.or.dgit.RentCar_Project.service.CarDataService;
 import kr.or.dgit.RentCar_Project.service.CarModelService;
@@ -45,6 +47,7 @@ public class UserMainReserve extends JPanel {
 	private String fDay;
 	private ReserveAddCarContent addCar;
 	private Boolean isInsurance;
+	private List<CarData> newLists;
 
 	public void setComfirmUser(User comfirmUser) {
 		this.comfirmUser = comfirmUser;
@@ -161,10 +164,10 @@ public class UserMainReserve extends JPanel {
 			@Override
 			public void itemStateChanged(ItemEvent e) {
 				if(e.getStateChange()==1) {
-					isInsurance=true;
+					
 					setScrollPaneAddList(scrollPane, header,isInsurance);
 				}else {
-					isInsurance=false;
+					
 					setScrollPaneAddList(scrollPane, header,isInsurance);
 				}
 
@@ -183,20 +186,67 @@ public class UserMainReserve extends JPanel {
 		});
 		
 		leftPanel.getComboBoxFuel().getComboBox().addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				newListAdd();
+				Fuel fuel = leftPanel.getComboBoxFuel().getComboboxValue();
+				for (int i = lists.size() - 1; i >= 0; i--) {
+					if (!lists.get(i).getFuelCode().getFuelCode().equals(fuel.getFuelCode())) {
+						lists.remove(i);
+					}
+				}
+
+				if (lists.size() == 0) {
+					lists = newLists;
+					JOptionPane.showMessageDialog(null, fuel.getFuelType() + "type 렌트카가 존재하지 않습니다.");
+					return;
+				}
+				setScrollPaneAddList(scrollPane, header, isInsurance);
+			}
+
+			
+		});
+		
+		leftPanel.getComboBoxManufacturer().getComboBox().addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				String fuelCode= leftPanel.getComboBoxFuel().getComboboxValue().getFuelCode();
-				int s=0;
-				for(int i=0;i<lists.size();i++) {
-					if(lists.get(i).getFuelCode().getFuelCode().equals(fuelCode)) {
-						s++;
+				newListAdd();
+				Manufacturer manufacturer = leftPanel.getComboBoxManufacturer().getComboboxValue();
+				for (int i = lists.size() - 1; i >= 0; i--) {
+					if (!lists.get(i).getManufacturerCode().getManufacturerCode().equals(manufacturer.getManufacturerCode())) {
+						lists.remove(i);
 					}
-					
 				}
-				JOptionPane.showMessageDialog(null, s);
-				JOptionPane.showMessageDialog(null, lists.toString());
+
+				if (lists.size() == 0) {
+					lists = newLists;
+					JOptionPane.showMessageDialog(null, manufacturer.getManufacturerName() + " 의 렌트카가 존재하지 않습니다.");
+					return;
+				}
+				setScrollPaneAddList(scrollPane, header, isInsurance);
+			}
+		});
+		
+		
+		leftPanel.getComboBoxSeater().getComboBox().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				newListAdd();
+				CarData seater = leftPanel.getComboBoxSeater().getComboboxValue();
+				for (int i = lists.size() - 1; i >= 0; i--) {
+					if (!lists.get(i).getCarSeater().equals(seater.getCarSeater())) {
+						lists.remove(i);
+					}
+				}
+
+				if (lists.size() == 0) {
+					lists = newLists;
+					JOptionPane.showMessageDialog(null, seater.getCarSeater() + " 의 렌트카가 존재하지 않습니다.");
+					return;
+				}
 				setScrollPaneAddList(scrollPane, header, isInsurance);
 			}
 		});
@@ -208,14 +258,20 @@ public class UserMainReserve extends JPanel {
 		
 		
 		
-		
-		
-		
-		
-		
-		
 	}
 
+	
+	private List<CarData> newListAdd() {
+		newLists = new ArrayList<>();
+		for (int i = 0; i < lists.size(); i++) {
+			newLists.add(lists.get(i));
+		}
+		return newLists;
+	}
+	
+	
+	
+	
 	private void setScrollPaneAddList(JScrollPane scrollPane, ReserveHeaderContent header,Boolean isInsurance) {
 		int totalTime = Integer.parseInt(header.getTotalTimePanel().getTextValue());
 		if (totalTime == 0) {
