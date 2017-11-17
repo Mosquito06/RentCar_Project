@@ -122,9 +122,7 @@
 	
 	<update id="UserHistoryUpdate">
 		<include refid="updateSql"/>
-		where user_code = #{userCode.userCode} 
-		and use_time = #{userTime} and is_insurance = #{isInsurance} 
-		and final_price = #{finalPrice} and car_code = #{carCode.carCode}
+		where rent_code = #{rentCode} 
 	</update>
 	
 	<select id="selectPerformenceTotal" resultMap="JoinCarDataAndCarModelAndManufacturer">

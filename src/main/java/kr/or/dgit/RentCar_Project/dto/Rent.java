@@ -127,7 +127,7 @@ public class Rent {
 		// 숫자 표기를 위한 DecimalFormat;
 		DecimalFormat DeciFormat = new DecimalFormat("#,##0");
 
-		return new Object[] { getSituationTostring(rent), carCode.getCarCode(), carCode.getCarName(),
+		return new Object[] {rentCode ,getSituationTostring(rent), carCode.getCarCode(), carCode.getCarName(),
 				carCode.getCarOld(), carCode.getIsAuto(), carCode.getCarSeater(), getFuelTostring(), userTime,
 				getIsInsuranceTostring(), sdf.format(dayStart), sdf.format(dayEnd), DeciFormat.format(discountPrice),
 				DeciFormat.format(finalPrice) };

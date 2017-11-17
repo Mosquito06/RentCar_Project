@@ -26,9 +26,9 @@ public class UserHistoryTable extends AbstractTable {
 
 	@Override
 	protected void setAlignWidth() {
-		setAlign(SwingConstants.CENTER, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
-		setAlign(SwingConstants.RIGHT, 11, 12);
-		setCellwidth(55, 90, 115, 45, 55, 30, 50, 50, 80, 80, 80 ,80, 80);
+		setAlign(SwingConstants.CENTER, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11);
+		setAlign(SwingConstants.RIGHT, 12, 13);
+		setCellwidth(55, 55, 90, 115, 45, 55, 30, 50, 50, 80, 80, 80 ,80, 80);
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public class UserHistoryTable extends AbstractTable {
 
 	@Override
 	protected Object[] getcolumnNames() {
-		return new String[] {"상태", "차량코드", "차량명", "연식", "오토유무", "인승", "연료타입", "이용시간", "보험 가입 유무", "대여일", "반납일", "할인요금", "최종가격" };
+		return new String[] {"예약번호", "상태", "차량코드", "차량명", "연식", "오토유무", "인승", "연료타입", "이용시간", "보험 가입 유무", "대여일", "반납일", "할인요금", "최종가격" };
 	}
 
 	@Override
@@ -55,14 +55,15 @@ public class UserHistoryTable extends AbstractTable {
 		// 테이블에서 선택된 객체의 각 정보를 가져와서 Rent 객체로 반환
 		int selectIndex = table.getSelectedRow();
 		
-		String sSituation = (String) table.getValueAt(selectIndex, 0);
-		String carCode= (String) table.getValueAt(selectIndex, 1);
-		String userTime = (String) table.getValueAt(selectIndex, 7);
-		String sIsInsurance = (String) table.getValueAt(selectIndex, 8);
-		String sDate = (String) table.getValueAt(selectIndex, 9);
-		String eDate = (String) table.getValueAt(selectIndex, 10);
-		String discountPrice = (String) table.getValueAt(selectIndex, 11);
-		String finalPrice = (String) table.getValueAt(selectIndex, 12);
+		int code = (int) table.getValueAt(selectIndex, 0);
+		String sSituation = (String) table.getValueAt(selectIndex, 1);
+		String carCode= (String) table.getValueAt(selectIndex, 2);
+		String userTime = (String) table.getValueAt(selectIndex, 8);
+		String sIsInsurance = (String) table.getValueAt(selectIndex, 9);
+		String sDate = (String) table.getValueAt(selectIndex, 10);
+		String eDate = (String) table.getValueAt(selectIndex, 11);
+		String discountPrice = (String) table.getValueAt(selectIndex, 12);
+		String finalPrice = (String) table.getValueAt(selectIndex, 13);
 				
 		String[] selectSDate = sDate.split("/");
 		String[] selectEDate = eDate.split("/");
@@ -77,6 +78,7 @@ public class UserHistoryTable extends AbstractTable {
 		carDate.setCarCode(carCode);
 		
 		Rent selectRent = new Rent();
+		selectRent.setRentCode(code);
 		selectRent.setSituation(getSituation(sSituation));
 		selectRent.setCarCode(carDate);
 		selectRent.setDiscountPrice(Integer.parseInt(discountPrice.replaceAll(",", "")));
