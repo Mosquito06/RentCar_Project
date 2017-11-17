@@ -32,6 +32,7 @@ import kr.or.dgit.RentCar_Project.content.ReserveLeftContent;
 import kr.or.dgit.RentCar_Project.dto.CarData;
 import kr.or.dgit.RentCar_Project.dto.CarModel;
 import kr.or.dgit.RentCar_Project.dto.Fuel;
+import kr.or.dgit.RentCar_Project.dto.IsAuto;
 import kr.or.dgit.RentCar_Project.dto.Manufacturer;
 import kr.or.dgit.RentCar_Project.dto.User;
 import kr.or.dgit.RentCar_Project.service.CarDataService;
@@ -48,7 +49,9 @@ public class UserMainReserve extends JPanel {
 	private ReserveAddCarContent addCar;
 	private Boolean isInsurance;
 	private List<CarData> newLists;
-
+	private IsAuto auto;
+	private ReserveLeftContent leftPanel;
+	
 	public void setComfirmUser(User comfirmUser) {
 		this.comfirmUser = comfirmUser;
 	}
@@ -58,17 +61,17 @@ public class UserMainReserve extends JPanel {
 		setBounds(new Rectangle(0, 0, 500, 500));
 		setLayout(null);
 
-		ReserveLeftContent leftPanel = new ReserveLeftContent();
+		leftPanel = new ReserveLeftContent();
 		leftPanel.setBorder(new TitledBorder(
 				new CompoundBorder(new LineBorder(new Color(0, 0, 0)),
 						new EtchedBorder(EtchedBorder.LOWERED, null, null)),
 				"\uC0C1\uC138\uC815\uBCF4", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		leftPanel.setBounds(0, 79, 302, 672);
+		leftPanel.setBounds(0, 79, 259, 672);
 		add(leftPanel);
 		leftPanel.setLayout(null);
 
 		JPanel rightPanel = new JPanel();
-		rightPanel.setBounds(310, 112, 664, 639);
+		rightPanel.setBounds(271, 112, 703, 639);
 		add(rightPanel);
 		rightPanel.setLayout(new BorderLayout(0, 0));
 
@@ -107,13 +110,15 @@ public class UserMainReserve extends JPanel {
 				
 				lists = carDataService.selectCarDataByAll();
 				setScrollPaneAddList(scrollPane, header,isInsurance);
+				setComboBaxEnabled(true);
+				
 			}
 		});
 
 		JPanel btnsPanel = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) btnsPanel.getLayout();
 		flowLayout.setHgap(10);
-		btnsPanel.setBounds(303, 76, 671, 35);
+		btnsPanel.setBounds(271, 76, 703, 35);
 		List<CarModel> carModelLists = carModelService.selectCarModelByAll();
 		for (int i = 0; i < carModelLists.size(); i++) {
 			String carModel = carModelLists.get(i).getCarModel();
@@ -126,7 +131,9 @@ public class UserMainReserve extends JPanel {
 				public void actionPerformed(ActionEvent e) {
 					lists = carDataService.selectCarDataByCarModelCode(carModelCode);
 					setScrollPaneAddList(scrollPane, header,isInsurance);
+					setComboBaxEnabled(true);
 				}
+
 			});
 		}
 		add(btnsPanel);
@@ -160,17 +167,42 @@ public class UserMainReserve extends JPanel {
 		});
 		
 		leftPanel.getIsAuto().getRdbtnLeft().addItemListener(new ItemListener() {
-			
+
 			@Override
 			public void itemStateChanged(ItemEvent e) {
-				if(e.getStateChange()==1) {
-					
-					setScrollPaneAddList(scrollPane, header,isInsurance);
-				}else {
-					
-					setScrollPaneAddList(scrollPane, header,isInsurance);
+				
+				JOptionPane.showMessageDialog(null, e.getStateChange());
+				newListAdd();
+				if (e.getStateChange() == 1) {
+					auto = IsAuto.AUTO;
+					for (int i = lists.size() - 1; i >= 0; i--) {
+						if (!lists.get(i).getIsAuto().equals(auto)) {
+							lists.remove(i);
+						}
+					}
+					if (lists.size() == 0) {
+						lists = newLists;
+						JOptionPane.showMessageDialog(null, auto.toString() + " 의 렌트카가 존재하지 않습니다.");
+						leftPanel.getIsAuto().getRdbtnRight().setSelected(true);
+						return;
+					}
+				} else {
+					auto = IsAuto.MANUAL;
+					for (int i = lists.size() - 1; i >= 0; i--) {
+						if (!lists.get(i).getIsAuto().equals(auto)) {
+							lists.remove(i);
+						}
+					}
+					if (lists.size() == 0) {
+						lists = newLists;
+						JOptionPane.showMessageDialog(null, auto.toString() + " 의 렌트카가 존재하지 않습니다.");
+						leftPanel.getIsAuto().getRdbtnLeft().setSelected(true);
+						return;
+					}
 				}
-
+				
+				setScrollPaneAddList(scrollPane, header, isInsurance);
+				
 			}
 		});
 		
@@ -181,7 +213,9 @@ public class UserMainReserve extends JPanel {
 				
 				CarData carData = leftPanel.getComboBoxCarName().getComboboxValue();
 				lists=carDataService.selectCarDataByCarDataCodeList(carData);
+				setComboBaxEnabled(false);
 				setScrollPaneAddList(scrollPane, header, isInsurance);
+				
 			}
 		});
 		
@@ -203,6 +237,7 @@ public class UserMainReserve extends JPanel {
 					return;
 				}
 				setScrollPaneAddList(scrollPane, header, isInsurance);
+				leftPanel.getComboBoxFuel().getComboBox().setEnabled(false);
 			}
 
 			
@@ -226,6 +261,7 @@ public class UserMainReserve extends JPanel {
 					return;
 				}
 				setScrollPaneAddList(scrollPane, header, isInsurance);
+				leftPanel.getComboBoxManufacturer().getComboBox().setEnabled(false);
 			}
 		});
 		
@@ -248,16 +284,31 @@ public class UserMainReserve extends JPanel {
 					return;
 				}
 				setScrollPaneAddList(scrollPane, header, isInsurance);
+				leftPanel.getComboBoxSeater().getComboBox().setEnabled(false);
 			}
 		});
 		
-		
-		
-		
-		
-		
-		
-		
+		leftPanel.getComboBoxOld().getComboBox().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				newListAdd();
+				CarData old = leftPanel.getComboBoxOld().getComboboxValue();
+				for (int i = lists.size() - 1; i >= 0; i--) {
+					if (lists.get(i).getCarOld()!=old.getCarOld()) {
+						lists.remove(i);
+					}
+				}
+
+				if (lists.size() == 0) {
+					lists = newLists;
+					JOptionPane.showMessageDialog(null, old.getCarOld() + " 의 렌트카가 존재하지 않습니다.");
+					return;
+				}
+				setScrollPaneAddList(scrollPane, header, isInsurance);
+				leftPanel.getComboBoxOld().getComboBox().setEnabled(false);
+			}
+		});
 	}
 
 	
@@ -269,7 +320,13 @@ public class UserMainReserve extends JPanel {
 		return newLists;
 	}
 	
-	
+	private void setComboBaxEnabled(Boolean yes) {
+		leftPanel.getComboBoxOld().getComboBox().setEnabled(yes);
+		leftPanel.getComboBoxSeater().getComboBox().setEnabled(yes);
+		leftPanel.getComboBoxManufacturer().getComboBox().setEnabled(yes);
+		leftPanel.getComboBoxFuel().getComboBox().setEnabled(yes);
+		leftPanel.getIsAuto().setAllEnable(yes);
+	}
 	
 	
 	private void setScrollPaneAddList(JScrollPane scrollPane, ReserveHeaderContent header,Boolean isInsurance) {

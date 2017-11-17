@@ -82,5 +82,11 @@ public class RadioComponent extends JPanel {
 			rdbtnLeft.setSelected(false);
 		}
 	}
+	
+	public void setAllEnable(boolean selected) {
+			rdbtnLeft.setEnabled(selected);
+			rdbtnRight.setEnabled(selected);
+	
+	}
 
 }
