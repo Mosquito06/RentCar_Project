@@ -141,7 +141,7 @@ public class AdminMainCarManagerFuel_UserGrade extends JPanel implements ActionL
 	
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==btnSearchFuel) {
-			fuelList.validate();
+			fuelList.revalidate();
 			Fuel fuelCode  = searchFuel.getComboboxValue();
 			findTable.setFuel(fuelCode);
 			findTable.loadDate();
