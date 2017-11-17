@@ -171,8 +171,6 @@ public class AdminMainCarManagerCarDetail extends JPanel implements ActionListen
 		}else if(selected==details[1]) {
 			frame.getContentPane().add(new AdminMainCarManagerRentalPrice(), BorderLayout.CENTER);
 		}else if(selected==details[2]) {
-			frame.getContentPane().add(new AdminMainCarManagerFuel_UserGrade(), BorderLayout.CENTER);
-		}else if(selected==details[3]) {
 			frame.getContentPane().add(new AdminMainCarManager(), BorderLayout.CENTER);
 		}else {
 			return;
