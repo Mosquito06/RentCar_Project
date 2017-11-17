@@ -7,7 +7,20 @@ import javax.swing.SwingConstants;
 import kr.or.dgit.RentCar_Project.dto.Manufacturer;
 import kr.or.dgit.RentCar_Project.service.ManufacturerService;
 
+@SuppressWarnings("serial")
 public class ManufacturerTable extends AbstractTable {
+	
+	private boolean isFull;
+	private Manufacturer mfCode;
+	
+	
+	public void setMfCode(Manufacturer mfCode) {
+		this.mfCode = mfCode;
+	}
+
+	public void setFull(boolean isFull) {
+		this.isFull = isFull;
+	}
 
 	@Override
 	protected void setAlignWidth() {
@@ -17,7 +30,13 @@ public class ManufacturerTable extends AbstractTable {
 
 	@Override
 	protected Object[][] getData() {
-		List<Manufacturer> lists = ManufacturerService.getInstance().selectManufacturerByAll();
+		List<Manufacturer> lists;
+		
+		if(isFull) {
+			lists = ManufacturerService.getInstance().selectManufacturerByAll();
+		}else {
+			lists = ManufacturerService.getInstance().findManufacturerByFacturerCode(mfCode);
+		}
 		Object[][] datas = new Object[lists.size()][];
 		for(int i=0;i<lists.size();i++) {
 			Manufacturer mf = lists.get(i);

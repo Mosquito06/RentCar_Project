@@ -1,20 +1,19 @@
 package kr.or.dgit.RentCar_Project.content;
 
-import javax.swing.JPanel;
-import kr.or.dgit.RentCar_Project.component.TextFieldComponent;
-import javax.swing.JTextField;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+import kr.or.dgit.RentCar_Project.component.TextFieldComponent;
 
 @SuppressWarnings("serial")
 public class CarModelContent extends JPanel {
 	private TextFieldComponent cmCode;
 	private TextFieldComponent carModel;
+	
 	public CarModelContent() {
 		setBounds(100, 100, 333, 171);
 		setLayout(null);
@@ -52,6 +51,18 @@ public class CarModelContent extends JPanel {
 		add(btnCancel);
 
 	}
+	
+	
+	public TextFieldComponent getCmCode() {
+		return cmCode;
+	}
+
+
+	public TextFieldComponent getCarModel() {
+		return carModel;
+	}
+
+
 	public void setCarModelValueClear(){
 		cmCode.setTextValue("");
 		carModel.setTextValue("");

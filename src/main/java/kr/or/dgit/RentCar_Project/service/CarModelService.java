@@ -5,8 +5,6 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import kr.or.dgit.RentCar_Project.dao.CarModelDao;
-import kr.or.dgit.RentCar_Project.dao.FuelDao;
-import kr.or.dgit.RentCar_Project.dao.ManufacturerDao;
 import kr.or.dgit.RentCar_Project.dto.CarModel;
 import kr.or.dgit.RentCar_Project.util.MyBatisSqlSessionFactory;
 
@@ -63,6 +61,14 @@ public class CarModelService implements CarModelDao {
 		try(SqlSession sqlsession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();){
 			carModelDao = sqlsession.getMapper(CarModelDao.class);
 			return carModelDao.selectCarModelByAll();
+		}
+	}
+
+	@Override
+	public List<CarModel> findCarModelByCarModelCode(CarModel carModelCode) {
+		try(SqlSession sqlsession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();){
+			carModelDao = sqlsession.getMapper(CarModelDao.class);
+			return carModelDao.findCarModelByCarModelCode(carModelCode);
 		}
 	}
 

@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
+@SuppressWarnings("serial")
 public class ManufacturerManagerContent extends JPanel {
 	
 	private TextFieldComponent mfCode;
@@ -50,11 +51,19 @@ public class ManufacturerManagerContent extends JPanel {
 		JButton btnDelete = new JButton("삭제");
 		btnDelete.setBounds(163, 117, 66, 23);
 		add(btnDelete);
-		
-		
-		
-
 	}
+	
+	
+	public TextFieldComponent getMfCode() {
+		return mfCode;
+	}
+
+
+	public TextFieldComponent getMfName() {
+		return mfName;
+	}
+
+
 	public void setManufacturerTextValueClear() {
 		mfCode.setTextValue("");
 		mfName.setTextValue("");

@@ -118,6 +118,8 @@ public class AdminMainCarManagerRentalPrice extends JPanel {
 			return;
 		}else if(selected==details[1]) {
 			frame.getContentPane().add(new AdminMainCarManagerCarDetail(), BorderLayout.CENTER);
+		}else if(selected==details[2]) {
+			frame.getContentPane().add(new AdminMainCarManager(), BorderLayout.CENTER);
 		}else {
 			return;
 		}

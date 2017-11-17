@@ -9,6 +9,18 @@ import kr.or.dgit.RentCar_Project.service.CarDataService;
 import kr.or.dgit.RentCar_Project.service.CarModelService;
 
 public class CarModelTable extends AbstractTable {
+	private boolean isFull;
+	private CarModel cmCode;
+	
+	
+	public void setIfFull(boolean isFull) {
+		this.isFull = isFull;
+	}
+
+	public void setCmCode(CarModel cmCode) {
+		this.cmCode = cmCode;
+	}
+
 	public CarModelTable() {
 	}
 
@@ -19,7 +31,12 @@ public class CarModelTable extends AbstractTable {
 
 	@Override
 	protected Object[][] getData() {
-		List<CarModel> lists = CarModelService.getInstance().selectCarModelByAll();
+		List<CarModel> lists;
+		if(isFull) {
+			lists = CarModelService.getInstance().selectCarModelByAll();
+		}else {
+			lists = CarModelService.getInstance().findCarModelByCarModelCode(cmCode);
+		}
 		Object[][] datas = new Object[lists.size()][];
 		for(int i=0;i<lists.size();i++) {
 			CarModel cm = lists.get(i);

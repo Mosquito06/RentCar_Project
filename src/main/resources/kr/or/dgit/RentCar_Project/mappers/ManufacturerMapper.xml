@@ -52,6 +52,11 @@
 		<include refid="selectSql"/>
 	</select>
 	
+	<select id="findManufacturerByFacturerCode" resultMap="ManufacturerResult">
+		<include refid="selectSql"/>
+		<include refid="wherePrimarySql"/>
+	</select>
+	
 	<insert id="insertManufacturer" parameterType="Manufacturer">
 		<include refid="insertSql"/>
 	</insert>
