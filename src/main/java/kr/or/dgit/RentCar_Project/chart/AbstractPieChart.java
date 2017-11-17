@@ -13,14 +13,14 @@ public abstract class AbstractPieChart<T>{
 	private JChartLibPiechart chart;
 	private JChartLibPanel chartPanel;
 	
-	public AbstractPieChart(String setTitle, String xName, String yName, List<T> items) {
+	public AbstractPieChart(String setTitle, String xName, String yName, List<T> items, boolean UseName) {
 		values = new JChartLibSerie(setTitle);
 		dataset = new JChartLibDataSet();
-		chart = new JChartLibPiechart(setTitle, xName, yName, setDataset(values, dataset, items));
+		chart = new JChartLibPiechart(setTitle, xName, yName, setDataset(values, dataset, items, UseName));
 		chartPanel = new JChartLibPanel(chart);
 	}
 
-	protected abstract JChartLibDataSet setDataset(JChartLibSerie values, JChartLibDataSet dataset, List<T> items);
+	protected abstract JChartLibDataSet setDataset(JChartLibSerie values, JChartLibDataSet dataset, List<T> items, boolean UseName);
 	 
 	public JChartLibPanel getPieChart() {
 		return chartPanel;
