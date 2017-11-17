@@ -14,6 +14,7 @@ public class PerformenceTotalBarChart extends AbstractBarChart<Rent> {
 		// TODO Auto-generated constructor stub
 	}
 
+	
 	@Override
 	protected JChartLibDataSet setDataset(JChartLibDataSet dataset, List<Rent> items) {
 		for(int i = 0; i < items.size(); i++) {

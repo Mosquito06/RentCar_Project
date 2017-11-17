@@ -63,7 +63,7 @@ public class AdminMainPerformenceChart extends JFrame {
 				chartPanel.repaint();
 			}
 		});
-		btnBarChart.setBounds(91, 15, 158, 34);
+		btnBarChart.setBounds(175, 16, 158, 34);
 		btnPanel.add(btnBarChart);
 		
 		JButton btnPieChart = new JButton("파이차트");
@@ -80,12 +80,8 @@ public class AdminMainPerformenceChart extends JFrame {
 				chartPanel.repaint();
 			}
 		});
-		btnPieChart.setBounds(261, 15, 158, 34);
+		btnPieChart.setBounds(345, 16, 158, 34);
 		btnPanel.add(btnPieChart);
-		
-		JButton btnLineChart = new JButton("라인차트");
-		btnLineChart.setBounds(431, 15, 158, 34);
-		btnPanel.add(btnLineChart);
 		
 		// 나가기 버튼 리스너
 		JButton btnExit = new JButton("나가기");
@@ -96,7 +92,7 @@ public class AdminMainPerformenceChart extends JFrame {
 				setVisible(false);
 			}
 		});
-		btnExit.setBounds(601, 15, 158, 34);
+		btnExit.setBounds(515, 16, 158, 34);
 		btnPanel.add(btnExit);
 	}
 }
