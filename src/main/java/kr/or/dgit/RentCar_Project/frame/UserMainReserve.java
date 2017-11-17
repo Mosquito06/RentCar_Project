@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -188,14 +189,21 @@ public class UserMainReserve extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				
 				Fuel fuel= leftPanel.getComboBoxFuel().getComboboxValue();
+				List<CarData> newLists = new ArrayList<>();
+				
+				for(int i=0;i<lists.size();i++) {
+					newLists.add(lists.get(i));
+				}
 
 				for(int i=lists.size()-1;i>=0;i--) {
 					if(!lists.get(i).getFuelCode().getFuelCode().equals(fuel.getFuelCode())) {
 						lists.remove(i);
 					}
 				}
+
 				if(lists.size()==0) {
-					JOptionPane.showMessageDialog(null, fuel.getFuelType()+" 연료가 존재하지 않습니다.");
+					lists = newLists;
+					JOptionPane.showMessageDialog(null, fuel.getFuelType()+"type 렌트카가 존재하지 않습니다.");
 					return;
 				}
 				setScrollPaneAddList(scrollPane, header, isInsurance);
