@@ -50,7 +50,7 @@ public class AdminMainCarManager extends JPanel {
 	private JButton btnNewButton;
 	private ComboBoxComponent<CarData> searchPanel;
 	private JButton btnChart;
-	private String[] details = {"선택하세요","대여단가 관리","차종&제조회사 관리","연료&고객등급 관리"};
+	private String[] details = {"선택하세요","대여단가 관리","차종&제조회사&연료 관리"};
 	private JButton btnAll;
 	private CarDataTable carDataTable;
 	
@@ -263,9 +263,7 @@ public class AdminMainCarManager extends JPanel {
 		}else if(selected==details[1]) {
 			frame.getContentPane().add(new AdminMainCarManagerRentalPrice(), BorderLayout.CENTER);
 		}else if(selected==details[2]) {
-			frame.getContentPane().add(new AdminMainCarManagerCarModel_Manufacturer(), BorderLayout.CENTER);
-		}else if(selected==details[3]){
-			frame.getContentPane().add(new AdminMainCarManagerFuel_UserGrade(), BorderLayout.CENTER);
+			frame.getContentPane().add(new AdminMainCarManagerCarDetail(), BorderLayout.CENTER);
 		}else {
 			return;
 		}

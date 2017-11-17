@@ -26,7 +26,7 @@ import kr.or.dgit.RentCar_Project.service.CarDataService;
 public class AdminMainCarManagerRentalPrice extends JPanel {
 	private ComboBoxComponent<CarData> searchCode;
 	private RentalPriceTable rentalPriceTable;
-	private String[] details = {"선택하세요","차종&제조회사 관리","연료&고객등급 관리","초기화면"};
+	private String[] details = {"선택하세요","차종&제조회사&연료 관리","초기화면"};
 	
 	public AdminMainCarManagerRentalPrice() {
 		setBounds(100, 100, 974, 751);
@@ -117,11 +117,9 @@ public class AdminMainCarManagerRentalPrice extends JPanel {
 			JOptionPane.showMessageDialog(null, "세부사향을 선택하세요");
 			return;
 		}else if(selected==details[1]) {
-			frame.getContentPane().add(new AdminMainCarManagerCarModel_Manufacturer(), BorderLayout.CENTER);
+			frame.getContentPane().add(new AdminMainCarManagerCarDetail(), BorderLayout.CENTER);
 		}else if(selected==details[2]) {
 			frame.getContentPane().add(new AdminMainCarManagerFuel_UserGrade(), BorderLayout.CENTER);
-		}else if(selected==details[3]) {
-			frame.getContentPane().add(new AdminMainCarManager(), BorderLayout.CENTER);
 		}else {
 			return;
 		}
