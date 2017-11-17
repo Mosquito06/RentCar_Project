@@ -66,5 +66,13 @@ public class ManufacturerService implements ManufacturerDao {
 		}
 	}
 
+	@Override
+	public List<Manufacturer> findManufacturerByFacturerCode(Manufacturer manufacturerCode) {
+		try(SqlSession sqlsession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();){
+			manufacturerDao = sqlsession.getMapper(ManufacturerDao.class);
+			return manufacturerDao.findManufacturerByFacturerCode(manufacturerCode);
+		}
+	}
+
 
 }

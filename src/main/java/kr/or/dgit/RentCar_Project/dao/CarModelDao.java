@@ -10,4 +10,5 @@ public interface CarModelDao {
 	void deleteCarModel(CarModel carModelCode);
 	CarModel selectCarModelByCarModelCode(CarModel carModelCode);
 	List<CarModel> selectCarModelByAll();
+	List<CarModel> findCarModelByCarModelCode(CarModel carModelCode);
 }

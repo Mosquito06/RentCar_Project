@@ -52,6 +52,10 @@
 		<include refid="selectSql"/>
 	</select>
 	
+	<select id="findCarModelByCarModelCode" resultMap="CarModelResult">
+		<include refid="selectSql"/>
+		<include refid="wherePrimarySql"/>
+	</select>
 	<insert id="insertCarModel" parameterType="CarModel">
 		<include refid="insertSql"/>
 	</insert>

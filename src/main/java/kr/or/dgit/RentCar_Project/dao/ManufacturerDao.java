@@ -10,4 +10,5 @@ public interface ManufacturerDao {
 	void deleteManufacturer(Manufacturer manufacturerCode);
 	Manufacturer selectManufacturerByManufacturerCode(Manufacturer manufacturerCode);
 	List<Manufacturer> selectManufacturerByAll();
+	List<Manufacturer> findManufacturerByFacturerCode(Manufacturer manufacturerCode);
 }
