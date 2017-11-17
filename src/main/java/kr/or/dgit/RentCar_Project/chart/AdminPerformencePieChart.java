@@ -17,7 +17,7 @@ public class AdminPerformencePieChart extends AbstractPieChart<Rent> {
 	protected JChartLibDataSet setDataset(JChartLibSerie values, JChartLibDataSet dataset, List<Rent> items) {
 		
 		for(int i = 0; i < items.size(); i++) {
-			values.addValue(items.get(i).getFinalPrice());
+			values.addValue("", items.get(i).getFinalPrice());
 		}
 		dataset.addDataSerie(values);
 		return dataset;

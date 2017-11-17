@@ -2,6 +2,7 @@ package kr.or.dgit.RentCar_Project.frame;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -34,7 +35,7 @@ public class AdminMainPerformence extends JPanel {
 		
 		AdminPerformenceTable adminTable = new AdminPerformenceTable();
 		adminTable.setBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.LOWERED, null, null)));
-		adminTable.setBounds(0, 80, 595, 293);
+		adminTable.setBounds(8, 80, 587, 664);
 		adminTable.loadDate();
 		add(adminTable);
 		
@@ -67,10 +68,11 @@ public class AdminMainPerformence extends JPanel {
 		AbstractPieChart<Rent> abstractPieChahrt = new AdminPerformencePieChart("성과분석", "", "", items);
 		JChartLibPanel jChart = abstractPieChahrt.getPieChart();
 				
+		
 		JPanel chartPanel = new JPanel();
 		chartPanel.setLayout(new BorderLayout(0, 0));
 		chartPanel.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.LOWERED, null, null)), "\uACB0\uACFC\uC694\uC57D", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		chartPanel.setBounds(0, 383, 595, 358);
+		chartPanel.setBounds(601, 374, 373, 333);
 		chartPanel.add(jChart, BorderLayout.CENTER);
 		add(chartPanel);
 		

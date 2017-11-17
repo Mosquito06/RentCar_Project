@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Rent {
+	private int rentCode;
 	private Situation situation;
 	private User userCode;
 	private String userTime;
@@ -31,6 +32,14 @@ public class Rent {
 		this.discountPrice = discountPrice;
 		this.finalPrice = finalPrice;
 		this.carCode = carCode;
+	}
+
+	public int getRentCode() {
+		return rentCode;
+	}
+
+	public void setRentCode(int rentCode) {
+		this.rentCode = rentCode;
 	}
 
 	public User getUserCode() {
@@ -119,17 +128,19 @@ public class Rent {
 		DecimalFormat DeciFormat = new DecimalFormat("#,##0");
 
 		return new Object[] { getSituationTostring(rent), carCode.getCarCode(), carCode.getCarName(),
-				carCode.getCarOld(), carCode.getIsAuto(), carCode.getCarSeater(), getFuelTostring(),
-				userTime, getIsInsuranceTostring(), sdf.format(dayStart), sdf.format(dayEnd),  DeciFormat.format(discountPrice), DeciFormat.format(finalPrice) };
+				carCode.getCarOld(), carCode.getIsAuto(), carCode.getCarSeater(), getFuelTostring(), userTime,
+				getIsInsuranceTostring(), sdf.format(dayStart), sdf.format(dayEnd), DeciFormat.format(discountPrice),
+				DeciFormat.format(finalPrice) };
 	}
 
 	// 성과관리 토탈 ToArray
 	public Object[] PerformenceToTaltoArray() {
 		DecimalFormat DeciFormat = new DecimalFormat("#,##0");
-		
-		return new Object[] {carCode.getCarModelCode().getCarModel(), "-", "-", userTime, DeciFormat.format(discountPrice), DeciFormat.format(finalPrice)};
+
+		return new Object[] { carCode.getCarModelCode().getCarModel(), "-", "-", userTime,
+				DeciFormat.format(discountPrice), DeciFormat.format(finalPrice) };
 	}
-	
+
 	private Object getSituationTostring(Date endDate) {
 		Date CurrentDate = new Date();
 		int CompareDate = endDate.compareTo(CurrentDate);
@@ -148,26 +159,25 @@ public class Rent {
 	}
 
 	private Object getIsInsuranceTostring() {
-		if(isInsurance.equals(IsInsurance.TRUE)) {
+		if (isInsurance.equals(IsInsurance.TRUE)) {
 			return "가입";
-		}else {
+		} else {
 			return "미가입";
 		}
 	}
-	
+
 	private Object getFuelTostring() {
 		String FuelType = carCode.getFuelCode().getFuelCode();
-		
-		if(FuelType.equals("D")) {
+
+		if (FuelType.equals("D")) {
 			return "경유";
-		}else if(FuelType.equals("EV")) {
+		} else if (FuelType.equals("EV")) {
 			return "전기";
-		}else if(FuelType.equals("G")){
+		} else if (FuelType.equals("G")) {
 			return "휘발유";
-		}else {
+		} else {
 			return "LPG";
 		}
 	}
 
-	
 }

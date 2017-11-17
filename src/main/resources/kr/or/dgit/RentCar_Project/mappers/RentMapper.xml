@@ -15,6 +15,7 @@
 	</resultMap>
 	
 	<resultMap type="Rent" id="RentJoinCarDataResult">
+		<result property="rentCode" column="rent_code"/>
 		<result property="situation" column="situation"/>
 		<result property="userTime" column="use_time"/>
 		<result property="isInsurance" column="is_insurance"/>
@@ -26,6 +27,7 @@
 	</resultMap>
 	
 	<resultMap type="Rent" id="JoinCarDataAndCarModelAndManufacturer">
+		<result property="rentCode" column="rent_code"/>
 		<result property="userTime" column="sum(use_time)"/>
 		<result property="discountPrice" column="sum(discount_price)"/>
 		<result property="finalPrice" column="sum(final_price)"/>
@@ -108,7 +110,7 @@
 	</delete>
 	
 	<select id="selectRentJoinCarData" parameterType="Rent" resultMap="RentJoinCarDataResult">
-		select situation, car_data.car_code, car_name, car_old, is_auto, car_seater, fuel_code, use_time, 
+		select rent_code, situation, car_data.car_code, car_name, car_old, is_auto, car_seater, fuel_code, use_time, 
 		is_insurance, day_start, day_end, discount_Price, final_price from rent join car_data on rent.car_code = car_data.car_code
 		where user_code = #{userCode.userCode} and day_start &gt;= #{dayStart} and day_end &lt;= #{dayEnd} order by day_start
 	</select>
@@ -126,7 +128,7 @@
 	</update>
 	
 	<select id="selectPerformenceTotal" resultMap="JoinCarDataAndCarModelAndManufacturer">
-		select car_model, manufacturer_name, car_name, sum(use_time), sum(discount_price), 
+		select rent_code, car_model, manufacturer_name, car_name, sum(use_time), sum(discount_price), 
 		sum(final_price) from car_data join manufacturer on car_data.manufacturer_code = manufacturer.manufacturer_code
 		join car_model on car_data.car_model_code = car_model.car_model_code join rent on car_data.car_code = rent.car_code group by car_model
 	</select>
