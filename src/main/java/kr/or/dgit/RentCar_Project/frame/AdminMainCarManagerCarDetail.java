@@ -65,6 +65,7 @@ public class AdminMainCarManagerCarDetail extends JPanel implements ActionListen
 		manufacturerPanel.add(inputManufacturer);
 		
 		mfTable = new ManufacturerTable();
+		mfTable.setBorder(new LineBorder(new Color(0, 0, 0)));
 		mfTable.setBounds(369, 63, 416, 170);
 		mfTable.setFull(true);
 		mfTable.loadDate();
@@ -94,6 +95,7 @@ public class AdminMainCarManagerCarDetail extends JPanel implements ActionListen
 		inputCarModel.setBounds(12, 47, 345, 170);
 		carModelPanel.add(inputCarModel);
 		carModelTable = new CarModelTable();
+		carModelTable.setBorder(new LineBorder(new Color(0, 0, 0)));
 		carModelTable.setIfFull(true);
 		carModelTable.loadDate();
 		carModelTable.setBounds(369, 63, 416, 170);
