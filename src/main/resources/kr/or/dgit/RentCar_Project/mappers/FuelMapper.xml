@@ -39,9 +39,7 @@
 	</sql>
 	
 	<sql id="updateSql">
-
-		update fuel set fuel_code=#{fuelCode}, fuel_type=#{fuelType}
-
+		update fuel
 	</sql>
 	
 	<sql id="deleteSql">
@@ -73,10 +71,10 @@
 					fuel_code = #{fuelCode},
 				</if>
 				<if test="fuelType != null">
-					fuel_type = #{fuelType},
+					fuel_type = #{fuelType}
 				</if>
 			</set>
-		<include refid="wherePrimarySql"/>
+		<include refid="wherePrimarySql"/>	
 	</update>
 	
 	<delete id="deleteFule" parameterType="Fuel">

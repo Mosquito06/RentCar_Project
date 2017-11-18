@@ -2,6 +2,8 @@ package kr.or.dgit.RentCar_Project.service;
 
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import org.apache.ibatis.session.SqlSession;
 
 import kr.or.dgit.RentCar_Project.dao.FuelDao;
@@ -20,21 +22,29 @@ public class FuelService implements FuelDao {
 
 
 	@Override
-	public void insertFuel(Fuel fuel) {
+	public void insertFuel(Fuel fuel){
 		try(SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession()){
 			fuelDao = sqlSession.getMapper(FuelDao.class);
 			fuelDao.insertFuel(fuel);
 			sqlSession.commit();
+			JOptionPane.showMessageDialog(null, "추가되었습니다");
+		}catch(Exception e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "추가를 실패하였습니다");
 		}
 
 	}
 
 	@Override
-	public void updateFuel(Fuel fuel) {
+	public void updateFuel(Fuel fuel){
 		try(SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession()){
 			fuelDao = sqlSession.getMapper(FuelDao.class);
 			fuelDao.updateFuel(fuel);
 			sqlSession.commit();
+			JOptionPane.showMessageDialog(null, "수정되었습니다");
+		}catch(Exception e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null,"수정을 실패하였습니다");
 		}
 
 	}
@@ -45,6 +55,10 @@ public class FuelService implements FuelDao {
 			fuelDao = sqlSession.getMapper(FuelDao.class);
 			fuelDao.deleteFule(fuelCode);
 			sqlSession.commit();
+			JOptionPane.showMessageDialog(null, "삭제되었습니다");
+		}catch(Exception e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "삭제를 실패하였습니다.");
 		}
 
 	}

@@ -254,6 +254,7 @@ public class AdminMainCarManagerCarDetail extends JPanel implements ActionListen
 			searchCarModel.getComboBox().setSelectedIndex(0);
 		}
 		if(e.getSource()==btnSearchFuel) {
+			inputFuelPanel.isEnabledBtn(true);
 			Fuel fuelCode  = searchFuel.getComboboxValue();
 			fuelTable.setFull(false);
 			fuelTable.setFuel(fuelCode);

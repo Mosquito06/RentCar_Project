@@ -26,7 +26,7 @@ public class TestFuelService {
 		fuelService = null;
 	}
 
-	@Test
+/*	@Test
 	public void test1insertFuel() {
 		Fuel fuel = new Fuel();
 		fuel.setFuelCode("test1");
@@ -64,7 +64,7 @@ public class TestFuelService {
 		Fuel fuel = new Fuel();
 		fuel.setFuelCode("test1");
 		fuelService.deleteFule(fuel);
-	}
+	}*/
 	
 	
 	
