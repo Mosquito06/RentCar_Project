@@ -15,12 +15,13 @@ import kr.or.dgit.RentCar_Project.dto.UserGrade;
 @SuppressWarnings("serial")
 public class ComboBoxComponent<T> extends JPanel {
 	private JComboBox<T> comboBox;
+	private JLabel lbl;
 
 	
 	public ComboBoxComponent(String title) {
 		setLayout(new GridLayout(1, 0, 0, 0));
 		
-		JLabel lbl = new JLabel(title);
+		lbl = new JLabel(title);
 		lbl.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lbl);
 		
@@ -28,6 +29,11 @@ public class ComboBoxComponent<T> extends JPanel {
 		add(comboBox);
 
 
+	}
+
+
+	public JLabel getLbl() {
+		return lbl;
 	}
 
 
