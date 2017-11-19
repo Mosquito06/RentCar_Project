@@ -1,25 +1,25 @@
 package kr.or.dgit.RentCar_Project.content;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import kr.or.dgit.RentCar_Project.component.TextFieldComponent;
-import javax.swing.JButton;
-import javax.swing.SwingConstants;
-import kr.or.dgit.RentCar_Project.component.RadioComboBoxComponent;
-import kr.or.dgit.RentCar_Project.component.RadioComponent;
-import kr.or.dgit.RentCar_Project.component.PhoneTextFiedComponent;
-import java.awt.GridLayout;
-import kr.or.dgit.RentCar_Project.component.EmailTextFiedComponent;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import java.awt.Font;
-import javax.swing.border.TitledBorder;
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Vector;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
+
+import kr.or.dgit.RentCar_Project.component.RadioComponent;
+import kr.or.dgit.RentCar_Project.component.TextFieldComponent;
 
 public class MembershipFrame extends JFrame {
 
@@ -31,9 +31,10 @@ public class MembershipFrame extends JFrame {
 	private JTextField textField_4;
 
 
+
 	public MembershipFrame() {
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		setBounds(100, 100, 330, 520);
+		setBounds(100, 100, 332, 520);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -63,71 +64,75 @@ public class MembershipFrame extends JFrame {
 		panel.add(textFieldComponent_2);
 		
 		RadioComponent panel_2 = new RadioComponent("성별", "남", "여");
-		panel_2.setBounds(18, 187, 195, 28);
+		panel_2.setBounds(23, 187, 196, 28);
 		panel.add(panel_2);
 		
-		TextFieldComponent panel_3 = new TextFieldComponent("생년월일");
-		panel_3.setBounds(3, 225, 216, 28);
-		panel.add(panel_3);
-		
 		JPanel panel_4 = new JPanel();
-		panel_4.setBounds(9, 263, 238, 28);
+		panel_4.setBounds(9, 263, 263, 28);
 		panel.add(panel_4);
 		panel_4.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("핸드폰");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(0, 0, 57, 28);
+		lblNewLabel.setBounds(0, 0, 67, 28);
 		panel_4.add(lblNewLabel);
 		
 		textField_1 = new JTextField();
 		textField_1.setHorizontalAlignment(SwingConstants.CENTER);
 		textField_1.setColumns(10);
-		textField_1.setBounds(127, 1, 50, 28);
+		textField_1.setBounds(141, 1, 55, 28);
 		panel_4.add(textField_1);
 		
 		textField_2 = new JTextField();
 		textField_2.setHorizontalAlignment(SwingConstants.CENTER);
 		textField_2.setColumns(10);
-		textField_2.setBounds(187, 1, 51, 28);
+		textField_2.setBounds(208, 1, 55, 28);
 		panel_4.add(textField_2);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(58, 0, 57, 28);
-		panel_4.add(comboBox);
+		String[] phoneArr = {"010","011","016","017","018","019"}; 
+		
+		DefaultComboBoxModel<String> modelPhone=new DefaultComboBoxModel<>(phoneArr);
+		
+		JComboBox<String> comboPhone = new JComboBox<>(modelPhone);
+		comboPhone.setBounds(69, 0, 60, 28);
+		panel_4.add(comboPhone);
 		
 		JLabel lblNewLabel_1 = new JLabel("-");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setBounds(115, 0, 11, 28);
+		lblNewLabel_1.setBounds(130, 0, 11, 28);
 		panel_4.add(lblNewLabel_1);
 		
 		JLabel label = new JLabel("-");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
-		label.setBounds(177, 0, 11, 28);
+		label.setBounds(197, 0, 11, 28);
 		panel_4.add(label);
 		
 		JPanel panel_5 = new JPanel();
-		panel_5.setBounds(9, 301, 238, 28);
+		panel_5.setBounds(9, 301, 285, 28);
 		panel.add(panel_5);
 		panel_5.setLayout(null);
 		
 		JLabel lblNewLabel_2 = new JLabel("이메일");
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_2.setBounds(0, 0, 57, 28);
+		lblNewLabel_2.setBounds(0, 0, 67, 28);
 		panel_5.add(lblNewLabel_2);
 		
 		textField = new JTextField();
-		textField.setBounds(56, 0, 98, 28);
+		textField.setBounds(68, 1, 95, 28);
 		panel_5.add(textField);
 		textField.setColumns(10);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(166, 0, 72, 28);
-		panel_5.add(comboBox_1);
+		String[] emailArr = {"직접입력","naver.com","gmail.com","nate.com","daum.net"};
+		
+		DefaultComboBoxModel<String> modelEmail=new DefaultComboBoxModel<>(emailArr);
+		
+		JComboBox<String> comboEmail = new JComboBox<>(modelEmail);
+		comboEmail.setBounds(182, 0, 95, 28);
+		panel_5.add(comboEmail);
 		
 		JLabel lblNewLabel_3 = new JLabel("@");
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_3.setBounds(154, 0, 12, 28);
+		lblNewLabel_3.setBounds(163, 0, 19, 28);
 		panel_5.add(lblNewLabel_3);
 		
 		JPanel panel_6 = new JPanel();
@@ -137,40 +142,41 @@ public class MembershipFrame extends JFrame {
 		
 		JLabel lblNewLabel_4 = new JLabel("주소");
 		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_4.setBounds(0, 0, 57, 59);
+		lblNewLabel_4.setBounds(0, 0, 68, 59);
 		panel_6.add(lblNewLabel_4);
 		
 		textField_3 = new JTextField();
-		textField_3.setBounds(56, 0, 129, 28);
+		textField_3.setBounds(69, 0, 116, 28);
 		panel_6.add(textField_3);
 		textField_3.setColumns(10);
 		
 		textField_4 = new JTextField();
 		textField_4.setColumns(10);
-		textField_4.setBounds(56, 31, 207, 28);
+		textField_4.setBounds(69, 31, 194, 28);
 		panel_6.add(textField_4);
 		
-		JButton btnNewButton_4 = new JButton("주소검색");
-		btnNewButton_4.setFont(new Font("굴림", Font.PLAIN, 11));
-		btnNewButton_4.setBounds(186, 0, 76, 28);
-		panel_6.add(btnNewButton_4);
+		JButton btnAddr = new JButton("주소검색");
+		btnAddr.setFont(new Font("굴림", Font.PLAIN, 11));
+		btnAddr.setBounds(186, 0, 76, 28);
+		panel_6.add(btnAddr);
 		
-		JButton btnNewButton = new JButton("가입");
-		btnNewButton.setBounds(31, 414, 97, 38);
-		panel.add(btnNewButton);
+		JButton btnAdd = new JButton("가입");
+		btnAdd.setBounds(31, 414, 97, 38);
+		panel.add(btnAdd);
 		
-		JButton btnNewButton_1 = new JButton("취소");
-		btnNewButton_1.setBounds(175, 414, 97, 38);
-		panel.add(btnNewButton_1);
+		JButton btnCancel = new JButton("취소");
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+			}
+		});
+		btnCancel.setBounds(175, 414, 97, 38);
+		panel.add(btnCancel);
 		
-		JButton btnNewButton_2 = new JButton("중복검사");
-		btnNewButton_2.setFont(new Font("굴림", Font.PLAIN, 11));
-		btnNewButton_2.setBounds(222, 35, 76, 28);
-		panel.add(btnNewButton_2);
-		
-		JButton btnNewButton_3 = new JButton();
-		btnNewButton_3.setBounds(222, 225, 35, 28);
-		panel.add(btnNewButton_3);
+		JButton btnTest = new JButton("중복검사");
+		btnTest.setFont(new Font("굴림", Font.PLAIN, 11));
+		btnTest.setBounds(222, 35, 76, 28);
+		panel.add(btnTest);
 		
 		JLabel lblNewLabel_5 = new JLabel("불가능합니다");
 		lblNewLabel_5.setForeground(Color.RED);
@@ -183,5 +189,64 @@ public class MembershipFrame extends JFrame {
 		lblDlfclgkqslek.setFont(new Font("굴림", Font.PLAIN, 11));
 		lblDlfclgkqslek.setBounds(222, 111, 76, 28);
 		panel.add(lblDlfclgkqslek);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBounds(3, 225, 291, 28);
+		panel.add(panel_3);
+		panel_3.setLayout(null);
+		
+		JLabel lblNewLabel_6 = new JLabel("생년월일");
+		lblNewLabel_6.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_6.setBounds(0, 0, 75, 28);
+		panel_3.add(lblNewLabel_6);
+		
+		Vector<String> yearArr = new Vector<>();
+		for(int i=1997;i>1900;i--) {
+			yearArr.addElement(i+"");
+		}
+		
+		DefaultComboBoxModel<String> modelYear=new DefaultComboBoxModel<>(yearArr);
+		
+		JComboBox<String> comboYear = new JComboBox<>(modelYear);
+		
+		comboYear.setBounds(74, 0, 65, 28);
+		panel_3.add(comboYear);
+		
+		JLabel lblNewLabel_7 = new JLabel("년");
+		lblNewLabel_7.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_7.setBounds(140, 0, 17, 28);
+		panel_3.add(lblNewLabel_7);
+		
+		Vector<String> monthArr = new Vector<>();
+		for(int i=1;i<13;i++) {
+			monthArr.addElement(i+"");
+		}
+		
+		DefaultComboBoxModel<String> modelMonth=new DefaultComboBoxModel<>(monthArr);
+		
+		JComboBox<String> comboMonth = new JComboBox<>(modelMonth);
+		comboMonth.setBounds(157, 0, 50, 28);
+		panel_3.add(comboMonth);
+		
+		Vector<String> dayArr = new Vector<>();
+		for(int i=1;i<32;i++) {
+			dayArr.addElement(i+"");
+		}
+		
+		DefaultComboBoxModel<String> modelDay=new DefaultComboBoxModel<>(dayArr);
+		
+		JComboBox<String> comboDay = new JComboBox<>(modelDay);
+		comboDay.setBounds(224, 0, 50, 28);
+		panel_3.add(comboDay);
+		
+		JLabel label_1 = new JLabel("월");
+		label_1.setHorizontalAlignment(SwingConstants.CENTER);
+		label_1.setBounds(208, 0, 17, 28);
+		panel_3.add(label_1);
+		
+		JLabel label_2 = new JLabel("일");
+		label_2.setHorizontalAlignment(SwingConstants.CENTER);
+		label_2.setBounds(274, 0, 17, 28);
+		panel_3.add(label_2);
 	}
 }
