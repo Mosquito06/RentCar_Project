@@ -48,6 +48,9 @@ public class ReserveAddCarContent extends JPanel {
 			String fuelType = fuelService.selectFuelByFuelCode(fuelCode).getFuelType();
 
 			String auto = carCode.getIsAuto().toString();
+			if(auto.equals("MANUAL")) {
+				auto="수동";
+			}
 			int dPrice = userGradeService.selectUserGradeByGrade(user).getDiscount();
 
 			int dTotalPrice = ((price + btPrice * bTime + otPrice * (time - bTime)) * (dPrice)) / 100;

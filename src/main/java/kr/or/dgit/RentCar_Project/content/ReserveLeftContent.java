@@ -15,8 +15,6 @@ import kr.or.dgit.RentCar_Project.dto.Manufacturer;
 import kr.or.dgit.RentCar_Project.service.CarDataService;
 import kr.or.dgit.RentCar_Project.service.FuelService;
 import kr.or.dgit.RentCar_Project.service.ManufacturerService;
-import javax.swing.border.LineBorder;
-import java.awt.Color;
 
 @SuppressWarnings("serial")
 public class ReserveLeftContent extends JPanel {
@@ -25,10 +23,16 @@ public class ReserveLeftContent extends JPanel {
 	private ComboBoxComponent<Fuel> comboBoxFuel;
 	private ComboBoxComponent<CarData> comboBoxOld;
 	private ComboBoxComponent<CarData> comboBoxSeater;
-	private ComboBoxComponent<CarData> comboBoxCarName;
 	private JButton btnExit;
 	private RadioComponent isInsurance;
 	private RadioComponent isAuto;
+	private JButton btnReset;
+	
+	
+
+	public JButton getBtnReset() {
+		return btnReset;
+	}
 
 	public ComboBoxComponent<Manufacturer> getComboBoxManufacturer() {
 		return comboBoxManufacturer;
@@ -44,10 +48,6 @@ public class ReserveLeftContent extends JPanel {
 
 	public ComboBoxComponent<CarData> getComboBoxSeater() {
 		return comboBoxSeater;
-	}
-
-	public ComboBoxComponent<CarData> getComboBoxCarName() {
-		return comboBoxCarName;
 	}
 
 	public RadioComponent getIsAuto() {
@@ -67,16 +67,16 @@ public class ReserveLeftContent extends JPanel {
 		setLayout(null);
 
 		comboBoxManufacturer = new ComboBoxComponent<>("제조회사  ");
-		comboBoxManufacturer.setBounds(26, 129, 191, 36);
+		comboBoxManufacturer.setBounds(26, 82, 191, 36);
 		add(comboBoxManufacturer);
 
 		comboBoxFuel = new ComboBoxComponent<>("연료종류  ");
 		
-		comboBoxFuel.setBounds(26, 209, 191, 36);
+		comboBoxFuel.setBounds(26, 179, 191, 36);
 		add(comboBoxFuel);
 
 		comboBoxOld = new ComboBoxComponent<>("연식  ");
-		comboBoxOld.setBounds(26, 288, 191, 36);
+		comboBoxOld.setBounds(26, 270, 191, 36);
 		add(comboBoxOld);
 
 		comboBoxSeater = new ComboBoxComponent<>("인승  ");
@@ -97,16 +97,12 @@ public class ReserveLeftContent extends JPanel {
 		btnExit.setBounds(94, 598, 137, 53);
 		add(btnExit);
 		
-		JButton btnNewButton = new JButton("");
-		btnNewButton.setIcon(new ImageIcon(System.getProperty("user.dir")+"\\images\\reset.png"));
-		btnNewButton.setBounds(26, 598, 56, 53);
-		add(btnNewButton);
-		
-				comboBoxCarName = new ComboBoxComponent<>("상세 차 검색  ");
-				comboBoxCarName.setBounds(26, 58, 191, 36);
-				add(comboBoxCarName);
+		btnReset = new JButton("");
+		btnReset.setIcon(new ImageIcon(System.getProperty("user.dir")+"\\images\\reset.png"));
+		btnReset.setBounds(26, 598, 56, 53);
+		add(btnReset);
+
 		setManufacturerBoxModel();
-		setCarDataNameBoxModel();
 		setFuelBoxModel();
 		setCarDataOldBoxModel();
 		setCarDataSeaterBoxModel();
@@ -160,14 +156,5 @@ public class ReserveLeftContent extends JPanel {
 		comboBoxSeater.setComboBoxModel(carData);
 	}
 
-	public void setCarDataNameBoxModel() {
-		CarDataService carDataService = CarDataService.getInstance();
-		List<CarData> lists = carDataService.selectCarDataByAll();
-		Vector<CarData> carData = new Vector<>(lists);
-		for (CarData c : lists) {
-			c.setComboType(1);
-			carData.add(c);
-		}
-		comboBoxCarName.setComboBoxModel(carData);
-	}
+	
 }

@@ -26,6 +26,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 
+import kr.or.dgit.RentCar_Project.content.MembershipFrame;
 import kr.or.dgit.RentCar_Project.dao.UserDao;
 import kr.or.dgit.RentCar_Project.dto.User;
 import kr.or.dgit.RentCar_Project.service.UserService;
@@ -256,6 +257,16 @@ public class Login extends JFrame {
 		JButton btnRegister = new JButton("회원가입");
 		btnRegister.setBounds(442, 386, 97, 23);
 		contentPane.add(btnRegister);
+		
+		btnRegister.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MembershipFrame frame = new MembershipFrame();
+				frame.setVisible(true);
+			}
+		});
+		
 		
 		JButton btnDb = new JButton("DB설치하기");
 		btnDb.addActionListener(new ActionListener() {
