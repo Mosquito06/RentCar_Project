@@ -202,10 +202,9 @@ public class AdminMainPerformence extends JPanel {
 		 
 		 // 그래프 변경
 		 abstractPieChart = new PerformenceMonthPieChart("성과분석", "", "", list, false);
-		 // 자세히 보기 차트 출력을 위한 별도의 파이 차트 생성 및 바 차트 생성
+		 // 자세히 보기 차트 출력을 위한  바 차트 생성
 		 abstractBarChart = new  PerformenceTotalBarChart("성과분석", "차종별", "최종요금", list);
-		 
-		 
+		 		 
 		 chartPanel.removeAll();
 		 JChartLibPanel jChart = abstractPieChart.getPieChart();
 		 chartPanel.add(jChart, BorderLayout.CENTER);
