@@ -107,7 +107,7 @@ public class Login extends JFrame {
 		IdField.addKeyListener(new KeyAdapter() {
 
 			@Override
-			public void keyPressed(KeyEvent e) {
+			public void keyReleased(KeyEvent e) {
 				// 아이디 정규표현식
 				Pattern p = Pattern.compile("(^[a-zA-Z0-9]{10,15}$)");
 				Matcher m = p.matcher(IdField.getText());
@@ -146,7 +146,7 @@ public class Login extends JFrame {
 		PwField.addKeyListener(new KeyAdapter() {
 
 			@Override
-			public void keyPressed(KeyEvent e) {
+			public void keyReleased(KeyEvent e) {
 				// 비밀번호 정규표현식
 				Pattern p = Pattern.compile("(^[a-zA-Z0-9!@#$%^&*()]{9,15}$)");
 				Matcher m = p.matcher(PwField.getText());
