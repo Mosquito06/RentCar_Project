@@ -27,6 +27,26 @@ public class User {
 		this.gender = gender;
 		this.grade = grade;
 	}
+	
+	
+
+
+
+
+	public User(String id, String pw, String userName, String phone, String email, Gender gender) {
+		super();
+		this.id = id;
+		this.pw = pw;
+		this.userName = userName;
+		this.phone = phone;
+		this.email = email;
+		this.gender = gender;
+	}
+
+
+
+
+
 
 	public User() {
 		super();

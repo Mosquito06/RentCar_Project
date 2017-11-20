@@ -7,6 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.List;
@@ -21,6 +23,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
@@ -29,13 +32,9 @@ import javax.swing.border.TitledBorder;
 import kr.or.dgit.RentCar_Project.component.RadioComponent;
 import kr.or.dgit.RentCar_Project.component.TextFieldComponent;
 import kr.or.dgit.RentCar_Project.dao.UserDao;
+import kr.or.dgit.RentCar_Project.dto.Gender;
 import kr.or.dgit.RentCar_Project.dto.User;
 import kr.or.dgit.RentCar_Project.service.UserService;
-import java.awt.GridLayout;
-import javax.swing.JPasswordField;
-import java.awt.GridBagLayout;
-import java.awt.event.ItemListener;
-import java.awt.event.ItemEvent;
 
 @SuppressWarnings("serial")
 public class MembershipFrame extends JFrame {
@@ -140,6 +139,8 @@ public class MembershipFrame extends JFrame {
 		DefaultComboBoxModel<String> modelEmail=new DefaultComboBoxModel<>(emailArr);
 		
 		JComboBox<String> comboEmail = new JComboBox<>(modelEmail);
+		
+		
 		comboEmail.setBounds(285, 0, 95, 28);
 		panel_5.add(comboEmail);
 		
@@ -179,7 +180,11 @@ public class MembershipFrame extends JFrame {
 		panel_6.add(btnAddr);
 		
 		JButton btnAdd = new JButton("가입");
-		btnAdd.setBounds(66, 430, 97, 44);
+		btnAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnAdd.setBounds(66, 430, 108, 44);
 		panel.add(btnAdd);
 		
 		JButton btnCancel = new JButton("취소");
@@ -188,7 +193,7 @@ public class MembershipFrame extends JFrame {
 				setVisible(false);
 			}
 		});
-		btnCancel.setBounds(262, 430, 97, 44);
+		btnCancel.setBounds(251, 430, 108, 44);
 		panel.add(btnCancel);
 		
 		tfId.getTextField().addKeyListener(new KeyAdapter() {
@@ -318,25 +323,29 @@ public class MembershipFrame extends JFrame {
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(3, 73, 231, 28);
 		panel.add(panel_1);
-		panel_1.setLayout(new GridLayout(1, 1, 0, 0));
+		panel_1.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("비밀번호");
+		lblNewLabel.setBounds(0, 0, 115, 28);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_1.add(lblNewLabel);
 		
 		tfPw = new JPasswordField();
+		tfPw.setBounds(118, 0, 113, 28);
 		panel_1.add(tfPw);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBounds(3, 111, 231, 28);
 		panel.add(panel_2);
-		panel_2.setLayout(new GridLayout(1, 0, 0, 0));
+		panel_2.setLayout(null);
 		
 		JLabel lblNewLabel_5 = new JLabel("비밀번호확인");
+		lblNewLabel_5.setBounds(0, 0, 115, 28);
 		lblNewLabel_5.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_2.add(lblNewLabel_5);
 		
 		tfTestPw = new JPasswordField();
+		tfTestPw.setBounds(118, 0, 113, 28);
 		panel_2.add(tfTestPw);
 		
 		
@@ -396,8 +405,8 @@ public class MembershipFrame extends JFrame {
 		});
 		
 		
-		comboPhone.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent e) {
+		comboPhone.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				tfNum1.requestFocus();
 			}
 		});
@@ -414,27 +423,84 @@ public class MembershipFrame extends JFrame {
 					if (m.find()) {
 						
 					}
-					
 				}
 			}
 		});
+		
+		tfNum1.addFocusListener(new FocusListener() {
+			public void focusLost(FocusEvent e) {}
+			@Override
+			public void focusGained(FocusEvent e) {
+				tfNum1.setText("");
+			}
+		});
+		
 		
 		tfNum2.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
 				
 				if(tfNum2.getText().length()==4) {
-					tfNum2.requestFocus();
-					Pattern p = Pattern.compile("(^[0-9]{3,4}$)");
-					Matcher m = p.matcher(tfNum1.getText());
+					tfEmail1.requestFocus();
+					Pattern p = Pattern.compile("(^[0-9]{4}$)");
+					Matcher m = p.matcher(tfNum2.getText());
 					
 					if (m.find()) {
 						
 					}
-					
 				}
 			}
 		});
+		
+		tfNum2.addFocusListener(new FocusListener() {
+			public void focusLost(FocusEvent e) {}
+			@Override
+			public void focusGained(FocusEvent e) {
+				tfNum2.setText("");
+			}
+		});
+		
+		
+		comboEmail.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				Object obj=comboEmail.getSelectedItem();
+				if(!obj.equals("직접입력")) {
+					tfEmail2.setText(String.valueOf(obj));
+					tfEmail2.setEnabled(false);
+				}else {
+					tfEmail2.setText("");
+					tfEmail2.setEnabled(true);
+					tfEmail2.requestFocus();
+				}
+			}
+		});
+		
+		
+		btnAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				UserDao userDao = UserService.getInstance();
+				String id = tfId.getTextValue();
+				String pw = tfPw.getText();
+				String userName = tfName.getTextValue();
+				String phone = comboPhone.getSelectedItem()+"-"+tfNum1.getText()+"-"+tfNum2.getText();
+				String email = tfEmail1.getText()+"@"+tfEmail2.getText();
+				Gender gender;
+				if(genderRadio.getSelectText().equals("남")) {
+					gender=Gender.MALE;
+				}else {
+					gender=Gender.FEMALE;
+				}
+				
+				User user = new User(id, pw, userName, phone, email, gender);
+				userDao.insertUser(user);
+				
+				JOptionPane.showMessageDialog(null, "가입이 완료되었습니다.");
+				setVisible(false);
+			}
+		});
+		
+		
+		
 		
 		
 		
