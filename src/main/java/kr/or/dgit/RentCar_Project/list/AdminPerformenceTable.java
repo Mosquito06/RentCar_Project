@@ -8,6 +8,15 @@ import kr.or.dgit.RentCar_Project.dto.Rent;
 import kr.or.dgit.RentCar_Project.service.RentService;
 
 public class AdminPerformenceTable extends AbstractTable {
+	
+	private List<Rent> list;
+	private int toStringType;
+	
+	public AdminPerformenceTable(List<Rent> list, int toStringType) {
+		super();
+		this.list = list;
+		this.toStringType = toStringType;
+	}
 
 	@Override
 	protected void setAlignWidth() {
@@ -19,12 +28,11 @@ public class AdminPerformenceTable extends AbstractTable {
 
 	@Override
 	protected Object[][] getData() {
-		List<Rent> list = RentService.getInstance().selectPerformenceTotal();
 		Object[][] datas = new Object[list.size()][];
 
 		for (int i = 0; i < list.size(); i++) {
 			Rent rentObject = list.get(i);
-			datas[i] = rentObject.PerformenceToTaltoArray();
+			datas[i] = rentObject.PerformenceToTaltoArray(toStringType);
 		}
 
 		return datas;

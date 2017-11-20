@@ -93,17 +93,19 @@ public class PerformenceContent extends JPanel {
 		group.add(fuelBox.getRadioButton());
 	}
 
-	public JComboBox selectGetComboBox() {
+	public Object[] selectGetObject() {
 		Enumeration<AbstractButton> selectObject = group.getElements();
 		while (selectObject.hasMoreElements()) {
 			JRadioButton jb = (JRadioButton) selectObject.nextElement();
 			if (jb.isSelected()) {
 				Object[] content = jb.getParent().getComponents();
-				for (int i = 0; i < content.length; i++) {
+				return content;
+				
+				/*for (int i = 0; i < content.length; i++) {
 					if (content[i] instanceof JComboBox) {
 						return (JComboBox) content[i];
 					}
-				}
+				}*/
 			}
 		}
 		return null;

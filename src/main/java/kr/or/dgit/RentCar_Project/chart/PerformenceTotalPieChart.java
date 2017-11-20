@@ -16,12 +16,12 @@ public class PerformenceTotalPieChart extends AbstractPieChart<Rent> {
 	@Override
 	protected JChartLibDataSet setDataset(JChartLibSerie values, JChartLibDataSet dataset, List<Rent> items, boolean UseName) {
 		if(!UseName) {
-			for(int i = 0; i < items.size(); i++) {
+			for(int i = 0; i < items.size()-1; i++) {
 				values.addValue("", items.get(i).getFinalPrice());
 			}
 			dataset.addDataSerie(values);
 		}else {
-			for(int i = 0; i < items.size(); i++) {
+			for(int i = 0; i < items.size()-1; i++) {
 				values.addValue(items.get(i).getCarCode().getCarModelCode().getCarModel(), items.get(i).getFinalPrice());
 			}
 			dataset.addDataSerie(values);
