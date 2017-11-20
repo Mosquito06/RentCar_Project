@@ -134,11 +134,17 @@ public class Rent {
 	}
 
 	// 성과관리 토탈 ToArray
-	public Object[] PerformenceToTaltoArray() {
+	public Object[] PerformenceToTaltoArray(int toStringType) {
 		DecimalFormat DeciFormat = new DecimalFormat("#,##0");
 
-		return new Object[] { carCode.getCarModelCode().getCarModel(), "-", "-", userTime,
-				DeciFormat.format(discountPrice), DeciFormat.format(finalPrice) };
+		if(toStringType == 0) {
+			return new Object[] { carCode.getCarModelCode().getCarModel(), "-", "-", 
+					userTime, DeciFormat.format(discountPrice), DeciFormat.format(finalPrice) };
+		}else {
+			return null;
+		}
+		
+		
 	}
 
 	private Object getSituationTostring(Date endDate) {
