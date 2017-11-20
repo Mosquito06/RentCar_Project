@@ -23,6 +23,12 @@ public class RentalPrice {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+
+	public RentalPrice(CarData carCode) {
+		super();
+		this.carCode = carCode;
+	}
 
 	public CarData getCarCode() {
 		return carCode;

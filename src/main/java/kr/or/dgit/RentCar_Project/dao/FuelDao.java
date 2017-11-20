@@ -11,6 +11,6 @@ public interface FuelDao{
 	void deleteFule(Fuel fuelCode);
 	Fuel selectFuelByFuelCode(Fuel fuelCode);
 	List<Fuel> selectFuelByAll();
-	List<Fuel> FindFuelByFuelCode(Fuel fuelCode);
+	List<Fuel> findFuelByFuelCode(Fuel fuelCode);
 }
  

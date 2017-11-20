@@ -19,14 +19,17 @@ import javax.swing.border.TitledBorder;
 import kr.or.dgit.RentCar_Project.component.ComboBoxComponent;
 import kr.or.dgit.RentCar_Project.content.RentalPriceManagerContent;
 import kr.or.dgit.RentCar_Project.dto.CarData;
+import kr.or.dgit.RentCar_Project.dto.RentalPrice;
 import kr.or.dgit.RentCar_Project.list.RentalPriceTable;
 import kr.or.dgit.RentCar_Project.service.CarDataService;
 
 @SuppressWarnings("serial")
-public class AdminMainCarManagerRentalPrice extends JPanel {
+public class AdminMainCarManagerRentalPrice extends JPanel implements ActionListener{
 	private ComboBoxComponent<CarData> searchCode;
 	private RentalPriceTable rentalPriceTable;
 	private String[] details = {"선택하세요","차종&제조회사&연료 관리","초기화면"};
+	private JButton btnSearch;
+	private JButton btnAll;
 	
 	public AdminMainCarManagerRentalPrice() {
 		setBounds(100, 100, 974, 751);
@@ -43,22 +46,21 @@ public class AdminMainCarManagerRentalPrice extends JPanel {
 		totalPanel.add(inputPanel);
 		
 		JPanel listPanel = new JPanel();
-		listPanel.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), " \uC804\uCCB4 \uBCF4\uAE30 ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		listPanel.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), " \uCC28\uB7C9 \uAC00\uACA9 \uB9AC\uC2A4\uD2B8 ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		listPanel.setBounds(310, 43, 624, 634);
 		totalPanel.add(listPanel);
 		listPanel.setLayout(null);
-		
-		JPanel panel = new JPanel();
-		panel.setBounds(12, 75, 600, 561);
-		listPanel.add(panel);
-		panel.setLayout(new BorderLayout(0, 0));
 		rentalPriceTable = new RentalPriceTable();
+		rentalPriceTable.setBounds(12, 105, 600, 519);
+		listPanel.add(rentalPriceTable);
+		rentalPriceTable.setFull(true);
 		rentalPriceTable.loadDate();
-		panel.add(rentalPriceTable,BorderLayout.CENTER);
+		inputPanel.setRentalPriceTable(rentalPriceTable);
+		
 		
 		JPanel searchPanel = new JPanel();
 		searchPanel.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), " \uAC80\uC0C9 ", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		searchPanel.setBounds(95, 10, 440, 55);
+		searchPanel.setBounds(12, 30, 440, 55);
 		listPanel.add(searchPanel);
 		searchPanel.setLayout(null);
 		
@@ -66,13 +68,19 @@ public class AdminMainCarManagerRentalPrice extends JPanel {
 		searchCode.setBounds(74, 15, 244, 28);
 		searchPanel.add(searchCode);
 		
-		JButton btnSearch = new JButton("검색");
+		btnSearch = new JButton("검색");
 		btnSearch.setBounds(331, 15, 97, 28);
+		btnSearch.addActionListener(this);
 		searchPanel.add(btnSearch);
 		
-		JButton button = new JButton("세부사항 관리");
-		button.setBounds(819, 20, 115, 23);
-		button.addActionListener(new ActionListener() {
+		btnAll = new JButton("전체보기");
+		btnAll.setBounds(515, 26, 97, 28);
+		btnAll.addActionListener(this);
+		listPanel.add(btnAll);
+		
+		JButton btnDetail = new JButton("세부사항 관리");
+		btnDetail.setBounds(819, 20, 115, 23);
+		btnDetail.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -80,7 +88,7 @@ public class AdminMainCarManagerRentalPrice extends JPanel {
 				openDetailFrame(selected);
 			}
 		});
-		totalPanel.add(button);
+		totalPanel.add(btnDetail);
 		
 		JButton btnBack = new JButton("나가기");
 		btnBack.addActionListener(new ActionListener() {
@@ -124,5 +132,24 @@ public class AdminMainCarManagerRentalPrice extends JPanel {
 			return;
 		}
 		frame.setVisible(true);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		
+		if(e.getSource()==btnSearch) {
+			CarData cd = new CarData();
+			cd.setCarCode(searchCode.getComboboxValue().getCarCode());
+			RentalPrice carCode = new RentalPrice();
+			carCode.setCarCode(cd);
+			rentalPriceTable.setFull(false);
+			rentalPriceTable.setCarCode(carCode);
+			rentalPriceTable.loadDate();
+		}
+		if(e.getSource()==btnAll) {
+			rentalPriceTable.setFull(true);
+			rentalPriceTable.loadDate();
+		}
+		
 	}
 }
