@@ -150,11 +150,5 @@ public class TestRentService {
 		List<Rent> list = rentService.selectPerformenceTotal();
 		Assert.assertNotNull(list);
 	}*/
-	
-	@Test
-	public void selectPerformenceMonth() {
-		
-		List<Rent> list = rentService.selectPerformenceMonth("20170131");
-		Assert.assertNotNull(list);
-	}
+
 }
