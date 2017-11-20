@@ -29,17 +29,16 @@ import kr.or.dgit.RentCar_Project.list.ManufacturerTable;
 import kr.or.dgit.RentCar_Project.service.CarModelService;
 import kr.or.dgit.RentCar_Project.service.FuelService;
 import kr.or.dgit.RentCar_Project.service.ManufacturerService;
+import kr.or.dgit.RentCar_Project.content.CarModellListManagerContent;
 
 @SuppressWarnings("serial")
 public class AdminMainCarManagerCarDetail extends JPanel implements ActionListener {
 	
 	private ManufacturerTable mfTable;
-	private CarModelTable carModelTable;
 	private FuelTable fuelTable;
 	private String[] details = {"선택하세요","대여단가 관리","초기화면"};
 	private ComboBoxComponent<Fuel> searchFuel;
 	private ComboBoxComponent<Manufacturer> searchMF;
-	private ComboBoxComponent<CarModel> searchCarModel;
 	private JButton btnSearchFuel;
 	private JButton btnAllFuel;
 	private FuelManagerContent inputFuelPanel;
@@ -47,8 +46,7 @@ public class AdminMainCarManagerCarDetail extends JPanel implements ActionListen
 	private ManufacturerManagerContent inputManufacturer;
 	private JButton btnAllMF;
 	private CarModelContent inputCarModel;
-	private JButton btnSearchCarModel;
-	private JButton btnAllCarModel;
+	public CarModellListManagerContent listCarModel;
 	
 	public AdminMainCarManagerCarDetail() {
 		setBounds(100, 100, 974, 751);
@@ -95,28 +93,11 @@ public class AdminMainCarManagerCarDetail extends JPanel implements ActionListen
 		inputCarModel = new CarModelContent();
 		inputCarModel.setBounds(12, 47, 345, 170);
 		carModelPanel.add(inputCarModel);
-		carModelTable = new CarModelTable();
-		carModelTable.setBorder(new LineBorder(new Color(0, 0, 0)));
-		carModelTable.setIfFull(true);
-		carModelTable.loadDate();
-		carModelTable.setBounds(369, 63, 416, 170);
-		carModelPanel.add(carModelTable);
-	
-		searchCarModel = new ComboBoxComponent<>("차종 코드");
-		searchCarModel.setBounds(369, 18, 231, 37);
-		carModelPanel.add(searchCarModel);
-		inputCarModel.setCmTable(carModelTable);
-		inputCarModel.setAdcmCarDetail(this);
 		
-		btnSearchCarModel = new JButton("검색");
-		btnSearchCarModel.setBounds(601, 18, 65, 37);
-		btnSearchCarModel.addActionListener(this);
-		carModelPanel.add(btnSearchCarModel);
-		
-		btnAllCarModel = new JButton("전체보기");
-		btnAllCarModel.setBounds(686, 18, 97, 37);
-		btnAllCarModel.addActionListener(this);
-		carModelPanel.add(btnAllCarModel);
+		listCarModel = new CarModellListManagerContent();
+		listCarModel.setBounds(359, 10, 427, 225);
+		carModelPanel.add(listCarModel);
+		inputCarModel.setCm(listCarModel);
 		
 		JPanel fuelPanel = new JPanel();
 		fuelPanel.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.RAISED, null, null)), " \uC5F0\uB8CC\uAD00\uB9AC ", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -216,7 +197,6 @@ public class AdminMainCarManagerCarDetail extends JPanel implements ActionListen
 			cm.setComboType(0);
 			cmCode.add(cm);
 		}
-		searchCarModel.setComboBoxModel(cmCode);
 		
 	}
 	public void setFuelComboBoxModel() {
@@ -243,20 +223,6 @@ public class AdminMainCarManagerCarDetail extends JPanel implements ActionListen
 			mfTable.loadDate();
 			inputManufacturer.setManufacturerTextValueClear();
 			searchMF.getComboBox().setSelectedIndex(0);
-		}
-		if(e.getSource()==btnSearchCarModel) {
-			CarModel cmCode = searchCarModel.getComboboxValue();
-			carModelTable.setIfFull(false);
-			carModelTable.setCmCode(cmCode);
-			carModelTable.loadDate();
-			inputCarModel.getCmCode().setTextValue(cmCode.getCarModelCode());
-			inputCarModel.getCarModel().setTextValue(cmCode.getCarModel());
-		}
-		if(e.getSource()==btnAllCarModel) {
-			carModelTable.setIfFull(true);
-			carModelTable.loadDate();
-			inputCarModel.setCarModelValueClear();
-			searchCarModel.getComboBox().setSelectedIndex(0);
 		}
 		if(e.getSource()==btnSearchFuel) {
 			inputFuelPanel.isEnabledBtn(true);

@@ -20,16 +20,15 @@ public class CarModelContent extends JPanel implements ActionListener {
 	private JButton btnAdd;
 	private JButton btnUpdate;
 	private JButton btnDelete;
-	private CarModelTable cmTable;
-	private AdminMainCarManagerCarDetail adcmCarDetail;
+	/*private CarModelTable cmTable;*/
+	private CarModellListManagerContent carModelListContent;
 	
-	
-	public void setAdcmCarDetail(AdminMainCarManagerCarDetail adcmCarDetail) {
-		this.adcmCarDetail = adcmCarDetail;
+	public void setCm(CarModellListManagerContent carModelListContent) {
+		this.carModelListContent = carModelListContent;
 	}
-	public void setCmTable(CarModelTable cmTable) {
+/*	public void setCmTable(CarModelTable cmTable) {
 		this.cmTable = cmTable;
-	}
+	}*/
 	public CarModelContent() {
 		setBounds(100, 100, 333, 171);
 		setLayout(null);
@@ -106,8 +105,8 @@ public class CarModelContent extends JPanel implements ActionListener {
 						JOptionPane.OK_CANCEL_OPTION);
 				if (insert == 0) {
 					carModelService.insertCarModel(new CarModel(carModelCode, cModel));
-					cmTable.loadDate();
-					adcmCarDetail.setCarModelComboBoxModel();
+					carModelListContent.cmTable.loadDate();
+					carModelListContent.setCarModelComboBoxModel();
 				} else {
 					JOptionPane.showMessageDialog(null, "취소되었습니다");
 				}
@@ -122,8 +121,8 @@ public class CarModelContent extends JPanel implements ActionListener {
 						JOptionPane.OK_CANCEL_OPTION);
 				if(update==0) {
 					carModelService.updateCarModel(new CarModel(carModelCode, cModel));
-					cmTable.loadDate();
-					adcmCarDetail.setCarModelComboBoxModel();
+					/*cmTable.loadDate();*/
+					/*adcmCarDetail.setCarModelComboBoxModel();*/
 				} else {
 					JOptionPane.showMessageDialog(null, "취소되었습니다");
 				}
@@ -136,8 +135,8 @@ public class CarModelContent extends JPanel implements ActionListener {
 				int delete = JOptionPane.showConfirmDialog(null, "입력 데이터를 삭제하시겠습니까?", "확인창", JOptionPane.OK_CANCEL_OPTION);
 				if (delete == 0) {
 					carModelService.deleteCarModel(new CarModel(carModelCode, cModel));
-					cmTable.loadDate();
-					adcmCarDetail.setCarModelComboBoxModel();
+					/*cmTable.loadDate();*/
+				/*	adcmCarDetail.setCarModelComboBoxModel();*/
 				} else {
 					JOptionPane.showMessageDialog(null, "취소되었습니다");
 				}
