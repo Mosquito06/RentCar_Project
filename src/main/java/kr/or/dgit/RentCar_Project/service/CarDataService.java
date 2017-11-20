@@ -11,16 +11,17 @@ import kr.or.dgit.RentCar_Project.util.MyBatisSqlSessionFactory;
 public class CarDataService implements CarDataDao {
 	private static final CarDataService INSTANCE = new CarDataService();
 	private CarDataDao carDataDao;
-	
+
 	public static CarDataService getInstance() {
 		return INSTANCE;
 	}
-	
-	private CarDataService() {}
+
+	private CarDataService() {
+	}
 
 	@Override
 	public void insertCarData(CarData carData) {
-		try(SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession()){
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession()) {
 			carDataDao = sqlSession.getMapper(CarDataDao.class);
 			carDataDao.insertCarData(carData);
 			sqlSession.commit();
@@ -29,7 +30,7 @@ public class CarDataService implements CarDataDao {
 
 	@Override
 	public void updateCarData(CarData carData) {
-		try(SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession()){
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession()) {
 			carDataDao = sqlSession.getMapper(CarDataDao.class);
 			carDataDao.updateCarData(carData);
 			sqlSession.commit();
@@ -38,17 +39,17 @@ public class CarDataService implements CarDataDao {
 
 	@Override
 	public void deleteCarData(CarData carDataCode) {
-		try(SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession()){
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession()) {
 			carDataDao = sqlSession.getMapper(CarDataDao.class);
 			carDataDao.deleteCarData(carDataCode);
 			sqlSession.commit();
 		}
-		
+
 	}
 
 	@Override
 	public CarData selectCarDataByCarDataCode(CarData carDataCode) {
-		try(SqlSession sqlsession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();){
+		try (SqlSession sqlsession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();) {
 			carDataDao = sqlsession.getMapper(CarDataDao.class);
 			return carDataDao.selectCarDataByCarDataCode(carDataCode);
 		}
@@ -56,7 +57,7 @@ public class CarDataService implements CarDataDao {
 
 	@Override
 	public List<CarData> selectCarDataByAll() {
-		try(SqlSession sqlsession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();){
+		try (SqlSession sqlsession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();) {
 			carDataDao = sqlsession.getMapper(CarDataDao.class);
 			return carDataDao.selectCarDataByAll();
 		}
@@ -64,7 +65,7 @@ public class CarDataService implements CarDataDao {
 
 	@Override
 	public List<CarData> selectCarDataByCarModelCode(String carModelCode) {
-		try(SqlSession sqlsession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();){
+		try (SqlSession sqlsession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();) {
 			carDataDao = sqlsession.getMapper(CarDataDao.class);
 			return carDataDao.selectCarDataByCarModelCode(carModelCode);
 		}
@@ -72,7 +73,7 @@ public class CarDataService implements CarDataDao {
 
 	@Override
 	public List<CarData> selectCarDataByCarDataCodeList(CarData carDataCode) {
-		try(SqlSession sqlsession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();){
+		try (SqlSession sqlsession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();) {
 			carDataDao = sqlsession.getMapper(CarDataDao.class);
 			return carDataDao.selectCarDataByCarDataCodeList(carDataCode);
 		}
@@ -80,18 +81,27 @@ public class CarDataService implements CarDataDao {
 
 	@Override
 	public List<CarData> selectCarDataByFuel(String fuel) {
-		try(SqlSession sqlsession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();){
+		try (SqlSession sqlsession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();) {
 			carDataDao = sqlsession.getMapper(CarDataDao.class);
 			return carDataDao.selectCarDataByFuel(fuel);
 		}
 	}
 
+	@Override
+	public List<CarData> selectCarDataByOld() {
+		try (SqlSession sqlsession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();) {
+			carDataDao = sqlsession.getMapper(CarDataDao.class);
+			return carDataDao.selectCarDataByOld();
+		}
+	}
 
+	@Override
+	public List<CarData> selectCarDataBySeater() {
+		try (SqlSession sqlsession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();) {
+			carDataDao = sqlsession.getMapper(CarDataDao.class);
+			return carDataDao.selectCarDataBySeater();
+		}
 
-	
-
-
-	
-	
+	}
 
 }

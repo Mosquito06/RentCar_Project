@@ -14,8 +14,6 @@ public class CarData {
 	private Manufacturer manufacturerCode;
 	private Fuel fuelCode;
 	private int comboType = 0;
-	
-	
 
 	public void setComboType(int comboType) {
 		this.comboType = comboType;
@@ -34,6 +32,10 @@ public class CarData {
 		this.carModelCode = carModelCode;
 		this.manufacturerCode = manufacturerCode;
 		this.fuelCode = fuelCode;
+	}
+
+	public int getComboType() {
+		return comboType;
 	}
 
 	public CarData(String carCode) {
@@ -134,35 +136,23 @@ public class CarData {
 
 	@Override
 	public String toString() {
-		if(comboType==0) {
-			return String.format("%s",carCode);
-		}else if(comboType==1) {
-			return String.format("%s",carName);
-		}else if(comboType==2) {
-			return String.format("%s",carOld);
-		}else if(comboType==3) {
-			return String.format("%s",carSeater);
-		}else {
-			return String.format(
-					"%s %s %s %s %s %s %s %s %s %s %s",
-					carCode, carName, carImage, carOld, carNumber, isAuto, carSeater, carModelCode,
-					manufacturerCode, fuelCode, comboType);
+		if (comboType == 0) {
+			return String.format("%s", carCode);
+		} else if (comboType == 1) {
+			return String.format("%s", carName);
+		} else if (comboType == 2) {
+			return String.format("%s", carOld);
+		} else if (comboType == 3) {
+			return String.format("%s", carSeater);
+		} else {
+			return String.format("%s %s %s %s %s %s %s %s %s %s %s", carCode, carName, carImage, carOld, carNumber,
+					isAuto, carSeater, carModelCode, manufacturerCode, fuelCode, comboType);
 		}
 	}
 
 	public Object[] toArray() {
-		return new Object[] {carCode,
-							carName,
-							carOld,
-							carNumber,
-							isAuto,
-							carSeater,
-							carModelCode.getCarModelCode(),
-							manufacturerCode.getManufacturerCode(),
-							fuelCode.getFuelCode()};
-		}
-	
-
-
+		return new Object[] { carCode, carName, carOld, carNumber, isAuto, carSeater, carModelCode.getCarModelCode(),
+				manufacturerCode.getManufacturerCode(), fuelCode.getFuelCode() };
+	}
 
 }

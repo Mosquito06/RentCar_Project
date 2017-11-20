@@ -92,6 +92,14 @@
 		where fuel_code = #{fuelCode}
 	</select>
 	
+	<select id="selectCarDataByOld" resultMap="CarDataResult">
+		select distinct car_old from car_data order by car_old
+	</select>
+	
+	<select id="selectCarDataBySeater" resultMap="CarDataResult">
+		select distinct car_seater from car_data order by car_seater
+	</select>
+	
 	<select id="selectCarDataByCarDataCode" resultMap="CarDataResult">
 		<include refid="selectSql"/>
 		<include refid="wherePrimarySql"/>
