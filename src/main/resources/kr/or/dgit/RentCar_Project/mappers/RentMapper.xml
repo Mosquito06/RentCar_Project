@@ -135,7 +135,8 @@
 	<select id="selectPerformenceMonth" resultMap="JoinCarDataAndCarModelAndManufacturer">
 		select rent_code, car_model, manufacturer_name, car_name, sum(use_time), sum(discount_price), sum(final_price) from car_data join manufacturer 
 		on car_data.manufacturer_code = manufacturer.manufacturer_code join car_model on car_data.car_model_code = car_model.car_model_code 
-		join rent on car_data.car_code = rent.car_code where day_end &lt;= #{param1} group by car_model 
-		union select rent_code, '합계', '-', '-', sum(use_time), sum(discount_price), sum(final_price) from rent where day_end &lt;= #{param1}
+		join rent on car_data.car_code = rent.car_code where day_start &gt;= #{param1} and day_end &lt;= #{param2} group by car_model 
+		union select 0, '합계', '-', '-', sum(use_time), sum(discount_price), sum(final_price) from rent
+		where day_start &gt;= #{param1} and day_end &lt;= #{param2}
 	</select>
 </mapper>

@@ -5,9 +5,7 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -25,6 +23,7 @@ import javax.swing.border.TitledBorder;
 import com.bitagentur.renderer.JChartLibPanel;
 
 import kr.or.dgit.RentCar_Project.chart.AbstractPieChart;
+import kr.or.dgit.RentCar_Project.chart.PerformenceMonthPieChart;
 import kr.or.dgit.RentCar_Project.chart.PerformenceTotalPieChart;
 import kr.or.dgit.RentCar_Project.content.PerformenceContent;
 import kr.or.dgit.RentCar_Project.dto.Rent;
@@ -35,6 +34,7 @@ import kr.or.dgit.RentCar_Project.service.RentService;
 public class AdminMainPerformence extends JPanel {
 	private AdminMainPerformenceChart chartFrame;
 	private AdminPerformenceTable adminTable;
+	private JPanel chartPanel;
 	
 	
 	public AdminMainPerformence() {
@@ -83,9 +83,11 @@ public class AdminMainPerformence extends JPanel {
 							 String CurrentYear = sdf.format(date);
 							 
 							 String Month = selectItem.toString().replaceAll("월", "");
-							 String setMonth = CurrentYear + "0" + Month + "31";
+							 String setStart = CurrentYear + "0" + Month + "01";
+							 String setEnd = CurrentYear + "0" + Month + "31";
 							 
-							 List<Rent> list = RentService.getInstance().selectPerformenceMonth(setMonth);
+							 // 테이블 변경
+							 List<Rent> list = RentService.getInstance().selectPerformenceMonth(setStart, setEnd);
 							 remove(adminTable);
 							 
 							 adminTable = new AdminPerformenceTable(list, 0);
@@ -94,18 +96,26 @@ public class AdminMainPerformence extends JPanel {
 							 adminTable.loadDate();
 							 add(adminTable);
 							 
+							 // 그래프 변경
+							 AbstractPieChart<Rent> abstractPieChart = new PerformenceMonthPieChart("성과분석", "", "", list, false);
+							 chartPanel.removeAll();
+							 JChartLibPanel jChart = abstractPieChart.getPieChart();
+							 chartPanel.add(jChart, BorderLayout.CENTER);
+							 
 							 revalidate();
 							 repaint();
-							 
 						 }else {
+							// 현재 년도 가져오기
 							 Date date = new Date();
 							 SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
 							 String CurrentYear = sdf.format(date);
 							 
 							 String Month = selectItem.toString().replaceAll("월", "");
-							 String setMonth = CurrentYear + Month + "31";
+							 String setStart = CurrentYear +  Month + "01";
+							 String setEnd = CurrentYear + Month + "31";
 							 
-							 List<Rent> list = RentService.getInstance().selectPerformenceMonth(setMonth);
+							 // 테이블 변경
+							 List<Rent> list = RentService.getInstance().selectPerformenceMonth(setStart, setEnd);
 							 remove(adminTable);
 							 
 							 adminTable = new AdminPerformenceTable(list, 0);
@@ -113,6 +123,12 @@ public class AdminMainPerformence extends JPanel {
 							 adminTable.setBounds(8, 80, 587, 664);
 							 adminTable.loadDate();
 							 add(adminTable);
+							 
+							 // 그래프 변경
+							 AbstractPieChart<Rent> abstractPieChart = new PerformenceMonthPieChart("성과분석", "", "", list, false);
+							 chartPanel.removeAll();
+							 JChartLibPanel jChart = abstractPieChart.getPieChart();
+							 chartPanel.add(jChart, BorderLayout.CENTER);
 							 
 							 revalidate();
 							 repaint();
@@ -156,10 +172,10 @@ public class AdminMainPerformence extends JPanel {
 		
 		// 결과요약 파이패널 출력
 		List<Rent> items = RentService.getInstance().selectPerformenceTotal();
-		AbstractPieChart<Rent> abstractPieChahrt = new PerformenceTotalPieChart("성과분석", "", "", items, false);
-		JChartLibPanel jChart = abstractPieChahrt.getPieChart();
+		AbstractPieChart<Rent> abstractPieChart = new PerformenceTotalPieChart("성과분석", "", "", items, false);
+		JChartLibPanel jChart = abstractPieChart.getPieChart();
 						
-		JPanel chartPanel = new JPanel();
+		chartPanel = new JPanel();
 		chartPanel.setLayout(new BorderLayout(0, 0));
 		chartPanel.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.LOWERED, null, null)), "\uACB0\uACFC\uC694\uC57D", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		chartPanel.setBounds(601, 374, 373, 333);
