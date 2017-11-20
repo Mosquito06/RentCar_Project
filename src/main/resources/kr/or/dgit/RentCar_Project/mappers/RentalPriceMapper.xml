@@ -70,6 +70,11 @@
 		<include refid="selectSql"/>
 	</select>
 	
+	<select id="findRentalPriceCarCode" resultMap="RentalPriceResult">
+		<include refid="selectSql"/>
+		<include refid="wherePrimarySql"/>
+		
+	</select>
 	<select id="selectRentalPriceByCarCodeString" resultMap="RentalPriceResult">
 		 select car_code, basic_price, basic_time, basic_time_price, 
 		over_price, insurance from rental_price where car_code = #{carCode} 

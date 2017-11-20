@@ -7,9 +7,11 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import kr.or.dgit.RentCar_Project.component.ComboBoxComponent;
 import kr.or.dgit.RentCar_Project.component.TextFieldComponent;
 import kr.or.dgit.RentCar_Project.dto.Fuel;
 import kr.or.dgit.RentCar_Project.frame.AdminMainCarManagerCarDetail;
+import kr.or.dgit.RentCar_Project.list.FuelTable;
 import kr.or.dgit.RentCar_Project.service.FuelService;
 
 @SuppressWarnings("serial")
@@ -20,6 +22,16 @@ public class FuelManagerContent extends JPanel implements ActionListener {
 	private JButton btnAdd;
 	private JButton btnUpdate;
 	private JButton btnDelete;
+	private FuelTable fuelTable;
+	private AdminMainCarManagerCarDetail adcmCarDetail;
+	
+	public void setAdcmCarDetail(AdminMainCarManagerCarDetail adcmCarDetail) {
+		this.adcmCarDetail = adcmCarDetail;
+	}
+
+	public void setFuelTable(FuelTable fuelTable) {
+		this.fuelTable = fuelTable;
+	}
 
 	public FuelManagerContent() {
 		setBounds(100, 100, 333, 171);
@@ -115,6 +127,8 @@ public class FuelManagerContent extends JPanel implements ActionListener {
 						JOptionPane.OK_CANCEL_OPTION);
 				if (insert == 0) {
 					fuelService.insertFuel(new Fuel(fCode, fType));
+					fuelTable.loadDate();
+					adcmCarDetail.setFuelComboBoxModel();
 				} else {
 					JOptionPane.showMessageDialog(null, "취소되었습니다");
 				}
@@ -129,6 +143,8 @@ public class FuelManagerContent extends JPanel implements ActionListener {
 						JOptionPane.OK_CANCEL_OPTION);
 				if (update == 0) {
 					fuelService.updateFuel(new Fuel(fCode, fType));
+					fuelTable.loadDate();
+					adcmCarDetail.setFuelComboBoxModel();
 				} else {
 					JOptionPane.showMessageDialog(null, "취소되었습니다");
 				}
@@ -142,6 +158,8 @@ public class FuelManagerContent extends JPanel implements ActionListener {
 				int delete = JOptionPane.showConfirmDialog(null, "입력 데이터를 삭제하시겠습니까?", "확인창", JOptionPane.OK_CANCEL_OPTION);
 				if (delete == 0) {
 					fuelService.deleteFule(new Fuel(fCode, fType));
+					fuelTable.loadDate();
+					adcmCarDetail.setFuelComboBoxModel();
 				} else {
 					JOptionPane.showMessageDialog(null, "취소되었습니다");
 				}

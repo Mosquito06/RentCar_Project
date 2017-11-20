@@ -55,7 +55,7 @@
 		<include refid="selectSql"/>
 	</select>
 	
-	<select id="FindFuelByFuelCode" resultMap="FuelResult">
+	<select id="findFuelByFuelCode" resultMap="FuelResult">
 		<include refid="selectSql"/>
 		<include refid="wherePrimarySql"/>	
 	</select>

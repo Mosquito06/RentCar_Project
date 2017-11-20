@@ -13,11 +13,12 @@ import kr.or.dgit.RentCar_Project.component.ComboBoxComponent;
 import kr.or.dgit.RentCar_Project.component.TextFieldComponent;
 import kr.or.dgit.RentCar_Project.dto.CarData;
 import kr.or.dgit.RentCar_Project.dto.RentalPrice;
+import kr.or.dgit.RentCar_Project.list.RentalPriceTable;
 import kr.or.dgit.RentCar_Project.service.CarDataService;
 import kr.or.dgit.RentCar_Project.service.RentalPriceService;
 
 @SuppressWarnings("serial")
-public class RentalPriceManagerContent extends JPanel {
+public class RentalPriceManagerContent extends JPanel implements ActionListener{
 	
 	private ComboBoxComponent<CarData> carCode;
 	private TextFieldComponent bPrice;
@@ -25,7 +26,13 @@ public class RentalPriceManagerContent extends JPanel {
 	private TextFieldComponent oPrice;
 	private TextFieldComponent btPrice;
 	private TextFieldComponent insurance;
+	private JButton btnUpdate;
+	private RentalPriceTable rentalPriceTable;
+	private JButton btnDelete;
 	
+	public void setRentalPriceTable(RentalPriceTable rentalPriceTable) {
+		this.rentalPriceTable = rentalPriceTable;
+	}
 	public RentalPriceManagerContent() {
 		setBounds(100, 100, 267, 489);
 		setLayout(null);
@@ -69,18 +76,14 @@ public class RentalPriceManagerContent extends JPanel {
 		insurance.setBounds(5, 230, 230, 30);
 		add(insurance);
 		
-		JButton btnUpdate = new JButton("수정");
-		btnUpdate.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				RentalPriceService rentalPriceService = RentalPriceService.getInstance();
-				/*rentalPriceService.updateRentalPrice(rentalPrice);*/
-			}
-		});
+		btnUpdate = new JButton("수정");
+		btnUpdate.addActionListener(this);
 		btnUpdate.setBounds(21, 456, 66, 23);
 		add(btnUpdate);
 		
-		JButton btnDelete = new JButton("삭제");
+		btnDelete = new JButton("삭제");
 		btnDelete.setBounds(99, 456, 66, 23);
+		btnDelete.addActionListener(this);
 		add(btnDelete);
 		
 		JButton btnCancel = new JButton("취소");
@@ -114,5 +117,39 @@ public class RentalPriceManagerContent extends JPanel {
 		oPrice.setTextValue("");
 		btPrice.setTextValue("");
 		insurance.setTextValue("");
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		RentalPriceService rentalPriceService = RentalPriceService.getInstance();
+		CarData  cCode = carCode.getComboboxValue();
+		int basicPrice = Integer.parseInt(bPrice.getTextValue().replaceAll(",", "").trim());
+		int basicTime  = Integer.parseInt(useTime.getTextValue());
+		int basicTimePrice = Integer.parseInt(btPrice.getTextValue().replaceAll(",", "").trim());
+		int overPrice = Integer.parseInt(oPrice.getTextValue().replaceAll(",", "").trim());
+		int is = Integer.parseInt(insurance.getTextValue().replaceAll(",", "").trim());
+		
+ 		if(e.getSource()==btnUpdate) {
+			int update = JOptionPane.showConfirmDialog(null, "입력 데이터를 수정하시겠습니까?", "확인창",
+					JOptionPane.OK_CANCEL_OPTION);
+			if(update==0) {
+				rentalPriceService.updateRentalPrice(new RentalPrice(cCode, basicPrice, basicTime, basicTimePrice, overPrice, is));
+				rentalPriceTable.loadDate();
+		
+			}else {
+				JOptionPane.showMessageDialog(null, "취소되었습니다");
+			}
+		}
+
+ 		if(e.getSource()==btnDelete) {
+ 			int delete = JOptionPane.showConfirmDialog(null, "입력 데이터를 삭제하시겠습니까?", "확인창", JOptionPane.OK_CANCEL_OPTION);
+ 			if(delete==0) {
+ 				rentalPriceService.deleteRentalPrice(new RentalPrice(cCode));
+ 				rentalPriceTable.loadDate();
+ 			}else {
+				JOptionPane.showMessageDialog(null, "취소되었습니다");
+				
+			}
+ 		}
+		setRentalPriceValueClear();
 	}
 }
