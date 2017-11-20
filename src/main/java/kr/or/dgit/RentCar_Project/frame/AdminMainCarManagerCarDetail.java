@@ -16,37 +16,24 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
-import kr.or.dgit.RentCar_Project.component.ComboBoxComponent;
 import kr.or.dgit.RentCar_Project.content.CarModelContent;
-import kr.or.dgit.RentCar_Project.content.FuelManagerContent;
-import kr.or.dgit.RentCar_Project.content.ManufacturerManagerContent;
-import kr.or.dgit.RentCar_Project.dto.CarModel;
-import kr.or.dgit.RentCar_Project.dto.Fuel;
-import kr.or.dgit.RentCar_Project.dto.Manufacturer;
-import kr.or.dgit.RentCar_Project.list.CarModelTable;
-import kr.or.dgit.RentCar_Project.list.FuelTable;
-import kr.or.dgit.RentCar_Project.list.ManufacturerTable;
-import kr.or.dgit.RentCar_Project.service.CarModelService;
-import kr.or.dgit.RentCar_Project.service.FuelService;
-import kr.or.dgit.RentCar_Project.service.ManufacturerService;
 import kr.or.dgit.RentCar_Project.content.CarModellListManagerContent;
+import kr.or.dgit.RentCar_Project.content.FuelListManagerContent;
+import kr.or.dgit.RentCar_Project.content.FuelManagerContent;
+import kr.or.dgit.RentCar_Project.content.ManufacturerListContent;
+import kr.or.dgit.RentCar_Project.content.ManufacturerManagerContent;
+import kr.or.dgit.RentCar_Project.dto.Manufacturer;
+import kr.or.dgit.RentCar_Project.service.ManufacturerService;
 
 @SuppressWarnings("serial")
-public class AdminMainCarManagerCarDetail extends JPanel implements ActionListener {
-	
-	private ManufacturerTable mfTable;
-	private FuelTable fuelTable;
+public class AdminMainCarManagerCarDetail extends JPanel{
 	private String[] details = {"선택하세요","대여단가 관리","초기화면"};
-	private ComboBoxComponent<Fuel> searchFuel;
-	private ComboBoxComponent<Manufacturer> searchMF;
-	private JButton btnSearchFuel;
-	private JButton btnAllFuel;
 	private FuelManagerContent inputFuelPanel;
-	private JButton btnSearchMF;
 	private ManufacturerManagerContent inputManufacturer;
-	private JButton btnAllMF;
 	private CarModelContent inputCarModel;
-	public CarModellListManagerContent listCarModel;
+	private CarModellListManagerContent listCarModel;
+	private FuelListManagerContent listFuel;
+	private ManufacturerListContent listManufacturer;
 	
 	public AdminMainCarManagerCarDetail() {
 		setBounds(100, 100, 974, 751);
@@ -62,27 +49,11 @@ public class AdminMainCarManagerCarDetail extends JPanel implements ActionListen
 		inputManufacturer.setBounds(12, 47, 345, 170);
 		manufacturerPanel.add(inputManufacturer);
 		
-		mfTable = new ManufacturerTable();
-		mfTable.setBorder(new LineBorder(new Color(0, 0, 0)));
-		mfTable.setBounds(369, 63, 416, 170);
-		mfTable.setFull(true);
-		mfTable.loadDate();
-		manufacturerPanel.add(mfTable);
-		inputManufacturer.setMfTable(mfTable);
-		inputManufacturer.setAdcmCarDetail(this);
-		searchMF = new ComboBoxComponent<>("제조회사 코드");
-		searchMF.setBounds(369, 18, 231, 37);
-		manufacturerPanel.add(searchMF);
-		
-		btnSearchMF = new JButton("검색");
-		btnSearchMF.setBounds(601, 18, 65, 37);
-		btnSearchMF.addActionListener(this);
-		manufacturerPanel.add(btnSearchMF);
-		
-		btnAllMF = new JButton("전체보기");
-		btnAllMF.setBounds(686, 18, 97, 37);
-		btnAllMF.addActionListener(this);
-		manufacturerPanel.add(btnAllMF);
+		listManufacturer = new ManufacturerListContent();
+		listManufacturer.setBounds(359, 10, 427, 225);
+		manufacturerPanel.add(listManufacturer);
+		inputManufacturer.setMfList(listManufacturer);
+		listManufacturer.setMfManagerContent(inputManufacturer);
 		
 		JPanel carModelPanel = new JPanel();
 		carModelPanel.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.RAISED, null, null)), " \uCC28\uC885 \uAD00\uB9AC ", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -98,6 +69,7 @@ public class AdminMainCarManagerCarDetail extends JPanel implements ActionListen
 		listCarModel.setBounds(359, 10, 427, 225);
 		carModelPanel.add(listCarModel);
 		inputCarModel.setCm(listCarModel);
+		listCarModel.setCmContent(inputCarModel);
 		
 		JPanel fuelPanel = new JPanel();
 		fuelPanel.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.RAISED, null, null)), " \uC5F0\uB8CC\uAD00\uB9AC ", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -109,29 +81,12 @@ public class AdminMainCarManagerCarDetail extends JPanel implements ActionListen
 		inputFuelPanel.setBounds(12, 47, 345, 170);
 		fuelPanel.add(inputFuelPanel);
 		
-		fuelTable = new FuelTable();
-		fuelTable.setBorder(new LineBorder(new Color(0, 0, 0)));
-		fuelTable.setBounds(369, 63, 416, 170);
-		fuelTable.setFull(true);
-		fuelTable.loadDate();
-		fuelPanel.add(fuelTable);
-		inputFuelPanel.setFuelTable(fuelTable);
-		inputFuelPanel.setAdcmCarDetail(this);
+		listFuel = new FuelListManagerContent();
+		listFuel.setBounds(359, 10, 427, 225);
+		fuelPanel.add(listFuel);
 		
-		searchFuel = new ComboBoxComponent<>("연료코드");
-		searchFuel.setBounds(369, 18, 231, 37);
-		fuelPanel.add(searchFuel);
-		
-		btnSearchFuel = new JButton("검색");
-		btnSearchFuel.setBounds(602, 18, 65, 37);
-		btnSearchFuel.addActionListener(this);
-		fuelPanel.add(btnSearchFuel);
-		
-		btnAllFuel = new JButton("전체보기");
-		btnAllFuel.setBounds(686, 18, 97, 37);
-		btnAllFuel.addActionListener(this);
-		fuelPanel.add(btnAllFuel);
-		
+		inputFuelPanel.setFuelList(listFuel);
+		listFuel.setFMContent(inputFuelPanel);
 		
 		JButton btnBack = new JButton("나가기");
 		btnBack.addActionListener(new ActionListener() {
@@ -161,9 +116,6 @@ public class AdminMainCarManagerCarDetail extends JPanel implements ActionListen
 
 		});
 		add(button);
-		setManufacturerComboBoxModel();
-		setFuelComboBoxModel();
-		setCarModelComboBoxModel();
 	}
 	private void openDetailFrame(Object selected) {
 		JFrame frame = AdminMain.getInstance();
@@ -181,63 +133,5 @@ public class AdminMainCarManagerCarDetail extends JPanel implements ActionListen
 			frame.setVisible(true);
 		
 	}
-	public void setManufacturerComboBoxModel(){
-		List<Manufacturer> lists = ManufacturerService.getInstance().selectManufacturerByAll();
-		Vector<Manufacturer> mfCode = new Vector<>();
-		for(Manufacturer mf : lists) {
-			mf.setComboType(1);
-			mfCode.add(mf);
-		}
-		searchMF.setComboBoxModel(mfCode);
-	}
-	public void setCarModelComboBoxModel() {
-		List<CarModel> lists = CarModelService.getInstance().selectCarModelByAll();
-		Vector<CarModel> cmCode = new Vector<>();
-		for(CarModel cm:lists) {
-			cm.setComboType(0);
-			cmCode.add(cm);
-		}
-		
-	}
-	public void setFuelComboBoxModel() {
-		List<Fuel> lists = FuelService.getInstance().selectFuelByAll();
-		Vector<Fuel> fuelCode = new Vector<>();
-		for(Fuel f : lists) {
-			f.setComboType(1);
-			fuelCode.add(f);
-		}
-		searchFuel.setComboBoxModel(fuelCode);
-	}
 	
-	public void actionPerformed(ActionEvent e) {
-		if(e.getSource()==btnSearchMF) {
-			Manufacturer mfCode = searchMF.getComboboxValue();
-			mfTable.setFull(false);
-			mfTable.setMfCode(mfCode);
-			mfTable.loadDate();
-			inputManufacturer.getMfCode().setTextValue(mfCode.getManufacturerCode());
-			inputManufacturer.getMfName().setTextValue(mfCode.getManufacturerName());
-		}
-		if(e.getSource()==btnAllMF) {
-			mfTable.setFull(true);
-			mfTable.loadDate();
-			inputManufacturer.setManufacturerTextValueClear();
-			searchMF.getComboBox().setSelectedIndex(0);
-		}
-		if(e.getSource()==btnSearchFuel) {
-			inputFuelPanel.isEnabledBtn(true);
-			Fuel fuelCode  = searchFuel.getComboboxValue();
-			fuelTable.setFull(false);
-			fuelTable.setFuel(fuelCode);
-			fuelTable.loadDate();
-			inputFuelPanel.getFuelCode().setTextValue(fuelCode.getFuelCode());
-			inputFuelPanel.getFuelType().setTextValue(fuelCode.getFuelType());
-		}
-		if(e.getSource() == btnAllFuel) {
-			fuelTable.setFull(true);
-			fuelTable.loadDate();
-			inputFuelPanel.setFuelTextValueClear();
-			searchFuel.getComboBox().setSelectedIndex(0);
-		}
-	}
 }

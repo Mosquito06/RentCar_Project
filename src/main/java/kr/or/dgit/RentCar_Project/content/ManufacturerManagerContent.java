@@ -21,17 +21,12 @@ public class ManufacturerManagerContent extends JPanel 	implements ActionListene
 	private JButton btnAdd;
 	private JButton btnUpdate;
 	private JButton btnDelete;
-	private ManufacturerTable mfTable;
-	private AdminMainCarManagerCarDetail adcmCarDetail;
+	private ManufacturerListContent mfList;
 	
 	
-	public void setAdcmCarDetail(AdminMainCarManagerCarDetail adcmCarDetail) {
-		this.adcmCarDetail = adcmCarDetail;
+	public void setMfList(ManufacturerListContent mfList) {
+		this.mfList = mfList;
 	}
-	public void setMfTable(ManufacturerTable mfTable) {
-		this.mfTable = mfTable;
-	}
-	
 	public ManufacturerManagerContent() {
 		setBounds(100, 100, 333, 171);
 		setLayout(null);
@@ -97,8 +92,8 @@ public class ManufacturerManagerContent extends JPanel 	implements ActionListene
 			int insert = JOptionPane.showConfirmDialog(null, "입력 데이터를 추가하시겠습니까?", "확인창", JOptionPane.OK_CANCEL_OPTION);
 			if(insert ==0) {
 				manufacturerService.insertManufacturer(new Manufacturer(manufacturerCode, manufacturerName));
-				mfTable.loadDate();
-				adcmCarDetail.setManufacturerComboBoxModel();
+				mfList.mfTable.loadDate();
+				mfList.setManufacturerComboBoxModel();
 			}else {
 				JOptionPane.showMessageDialog(null, "취소되었습니다");
 			}	
@@ -108,8 +103,8 @@ public class ManufacturerManagerContent extends JPanel 	implements ActionListene
 			int update = JOptionPane.showConfirmDialog(null, "입력 데이터를 수정하시겠습니까?", "확인창", JOptionPane.OK_CANCEL_OPTION);
 			if(update==0) {
 				manufacturerService.updateManufacturer(new Manufacturer(manufacturerCode, manufacturerName));
-				mfTable.loadDate();
-				adcmCarDetail.setManufacturerComboBoxModel();
+				mfList.mfTable.loadDate();
+				mfList.setManufacturerComboBoxModel();
 			}else {
 				JOptionPane.showMessageDialog(null, "취소되었습니다");
 			}
@@ -118,8 +113,8 @@ public class ManufacturerManagerContent extends JPanel 	implements ActionListene
 			int delete = JOptionPane.showConfirmDialog(null, "입력 데이터를 삭제하시겠습니까?", "확인창", JOptionPane.OK_CANCEL_OPTION);
 			if(delete==0) {
 				manufacturerService.deleteManufacturer(new Manufacturer(manufacturerCode, manufacturerName));
-				mfTable.loadDate();
-				adcmCarDetail.setManufacturerComboBoxModel();
+				mfList.mfTable.loadDate();
+				mfList.setManufacturerComboBoxModel();
 			}else {
 				JOptionPane.showMessageDialog(null, "취소되었습니다");
 			}

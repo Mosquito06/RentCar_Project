@@ -4,8 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
-import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,20 +14,13 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
-import kr.or.dgit.RentCar_Project.component.ComboBoxComponent;
+import kr.or.dgit.RentCar_Project.content.RentalPriceListContent;
 import kr.or.dgit.RentCar_Project.content.RentalPriceManagerContent;
-import kr.or.dgit.RentCar_Project.dto.CarData;
-import kr.or.dgit.RentCar_Project.dto.RentalPrice;
-import kr.or.dgit.RentCar_Project.list.RentalPriceTable;
-import kr.or.dgit.RentCar_Project.service.CarDataService;
 
 @SuppressWarnings("serial")
-public class AdminMainCarManagerRentalPrice extends JPanel implements ActionListener{
-	private ComboBoxComponent<CarData> searchCode;
-	private RentalPriceTable rentalPriceTable;
+public class AdminMainCarManagerRentalPrice extends JPanel{
 	private String[] details = {"선택하세요","차종&제조회사&연료 관리","초기화면"};
-	private JButton btnSearch;
-	private JButton btnAll;
+	private RentalPriceListContent listRentalPrice;
 	
 	public AdminMainCarManagerRentalPrice() {
 		setBounds(100, 100, 974, 751);
@@ -50,33 +41,10 @@ public class AdminMainCarManagerRentalPrice extends JPanel implements ActionList
 		listPanel.setBounds(310, 43, 624, 634);
 		totalPanel.add(listPanel);
 		listPanel.setLayout(null);
-		rentalPriceTable = new RentalPriceTable();
-		rentalPriceTable.setBounds(12, 105, 600, 519);
-		listPanel.add(rentalPriceTable);
-		rentalPriceTable.setFull(true);
-		rentalPriceTable.loadDate();
-		inputPanel.setRentalPriceTable(rentalPriceTable);
 		
-		
-		JPanel searchPanel = new JPanel();
-		searchPanel.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), " \uAC80\uC0C9 ", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		searchPanel.setBounds(12, 30, 440, 55);
-		listPanel.add(searchPanel);
-		searchPanel.setLayout(null);
-		
-		searchCode = new ComboBoxComponent<>("차 코드");
-		searchCode.setBounds(74, 15, 244, 28);
-		searchPanel.add(searchCode);
-		
-		btnSearch = new JButton("검색");
-		btnSearch.setBounds(331, 15, 97, 28);
-		btnSearch.addActionListener(this);
-		searchPanel.add(btnSearch);
-		
-		btnAll = new JButton("전체보기");
-		btnAll.setBounds(515, 26, 97, 28);
-		btnAll.addActionListener(this);
-		listPanel.add(btnAll);
+		listRentalPrice = new RentalPriceListContent();
+		listRentalPrice.setBounds(12, 22, 600, 602);
+		listPanel.add(listRentalPrice);
 		
 		JButton btnDetail = new JButton("세부사항 관리");
 		btnDetail.setBounds(819, 20, 115, 23);
@@ -104,18 +72,7 @@ public class AdminMainCarManagerRentalPrice extends JPanel implements ActionList
 		});
 		btnBack.setBounds(872, 718, 97, 23);
 		add(btnBack);
-		setSearchCarCodeComboModel();
-	}
 	
-	public void setSearchCarCodeComboModel() {
-		CarDataService carDataService = CarDataService.getInstance();
-		List<CarData> lists = carDataService.selectCarDataByAll();
-		Vector<CarData> carData = new Vector<>();
-		for(CarData cd : lists) {
-			cd.setComboType(0);
-			carData.add(cd);
-		}
-		searchCode.setComboBoxModel(carData);
 	}
 	
 	private void openDetailFrame(Object selected) {
@@ -132,24 +89,5 @@ public class AdminMainCarManagerRentalPrice extends JPanel implements ActionList
 			return;
 		}
 		frame.setVisible(true);
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		
-		if(e.getSource()==btnSearch) {
-			CarData cd = new CarData();
-			cd.setCarCode(searchCode.getComboboxValue().getCarCode());
-			RentalPrice carCode = new RentalPrice();
-			carCode.setCarCode(cd);
-			rentalPriceTable.setFull(false);
-			rentalPriceTable.setCarCode(carCode);
-			rentalPriceTable.loadDate();
-		}
-		if(e.getSource()==btnAll) {
-			rentalPriceTable.setFull(true);
-			rentalPriceTable.loadDate();
-		}
-		
 	}
 }

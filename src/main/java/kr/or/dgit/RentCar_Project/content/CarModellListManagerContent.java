@@ -1,6 +1,8 @@
 package kr.or.dgit.RentCar_Project.content;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Vector;
 
@@ -14,20 +16,17 @@ import kr.or.dgit.RentCar_Project.list.CarModelTable;
 import kr.or.dgit.RentCar_Project.service.CarModelService;
 
 @SuppressWarnings("serial")
-public class CarModellListManagerContent extends JPanel {
+public class CarModellListManagerContent extends JPanel implements ActionListener {
 	private ComboBoxComponent<CarModel> carModel;
 	private JButton btnSearch;
 	private JButton btnAll;
 	protected CarModelTable cmTable;
+	private CarModelContent cmContent;
 	
 	
-	public JPanel getCmTable() {
-		return cmTable;
+	public void setCmContent(CarModelContent cmContent) {
+		this.cmContent = cmContent;
 	}
-
-	/*public void setCmTable(JPanel cmTable) {
-		this.cmTable = cmTable;
-	}*/
 
 	public CarModellListManagerContent() {
 		setBounds(100, 100, 431, 243);
@@ -39,16 +38,18 @@ public class CarModellListManagerContent extends JPanel {
 		
 		btnSearch = new JButton("검색");
 		btnSearch.setBounds(218, 10, 67, 39);
+		btnSearch.addActionListener(this);
 		add(btnSearch);
 		
 		btnAll = new JButton("전체보기");
 		btnAll.setBounds(327, 10, 97, 37);
+		btnAll.addActionListener(this);
 		add(btnAll);
 		
 		cmTable = new CarModelTable();
 		cmTable.setBorder(new LineBorder(new Color(0, 0, 0)));
 		cmTable.setBounds(5, 57, 420, 166);
-		cmTable.setIfFull(true);
+		cmTable.setFull(true);
 		cmTable.loadDate();
 		add(cmTable);
 		setCarModelComboBoxModel();
@@ -63,4 +64,22 @@ public class CarModellListManagerContent extends JPanel {
 		}
 		carModel.setComboBoxModel(cmCode);
 	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource()==btnSearch) {
+			cmTable.setFull(false);
+			CarModel cmCode = carModel.getComboboxValue();
+			cmTable.setCmCode(cmCode);
+			cmTable.loadDate();
+			cmContent.getCmCode().setTextValue(cmCode.getCarModelCode());
+			cmContent.getCarModel().setTextValue(cmCode.getCarModel());
+		}
+		if(e.getSource()==btnAll) {
+			cmTable.setFull(true);
+			cmTable.loadDate();
+		}
+	}
+	
+	
 }

@@ -14,6 +14,11 @@ public class Fuel {
 		this.fuelCode = fuelCode;
 		this.fuelType = fuelType;
 	}
+	
+	public Fuel(String fuelCode) {
+		super();
+		this.fuelCode = fuelCode;
+	}
 
 	public Fuel() {
 		super();

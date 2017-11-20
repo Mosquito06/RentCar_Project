@@ -5,15 +5,15 @@ import java.util.List;
 import javax.swing.SwingConstants;
 
 import kr.or.dgit.RentCar_Project.dto.CarModel;
-import kr.or.dgit.RentCar_Project.service.CarDataService;
 import kr.or.dgit.RentCar_Project.service.CarModelService;
 
+@SuppressWarnings("serial")
 public class CarModelTable extends AbstractTable {
 	private boolean isFull;
 	private CarModel cmCode;
 	
 	
-	public void setIfFull(boolean isFull) {
+	public void setFull(boolean isFull) {
 		this.isFull = isFull;
 	}
 
