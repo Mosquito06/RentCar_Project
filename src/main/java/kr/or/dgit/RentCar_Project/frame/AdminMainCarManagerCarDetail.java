@@ -70,7 +70,8 @@ public class AdminMainCarManagerCarDetail extends JPanel implements ActionListen
 		mfTable.setFull(true);
 		mfTable.loadDate();
 		manufacturerPanel.add(mfTable);
-		
+		inputManufacturer.setMfTable(mfTable);
+		inputManufacturer.setAdcmCarDetail(this);
 		searchMF = new ComboBoxComponent<>("제조회사 코드");
 		searchMF.setBounds(369, 18, 231, 37);
 		manufacturerPanel.add(searchMF);
@@ -100,10 +101,12 @@ public class AdminMainCarManagerCarDetail extends JPanel implements ActionListen
 		carModelTable.loadDate();
 		carModelTable.setBounds(369, 63, 416, 170);
 		carModelPanel.add(carModelTable);
-		
+	
 		searchCarModel = new ComboBoxComponent<>("차종 코드");
 		searchCarModel.setBounds(369, 18, 231, 37);
 		carModelPanel.add(searchCarModel);
+		inputCarModel.setCmTable(carModelTable);
+		inputCarModel.setAdcmCarDetail(this);
 		
 		btnSearchCarModel = new JButton("검색");
 		btnSearchCarModel.setBounds(601, 18, 65, 37);
@@ -131,6 +134,8 @@ public class AdminMainCarManagerCarDetail extends JPanel implements ActionListen
 		fuelTable.setFull(true);
 		fuelTable.loadDate();
 		fuelPanel.add(fuelTable);
+		inputFuelPanel.setFuelTable(fuelTable);
+		inputFuelPanel.setAdcmCarDetail(this);
 		
 		searchFuel = new ComboBoxComponent<>("연료코드");
 		searchFuel.setBounds(369, 18, 231, 37);

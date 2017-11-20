@@ -17,7 +17,7 @@ public class PerformenceTotalBarChart extends AbstractBarChart<Rent> {
 	
 	@Override
 	protected JChartLibDataSet setDataset(JChartLibDataSet dataset, List<Rent> items) {
-		for(int i = 0; i < items.size(); i++) {
+		for(int i = 0; i < items.size()-1; i++) {
 			JChartLibSerie values = new JChartLibSerie(items.get(i).getCarCode().getCarModelCode().getCarModel());
 			values.addValue(items.get(i).getFinalPrice());
 			dataset.addDataSerie(values);

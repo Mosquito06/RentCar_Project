@@ -32,7 +32,7 @@ public class FuelTable extends AbstractTable {
 		if(isFull) {
 			lists = FuelService.getInstance().selectFuelByAll();
 		} else  {
-			lists =FuelService.getInstance().FindFuelByFuelCode(fuel);
+			lists =FuelService.getInstance().findFuelByFuelCode(fuel);
 		}
 		Object[][] datas = new Object[lists.size()][];
 		

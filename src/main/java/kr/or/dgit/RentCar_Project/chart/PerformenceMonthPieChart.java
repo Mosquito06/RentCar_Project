@@ -7,9 +7,9 @@ import com.bitagentur.data.JChartLibSerie;
 
 import kr.or.dgit.RentCar_Project.dto.Rent;
 
-public class PerformenceTotalPieChart extends AbstractPieChart<Rent> {
+public class PerformenceMonthPieChart extends AbstractPieChart<Rent> {
 
-	public PerformenceTotalPieChart(String setTitle, String xName, String yName, List<Rent> items, boolean UseName) {
+	public PerformenceMonthPieChart(String setTitle, String xName, String yName, List<Rent> items, boolean UseName) {
 		super(setTitle, xName, yName, items, UseName);
 	}
 

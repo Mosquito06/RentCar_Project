@@ -105,4 +105,13 @@ public class RentService implements RentDao {
 		}
 	}
 
+
+	@Override
+	public List<Rent> selectPerformenceMonth(String setStart, String setEnd) {
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession()){
+			rentDao = sqlSession.getMapper(RentDao.class);
+			return rentDao.selectPerformenceMonth(setStart, setEnd);
+		}
+	}
+
 }

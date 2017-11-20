@@ -9,6 +9,8 @@ import javax.swing.JPanel;
 
 import kr.or.dgit.RentCar_Project.component.TextFieldComponent;
 import kr.or.dgit.RentCar_Project.dto.CarModel;
+import kr.or.dgit.RentCar_Project.frame.AdminMainCarManagerCarDetail;
+import kr.or.dgit.RentCar_Project.list.CarModelTable;
 import kr.or.dgit.RentCar_Project.service.CarModelService;
 
 @SuppressWarnings("serial")
@@ -18,11 +20,20 @@ public class CarModelContent extends JPanel implements ActionListener {
 	private JButton btnAdd;
 	private JButton btnUpdate;
 	private JButton btnDelete;
-
+	private CarModelTable cmTable;
+	private AdminMainCarManagerCarDetail adcmCarDetail;
+	
+	
+	public void setAdcmCarDetail(AdminMainCarManagerCarDetail adcmCarDetail) {
+		this.adcmCarDetail = adcmCarDetail;
+	}
+	public void setCmTable(CarModelTable cmTable) {
+		this.cmTable = cmTable;
+	}
 	public CarModelContent() {
 		setBounds(100, 100, 333, 171);
 		setLayout(null);
-
+	
 		cmCode = new TextFieldComponent("차종 코드");
 		cmCode.setBounds(3, 25, 276, 30);
 		add(cmCode);
@@ -95,7 +106,8 @@ public class CarModelContent extends JPanel implements ActionListener {
 						JOptionPane.OK_CANCEL_OPTION);
 				if (insert == 0) {
 					carModelService.insertCarModel(new CarModel(carModelCode, cModel));
-					JOptionPane.showMessageDialog(null, "추가되었습니다");
+					cmTable.loadDate();
+					adcmCarDetail.setCarModelComboBoxModel();
 				} else {
 					JOptionPane.showMessageDialog(null, "취소되었습니다");
 				}
@@ -108,15 +120,10 @@ public class CarModelContent extends JPanel implements ActionListener {
 			if (!isEmptyCheck()) {
 				int update = JOptionPane.showConfirmDialog(null, "입력 데이터를 수정하시겠습니까?", "확인창",
 						JOptionPane.OK_CANCEL_OPTION);
-				if (update == 0) {
-					try{
-						carModelService.updateCarModel(new CarModel(carModelCode, cModel));
-					}catch(Exception e1){
-						e1.printStackTrace();
-						JOptionPane.showMessageDialog(null,"수정을 실패하였습니다");
-					}
-					
-					JOptionPane.showMessageDialog(null, "수정되었습니다");
+				if(update==0) {
+					carModelService.updateCarModel(new CarModel(carModelCode, cModel));
+					cmTable.loadDate();
+					adcmCarDetail.setCarModelComboBoxModel();
 				} else {
 					JOptionPane.showMessageDialog(null, "취소되었습니다");
 				}
@@ -129,7 +136,8 @@ public class CarModelContent extends JPanel implements ActionListener {
 				int delete = JOptionPane.showConfirmDialog(null, "입력 데이터를 삭제하시겠습니까?", "확인창", JOptionPane.OK_CANCEL_OPTION);
 				if (delete == 0) {
 					carModelService.deleteCarModel(new CarModel(carModelCode, cModel));
-					JOptionPane.showMessageDialog(null, "삭제되었습니다");
+					cmTable.loadDate();
+					adcmCarDetail.setCarModelComboBoxModel();
 				} else {
 					JOptionPane.showMessageDialog(null, "취소되었습니다");
 				}

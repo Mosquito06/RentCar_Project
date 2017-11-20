@@ -7,7 +7,19 @@ import javax.swing.SwingConstants;
 import kr.or.dgit.RentCar_Project.dto.RentalPrice;
 import kr.or.dgit.RentCar_Project.service.RentalPriceService;
 
+@SuppressWarnings("serial")
 public class RentalPriceTable extends AbstractTable {
+	private boolean isFull;
+	private RentalPrice carCode;
+	
+	
+	public void setCarCode(RentalPrice carCode) {
+		this.carCode = carCode;
+	}
+
+	public void setFull(boolean isFull) {
+		this.isFull = isFull;
+	}
 
 	@Override
 	protected void setAlignWidth() {
@@ -18,7 +30,13 @@ public class RentalPriceTable extends AbstractTable {
 
 	@Override
 	protected Object[][] getData() {
-		List<RentalPrice> lists = RentalPriceService.getInstance().selectRentalPriceByAll();
+		List<RentalPrice> lists;
+		if(isFull) {
+			lists = RentalPriceService.getInstance().selectRentalPriceByAll();
+		}
+		else {
+			lists = RentalPriceService.getInstance().findRentalPriceCarCode(carCode);
+		}
 		Object[][] datas = new Object[lists.size()][];
 		for(int i=0;i<lists.size();i++) {
 			RentalPrice rp = lists.get(i);

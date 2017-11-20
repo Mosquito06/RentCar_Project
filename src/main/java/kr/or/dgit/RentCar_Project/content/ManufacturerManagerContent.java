@@ -3,6 +3,8 @@ package kr.or.dgit.RentCar_Project.content;
 import javax.swing.JPanel;
 import kr.or.dgit.RentCar_Project.component.TextFieldComponent;
 import kr.or.dgit.RentCar_Project.dto.Manufacturer;
+import kr.or.dgit.RentCar_Project.frame.AdminMainCarManagerCarDetail;
+import kr.or.dgit.RentCar_Project.list.ManufacturerTable;
 import kr.or.dgit.RentCar_Project.service.ManufacturerService;
 
 import java.awt.event.ActionEvent;
@@ -19,6 +21,16 @@ public class ManufacturerManagerContent extends JPanel 	implements ActionListene
 	private JButton btnAdd;
 	private JButton btnUpdate;
 	private JButton btnDelete;
+	private ManufacturerTable mfTable;
+	private AdminMainCarManagerCarDetail adcmCarDetail;
+	
+	
+	public void setAdcmCarDetail(AdminMainCarManagerCarDetail adcmCarDetail) {
+		this.adcmCarDetail = adcmCarDetail;
+	}
+	public void setMfTable(ManufacturerTable mfTable) {
+		this.mfTable = mfTable;
+	}
 	
 	public ManufacturerManagerContent() {
 		setBounds(100, 100, 333, 171);
@@ -85,7 +97,8 @@ public class ManufacturerManagerContent extends JPanel 	implements ActionListene
 			int insert = JOptionPane.showConfirmDialog(null, "입력 데이터를 추가하시겠습니까?", "확인창", JOptionPane.OK_CANCEL_OPTION);
 			if(insert ==0) {
 				manufacturerService.insertManufacturer(new Manufacturer(manufacturerCode, manufacturerName));
-				JOptionPane.showMessageDialog(null, "추가되었습니다");
+				mfTable.loadDate();
+				adcmCarDetail.setManufacturerComboBoxModel();
 			}else {
 				JOptionPane.showMessageDialog(null, "취소되었습니다");
 			}	
@@ -95,7 +108,8 @@ public class ManufacturerManagerContent extends JPanel 	implements ActionListene
 			int update = JOptionPane.showConfirmDialog(null, "입력 데이터를 수정하시겠습니까?", "확인창", JOptionPane.OK_CANCEL_OPTION);
 			if(update==0) {
 				manufacturerService.updateManufacturer(new Manufacturer(manufacturerCode, manufacturerName));
-				JOptionPane.showMessageDialog(null, "수정되었습니다");
+				mfTable.loadDate();
+				adcmCarDetail.setManufacturerComboBoxModel();
 			}else {
 				JOptionPane.showMessageDialog(null, "취소되었습니다");
 			}
@@ -103,7 +117,9 @@ public class ManufacturerManagerContent extends JPanel 	implements ActionListene
 		if(e.getSource()==btnDelete) {
 			int delete = JOptionPane.showConfirmDialog(null, "입력 데이터를 삭제하시겠습니까?", "확인창", JOptionPane.OK_CANCEL_OPTION);
 			if(delete==0) {
-				JOptionPane.showMessageDialog(null, "삭제되었습니다");
+				manufacturerService.deleteManufacturer(new Manufacturer(manufacturerCode, manufacturerName));
+				mfTable.loadDate();
+				adcmCarDetail.setManufacturerComboBoxModel();
 			}else {
 				JOptionPane.showMessageDialog(null, "취소되었습니다");
 			}

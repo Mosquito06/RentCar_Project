@@ -4,10 +4,13 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -20,6 +23,7 @@ import javax.swing.border.TitledBorder;
 import com.bitagentur.renderer.JChartLibPanel;
 
 import kr.or.dgit.RentCar_Project.chart.AbstractPieChart;
+import kr.or.dgit.RentCar_Project.chart.PerformenceMonthPieChart;
 import kr.or.dgit.RentCar_Project.chart.PerformenceTotalPieChart;
 import kr.or.dgit.RentCar_Project.content.PerformenceContent;
 import kr.or.dgit.RentCar_Project.dto.Rent;
@@ -29,12 +33,18 @@ import kr.or.dgit.RentCar_Project.service.RentService;
 @SuppressWarnings("serial")
 public class AdminMainPerformence extends JPanel {
 	private AdminMainPerformenceChart chartFrame;
+	private AdminPerformenceTable adminTable;
+	private JPanel chartPanel;
 	
 	
 	public AdminMainPerformence() {
 		setLayout(null);
 		
-		AdminPerformenceTable adminTable = new AdminPerformenceTable();
+		// 검색결과 테이블
+		// 테이블 생성을 위해 list 값을 DB에서 가져옴
+		List<Rent> list = RentService.getInstance().selectPerformenceTotal();
+		
+		adminTable = new AdminPerformenceTable(list, 0);
 		adminTable.setBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.LOWERED, null, null)));
 		adminTable.setBounds(8, 80, 587, 664);
 		adminTable.loadDate();
@@ -58,9 +68,103 @@ public class AdminMainPerformence extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Object item = performenceContent.selectGetComboBox().getSelectedItem();
-				JOptionPane.showMessageDialog(null, item);
+				// chartFrame null로 초기화
 				chartFrame = null;
+				
+				Object[] item = performenceContent.selectGetObject();
+				
+				if(item[1].toString().indexOf("월별") > 0) {
+					if (item[2] instanceof JComboBox) {
+						Object selectItem = ((JComboBox) item[2]).getSelectedItem();
+						 if(selectItem.toString().length() == 2) {
+							 // 현재 년도 가져오기
+							 Date date = new Date();
+							 SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
+							 String CurrentYear = sdf.format(date);
+							 
+							 String Month = selectItem.toString().replaceAll("월", "");
+							 String setStart = CurrentYear + "0" + Month + "01";
+							 String setEnd = CurrentYear + "0" + Month + "31";
+							 
+							 // 테이블 변경
+							 List<Rent> list = RentService.getInstance().selectPerformenceMonth(setStart, setEnd);
+							 remove(adminTable);
+							 
+							 adminTable = new AdminPerformenceTable(list, 0);
+							 adminTable.setBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.LOWERED, null, null)));
+							 adminTable.setBounds(8, 80, 587, 664);
+							 adminTable.loadDate();
+							 add(adminTable);
+							 
+							 // 그래프 변경
+							 AbstractPieChart<Rent> abstractPieChart = new PerformenceMonthPieChart("성과분석", "", "", list, false);
+							 chartPanel.removeAll();
+							 JChartLibPanel jChart = abstractPieChart.getPieChart();
+							 chartPanel.add(jChart, BorderLayout.CENTER);
+							 
+							 revalidate();
+							 repaint();
+						 }else {
+							// 현재 년도 가져오기
+							 Date date = new Date();
+							 SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
+							 String CurrentYear = sdf.format(date);
+							 
+							 String Month = selectItem.toString().replaceAll("월", "");
+							 String setStart = CurrentYear +  Month + "01";
+							 String setEnd = CurrentYear + Month + "31";
+							 
+							 // 테이블 변경
+							 List<Rent> list = RentService.getInstance().selectPerformenceMonth(setStart, setEnd);
+							 remove(adminTable);
+							 
+							 adminTable = new AdminPerformenceTable(list, 0);
+							 adminTable.setBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.LOWERED, null, null)));
+							 adminTable.setBounds(8, 80, 587, 664);
+							 adminTable.loadDate();
+							 add(adminTable);
+							 
+							 // 그래프 변경
+							 AbstractPieChart<Rent> abstractPieChart = new PerformenceMonthPieChart("성과분석", "", "", list, false);
+							 chartPanel.removeAll();
+							 JChartLibPanel jChart = abstractPieChart.getPieChart();
+							 chartPanel.add(jChart, BorderLayout.CENTER);
+							 
+							 revalidate();
+							 repaint();
+						 }
+						
+					}
+				}else if(item[1].toString().indexOf("성별") > 0){
+					if (item[2] instanceof JComboBox) {
+						Object selectItem = ((JComboBox) item[2]).getSelectedItem();
+						JOptionPane.showMessageDialog(null, selectItem);
+					}
+				}else if(item[1].toString().indexOf("차종") > 0){
+					if (item[2] instanceof JComboBox) {
+						Object selectItem = ((JComboBox) item[2]).getSelectedItem();
+						JOptionPane.showMessageDialog(null, selectItem);
+					}
+				}else if(item[1].toString().indexOf("차종별") > 0){
+					if (item[2] instanceof JComboBox) {
+						Object selectItem = ((JComboBox) item[2]).getSelectedItem();
+						JOptionPane.showMessageDialog(null, selectItem);
+					}
+				}else if(item[1].toString().indexOf("제조사") > 0){
+					if (item[2] instanceof JComboBox) {
+						Object selectItem = ((JComboBox) item[2]).getSelectedItem();
+						JOptionPane.showMessageDialog(null, selectItem);
+					}
+				}else if(item[1].toString().indexOf("연료별") > 0){
+					if (item[2] instanceof JComboBox) {
+						Object selectItem = ((JComboBox) item[2]).getSelectedItem();
+						JOptionPane.showMessageDialog(null, selectItem);
+					}
+				}
+				
+				
+				
+				
 			}
 		});
 		performenceContent.setBounds(12, 22, 349, 354);
@@ -68,10 +172,10 @@ public class AdminMainPerformence extends JPanel {
 		
 		// 결과요약 파이패널 출력
 		List<Rent> items = RentService.getInstance().selectPerformenceTotal();
-		AbstractPieChart<Rent> abstractPieChahrt = new PerformenceTotalPieChart("성과분석", "", "", items, false);
-		JChartLibPanel jChart = abstractPieChahrt.getPieChart();
+		AbstractPieChart<Rent> abstractPieChart = new PerformenceTotalPieChart("성과분석", "", "", items, false);
+		JChartLibPanel jChart = abstractPieChart.getPieChart();
 						
-		JPanel chartPanel = new JPanel();
+		chartPanel = new JPanel();
 		chartPanel.setLayout(new BorderLayout(0, 0));
 		chartPanel.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.LOWERED, null, null)), "\uACB0\uACFC\uC694\uC57D", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		chartPanel.setBounds(601, 374, 373, 333);

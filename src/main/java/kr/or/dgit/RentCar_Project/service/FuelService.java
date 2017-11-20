@@ -80,10 +80,10 @@ public class FuelService implements FuelDao {
 	}
 
 	@Override
-	public List<Fuel> FindFuelByFuelCode(Fuel fuelCode) {
+	public List<Fuel> findFuelByFuelCode(Fuel fuelCode) {
 		try(SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession()){
 			fuelDao = sqlSession.getMapper(FuelDao.class);
-			return fuelDao.FindFuelByFuelCode(fuelCode);
+			return fuelDao.findFuelByFuelCode(fuelCode);
 		}	
 	
 	}

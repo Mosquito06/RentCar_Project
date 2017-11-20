@@ -11,4 +11,5 @@ public interface RentalPriceDao {
 	RentalPrice selectRentalPriceByCarCode(RentalPrice rentalPrice);
 	RentalPrice selectRentalPriceByCarCodeString(String code);
 	List<RentalPrice> selectRentalPriceByAll();
+	List<RentalPrice> findRentalPriceCarCode(RentalPrice rentalPrice);
 }
