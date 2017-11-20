@@ -27,8 +27,16 @@ import kr.or.dgit.RentCar_Project.service.RentService;
 public class AdminMainPerformenceChart extends JFrame {
 
 	private JPanel contentPane;
+	private List<Rent> items;
+	private AbstractBarChart<Rent> abstractBarChart;
 
-	public AdminMainPerformenceChart() {
+	
+	public AdminMainPerformenceChart(List<Rent> lists, AbstractBarChart<Rent> BarChart) {
+		this.items = lists;
+		this.abstractBarChart = BarChart;
+
+		
+		
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 850, 550);
 		contentPane = new JPanel();
@@ -55,9 +63,7 @@ public class AdminMainPerformenceChart extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				chartPanel.removeAll();
-				List<Rent> items = RentService.getInstance().selectPerformenceTotal();
-				AbstractBarChart<Rent> abstractBarChahrt = new  PerformenceTotalBarChart("성과분석", "차종별", "최종요금", items);
-				JChartLibPanel jChart = abstractBarChahrt.getBarChart();
+				JChartLibPanel jChart = abstractBarChart.getBarChart();
 				chartPanel.add(jChart);
 				chartPanel.revalidate();
 				chartPanel.repaint();
@@ -72,9 +78,9 @@ public class AdminMainPerformenceChart extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				chartPanel.removeAll();
-				List<Rent> items = RentService.getInstance().selectPerformenceTotal();
-				AbstractPieChart<Rent> abstractPieChahrt = new PerformenceTotalPieChart("성과분석", "", "", items, true);
-				JChartLibPanel jChart = abstractPieChahrt.getPieChart();
+				
+				AbstractPieChart<Rent> abstractPieChart = new PerformenceTotalPieChart("성과분석", "", "", items, true);
+				JChartLibPanel jChart = abstractPieChart.getPieChart();
 				chartPanel.add(jChart);
 				chartPanel.revalidate();
 				chartPanel.repaint();

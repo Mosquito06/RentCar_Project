@@ -22,8 +22,10 @@ import javax.swing.border.TitledBorder;
 
 import com.bitagentur.renderer.JChartLibPanel;
 
+import kr.or.dgit.RentCar_Project.chart.AbstractBarChart;
 import kr.or.dgit.RentCar_Project.chart.AbstractPieChart;
 import kr.or.dgit.RentCar_Project.chart.PerformenceMonthPieChart;
+import kr.or.dgit.RentCar_Project.chart.PerformenceTotalBarChart;
 import kr.or.dgit.RentCar_Project.chart.PerformenceTotalPieChart;
 import kr.or.dgit.RentCar_Project.content.PerformenceContent;
 import kr.or.dgit.RentCar_Project.dto.Rent;
@@ -35,14 +37,14 @@ public class AdminMainPerformence extends JPanel {
 	private AdminMainPerformenceChart chartFrame;
 	private AdminPerformenceTable adminTable;
 	private JPanel chartPanel;
-	
+	private List<Rent> list;
+	private AbstractPieChart<Rent> abstractPieChart;
+	private AbstractBarChart<Rent> abstractBarChart;
 	
 	public AdminMainPerformence() {
 		setLayout(null);
 		
-		// 검색결과 테이블
-		// 테이블 생성을 위해 list 값을 DB에서 가져옴
-		List<Rent> list = RentService.getInstance().selectPerformenceTotal();
+		list = RentService.getInstance().selectPerformenceTotal();
 		
 		adminTable = new AdminPerformenceTable(list, 0);
 		adminTable.setBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.LOWERED, null, null)));
@@ -71,108 +73,57 @@ public class AdminMainPerformence extends JPanel {
 				// chartFrame null로 초기화
 				chartFrame = null;
 				
-				Object[] item = performenceContent.selectGetObject();
-				
-				if(item[1].toString().indexOf("월별") > 0) {
-					if (item[2] instanceof JComboBox) {
-						Object selectItem = ((JComboBox) item[2]).getSelectedItem();
-						 if(selectItem.toString().length() == 2) {
-							 // 현재 년도 가져오기
-							 Date date = new Date();
-							 SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
-							 String CurrentYear = sdf.format(date);
-							 
-							 String Month = selectItem.toString().replaceAll("월", "");
-							 String setStart = CurrentYear + "0" + Month + "01";
-							 String setEnd = CurrentYear + "0" + Month + "31";
-							 
-							 // 테이블 변경
-							 List<Rent> list = RentService.getInstance().selectPerformenceMonth(setStart, setEnd);
-							 remove(adminTable);
-							 
-							 adminTable = new AdminPerformenceTable(list, 0);
-							 adminTable.setBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.LOWERED, null, null)));
-							 adminTable.setBounds(8, 80, 587, 664);
-							 adminTable.loadDate();
-							 add(adminTable);
-							 
-							 // 그래프 변경
-							 AbstractPieChart<Rent> abstractPieChart = new PerformenceMonthPieChart("성과분석", "", "", list, false);
-							 chartPanel.removeAll();
-							 JChartLibPanel jChart = abstractPieChart.getPieChart();
-							 chartPanel.add(jChart, BorderLayout.CENTER);
-							 
-							 revalidate();
-							 repaint();
-						 }else {
-							// 현재 년도 가져오기
-							 Date date = new Date();
-							 SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
-							 String CurrentYear = sdf.format(date);
-							 
-							 String Month = selectItem.toString().replaceAll("월", "");
-							 String setStart = CurrentYear +  Month + "01";
-							 String setEnd = CurrentYear + Month + "31";
-							 
-							 // 테이블 변경
-							 List<Rent> list = RentService.getInstance().selectPerformenceMonth(setStart, setEnd);
-							 remove(adminTable);
-							 
-							 adminTable = new AdminPerformenceTable(list, 0);
-							 adminTable.setBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.LOWERED, null, null)));
-							 adminTable.setBounds(8, 80, 587, 664);
-							 adminTable.loadDate();
-							 add(adminTable);
-							 
-							 // 그래프 변경
-							 AbstractPieChart<Rent> abstractPieChart = new PerformenceMonthPieChart("성과분석", "", "", list, false);
-							 chartPanel.removeAll();
-							 JChartLibPanel jChart = abstractPieChart.getPieChart();
-							 chartPanel.add(jChart, BorderLayout.CENTER);
-							 
-							 revalidate();
-							 repaint();
-						 }
-						
+				try {
+					Object[] item = performenceContent.selectGetObject();
+					
+					if(item[1].toString().indexOf("월별") > 0) {
+						if (item[2] instanceof JComboBox) {
+							Object selectItem = ((JComboBox) item[2]).getSelectedItem();
+							 if(selectItem.toString().length() == 2) {
+								 setMonthTableAndChart(selectItem, true);
+							 }else {
+								 setMonthTableAndChart(selectItem, false);
+							 }
+						}
+					}else if(item[1].toString().indexOf("성별") > 0){
+						if (item[2] instanceof JComboBox) {
+							Object selectItem = ((JComboBox) item[2]).getSelectedItem();
+							JOptionPane.showMessageDialog(null, selectItem);
+						}
+					}else if(item[1].toString().indexOf("차종") > 0){
+						if (item[2] instanceof JComboBox) {
+							Object selectItem = ((JComboBox) item[2]).getSelectedItem();
+							JOptionPane.showMessageDialog(null, selectItem);
+						}
+					}else if(item[1].toString().indexOf("차종별") > 0){
+						if (item[2] instanceof JComboBox) {
+							Object selectItem = ((JComboBox) item[2]).getSelectedItem();
+							JOptionPane.showMessageDialog(null, selectItem);
+						}
+					}else if(item[1].toString().indexOf("제조사") > 0){
+						if (item[2] instanceof JComboBox) {
+							Object selectItem = ((JComboBox) item[2]).getSelectedItem();
+							JOptionPane.showMessageDialog(null, selectItem);
+						}
+					}else if(item[1].toString().indexOf("연료별") > 0){
+						if (item[2] instanceof JComboBox) {
+							Object selectItem = ((JComboBox) item[2]).getSelectedItem();
+							JOptionPane.showMessageDialog(null, selectItem);
+						}
 					}
-				}else if(item[1].toString().indexOf("성별") > 0){
-					if (item[2] instanceof JComboBox) {
-						Object selectItem = ((JComboBox) item[2]).getSelectedItem();
-						JOptionPane.showMessageDialog(null, selectItem);
-					}
-				}else if(item[1].toString().indexOf("차종") > 0){
-					if (item[2] instanceof JComboBox) {
-						Object selectItem = ((JComboBox) item[2]).getSelectedItem();
-						JOptionPane.showMessageDialog(null, selectItem);
-					}
-				}else if(item[1].toString().indexOf("차종별") > 0){
-					if (item[2] instanceof JComboBox) {
-						Object selectItem = ((JComboBox) item[2]).getSelectedItem();
-						JOptionPane.showMessageDialog(null, selectItem);
-					}
-				}else if(item[1].toString().indexOf("제조사") > 0){
-					if (item[2] instanceof JComboBox) {
-						Object selectItem = ((JComboBox) item[2]).getSelectedItem();
-						JOptionPane.showMessageDialog(null, selectItem);
-					}
-				}else if(item[1].toString().indexOf("연료별") > 0){
-					if (item[2] instanceof JComboBox) {
-						Object selectItem = ((JComboBox) item[2]).getSelectedItem();
-						JOptionPane.showMessageDialog(null, selectItem);
-					}
+				}catch(NullPointerException e1) {
+					JOptionPane.showMessageDialog(null, "검색 조건을 선택하세요.");
 				}
-				
-				
-				
-				
 			}
+		
 		});
 		performenceContent.setBounds(12, 22, 349, 354);
 		searchPanel.add(performenceContent);
 		
-		// 결과요약 파이패널 출력
-		List<Rent> items = RentService.getInstance().selectPerformenceTotal();
-		AbstractPieChart<Rent> abstractPieChart = new PerformenceTotalPieChart("성과분석", "", "", items, false);
+		// 프레임 생성 시 기본 파이 차트 출력
+		abstractPieChart = new PerformenceTotalPieChart("성과분석", "", "", list, false);
+		// 자세히 보기 출력을 위한 기본 바 차트 생성
+		abstractBarChart = new  PerformenceTotalBarChart("성과분석", "차종별", "최종요금", list);
 		JChartLibPanel jChart = abstractPieChart.getPieChart();
 						
 		chartPanel = new JPanel();
@@ -193,7 +144,7 @@ public class AdminMainPerformence extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(chartFrame == null) {
-					chartFrame = new AdminMainPerformenceChart();
+					chartFrame = new AdminMainPerformenceChart(list, abstractBarChart);
 					chartFrame.setVisible(true);
 				}else {
 					chartFrame.setVisible(true);
@@ -218,5 +169,48 @@ public class AdminMainPerformence extends JPanel {
 		});
 		chartBtnPanel.add(btnExit);
 		
+	}
+	
+	// 월별 검색 조건 메소드
+	private void setMonthTableAndChart(Object selectItem, boolean setMonth) {
+		// 현재 년도 가져오기
+		 Date date = new Date();
+		 SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
+		 String CurrentYear = sdf.format(date);
+		 String Month = selectItem.toString().replaceAll("월", "");
+		 
+		 String setStart = null;
+		 String setEnd = null;
+		 
+		 if(setMonth) {
+			 setStart = CurrentYear + "0" + Month + "01";
+			 setEnd = CurrentYear + "0" + Month + "31";
+		 }else {
+			 setStart = CurrentYear +  Month + "01";
+			 setEnd = CurrentYear + Month + "31";
+		 }
+		 		 
+		 // 테이블 변경
+		 list = RentService.getInstance().selectPerformenceMonth(setStart, setEnd);
+		 remove(adminTable);
+		 
+		 adminTable = new AdminPerformenceTable(list, 0);
+		 adminTable.setBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.LOWERED, null, null)));
+		 adminTable.setBounds(8, 80, 587, 664);
+		 adminTable.loadDate();
+		 add(adminTable);
+		 
+		 // 그래프 변경
+		 abstractPieChart = new PerformenceMonthPieChart("성과분석", "", "", list, false);
+		 // 자세히 보기 차트 출력을 위한 별도의 파이 차트 생성 및 바 차트 생성
+		 abstractBarChart = new  PerformenceTotalBarChart("성과분석", "차종별", "최종요금", list);
+		 
+		 
+		 chartPanel.removeAll();
+		 JChartLibPanel jChart = abstractPieChart.getPieChart();
+		 chartPanel.add(jChart, BorderLayout.CENTER);
+		 
+		 revalidate();
+		 repaint();
 	}
 }
