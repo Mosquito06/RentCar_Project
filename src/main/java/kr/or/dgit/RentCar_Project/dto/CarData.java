@@ -1,7 +1,5 @@
 package kr.or.dgit.RentCar_Project.dto;
 
-import java.util.Arrays;
-
 public class CarData {
 	private String carCode;
 	private String carName;
