@@ -26,7 +26,7 @@ public class AddressFrame extends JFrame {
 	private ComboBoxComponent<Post> sidoPanel;
 	private JScrollPane scrollPane;
 
-	public AddressFrame() {
+	public AddressFrame(MembershipFrame mf) {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 469, 425);
@@ -58,7 +58,7 @@ public class AddressFrame extends JFrame {
 				Object sido = sidoPanel.getComboBox().getSelectedItem();
 				String doro =  doroPanel.getTextValue();
 				Post post = new Post(String.valueOf(sido), doro);
-				AddressAddPanel addPanel = new AddressAddPanel(post);
+				AddressAddPanel addPanel = new AddressAddPanel(post,mf);
 				scrollPane.setViewportView(addPanel);
 				addPanel.setLayout(new GridLayout(0, 1, 0, 0));
 			}

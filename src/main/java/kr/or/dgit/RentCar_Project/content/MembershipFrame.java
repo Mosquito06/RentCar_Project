@@ -53,10 +53,19 @@ public class MembershipFrame extends JFrame {
 	private JPasswordField tfTestPw;
 	private Boolean pw1Check = false;
 	private Boolean pw2Check = false;
-	private Boolean emailCheck = false;
 	private Boolean phone1Check = false;
 	private Boolean phone2Check = false;
+	private AddressFrame addr;
+	
+	
+	public AddressFrame getAddr() {
+		return addr;
+	}
 
+	public JTextField getTfAddr() {
+		return tfAddr;
+	}
+	
 	public MembershipFrame() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -180,8 +189,9 @@ public class MembershipFrame extends JFrame {
 
 		JButton btnAddr = new JButton("주소검색");
 		btnAddr.addActionListener(new ActionListener() {
+
 			public void actionPerformed(ActionEvent e) {
-				AddressFrame addr = new AddressFrame();
+				addr = new AddressFrame(MembershipFrame.this);
 				addr.setVisible(true);
 			}
 		});
