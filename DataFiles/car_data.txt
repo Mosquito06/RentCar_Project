@@ -1,12 +1,12 @@
 CC-H-G-002	엑센트	accent.jpg	2015	20	AUTO	5	CC	H	G	
-CC-H-G-003	아반테AD	avanteAD.jpg	2017	20	AUTO	5	CC	H	L	
-CC-H-G-004	아반테MD	avanteMD.jpg	2015	20	AUTO	5	CC	H	L	
+CC-H-L-003	아반테AD	avanteAD.jpg	2017	20	AUTO	5	CC	H	L	
+CC-H-L-004	아반테MD	avanteMD.jpg	2015	20	AUTO	5	CC	H	L	
 CC-H-G-006	i30	i30.jpg	2016	20	AUTO	5	CC	H	G	
 CC-K-G-001	K3	k3.jpg	2017	20	AUTO	5	CC	K	G	
 CC-K-G-005	소울	soul.jpg	2017	20	AUTO	5	CC	K	G	
-FV-H-G-002	스타렉스	starex.jpg	2015	20	MANUAL	12	FV	H	D	
-FV-K-G-001	카니발	carnival.jpg	2017	20	MANUAL	9	FV	K	D	
-FV-SY-G-003	투리스모	turismo.jpg	2016	20	MANUAL	9	FV	SY	D	
+FV-H-D-002	스타렉스	starex.jpg	2015	20	MANUAL	12	FV	H	D	
+FV-K-D-001	카니발	carnival.jpg	2017	20	MANUAL	9	FV	K	D	
+FV-SY-D-003	투리스모	turismo.jpg	2016	20	MANUAL	9	FV	SY	D	
 HC-C-G-002	임팔라	impala.jpg	2017	20	AUTO	5	HC	C	G	
 HC-H-G-001	제네시스	genesis.jpg	2017	20	AUTO	5	HC	H	G	
 HC-H-G-003	그랜저IG	grander.jpg	2016	20	AUTO	5	HC	H	G	

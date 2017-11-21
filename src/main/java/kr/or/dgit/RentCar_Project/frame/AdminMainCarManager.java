@@ -33,19 +33,10 @@ import kr.or.dgit.RentCar_Project.service.CarModelService;
 import kr.or.dgit.RentCar_Project.service.FuelService;
 import kr.or.dgit.RentCar_Project.service.ManufacturerService;
 import kr.or.dgit.RentCar_Project.content.CarDataListManagerContent;
+import kr.or.dgit.RentCar_Project.content.CarDataManagerContent;
 
 @SuppressWarnings("serial")
 public class AdminMainCarManager extends JPanel {
-	
-	private TextFieldComponent carCode;
-	private TextFieldComponent carName;
-	private TextFieldComponent carOld;
-	private TextFieldComponent seater;
-	private RadioComponent isAuto;
-	private JspinnerComponent carNumber;
-	private ComboBoxComponent<CarModel> cmCode;
-	private ComboBoxComponent<Manufacturer> mfCode;
-	private ComboBoxComponent<Fuel> fCode;
 	private String[] details = {"선택하세요","대여단가 관리","차종&제조회사&연료 관리"};
 	
 	public AdminMainCarManager() {
@@ -65,86 +56,11 @@ public class AdminMainCarManager extends JPanel {
 		btnBack.setBounds(862, 728, 97, 23);
 		add(btnBack);
 		
-		JPanel carPanel = new JPanel();
+		CarDataManagerContent carPanel = new CarDataManagerContent();
 		carPanel.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.RAISED, null, null)), " \uCC28\uB7C9 \uAD00\uB9AC  ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		carPanel.setBounds(12, 10, 950, 382);
 		add(carPanel);
 		carPanel.setLayout(null);
-		
-		carCode = new TextFieldComponent("차 코드");
-		carCode.setBounds(5, 20, 230, 30);
-		carPanel.add(carCode);
-		
-		carName = new TextFieldComponent("차 이름");
-		carName.setBounds(5, 60, 230, 30);
-		carPanel.add(carName);
-		
-		carOld = new TextFieldComponent("연식");
-		carOld.setBounds(5, 100, 230, 30);
-		carPanel.add(carOld);
-		
-		seater = new TextFieldComponent("인승");
-		seater.setBounds(5, 220, 230, 30);
-		carPanel.add(seater);
-		
-		isAuto = new RadioComponent("오토유무","yes", "no");
-		isAuto.setBounds(15, 180, 255, 30);
-		carPanel.add(isAuto);
-		
-		carNumber = new JspinnerComponent("차량대수");
-		carNumber.setBounds(5, 140, 230, 30);
-		carPanel.add(carNumber);
-		
-		cmCode = new ComboBoxComponent<>("차종코드");
-		cmCode.setBounds(5, 260, 230, 30);
-		carPanel.add(cmCode);
-		
-		mfCode = new ComboBoxComponent<>("제조회사코드");
-		mfCode.setBounds(5, 300, 230, 30);
-		carPanel.add(mfCode);
-		
-		fCode = new ComboBoxComponent<>("연료코드");
-		fCode.setBounds(5, 339, 230, 30);
-		carPanel.add(fCode);
-		
-		JButton btnDelete = new JButton("삭제");
-		btnDelete.setBounds(701, 86, 66, 23);
-		carPanel.add(btnDelete);
-		
-		JButton btnUpdate = new JButton("수정");
-		btnUpdate.setBounds(701, 53, 66, 23);
-		carPanel.add(btnUpdate);
-		
-		JButton btnAdd = new JButton("추가");
-		btnAdd.setBounds(701, 20, 66, 23);
-		carPanel.add(btnAdd);
-		
-		JButton btnClear = new JButton("취소");
-		btnClear.setBounds(701, 346, 66, 23);
-		btnClear.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				int clear = JOptionPane.showConfirmDialog(null, "입력 데이터를 취소하시겠습니까?", "확인창", JOptionPane.OK_CANCEL_OPTION);
-				if(clear==0)setRentalPriceValueClear();
-			}
-		});
-		carPanel.add(btnClear);
-		
-		JPanel panel = new JPanel();
-		panel.setBounds(282, 20, 400, 349);
-		carPanel.add(panel);
-		
-		JButton btnDetail = new JButton("세부사항관리");
-		btnDetail.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Object selected = JOptionPane.showInputDialog(null, "세부관리 사항을 선택하세요", "세부관리", JOptionPane.QUESTION_MESSAGE, null, details, details[0]);
-				openDetailFrame(selected);
-				
-			}
-		});
-		btnDetail.setBounds(783, 20, 144, 23);
-		carPanel.add(btnDetail);
 		
 		CarDataListManagerContent carListPanel = new CarDataListManagerContent();
 		carListPanel.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.RAISED, null, null)), " \uCC28\uB7C9 \uB9AC\uC2A4\uD2B8 ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -165,7 +81,6 @@ public class AdminMainCarManager extends JPanel {
 			cm.setComboType(0);
 			carModel.add(cm);
 		}
-		cmCode.setComboBoxModel(carModel);
 	}
 	public void setManufacturerComboModel() {
 		ManufacturerService manufacturerService = ManufacturerService.getInstance();
@@ -175,7 +90,6 @@ public class AdminMainCarManager extends JPanel {
 			mf.setComboType(1);
 			manufacturer.add(mf);
 		}
-		mfCode.setComboBoxModel(manufacturer);
 		
 	}
 	
@@ -187,10 +101,9 @@ public class AdminMainCarManager extends JPanel {
 			f.setComboType(1);
 			fuelCode.add(f);
 		}
-		fCode.setComboBoxModel(fuelCode);
 		
 	}
-	public void setRentalPriceValueClear() {
+/*	public void setRentalPriceValueClear() {
 		carCode.setTextValue("");
 		carName.setTextValue("");
 		carOld.setTextValue("");
@@ -200,7 +113,7 @@ public class AdminMainCarManager extends JPanel {
 		cmCode.setComboBoxModelClear();
 		mfCode.setComboBoxModelClear();
 		fCode.setComboBoxModelClear();
-	}
+	}*/
 	private void openDetailFrame(Object selected) {
 		JFrame frame = AdminMain.getInstance();
 		frame.getContentPane().removeAll();

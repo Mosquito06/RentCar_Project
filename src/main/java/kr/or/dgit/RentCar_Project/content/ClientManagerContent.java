@@ -58,7 +58,7 @@ public class ClientManagerContent extends JPanel implements ActionListener{
 		setLayout(null);
 		
 		JPanel searchPanel = new JPanel();
-		searchPanel.setBounds(310, 26, 354, 55);
+		searchPanel.setBounds(314, 33, 354, 55);
 		searchPanel.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0), 1, true), new EmptyBorder(5, 5, 5, 5)), " \uAC80\uC0C9 ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		add(searchPanel);
 		searchPanel.setLayout(new BorderLayout(0, 0));
@@ -71,46 +71,46 @@ public class ClientManagerContent extends JPanel implements ActionListener{
 		searchPanel.add(btnOk, BorderLayout.EAST);
 		
 		btnUpdate = new JButton("수정");
-		btnUpdate.setBounds(680, 29, 69, 22);
+		btnUpdate.setBounds(680, 40, 69, 22);
 		btnUpdate.addActionListener(this);
 		add(btnUpdate);
 		
 		btnDelete = new JButton("삭제");
-		btnDelete.setBounds(680, 57, 69, 22);
+		btnDelete.setBounds(680, 63, 69, 22);
 		btnDelete.addActionListener(this);
 		add(btnDelete);
 		
 		imgPanel = new JLabel();
-		imgPanel.setBounds(12, 13, 251, 302);
-		imgPanel.setHorizontalAlignment(SwingConstants.CENTER);
+		imgPanel.setBounds(5, 10, 264, 371);
+		/*imgPanel.setHorizontalAlignment(SwingConstants.CENTER);*/
 		add(imgPanel);
 		
 		clientId = new TextFieldComponent("아이디");
-		clientId.setBounds(234, 95, 278, 29);
+		clientId.setBounds(234, 115, 278, 29);
 		add(clientId);
 		
 		comboUserCodeGrade = new ComboBoxComponent<>("고객등급");
-		comboUserCodeGrade.setBounds(505, 95, 305, 29);
+		comboUserCodeGrade.setBounds(517, 115, 305, 29);
 		add(comboUserCodeGrade);
 		
 		clientCode = new TextFieldComponent("고객 코드");
-		clientCode.setBounds(234, 145, 278, 29);
+		clientCode.setBounds(234, 175, 278, 29);
 		add(clientCode);
 		
 		gender = new RadioComponent("성별", "남자", "여자");
-		gender.setBounds(531, 145, 290, 29);
+		gender.setBounds(545, 175, 290, 29);
 		add(gender);
 		
 		clientName = new TextFieldComponent("고객명");
-		clientName.setBounds(234, 195, 278, 29);
+		clientName.setBounds(234, 235, 278, 29);
 		add(clientName);
 		
 		phoneNum = new PhoneTextFiedComponent("연락처");
-		phoneNum.setBounds(390, 195, 462, 29);
+		phoneNum.setBounds(406, 235, 462, 29);
 		add(phoneNum);
 		
 		email = new EmailTextFiedComponent("이메일");
-		email.setBounds(253, 248, 469, 29);
+		email.setBounds(244, 295, 469, 29);
 		add(email);
 		
 		JButton btnCancel = new JButton("취소");
@@ -123,7 +123,7 @@ public class ClientManagerContent extends JPanel implements ActionListener{
 				}
 			}
 		});
-		btnCancel.setBounds(815, 275, 97, 23);
+		btnCancel.setBounds(814, 337, 97, 23);
 		add(btnCancel);
 		
 		JButton btnUseList = new JButton("이용내역 조회");
