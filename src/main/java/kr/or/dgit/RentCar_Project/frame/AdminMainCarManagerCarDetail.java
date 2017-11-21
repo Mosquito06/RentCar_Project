@@ -4,8 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
-import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -22,8 +20,6 @@ import kr.or.dgit.RentCar_Project.content.FuelListManagerContent;
 import kr.or.dgit.RentCar_Project.content.FuelManagerContent;
 import kr.or.dgit.RentCar_Project.content.ManufacturerListContent;
 import kr.or.dgit.RentCar_Project.content.ManufacturerManagerContent;
-import kr.or.dgit.RentCar_Project.dto.Manufacturer;
-import kr.or.dgit.RentCar_Project.service.ManufacturerService;
 
 @SuppressWarnings("serial")
 public class AdminMainCarManagerCarDetail extends JPanel{
@@ -120,15 +116,12 @@ public class AdminMainCarManagerCarDetail extends JPanel{
 	private void openDetailFrame(Object selected) {
 		JFrame frame = AdminMain.getInstance();
 		frame.getContentPane().removeAll();
-			if(selected==details[0]){
+			if(selected==details[0]||selected==null){
 			JOptionPane.showMessageDialog(null, "세부사향을 선택하세요");
-			return;
 		}else if(selected==details[1]) {
 			frame.getContentPane().add(new AdminMainCarManagerRentalPrice(), BorderLayout.CENTER);
 		}else if(selected==details[2]) {
 			frame.getContentPane().add(new AdminMainCarManager(), BorderLayout.CENTER);
-		}else {
-			return;
 		}
 			frame.setVisible(true);
 		
