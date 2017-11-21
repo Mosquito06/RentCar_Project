@@ -115,13 +115,6 @@ public class AdminMainPerformence extends JPanel {
 					JOptionPane.showMessageDialog(null, "검색 조건을 선택하세요.");
 				}
 			}
-
-			
-
-			
-
-			
-		
 		});
 		performenceContent.setBounds(12, 22, 349, 354);
 		searchPanel.add(performenceContent);
