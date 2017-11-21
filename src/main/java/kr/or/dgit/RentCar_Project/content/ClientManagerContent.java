@@ -7,10 +7,13 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Vector;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
@@ -44,6 +47,7 @@ public class ClientManagerContent extends JPanel implements ActionListener{
 	private JButton btnOk;
 	private JButton btnUpdate;
 	private JButton btnDelete;
+	private JLabel imgPanel;
 	
 	
 	public void setClientListManager(ClientlListManagerContent clientListManager) {
@@ -76,10 +80,10 @@ public class ClientManagerContent extends JPanel implements ActionListener{
 		btnDelete.addActionListener(this);
 		add(btnDelete);
 		
-		JPanel panel = new JPanel();
-		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel.setBounds(23, 29, 240, 269);
-		add(panel);
+		imgPanel = new JLabel();
+		imgPanel.setBounds(12, 13, 251, 302);
+		imgPanel.setHorizontalAlignment(SwingConstants.CENTER);
+		add(imgPanel);
 		
 		clientId = new TextFieldComponent("아이디");
 		clientId.setBounds(234, 95, 278, 29);
@@ -229,7 +233,7 @@ public class ClientManagerContent extends JPanel implements ActionListener{
 			email.setTextValueEmailAddr(user.getEmail().substring(user.getEmail().indexOf('@')+1));
 			gradeComboBoxSelected(user.getGrade().getGrade());
 			genderRadioSelected(user.getGender().name());
-			
+			imgPanel.setIcon(new ImageIcon(user.getUserImg()));
 			clientListManager.listClient.setFull(false);
 			clientListManager.listClient.setUserCode(user);
 			clientListManager.listClient.loadDate();
