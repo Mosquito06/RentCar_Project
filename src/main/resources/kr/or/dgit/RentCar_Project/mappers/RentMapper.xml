@@ -139,4 +139,14 @@
 		union select 0, '합계', '-', '-', sum(use_time), sum(discount_price), sum(final_price) from rent
 		where day_start &gt;= #{param1} and day_end &lt;= #{param2}
 	</select>
+	
+	<select id="selectPerformenceGender" resultMap="JoinCarDataAndCarModelAndManufacturer">
+		select rent_code, car_model, manufacturer_name, car_name, sum(use_time), sum(discount_price), sum(final_price) from car_data  
+		join manufacturer on car_data.manufacturer_code = manufacturer.manufacturer_code
+		join car_model on car_data.car_model_code = car_model.car_model_code
+		join rent on car_data.car_code = rent.car_code 
+		join user on user.user_code = rent.user_code where gender = #{param1} group by car_model
+		union select 0,'합계', '-', '-', sum(use_time), sum(discount_price), sum(final_price)
+		from rent join user on rent.user_code = user.user_code where gender = #{param1}
+	</select>
 </mapper>

@@ -114,4 +114,13 @@ public class RentService implements RentDao {
 		}
 	}
 
+
+	@Override
+	public List<Rent> selectPerformenceGender(String gender) {
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession()){
+			rentDao = sqlSession.getMapper(RentDao.class);
+			return rentDao.selectPerformenceGender(gender);
+		}
+	}
+
 }

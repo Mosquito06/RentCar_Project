@@ -88,7 +88,11 @@ public class AdminMainPerformence extends JPanel {
 					}else if(item[1].toString().indexOf("성별") > 0){
 						if (item[2] instanceof JComboBox) {
 							Object selectItem = ((JComboBox) item[2]).getSelectedItem();
-							JOptionPane.showMessageDialog(null, selectItem);
+							if(selectItem.equals("남자")) {
+								setGenderTableAndChart("MALE");
+							}else {
+								setGenderTableAndChart("FEMALE");
+							}
 						}
 					}else if(item[1].toString().indexOf("차종") > 0){
 						if (item[2] instanceof JComboBox) {
@@ -115,6 +119,8 @@ public class AdminMainPerformence extends JPanel {
 					JOptionPane.showMessageDialog(null, "검색 조건을 선택하세요.");
 				}
 			}
+
+			
 		
 		});
 		performenceContent.setBounds(12, 22, 349, 354);
@@ -204,6 +210,30 @@ public class AdminMainPerformence extends JPanel {
 		 abstractPieChart = new PerformenceMonthPieChart("성과분석", "", "", list, false);
 		 // 자세히 보기 차트 출력을 위한  바 차트 생성
 		 abstractBarChart = new  PerformenceTotalBarChart("성과분석", "차종별", "최종요금", list);
+		 		 
+		 chartPanel.removeAll();
+		 JChartLibPanel jChart = abstractPieChart.getPieChart();
+		 chartPanel.add(jChart, BorderLayout.CENTER);
+		 
+		 revalidate();
+		 repaint();
+	}
+	
+	private void setGenderTableAndChart(String gender) {
+		// 테이블 변경
+		 list = RentService.getInstance().selectPerformenceGender(gender);
+		 remove(adminTable);
+		 
+		 adminTable = new AdminPerformenceTable(list, 0);
+		 adminTable.setBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.LOWERED, null, null)));
+		 adminTable.setBounds(8, 80, 587, 664);
+		 adminTable.loadDate();
+		 add(adminTable);
+		 
+		 // 그래프 변경
+		 abstractPieChart = new PerformenceMonthPieChart("성과분석", "", "", list, false);
+		 // 자세히 보기 차트 출력을 위한  바 차트 생성
+		 abstractBarChart = new  PerformenceTotalBarChart("성과분석", "성별", "최종요금", list);
 		 		 
 		 chartPanel.removeAll();
 		 JChartLibPanel jChart = abstractPieChart.getPieChart();
