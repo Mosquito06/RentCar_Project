@@ -24,7 +24,6 @@ import kr.or.dgit.RentCar_Project.service.UserService;
 
 @SuppressWarnings("serial")
 public class AdminMainClientManagerUseList extends JPanel {
-	private ComboBoxComponent<User> searchCombo;
 	
 	public AdminMainClientManagerUseList() {
 		setBounds(100, 100, 974, 751);
@@ -35,20 +34,6 @@ public class AdminMainClientManagerUseList extends JPanel {
 		panel.setBounds(28, 26, 923, 699);
 		add(panel);
 		panel.setLayout(null);
-		
-		JPanel searchPanel = new JPanel();
-		searchPanel.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), " \uAC80\uC0C9 ", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		searchPanel.setBounds(199, 32, 511, 56);
-		panel.add(searchPanel);
-		searchPanel.setLayout(null);
-		
-		searchCombo = new ComboBoxComponent<>("고객 코드");
-		searchCombo.setBounds(40, 17, 344, 29);
-		searchPanel.add(searchCombo);
-		
-		JButton btnNewButton = new JButton("조회");
-		btnNewButton.setBounds(402, 17, 97, 29);
-		searchPanel.add(btnNewButton);
 		
 		JPanel useListPanel = new JPanel();
 		useListPanel.setBounds(22, 112, 878, 528);
@@ -95,6 +80,5 @@ public class AdminMainClientManagerUseList extends JPanel {
 			u.setComboType(0);
 			userCode.add(u);
 		}
-		searchCombo.setComboBoxModel(userCode);
 	}
 }

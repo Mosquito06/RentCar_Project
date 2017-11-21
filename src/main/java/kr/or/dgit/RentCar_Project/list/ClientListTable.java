@@ -8,6 +8,16 @@ import kr.or.dgit.RentCar_Project.dto.User;
 import kr.or.dgit.RentCar_Project.service.UserService;
 
 public class ClientListTable extends AbstractTable {
+	private boolean isFull;
+	private User userCode;
+	
+	public void setUserCode(User userCode) {
+		this.userCode = userCode;
+	}
+
+	public void setFull(boolean isFull) {
+		this.isFull = isFull;
+	}
 
 	public ClientListTable() {}
 
@@ -18,7 +28,15 @@ public class ClientListTable extends AbstractTable {
 
 	@Override
 	protected Object[][] getData() {
-		List<User> lists = UserService.getInstance().selectUserByAll();
+		
+		List<User> lists;
+		
+		if(isFull) {
+			lists = UserService.getInstance().selectUserByAll();
+		}else {
+			lists = UserService.getInstance().findUserCodeByUserCode(userCode);
+		}
+		
 		Object[][] datas = new Object[lists.size()][];
 		
 		for(int i=0;i<lists.size();i++) {

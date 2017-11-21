@@ -21,16 +21,16 @@ import kr.or.dgit.RentCar_Project.component.EmailTextFiedComponent;
 import kr.or.dgit.RentCar_Project.component.PhoneTextFiedComponent;
 import kr.or.dgit.RentCar_Project.component.RadioComponent;
 import kr.or.dgit.RentCar_Project.component.TextFieldComponent;
+import kr.or.dgit.RentCar_Project.dto.Gender;
 import kr.or.dgit.RentCar_Project.dto.User;
 import kr.or.dgit.RentCar_Project.dto.UserGrade;
 import kr.or.dgit.RentCar_Project.frame.AdminMain;
-import kr.or.dgit.RentCar_Project.frame.AdminMainClientManager;
 import kr.or.dgit.RentCar_Project.frame.AdminMainClientManagerUseList;
 import kr.or.dgit.RentCar_Project.service.UserGradeService;
 import kr.or.dgit.RentCar_Project.service.UserService;
 
 @SuppressWarnings("serial")
-public class ClientManagerContent extends JPanel {
+public class ClientManagerContent extends JPanel implements ActionListener{
 	
 	private TextFieldComponent clientId;
 	private TextFieldComponent clientCode;
@@ -40,7 +40,16 @@ public class ClientManagerContent extends JPanel {
 	private ComboBoxComponent<User> comboUserCode;
 	private EmailTextFiedComponent email;
 	private RadioComponent gender;
+	private ClientlListManagerContent clientListManager;
+	private JButton btnOk;
+	private JButton btnUpdate;
+	private JButton btnDelete;
 	
+	
+	public void setClientListManager(ClientlListManagerContent clientListManager) {
+		this.clientListManager = clientListManager;
+	}
+
 	public ClientManagerContent() {
 		setLayout(null);
 		
@@ -53,40 +62,18 @@ public class ClientManagerContent extends JPanel {
 		comboUserCode = new ComboBoxComponent<>("고객 코드");
 		searchPanel.add(comboUserCode, BorderLayout.CENTER);
 		
-		JButton btnOk = new JButton("확인");
-		btnOk.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "고객을 검색합니다.");
-				setActive(true);
-				
-				User user  = comboUserCode.getComboboxValue();
-				
-				
-				clientId.setTextValue(user.getId());
-				clientCode.setTextValue(String.valueOf(user.getUserCode()));
-				clientName.setTextValue(user.getUserName());
-				phoneNum.setTextValueNum1(user.getPhone().substring(0,3));
-				phoneNum.setTextValueNum2(user.getPhone().substring(4,8));
-				phoneNum.setTextValueNum3(user.getPhone().substring(9));
-				email.setTextValueId(user.getEmail().substring(0,user.getEmail().indexOf('@')));
-				email.setTextValueEmailAddr(user.getEmail().substring(user.getEmail().indexOf('@')+1));
-				gradeComboBoxSelected(user.getGrade().getGrade());
-				genderRadioSelected(user.getGender().name());
-				
-			}
-
-			
-		});
+		btnOk = new JButton("확인");
+		btnOk.addActionListener(this);
 		searchPanel.add(btnOk, BorderLayout.EAST);
 		
-		JButton btnUpdate = new JButton("수정");
+		btnUpdate = new JButton("수정");
 		btnUpdate.setBounds(680, 29, 69, 22);
+		btnUpdate.addActionListener(this);
 		add(btnUpdate);
 		
-		JButton btnDelete = new JButton("삭제");
+		btnDelete = new JButton("삭제");
 		btnDelete.setBounds(680, 57, 69, 22);
+		btnDelete.addActionListener(this);
 		add(btnDelete);
 		
 		JPanel panel = new JPanel();
@@ -212,4 +199,71 @@ public class ClientManagerContent extends JPanel {
 		}
 		
 	}
+	public Gender getSelectedGender(String selectText) {
+		if(selectText.equals("남자")) {
+			return Gender.MALE;
+		}else {
+			return Gender.FEMALE;
+		}
+		
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		
+		UserService userService = UserService.getInstance();
+		int userCode = comboUserCode.getComboboxValue().getUserCode();
+		if(e.getSource()==btnOk) {
+			
+			JOptionPane.showMessageDialog(null, "고객을 검색합니다.");
+			setActive(true);
+			
+			User user  = comboUserCode.getComboboxValue();
+			
+			clientId.setTextValue(user.getId());
+			clientCode.setTextValue(String.valueOf(user.getUserCode()));
+			clientName.setTextValue(user.getUserName());
+			phoneNum.setTextValueNum1(user.getPhone().substring(0,3));
+			phoneNum.setTextValueNum2(user.getPhone().substring(4,8));
+			phoneNum.setTextValueNum3(user.getPhone().substring(9));
+			email.setTextValueId(user.getEmail().substring(0,user.getEmail().indexOf('@')));
+			email.setTextValueEmailAddr(user.getEmail().substring(user.getEmail().indexOf('@')+1));
+			gradeComboBoxSelected(user.getGrade().getGrade());
+			genderRadioSelected(user.getGender().name());
+			
+			clientListManager.listClient.setFull(false);
+			clientListManager.listClient.setUserCode(user);
+			clientListManager.listClient.loadDate();
+		}
+		
+		if(e.getSource()==btnUpdate) {
+			int update = JOptionPane.showConfirmDialog(null, "입력 데이터를 수정하시겠습니까?", "확인창",
+					JOptionPane.OK_CANCEL_OPTION);
+			if (update == 0) {
+				String id = clientId.getTextValue();
+				String userName = clientName.getTextValue();
+				String phone = phoneNum.getTextValueNum1()+"-"+phoneNum.getTextValueNum2()+"-"+phoneNum.getTextValueNum3();
+				String userEmail = email.getTextVauleId()+"@"+email.getTextValueEmailAddr();
+				Gender userGender = getSelectedGender(gender.getSelectText());
+				UserGrade userGrade = comboUserCodeGrade.getComboboxValue();
+				userService.updateUser(new User(userCode, id, userName, phone, userEmail, userGender, userGrade));
+				clientListManager.listClient.loadDate();
+				setClearAll();
+			}else {
+				JOptionPane.showMessageDialog(null, "취소되었습니다");
+			}
+			
+		}
+		if(e.getSource()==btnDelete) {
+			int delete = JOptionPane.showConfirmDialog(null, "입력 데이터를 삭제하시겠습니까?", "확인창", JOptionPane.OK_CANCEL_OPTION);
+			if (delete == 0) {
+				userService.deleteUser(new User(userCode));
+				clientListManager.listClient.loadDate();
+				setClearAll();
+			}else {
+				JOptionPane.showMessageDialog(null, "취소되었습니다");
+			}
+		}
+	}
+
+
 }

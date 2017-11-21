@@ -28,11 +28,6 @@ public class User {
 		this.grade = grade;
 	}
 	
-	
-
-
-
-
 	public User(String id, String pw, String userName, String phone, String email, Gender gender) {
 		super();
 		this.id = id;
@@ -43,10 +38,21 @@ public class User {
 		this.gender = gender;
 	}
 
-
-
-
-
+	public User(int userCode, String id, String userName, String phone, String email, Gender gender, UserGrade grade) {
+		super();
+		this.userCode = userCode;
+		this.id = id;
+		this.userName = userName;
+		this.phone = phone;
+		this.email = email;
+		this.gender = gender;
+		this.grade = grade;
+	}
+	
+	public User(int userCode) {
+		super();
+		this.userCode = userCode;
+	}
 
 	public User() {
 		super();

@@ -10,4 +10,5 @@ public interface UserDao {
 	void deleteUser(User userCode);
 	User selectUserByUserCode(User userCode);
 	List<User> selectUserByAll();
+	List<User> findUserCodeByUserCode(User userCode);
 }
