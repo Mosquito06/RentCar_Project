@@ -8,6 +8,17 @@ import kr.or.dgit.RentCar_Project.dto.CarData;
 import kr.or.dgit.RentCar_Project.service.CarDataService;
 
 public class CarDataTable extends AbstractTable {
+	private boolean isFull;
+	private CarData carDataCode;
+	
+	
+	public void setFull(boolean isFull) {
+		this.isFull = isFull;
+	}
+
+	public void setCarDataCode(CarData carDataCode) {
+		this.carDataCode = carDataCode;
+	}
 
 	@Override
 	protected void setAlignWidth() {
@@ -17,7 +28,13 @@ public class CarDataTable extends AbstractTable {
 
 	@Override
 	protected Object[][] getData() {
-		List<CarData> lists = CarDataService.getInstance().selectCarDataByAll();
+		List<CarData> lists;
+		if(isFull) {
+			lists = CarDataService.getInstance().selectCarDataByAll();
+		}else {
+			lists = CarDataService.getInstance().selectCarDataByCarDataCodeList(carDataCode);
+		}
+		
 		Object[][] datas = new Object[lists.size()][];
 		for(int i=0;i<lists.size();i++) {
 			CarData cd = lists.get(i);

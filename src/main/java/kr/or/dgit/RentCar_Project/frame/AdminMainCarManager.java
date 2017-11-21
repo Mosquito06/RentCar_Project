@@ -32,6 +32,7 @@ import kr.or.dgit.RentCar_Project.service.CarDataService;
 import kr.or.dgit.RentCar_Project.service.CarModelService;
 import kr.or.dgit.RentCar_Project.service.FuelService;
 import kr.or.dgit.RentCar_Project.service.ManufacturerService;
+import kr.or.dgit.RentCar_Project.content.CarDataListManagerContent;
 
 @SuppressWarnings("serial")
 public class AdminMainCarManager extends JPanel {
@@ -45,14 +46,7 @@ public class AdminMainCarManager extends JPanel {
 	private ComboBoxComponent<CarModel> cmCode;
 	private ComboBoxComponent<Manufacturer> mfCode;
 	private ComboBoxComponent<Fuel> fCode;
-	private JPanel listTablePanel;
-	private JLabel lblNum;
-	private JButton btnNewButton;
-	private ComboBoxComponent<CarData> searchPanel;
-	private JButton btnChart;
 	private String[] details = {"선택하세요","대여단가 관리","차종&제조회사&연료 관리"};
-	private JButton btnAll;
-	private CarDataTable carDataTable;
 	
 	public AdminMainCarManager() {
 		setBounds(0, 0, 974, 751);
@@ -152,62 +146,15 @@ public class AdminMainCarManager extends JPanel {
 		btnDetail.setBounds(783, 20, 144, 23);
 		carPanel.add(btnDetail);
 		
-		JPanel carListPanel = new JPanel();
+		CarDataListManagerContent carListPanel = new CarDataListManagerContent();
 		carListPanel.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.RAISED, null, null)), " \uCC28\uB7C9 \uB9AC\uC2A4\uD2B8 ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		carListPanel.setBounds(12, 402, 950, 322);
 		add(carListPanel);
 		carListPanel.setLayout(null);
-		
-		lblNum = new JLabel("New label");
-		lblNum.setBounds(867, 300, 76, 15);
-		carListPanel.add(lblNum);
-		lblNum.setHorizontalAlignment(SwingConstants.RIGHT);
-		
-		listTablePanel = new JPanel();
-		listTablePanel.setBounds(12, 54, 931, 245);
-		carListPanel.add(listTablePanel);
-		listTablePanel.setLayout(new BorderLayout(0, 0));
-		carDataTable = new CarDataTable();
-		carDataTable.loadDate();
-		listTablePanel.add(carDataTable,BorderLayout.CENTER);
-		
-		btnNewButton = new JButton("검색");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				CarData carCode = searchPanel.getComboboxValue();
-				CarData lists = CarDataService.getInstance().selectCarDataByCarDataCode(carCode);
-				
-			}
-		});
-		btnNewButton.setBounds(600, 21, 97, 23);
-		carListPanel.add(btnNewButton);
-		
-		searchPanel = new ComboBoxComponent<>("차 코드");
-		searchPanel.setBounds(272, 16, 316, 28);
-		carListPanel.add(searchPanel);
-		
-		btnChart = new JButton("차트보기");
-		btnChart.setBounds(841, 21, 97, 23);
-		carListPanel.add(btnChart);
-		
-		btnAll = new JButton("전체보기");
-		btnAll.setBounds(744, 21, 97, 23);
-		carListPanel.add(btnAll);
-		setSearchCarCodeComboModel();
 		setCarModelComboModel();
 		setManufacturerComboModel();
 		setFuelComboModel();
 		
-	}
-	public void setSearchCarCodeComboModel() {
-		CarDataService carDataService = CarDataService.getInstance();
-		List<CarData> lists = carDataService.selectCarDataByAll();
-		Vector<CarData> carData = new Vector<>();
-		for(CarData cd : lists) {
-			cd.setComboType(0);
-			carData.add(cd);
-		}
-		searchPanel.setComboBoxModel(carData);
 	}
 	
 	public  void setCarModelComboModel() {
