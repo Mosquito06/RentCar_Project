@@ -69,9 +69,10 @@ public class Login extends JFrame {
 	}
 
 	public Login() {
+		setResizable(false);
 		this.userDao = UserService.getInstance();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 666, 520);
+		setBounds(100, 100, 654, 510);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -99,7 +100,6 @@ public class Login extends JFrame {
 			@Override
 			public void focusGained(FocusEvent e) {
 				IdField.select(0, IdField.getText().length());
-
 			}
 		});
 

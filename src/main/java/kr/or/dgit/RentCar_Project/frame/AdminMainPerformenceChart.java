@@ -32,12 +32,13 @@ public class AdminMainPerformenceChart extends JFrame {
 	private String createWhatPie;
 	
 	public AdminMainPerformenceChart(List<Rent> lists, AbstractBarChart<Rent> BarChart, String setPie) {
+		setResizable(false);
 		this.items = lists;
 		this.abstractBarChart = BarChart;
 		this.createWhatPie = setPie;
 		
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		setBounds(100, 100, 850, 550);
+		setBounds(100, 100, 841, 544);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

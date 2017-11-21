@@ -35,5 +35,6 @@
 		<mapper resource="kr/or/dgit/RentCar_Project/mappers/RentalPriceMapper.xml"/>
 		<mapper resource="kr/or/dgit/RentCar_Project/mappers/RentMapper.xml"/>
 		<mapper resource="kr/or/dgit/RentCar_Project/mappers/CarDataMapper.xml"/>
+		<mapper resource="kr/or/dgit/RentCar_Project/mappers/PostMapper.xml"/>
 	</mappers>
 </configuration>

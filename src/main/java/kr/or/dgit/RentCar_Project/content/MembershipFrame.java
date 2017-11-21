@@ -58,8 +58,9 @@ public class MembershipFrame extends JFrame {
 	private Boolean phone2Check = false;
 
 	public MembershipFrame() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		setBounds(100, 100, 448, 546);
+		setBounds(100, 100, 443, 543);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -178,6 +179,12 @@ public class MembershipFrame extends JFrame {
 		panel_6.add(tfAddr2);
 
 		JButton btnAddr = new JButton("주소검색");
+		btnAddr.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddressFrame addr = new AddressFrame();
+				addr.setVisible(true);
+			}
+		});
 		btnAddr.setFont(new Font("굴림", Font.PLAIN, 11));
 		btnAddr.setBounds(274, 0, 76, 28);
 		panel_6.add(btnAddr);
@@ -214,7 +221,7 @@ public class MembershipFrame extends JFrame {
 			}
 		});
 
-		btnTest = new JButton("중복검사");
+		btnTest = new JButton("중복확인");
 		btnTest.setEnabled(false);
 		btnTest.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
