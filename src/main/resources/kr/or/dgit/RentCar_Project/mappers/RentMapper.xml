@@ -160,4 +160,15 @@
 		from car_data join rent on rent.car_code = car_data.car_code 
 		join car_model on car_data.car_model_code = car_model.car_model_code where car_model = #{param1}
 	</select>
+	
+	<select id="selectPerformenceManufacturer" resultMap="JoinCarDataAndCarModelAndManufacturer">
+		select rent_code, car_model, manufacturer_name, car_name, sum(use_time), sum(discount_price), 
+		sum(final_price) from car_data 
+		join manufacturer on car_data.manufacturer_code = manufacturer.manufacturer_code
+		join car_model on car_data.car_model_code = car_model.car_model_code 
+		join rent on car_data.car_code = rent.car_code where manufacturer_name = #{param1} group by car_name
+		union select 0, '합계', '-', '-', sum(use_time), sum(discount_price), sum(final_price) 
+		from car_data join rent on rent.car_code = car_data.car_code 
+		join manufacturer on car_data.manufacturer_code = manufacturer.manufacturer_code where manufacturer_name = #{param1}
+	</select>
 </mapper>

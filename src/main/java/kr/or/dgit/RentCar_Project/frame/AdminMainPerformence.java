@@ -98,32 +98,12 @@ public class AdminMainPerformence extends JPanel {
 					}else if(item[1].toString().indexOf("차종") > 0){
 						if (item[2] instanceof JComboBox) {
 							Object selectItem = ((JComboBox) item[2]).getSelectedItem();
-													
-							if(selectItem.toString().equals("소형차")) {
-								setCarModelTableAndChart("소형차");
-							}else if(selectItem.toString().equals("승합차")) {
-								setCarModelTableAndChart("승합차");
-							}else if(selectItem.toString().equals("고급차")) {
-								setCarModelTableAndChart("고급차");
-							}else if(selectItem.toString().equals("수입차")) {
-								setCarModelTableAndChart("수입차");
-							}else if(selectItem.toString().equals("중형차")) {
-								setCarModelTableAndChart("중형차");
-							}else if(selectItem.toString().equals("RV/SUV")) {
-								setCarModelTableAndChart("RV/SUV");
-							}else{
-								setCarModelTableAndChart("경차");
-							}
-						}
-					}else if(item[1].toString().indexOf("차종별") > 0){
-						if (item[2] instanceof JComboBox) {
-							Object selectItem = ((JComboBox) item[2]).getSelectedItem();
-							JOptionPane.showMessageDialog(null, selectItem);
+							setCarModelTableAndChart(selectItem.toString());
 						}
 					}else if(item[1].toString().indexOf("제조사") > 0){
 						if (item[2] instanceof JComboBox) {
 							Object selectItem = ((JComboBox) item[2]).getSelectedItem();
-							JOptionPane.showMessageDialog(null, selectItem);
+							setManufacturerTableAndChart(selectItem.toString());
 						}
 					}else if(item[1].toString().indexOf("연료별") > 0){
 						if (item[2] instanceof JComboBox) {
@@ -135,6 +115,8 @@ public class AdminMainPerformence extends JPanel {
 					JOptionPane.showMessageDialog(null, "검색 조건을 선택하세요.");
 				}
 			}
+
+			
 
 			
 
@@ -288,5 +270,33 @@ public class AdminMainPerformence extends JPanel {
 		 
 		 // 자세히 보기 차트 프레임 미리 생성
 		 chartFrame = new AdminMainPerformenceChart(list, abstractBarChart, "차종");
+	}
+	
+	// 제조사별 검색 조건 메소드
+	private void setManufacturerTableAndChart(String manufacturer) {
+		list = RentService.getInstance().selectPerformenceManufacturer(manufacturer);
+		remove(adminTable);
+		 
+		adminTable = new AdminPerformenceTable(list, 1);
+		adminTable.setBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.LOWERED, null, null)));
+		adminTable.setBounds(8, 80, 587, 664);
+		adminTable.loadDate();
+		add(adminTable);
+		 
+		// 그래프 변경
+		abstractPieChart = new PerformenceCarModelPieChart("성과분석", "", "", list, false);
+		 		 
+		// 자세히 보기 차트 출력을 위한  바 차트 생성
+		abstractBarChart = new  PerformenceCarModelBarChart("성과분석", "차종별", "최종요금", list);
+		 
+		chartPanel.removeAll();
+		JChartLibPanel jChart = abstractPieChart.getPieChart();
+		chartPanel.add(jChart, BorderLayout.CENTER);
+		 
+		revalidate();
+		repaint();
+		 
+		// 자세히 보기 차트 프레임 미리 생성
+		chartFrame = new AdminMainPerformenceChart(list, abstractBarChart, "차종");
 	}
 }

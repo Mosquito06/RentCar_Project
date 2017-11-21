@@ -132,4 +132,13 @@ public class RentService implements RentDao {
 		}
 	}
 
+
+	@Override
+	public List<Rent> selectPerformenceManufacturer(String manufacturer) {
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession()){
+			rentDao = sqlSession.getMapper(RentDao.class);
+			return rentDao.selectPerformenceManufacturer(manufacturer);
+		}
+	}
+
 }
