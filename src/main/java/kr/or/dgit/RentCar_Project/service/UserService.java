@@ -40,7 +40,7 @@ public class UserService implements UserDao {
 			userDao = sqlsession.getMapper(UserDao.class);
 			userDao.updateUser(user);
 			sqlsession.commit();
-			JOptionPane.showMessageDialog(null, "수정되었습니다");
+			JOptionPane.showMessageDialog(null, "수정되었습니다.");
 		}catch(Exception e) {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null,"수정을 실패하였습니다");
@@ -55,7 +55,7 @@ public class UserService implements UserDao {
 			userDao = sqlsession.getMapper(UserDao.class);
 			userDao.deleteUser(user);
 			sqlsession.commit();
-			JOptionPane.showMessageDialog(null, "삭제되었습니다");
+			JOptionPane.showMessageDialog(null, "삭제되었습니다.");
 		}catch(Exception e) {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, "삭제를 실패하였습니다.");

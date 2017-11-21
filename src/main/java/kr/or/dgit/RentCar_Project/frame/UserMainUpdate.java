@@ -37,7 +37,8 @@ public class UserMainUpdate extends JPanel {
 	private User ComfirmUser;
 	private UpdateContent updatecontent;
 	
-	public UserMainUpdate(User ComfirmUser) {
+	public UserMainUpdate(User comfirmUser) {
+		this.ComfirmUser = comfirmUser;
 		setLayout(null);
 		JPanel upPanel = new JPanel();
 		upPanel.setBounds(0, 0, 974, 363);
@@ -78,7 +79,7 @@ public class UserMainUpdate extends JPanel {
 					ComfirmUser.setUserImg(getImage(selectString));
 					UserService.getInstance().updateUser(ComfirmUser);
 					updatecontent.setContent(ComfirmUser);
-					JOptionPane.showMessageDialog(null, "수정되었습니다.");
+					
 				}
 			}
 
@@ -126,7 +127,6 @@ public class UserMainUpdate extends JPanel {
 				ComfirmUser.setEmail(UpdateUser.getEmail());
 				ComfirmUser.setPhone(UpdateUser.getPhone());
 				UserService.getInstance().updateUser(ComfirmUser);
-				JOptionPane.showMessageDialog(null, "수정되었습니다");
 			}
 		});
 		
@@ -166,7 +166,6 @@ public class UserMainUpdate extends JPanel {
 				if (m.find()) {
 					ComfirmUser.setPw(changePw);
 					UserService.getInstance().updateUser(ComfirmUser);
-					JOptionPane.showMessageDialog(null, "수정되었습니다.");
 					updatepwcontent.clear();
 				}else {
 					JOptionPane.showMessageDialog(null, "비밀번호 양식에 맞게 입력해주세요");

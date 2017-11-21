@@ -64,7 +64,7 @@ public class TestUserService {
 	public void test3FindSelectUserByAll() {
 		List<User> list = userService.selectUserByAll();
 		Assert.assertNotNull(list);
-	}
+	}*/
 	
 	@Test
 	public void test4UpdeteUserByUserCode() {
@@ -73,13 +73,12 @@ public class TestUserService {
 		
 		User user = new User();
 		user.setGrade(userGrade);
-		user.setGender(gender);
 		user.setUserCode(3);
 		userService.updateUser(user);
 		
-	}*/
+	}
 	
-	@Test
+	/*@Test
 	public void test5DeleteUserByUserCode() {
 		User user = new User();
 		user.setUserCode(13);
@@ -105,6 +104,6 @@ public class TestUserService {
 		}
 		
 		return img;
-	}
+	}*/
 
 }

@@ -113,6 +113,7 @@ public class AdminMainPerformence extends JPanel {
 					}
 				}catch(NullPointerException e1) {
 					JOptionPane.showMessageDialog(null, "검색 조건을 선택하세요.");
+					return;
 				}
 				
 				JOptionPane.showMessageDialog(null, "검색을 완료하였습니다.");
