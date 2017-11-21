@@ -16,4 +16,5 @@ public interface RentDao {
 	List<Rent> selectPerformenceTotal();
 	List<Rent> selectPerformenceMonth(String setStart, String setEnd);
 	List<Rent> selectPerformenceGender(String gender);
+	List<Rent> selectPerformenceCarModel(String carModel);
 }

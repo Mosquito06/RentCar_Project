@@ -151,9 +151,15 @@ public class TestRentService {
 		Assert.assertNotNull(list);
 	}*/
 	
-	@Test
+	/*@Test
 	public void selectPerformenceGender() {
 		List<Rent> list = rentService.selectPerformenceGender("MALE");
+		Assert.assertNotNull(list);
+	}*/
+	
+	@Test
+	public void selectPerformenceCarModel() {
+		List<Rent> list = rentService.selectPerformenceCarModel("중형차");
 		Assert.assertNotNull(list);
 	}
 }

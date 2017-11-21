@@ -19,23 +19,22 @@ import com.bitagentur.renderer.JChartLibPanel;
 
 import kr.or.dgit.RentCar_Project.chart.AbstractBarChart;
 import kr.or.dgit.RentCar_Project.chart.AbstractPieChart;
-import kr.or.dgit.RentCar_Project.chart.PerformenceTotalBarChart;
+import kr.or.dgit.RentCar_Project.chart.PerformenceCarModelPieChart;
 import kr.or.dgit.RentCar_Project.chart.PerformenceTotalPieChart;
 import kr.or.dgit.RentCar_Project.dto.Rent;
-import kr.or.dgit.RentCar_Project.service.RentService;
 
 public class AdminMainPerformenceChart extends JFrame {
 
 	private JPanel contentPane;
 	private List<Rent> items;
 	private AbstractBarChart<Rent> abstractBarChart;
-
+	private AbstractPieChart<Rent> abstractPieChart;
+	private String createWhatPie;
 	
-	public AdminMainPerformenceChart(List<Rent> lists, AbstractBarChart<Rent> BarChart) {
+	public AdminMainPerformenceChart(List<Rent> lists, AbstractBarChart<Rent> BarChart, String setPie) {
 		this.items = lists;
 		this.abstractBarChart = BarChart;
-
-		
+		this.createWhatPie = setPie;
 		
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 850, 550);
@@ -79,7 +78,12 @@ public class AdminMainPerformenceChart extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				chartPanel.removeAll();
 				
-				AbstractPieChart<Rent> abstractPieChart = new PerformenceTotalPieChart("성과분석", "", "", items, true);
+				if(createWhatPie.equals("기본")) {
+					abstractPieChart = new PerformenceTotalPieChart("성과분석", "", "", items, true);
+				}else if(createWhatPie.equals("차종")) {
+					abstractPieChart = new PerformenceCarModelPieChart("성과분석", "", "", items, true);
+				}
+				
 				JChartLibPanel jChart = abstractPieChart.getPieChart();
 				chartPanel.add(jChart);
 				chartPanel.revalidate();

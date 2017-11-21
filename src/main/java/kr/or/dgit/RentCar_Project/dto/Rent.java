@@ -140,6 +140,9 @@ public class Rent {
 		if(toStringType == 0) {
 			return new Object[] { carCode.getCarModelCode().getCarModel(), "-", "-", 
 					userTime, DeciFormat.format(discountPrice), DeciFormat.format(finalPrice) };
+		}else if(toStringType == 1){
+			return new Object[] { carCode.getCarModelCode().getCarModel(), carCode.getManufacturerCode().getManufacturerName(), 
+					carCode.getCarName(), userTime, DeciFormat.format(discountPrice), DeciFormat.format(finalPrice) };
 		}else {
 			return null;
 		}
