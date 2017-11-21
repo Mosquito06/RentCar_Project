@@ -22,8 +22,7 @@ public class UserMain extends JFrame {
 	private static final UserMain instance = new UserMain();
 
 	private JPanel contentPane;
-	private JLabel lblNewLabel;
-
+	
 	public static UserMain getInstance() {
 		return instance;
 	}
@@ -33,8 +32,9 @@ public class UserMain extends JFrame {
 	}
 
 	private UserMain() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1000, 800);
+		setBounds(100, 100, 990, 790);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

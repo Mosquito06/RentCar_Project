@@ -67,7 +67,7 @@ public class Login extends JFrame {
 			}
 		});
 	}
-
+	
 	public Login() {
 		setResizable(false);
 		this.userDao = UserService.getInstance();
