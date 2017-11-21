@@ -18,4 +18,5 @@ public interface RentDao {
 	List<Rent> selectPerformenceGender(String gender);
 	List<Rent> selectPerformenceCarModel(String carModel);
 	List<Rent> selectPerformenceManufacturer(String manufacturer);
+	List<Rent> selectPerformenceFuel(String fuel);
 }

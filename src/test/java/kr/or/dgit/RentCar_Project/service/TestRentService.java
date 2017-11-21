@@ -163,10 +163,15 @@ public class TestRentService {
 		Assert.assertNotNull(list);
 	}*/
 	
-	@Test
+	/*@Test
 	public void selectPerformenceManufacturer() {
 		List<Rent> list = rentService.selectPerformenceManufacturer("현대");
 		Assert.assertNotNull(list);
-	}
+	}*/
 
+	@Test
+	public void selectPerformenceFuel() {
+		List<Rent> list = rentService.selectPerformenceFuel("휘발유");
+		Assert.assertNotNull(list);
+	}
 }

@@ -57,6 +57,9 @@ public class AdminMainPerformenceChart extends JFrame {
 		contentPane.add(btnPanel);
 		btnPanel.setLayout(null);
 		
+		JChartLibPanel jChart = abstractBarChart.getBarChart();
+		chartPanel.add(jChart);
+						
 		JButton btnBarChart = new JButton("막대차트");
 		btnBarChart.addActionListener(new ActionListener() {
 			

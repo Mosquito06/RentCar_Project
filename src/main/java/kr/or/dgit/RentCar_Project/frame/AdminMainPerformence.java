@@ -108,13 +108,17 @@ public class AdminMainPerformence extends JPanel {
 					}else if(item[1].toString().indexOf("연료별") > 0){
 						if (item[2] instanceof JComboBox) {
 							Object selectItem = ((JComboBox) item[2]).getSelectedItem();
-							JOptionPane.showMessageDialog(null, selectItem);
+							setFuelTableAndChart(selectItem.toString());
 						}
 					}
 				}catch(NullPointerException e1) {
 					JOptionPane.showMessageDialog(null, "검색 조건을 선택하세요.");
 				}
+				
+				JOptionPane.showMessageDialog(null, "검색을 완료하였습니다.");
 			}
+
+			
 		});
 		performenceContent.setBounds(12, 22, 349, 354);
 		searchPanel.add(performenceContent);
@@ -268,6 +272,34 @@ public class AdminMainPerformence extends JPanel {
 	// 제조사별 검색 조건 메소드
 	private void setManufacturerTableAndChart(String manufacturer) {
 		list = RentService.getInstance().selectPerformenceManufacturer(manufacturer);
+		remove(adminTable);
+		 
+		adminTable = new AdminPerformenceTable(list, 1);
+		adminTable.setBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.LOWERED, null, null)));
+		adminTable.setBounds(8, 80, 587, 664);
+		adminTable.loadDate();
+		add(adminTable);
+		 
+		// 그래프 변경
+		abstractPieChart = new PerformenceCarModelPieChart("성과분석", "", "", list, false);
+		 		 
+		// 자세히 보기 차트 출력을 위한  바 차트 생성
+		abstractBarChart = new  PerformenceCarModelBarChart("성과분석", "차종별", "최종요금", list);
+		 
+		chartPanel.removeAll();
+		JChartLibPanel jChart = abstractPieChart.getPieChart();
+		chartPanel.add(jChart, BorderLayout.CENTER);
+		 
+		revalidate();
+		repaint();
+		 
+		// 자세히 보기 차트 프레임 미리 생성
+		chartFrame = new AdminMainPerformenceChart(list, abstractBarChart, "차종");
+	}
+	
+	// 연료별 검색 조건 메소드
+	private void setFuelTableAndChart(String fuel) {
+		list = RentService.getInstance().selectPerformenceFuel(fuel);
 		remove(adminTable);
 		 
 		adminTable = new AdminPerformenceTable(list, 1);
