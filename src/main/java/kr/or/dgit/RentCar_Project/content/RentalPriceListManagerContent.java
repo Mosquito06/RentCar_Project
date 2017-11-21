@@ -16,17 +16,22 @@ import kr.or.dgit.RentCar_Project.dto.CarData;
 import kr.or.dgit.RentCar_Project.dto.RentalPrice;
 import kr.or.dgit.RentCar_Project.list.RentalPriceTable;
 import kr.or.dgit.RentCar_Project.service.CarDataService;
+import kr.or.dgit.RentCar_Project.service.RentalPriceService;
 
 @SuppressWarnings("serial")
-public class RentalPriceListContent extends JPanel 	implements ActionListener {
+public class RentalPriceListManagerContent extends JPanel 	implements ActionListener {
 	
 	private ComboBoxComponent<CarData> search;
 	protected RentalPriceTable rpTable;
 	private JButton btnAll;
 	private JButton btnSearch;
+	private RentalPriceManagerContent rpManagerContent;
 	
-	
-	public RentalPriceListContent() {
+	public void setRpManagerContent(RentalPriceManagerContent rpManagerContent) {
+		this.rpManagerContent = rpManagerContent;
+	}
+
+	public RentalPriceListManagerContent() {
 		setBounds(100, 100, 600, 602);
 		setLayout(null);
 		
@@ -75,13 +80,26 @@ public class RentalPriceListContent extends JPanel 	implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==btnSearch) {
+			RentalPriceService rentalPriceService = RentalPriceService.getInstance();
+			
+			String code = search.getComboBox().getSelectedItem().toString();
+			RentalPrice rentalPrice = rentalPriceService.selectRentalPriceByCarCodeString(code);
+			
+			CarData cd = new CarData();
+			cd.setCarCode(code);
+			RentalPrice rp = new RentalPrice();
+			rp.setCarCode(cd);
 			rpTable.setFull(false);
-			CarData  cd = new CarData();
-			cd.setCarCode(search.getComboboxValue().getCarCode());
-			RentalPrice carCode = new RentalPrice();
-			carCode.setCarCode(cd);
-			rpTable.setCarCode(carCode);
+			rpTable.setCarCode(rp);
 			rpTable.loadDate();
+			
+			rpManagerContent.getCarCode().getComboBox().setSelectedIndex(search.getComboBox().getSelectedIndex());
+			rpManagerContent.getbPrice().setTextValue(String.format("%,d",rentalPrice.getBasicPrice()));
+			rpManagerContent.getUseTime().setTextValue(String.valueOf(rentalPrice.getBasicTime()));
+			rpManagerContent.getBtPrice().setTextValue(String.format("%,d",rentalPrice.getBasicTimePrice()));
+			rpManagerContent.getoPrice().setTextValue(String.format("%,d",rentalPrice.getOverPrice()));
+			rpManagerContent.getInsurance().setTextValue(String.format("%,d", rentalPrice.getInsurance()));
+			
 		}
 		if(e.getSource()==btnAll) {
 			rpTable.setFull(true);

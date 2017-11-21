@@ -257,17 +257,15 @@ public class AdminMainCarManager extends JPanel {
 	private void openDetailFrame(Object selected) {
 		JFrame frame = AdminMain.getInstance();
 		frame.getContentPane().removeAll();
-		if(selected==details[0]){
+		if(selected==details[0]||selected==null){
 			JOptionPane.showMessageDialog(null, "세부사향을 선택하세요");
-			return;
 		}else if(selected==details[1]) {
 			frame.getContentPane().add(new AdminMainCarManagerRentalPrice(), BorderLayout.CENTER);
+			frame.setVisible(true);
 		}else if(selected==details[2]) {
 			frame.getContentPane().add(new AdminMainCarManagerCarDetail(), BorderLayout.CENTER);
-		}else {
-			return;
+			frame.setVisible(true);
 		}
-		frame.setVisible(true);
 		
 	}
 }

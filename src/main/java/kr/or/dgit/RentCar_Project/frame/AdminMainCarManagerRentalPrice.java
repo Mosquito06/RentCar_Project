@@ -14,13 +14,14 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
-import kr.or.dgit.RentCar_Project.content.RentalPriceListContent;
+import kr.or.dgit.RentCar_Project.content.RentalPriceListManagerContent;
 import kr.or.dgit.RentCar_Project.content.RentalPriceManagerContent;
 
 @SuppressWarnings("serial")
 public class AdminMainCarManagerRentalPrice extends JPanel{
 	private String[] details = {"선택하세요","차종&제조회사&연료 관리","초기화면"};
-	private RentalPriceListContent listRentalPrice;
+	private RentalPriceListManagerContent listRentalPrice;
+	private RentalPriceManagerContent inputPanel;
 	
 	public AdminMainCarManagerRentalPrice() {
 		setBounds(100, 100, 974, 751);
@@ -32,7 +33,7 @@ public class AdminMainCarManagerRentalPrice extends JPanel{
 		add(totalPanel);
 		totalPanel.setLayout(null);
 		
-		RentalPriceManagerContent inputPanel = new RentalPriceManagerContent();
+		inputPanel = new RentalPriceManagerContent();
 		inputPanel.setBounds(12, 27, 286, 650);
 		totalPanel.add(inputPanel);
 		
@@ -42,9 +43,12 @@ public class AdminMainCarManagerRentalPrice extends JPanel{
 		totalPanel.add(listPanel);
 		listPanel.setLayout(null);
 		
-		listRentalPrice = new RentalPriceListContent();
+		listRentalPrice = new RentalPriceListManagerContent();
 		listRentalPrice.setBounds(12, 22, 600, 602);
 		listPanel.add(listRentalPrice);
+		
+		inputPanel.setRpListManagerContent(listRentalPrice);
+		listRentalPrice.setRpManagerContent(inputPanel);
 		
 		JButton btnDetail = new JButton("세부사항 관리");
 		btnDetail.setBounds(819, 20, 115, 23);
@@ -78,16 +82,16 @@ public class AdminMainCarManagerRentalPrice extends JPanel{
 	private void openDetailFrame(Object selected) {
 		JFrame frame = AdminMain.getInstance();
 		frame.getContentPane().removeAll();
-		if(selected==details[0]){
+		if(selected==details[0]||selected==null){
 			JOptionPane.showMessageDialog(null, "세부사향을 선택하세요");
 			return;
 		}else if(selected==details[1]) {
 			frame.getContentPane().add(new AdminMainCarManagerCarDetail(), BorderLayout.CENTER);
+			frame.setVisible(true);
 		}else if(selected==details[2]) {
 			frame.getContentPane().add(new AdminMainCarManager(), BorderLayout.CENTER);
-		}else {
-			return;
+			frame.setVisible(true);
 		}
-		frame.setVisible(true);
+		
 	}
 }
