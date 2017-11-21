@@ -37,8 +37,11 @@ import kr.or.dgit.RentCar_Project.content.CarDataManagerContent;
 
 @SuppressWarnings("serial")
 public class AdminMainCarManager extends JPanel {
-	private String[] details = {"선택하세요","대여단가 관리","차종&제조회사&연료 관리"};
 	
+	
+	private CarDataManagerContent carPanel;
+	private CarDataListManagerContent carListPanel;
+
 	public AdminMainCarManager() {
 		setBounds(0, 0, 974, 751);
 		setLayout(null);
@@ -56,53 +59,22 @@ public class AdminMainCarManager extends JPanel {
 		btnBack.setBounds(862, 728, 97, 23);
 		add(btnBack);
 		
-		CarDataManagerContent carPanel = new CarDataManagerContent();
+		carPanel = new CarDataManagerContent();
 		carPanel.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.RAISED, null, null)), " \uCC28\uB7C9 \uAD00\uB9AC  ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		carPanel.setBounds(12, 10, 950, 382);
 		add(carPanel);
 		carPanel.setLayout(null);
 		
-		CarDataListManagerContent carListPanel = new CarDataListManagerContent();
+		carListPanel = new CarDataListManagerContent();
 		carListPanel.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.RAISED, null, null)), " \uCC28\uB7C9 \uB9AC\uC2A4\uD2B8 ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		carListPanel.setBounds(12, 402, 950, 322);
 		add(carListPanel);
 		carListPanel.setLayout(null);
-		setCarModelComboModel();
-		setManufacturerComboModel();
-		setFuelComboModel();
 		
-	}
+		carListPanel.setCdManagerContent(carPanel);
 	
-	public  void setCarModelComboModel() {
-		CarModelService carModelService = CarModelService.getInstance();
-		List<CarModel> lists = carModelService.selectCarModelByAll();
-		Vector<CarModel> carModel = new Vector<>();
-		for(CarModel cm:lists) {
-			cm.setComboType(0);
-			carModel.add(cm);
-		}
 	}
-	public void setManufacturerComboModel() {
-		ManufacturerService manufacturerService = ManufacturerService.getInstance();
-		List<Manufacturer> lists = manufacturerService.selectManufacturerByAll();
-		Vector<Manufacturer> manufacturer = new Vector<>();
-		for(Manufacturer mf:lists) {
-			mf.setComboType(1);
-			manufacturer.add(mf);
-		}
-		
-	}
-	
-	public void setFuelComboModel() {
-		FuelService fuelService = FuelService.getInstance();
-		List<Fuel> lists = fuelService.selectFuelByAll();
-		Vector<Fuel> fuelCode = new Vector<>();
-		for(Fuel f:lists) {
-			f.setComboType(1);
-			fuelCode.add(f);
-		}
-		
-	}
+
 /*	public void setRentalPriceValueClear() {
 		carCode.setTextValue("");
 		carName.setTextValue("");
@@ -114,18 +86,5 @@ public class AdminMainCarManager extends JPanel {
 		mfCode.setComboBoxModelClear();
 		fCode.setComboBoxModelClear();
 	}*/
-	private void openDetailFrame(Object selected) {
-		JFrame frame = AdminMain.getInstance();
-		frame.getContentPane().removeAll();
-		if(selected==details[0]||selected==null){
-			JOptionPane.showMessageDialog(null, "세부사향을 선택하세요");
-		}else if(selected==details[1]) {
-			frame.getContentPane().add(new AdminMainCarManagerRentalPrice(), BorderLayout.CENTER);
-			frame.setVisible(true);
-		}else if(selected==details[2]) {
-			frame.getContentPane().add(new AdminMainCarManagerCarDetail(), BorderLayout.CENTER);
-			frame.setVisible(true);
-		}
-		
-	}
+
 }

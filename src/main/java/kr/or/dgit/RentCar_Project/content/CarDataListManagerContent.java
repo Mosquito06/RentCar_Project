@@ -1,19 +1,25 @@
 package kr.or.dgit.RentCar_Project.content;
 
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Vector;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
 import kr.or.dgit.RentCar_Project.component.ComboBoxComponent;
 import kr.or.dgit.RentCar_Project.dto.CarData;
+import kr.or.dgit.RentCar_Project.dto.CarModel;
 import kr.or.dgit.RentCar_Project.list.CarDataTable;
 import kr.or.dgit.RentCar_Project.service.CarDataService;
+import kr.or.dgit.RentCar_Project.service.CarModelService;
 
 @SuppressWarnings("serial")
 public class CarDataListManagerContent extends JPanel implements ActionListener {
@@ -22,7 +28,12 @@ public class CarDataListManagerContent extends JPanel implements ActionListener 
 	private CarDataTable listCarData;
 	private JButton btnAll;
 	private JButton btnSearch;
+	private CarDataManagerContent cdManagerContent;
 	
+	public void setCdManagerContent(CarDataManagerContent cdManagerContent) {
+		this.cdManagerContent = cdManagerContent;
+	}
+
 	public CarDataListManagerContent() {
 		setBounds(100, 100, 950, 322);
 		setLayout(null);
@@ -73,15 +84,27 @@ public class CarDataListManagerContent extends JPanel implements ActionListener 
 			if(e.getSource()==btnAll) {
 				listCarData.setFull(true);
 				listCarData.loadDate();
+				
 			}
 			if(e.getSource()==btnSearch) {
 				CarData carDataCode = search.getComboboxValue();
+				
+				CarDataService cdService = CarDataService.getInstance();
+				CarData cdCode = cdService.selectCarDataByCarDataCode(carDataCode);
+				
 				listCarData.setFull(false);
-				listCarData.setCarDataCode(carDataCode);
+				listCarData.setCarDataCode(cdCode);
 				listCarData.loadDate();
+				
+				cdManagerContent.carDataCode.setTextValue(cdCode.getCarCode());
+				cdManagerContent.carName.setTextValue(cdCode.getCarName());
+				cdManagerContent.carOld.setTextValue(String.valueOf(cdCode.getCarOld()));
+				cdManagerContent.carSeater.setTextValue(cdCode.getCarSeater());
+				/*cdManagerContent.carModelCombo.getComboBox().setSelectedItem(cdCode.getCarModelCode());*/
+				cdManagerContent.carCount.setSpinValue(cdCode.getCarNumber());
+				cdManagerContent.img.setIcon(new ImageIcon(System.getProperty("user.dir") + "\\images\\car\\" + cdCode.getCarImage()));
+					
 			}
 			
 		}
-	
-
 }
