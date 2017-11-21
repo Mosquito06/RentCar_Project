@@ -2,6 +2,8 @@ package kr.or.dgit.RentCar_Project.service;
 
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import org.apache.ibatis.session.SqlSession;
 
 import kr.or.dgit.RentCar_Project.dao.UserDao;
@@ -38,7 +40,12 @@ public class UserService implements UserDao {
 			userDao = sqlsession.getMapper(UserDao.class);
 			userDao.updateUser(user);
 			sqlsession.commit();
+			JOptionPane.showMessageDialog(null, "수정되었습니다");
+		}catch(Exception e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null,"수정을 실패하였습니다");
 		}
+
 
 	}
 
@@ -48,7 +55,12 @@ public class UserService implements UserDao {
 			userDao = sqlsession.getMapper(UserDao.class);
 			userDao.deleteUser(user);
 			sqlsession.commit();
+			JOptionPane.showMessageDialog(null, "삭제되었습니다");
+		}catch(Exception e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "삭제를 실패하였습니다.");
 		}
+
 
 	}
 
@@ -65,6 +77,14 @@ public class UserService implements UserDao {
 		try(SqlSession sqlsession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();){
 			userDao = sqlsession.getMapper(UserDao.class);
 			return userDao.selectUserByAll();
+		}
+	}
+
+	@Override
+	public List<User> findUserCodeByUserCode(User userCode) {
+		try(SqlSession sqlsession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();){
+			userDao = sqlsession.getMapper(UserDao.class);
+			return userDao.findUserCodeByUserCode(userCode);
 		}
 	}
 

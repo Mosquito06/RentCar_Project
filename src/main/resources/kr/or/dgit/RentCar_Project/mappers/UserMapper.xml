@@ -74,6 +74,10 @@
 	<select id="selectUserByAll" resultMap="UserResult">
 		<include refid="selectSql"/>
 	</select>
+	<select id="findUserCodeByUserCode" resultMap="UserResult">
+		<include refid="selectSql"/>
+		<include refid="wherePrimarySql"/>
+	</select>
 	
 	<insert id="insertUser" parameterType="User">
 		<include refid="insertSql"/>
