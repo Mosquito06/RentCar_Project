@@ -29,7 +29,6 @@ public class PerformenceContent extends JPanel {
 	private JButton btnReset;
 	private ButtonGroup group;
 	private RadioComboBoxComponent<CarModel> carModelBox;
-	private RadioComboBoxComponent<CarData> carNameBox;
 	private RadioComboBoxComponent<Manufacturer> madeBox;
 	private RadioComboBoxComponent<String> genderBox;
 	private RadioComboBoxComponent<Fuel> fuelBox;
@@ -48,13 +47,8 @@ public class PerformenceContent extends JPanel {
 
 		carModelBox = new RadioComboBoxComponent<CarModel>("차종");
 		setCarModelComboBox();
-		carModelBox.setBounds(1, 100, 349, 35);
+		carModelBox.setBounds(1, 118, 349, 35);
 		add(carModelBox);
-
-		carNameBox = new RadioComboBoxComponent<CarData>("차종명");
-		setCarDataComboBox();
-		carNameBox.setBounds(1, 145, 349, 35);
-		add(carNameBox);
 
 		monthBox = new RadioComboBoxComponent<String>("월별");
 		setMonthBoxComboBox();
@@ -63,17 +57,17 @@ public class PerformenceContent extends JPanel {
 
 		madeBox = new RadioComboBoxComponent<Manufacturer>("제조사");
 		setMadeBoxComboBox();
-		madeBox.setBounds(1, 190, 349, 35);
+		madeBox.setBounds(1, 172, 349, 35);
 		add(madeBox);
 
 		genderBox = new RadioComboBoxComponent<String>("성별");
 		setGenderBoxComboBox();
-		genderBox.setBounds(1, 55, 349, 35);
+		genderBox.setBounds(1, 64, 349, 35);
 		add(genderBox);
 
 		fuelBox = new RadioComboBoxComponent<Fuel>("연료별");
 		setFuelBoxComboBox();
-		fuelBox.setBounds(1, 235, 349, 35);
+		fuelBox.setBounds(1, 226, 349, 35);
 		add(fuelBox);
 
 		btnSearch = new JButton("검색");
@@ -86,7 +80,6 @@ public class PerformenceContent extends JPanel {
 
 		group = new ButtonGroup();
 		group.add(carModelBox.getRadioButton());
-		group.add(carNameBox.getRadioButton());
 		group.add(monthBox.getRadioButton());
 		group.add(madeBox.getRadioButton());
 		group.add(genderBox.getRadioButton());
@@ -120,17 +113,6 @@ public class PerformenceContent extends JPanel {
 			carModel.add(cm);
 		}
 		carModelBox.setComboBoxModel(carModel);
-	}
-	
-	public void setCarDataComboBox() {
-		CarDataService carDataService = CarDataService.getInstance();
-		List<CarData> lists = carDataService.selectCarDataByAll();
-		Vector<CarData> carData = new Vector<>();
-		for (CarData cm : lists) {
-			cm.setComboType(1);
-			carData.add(cm);
-		}
-		carNameBox.setComboBoxModel(carData);
 	}
 	
 	public void setMonthBoxComboBox() {
