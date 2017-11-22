@@ -104,7 +104,7 @@ public class TestRentService {
 		rent.setUserCode(user);
 		rentService.deleteRent(rent);
 	}
-	
+
 	@Test
 	public void test6SelectRentJoinCarData(){
 		User user = new User();
@@ -169,9 +169,8 @@ public class TestRentService {
 		Assert.assertNotNull(list);
 	}*/
 
-	/*@Test
+	@Test
 	public void selectPerformenceFuel() {
-		List<Rent> list = rentService.selectPerformenceFuel("휘발유");
-		Assert.assertNotNull(list);
-	}*/
+
+	}
 }
