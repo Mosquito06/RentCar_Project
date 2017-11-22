@@ -5,12 +5,15 @@ import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.border.EmptyBorder;
+import java.awt.FlowLayout;
+import javax.swing.SwingConstants;
 
 @SuppressWarnings("serial")
 public class AddressContent extends JPanel {
 
 	private JButton btnSelect;
 	private JLabel lblNewLabel;
+	private JPanel panel_2;
 
 	public JLabel getLblNewLabel() {
 		return lblNewLabel;
@@ -24,15 +27,18 @@ public class AddressContent extends JPanel {
 		setBorder(new EmptyBorder(7, 5, 5, 5));
 		setLayout(new BorderLayout(0, 0));
 
-		lblNewLabel = new JLabel(addr);
-		add(lblNewLabel, BorderLayout.CENTER);
-
 		JPanel panel = new JPanel();
 		add(panel, BorderLayout.EAST);
-		panel.setLayout(new BorderLayout(0, 0));
+		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
 		btnSelect = new JButton("선택");
 		panel.add(btnSelect);
+		
+		panel_2 = new JPanel();
+		add(panel_2, BorderLayout.CENTER);
+		
+				lblNewLabel = new JLabel(addr);
+				panel_2.add(lblNewLabel);
 
 	}
 

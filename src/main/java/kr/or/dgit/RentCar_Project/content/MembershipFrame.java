@@ -36,6 +36,7 @@ import kr.or.dgit.RentCar_Project.component.TextFieldComponent;
 import kr.or.dgit.RentCar_Project.dao.UserDao;
 import kr.or.dgit.RentCar_Project.dto.Gender;
 import kr.or.dgit.RentCar_Project.dto.User;
+import kr.or.dgit.RentCar_Project.dto.UserGrade;
 import kr.or.dgit.RentCar_Project.service.UserService;
 
 @SuppressWarnings("serial")
@@ -546,7 +547,6 @@ public class MembershipFrame extends JFrame {
 				} else {
 					tfEmail2.setText("");
 					tfEmail2.setEnabled(true);
-					tfEmail2.requestFocus();
 				}
 			}
 		});
@@ -591,11 +591,6 @@ public class MembershipFrame extends JFrame {
 				
 				p = Pattern.compile("(^[a-zA-Z0-9.]{1,15}$)");
 				m = p.matcher(tfEmail2.getText());
-				if(tfEmail1.getText().equals("")){
-					JOptionPane.showMessageDialog(null, "이메일를 정확하게 입력하세요");
-					tfEmail1.setText("");
-					return;
-				}
 				if (!m.find()) {
 					JOptionPane.showMessageDialog(null, "이메일를 정확하게 입력하세요");
 					tfEmail2.requestFocus();
@@ -619,8 +614,11 @@ public class MembershipFrame extends JFrame {
 				} else {
 					gender = Gender.FEMALE;
 				}
+				UserGrade uGrade = new UserGrade();
+				uGrade.setGrade("C");
 
 				User user = new User(id, pw, userName, phone, email, gender);
+				user.setGrade(uGrade);
 				userDao.insertUser(user);
 
 				JOptionPane.showMessageDialog(null, "가입이 완료되었습니다.");
