@@ -45,7 +45,7 @@ public class AdminMainPerformence extends JPanel {
 	public AdminMainPerformence() {
 		setLayout(null);
 		
-		list = RentService.getInstance().selectPerformenceTotal();
+		list = RentService.getInstance().selectPerformenceTotalAndMonth(setThisYear(true), setThisYear(false));
 		
 		adminTable = new AdminPerformenceTable(list, 0);
 		adminTable.setBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.LOWERED, null, null)));
@@ -174,6 +174,20 @@ public class AdminMainPerformence extends JPanel {
 		chartBtnPanel.add(btnExit);
 		
 	}
+
+	// 1년 범위 날짜 설정
+	private String setThisYear(boolean Choice) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy");
+		Date year = new Date();
+		String setFirstMonth = dateFormat.format(year) + "01" + "01";
+		String setLastMonth = dateFormat.format(year) + "12" + "31";
+		
+		if(Choice) {
+			return setFirstMonth;
+		}else {
+			return setLastMonth;
+		}
+	}
 	
 	// 월별 검색 조건 메소드
 	private void setMonthTableAndChart(Object selectItem, boolean setMonth) {
@@ -195,7 +209,7 @@ public class AdminMainPerformence extends JPanel {
 		 }
 		 		 
 		 // 테이블 변경
-		 list = RentService.getInstance().selectPerformenceMonth(setStart, setEnd);
+		 list = RentService.getInstance().selectPerformenceTotalAndMonth(setStart, setEnd);
 		 remove(adminTable);
 		 
 		 adminTable = new AdminPerformenceTable(list, 0);
@@ -220,7 +234,7 @@ public class AdminMainPerformence extends JPanel {
 	// 성별 검색 조건 메소드
 	private void setGenderTableAndChart(String gender) {
 		// 테이블 변경
-		 list = RentService.getInstance().selectPerformenceGender(gender);
+		 list = RentService.getInstance().selectPerformenceGender(gender, setThisYear(true), setThisYear(false));
 		 remove(adminTable);
 		 
 		 adminTable = new AdminPerformenceTable(list, 0);
@@ -244,7 +258,7 @@ public class AdminMainPerformence extends JPanel {
 	
 	// 차종별 검색 조건 메소드
 	private void setCarModelTableAndChart(String carModel) {
-		list = RentService.getInstance().selectPerformenceCarModel(carModel);
+		list = RentService.getInstance().selectPerformenceCarModel(carModel, setThisYear(true), setThisYear(false));
 		 remove(adminTable);
 		 
 		 adminTable = new AdminPerformenceTable(list, 1);
@@ -272,7 +286,7 @@ public class AdminMainPerformence extends JPanel {
 	
 	// 제조사별 검색 조건 메소드
 	private void setManufacturerTableAndChart(String manufacturer) {
-		list = RentService.getInstance().selectPerformenceManufacturer(manufacturer);
+		list = RentService.getInstance().selectPerformenceManufacturer(manufacturer, setThisYear(true), setThisYear(false));
 		remove(adminTable);
 		 
 		adminTable = new AdminPerformenceTable(list, 1);
@@ -300,7 +314,7 @@ public class AdminMainPerformence extends JPanel {
 	
 	// 연료별 검색 조건 메소드
 	private void setFuelTableAndChart(String fuel) {
-		list = RentService.getInstance().selectPerformenceFuel(fuel);
+		list = RentService.getInstance().selectPerformenceFuel(fuel, setThisYear(true), setThisYear(false));
 		remove(adminTable);
 		 
 		adminTable = new AdminPerformenceTable(list, 1);

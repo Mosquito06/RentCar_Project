@@ -98,55 +98,45 @@ public class RentService implements RentDao {
 
 
 	@Override
-	public List<Rent> selectPerformenceTotal() {
+	public List<Rent> selectPerformenceTotalAndMonth(String FirstMonth, String LastMonth) {
 		try(SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession()){
 			rentDao = sqlSession.getMapper(RentDao.class);
-			return rentDao.selectPerformenceTotal();
+			return rentDao.selectPerformenceTotalAndMonth(FirstMonth, LastMonth);
+		}
+	}
+
+	@Override
+	public List<Rent> selectPerformenceGender(String gender, String FirstMonth, String LastMonth) {
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession()){
+			rentDao = sqlSession.getMapper(RentDao.class);
+			return rentDao.selectPerformenceGender(gender, FirstMonth, LastMonth);
 		}
 	}
 
 
 	@Override
-	public List<Rent> selectPerformenceMonth(String setStart, String setEnd) {
+	public List<Rent> selectPerformenceCarModel(String carModel, String FirstMonth, String LastMonth) {
 		try(SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession()){
 			rentDao = sqlSession.getMapper(RentDao.class);
-			return rentDao.selectPerformenceMonth(setStart, setEnd);
+			return rentDao.selectPerformenceCarModel(carModel, FirstMonth, LastMonth);
 		}
 	}
 
 
 	@Override
-	public List<Rent> selectPerformenceGender(String gender) {
+	public List<Rent> selectPerformenceManufacturer(String manufacturer, String FirstMonth, String LastMonth) {
 		try(SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession()){
 			rentDao = sqlSession.getMapper(RentDao.class);
-			return rentDao.selectPerformenceGender(gender);
+			return rentDao.selectPerformenceManufacturer(manufacturer, FirstMonth, LastMonth);
 		}
 	}
 
 
 	@Override
-	public List<Rent> selectPerformenceCarModel(String carModel) {
+	public List<Rent> selectPerformenceFuel(String fuel, String FirstMonth, String LastMonth) {
 		try(SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession()){
 			rentDao = sqlSession.getMapper(RentDao.class);
-			return rentDao.selectPerformenceCarModel(carModel);
-		}
-	}
-
-
-	@Override
-	public List<Rent> selectPerformenceManufacturer(String manufacturer) {
-		try(SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession()){
-			rentDao = sqlSession.getMapper(RentDao.class);
-			return rentDao.selectPerformenceManufacturer(manufacturer);
-		}
-	}
-
-
-	@Override
-	public List<Rent> selectPerformenceFuel(String fuel) {
-		try(SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession()){
-			rentDao = sqlSession.getMapper(RentDao.class);
-			return rentDao.selectPerformenceFuel(fuel);
+			return rentDao.selectPerformenceFuel(fuel, FirstMonth, LastMonth);
 		}
 	}
 

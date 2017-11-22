@@ -13,10 +13,9 @@ public interface RentDao {
 	List<Rent> selectRentByUserCode(Rent rent);
 	List<Rent> selectRentByAll();
 	List<Rent> selectRentJoinCarData(Rent rent);
-	List<Rent> selectPerformenceTotal();
-	List<Rent> selectPerformenceMonth(String setStart, String setEnd);
-	List<Rent> selectPerformenceGender(String gender);
-	List<Rent> selectPerformenceCarModel(String carModel);
-	List<Rent> selectPerformenceManufacturer(String manufacturer);
-	List<Rent> selectPerformenceFuel(String fuel);
+	List<Rent> selectPerformenceTotalAndMonth(String FirstMonth, String LastMonth);
+	List<Rent> selectPerformenceGender(String gender, String FirstMonth, String LastMonth);
+	List<Rent> selectPerformenceCarModel(String carModel, String FirstMonth, String LastMonth);
+	List<Rent> selectPerformenceManufacturer(String manufacturer, String FirstMonth, String LastMonth);
+	List<Rent> selectPerformenceFuel(String fuel, String FirstMonth, String LastMonth);
 }
