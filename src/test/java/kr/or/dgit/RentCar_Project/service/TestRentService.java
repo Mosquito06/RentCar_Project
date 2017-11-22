@@ -169,9 +169,9 @@ public class TestRentService {
 		Assert.assertNotNull(list);
 	}*/
 
-	@Test
+	/*@Test
 	public void selectPerformenceFuel() {
 		List<Rent> list = rentService.selectPerformenceFuel("휘발유");
 		Assert.assertNotNull(list);
-	}
+	}*/
 }
