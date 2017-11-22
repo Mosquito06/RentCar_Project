@@ -86,9 +86,19 @@ CREATE TABLE car_project.rent (
 	day_end     DATE,
 	discount_price INT(20),
 	final_price INT(20),
-	car_code    VARCHAR(11),
+	car_code    VARCHAR(50),
 	foreign key(user_code) references user(user_code),
 	foreign key(car_code) references rental_price(car_code)
+);
+
+-- 주소 테이블
+CREATE TABLE car_project.post(
+	zipcode char(5) null,
+	sido varchar(20) null,
+	sigungu varchar(20) null,
+	doro varchar(80) null,
+	building1 int(5) null,
+	building2 varchar(80) null	
 );
 
 -- create and gran user

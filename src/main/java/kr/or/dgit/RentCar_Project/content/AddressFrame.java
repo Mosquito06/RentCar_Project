@@ -10,6 +10,7 @@ import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
@@ -55,8 +56,13 @@ public class AddressFrame extends JFrame {
 		JButton btnSearch = new JButton("검색");
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				Object sido = sidoPanel.getComboBox().getSelectedItem();
 				String doro =  doroPanel.getTextValue();
+				if(doro.equals("")) {
+					JOptionPane.showMessageDialog(null, "도로명을 입력해 주세요.");
+					return;
+				}
 				Post post = new Post(String.valueOf(sido), doro+'%');
 				AddressAddPanel addPanel = new AddressAddPanel(post,mf);
 				scrollPane.setViewportView(addPanel);
