@@ -19,6 +19,10 @@ public class CarDataTable extends AbstractTable {
 	public void setCarDataCode(CarData carDataCode) {
 		this.carDataCode = carDataCode;
 	}
+	
+	public CarData getCarDataCode() {
+		return carDataCode;
+	}
 
 	@Override
 	protected void setAlignWidth() {
