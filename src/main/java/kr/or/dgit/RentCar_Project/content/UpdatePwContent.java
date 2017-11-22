@@ -24,6 +24,10 @@ public class UpdatePwContent extends JPanel {
 		return nowPwPanel;
 	}
 
+	public JPasswordFieldComponent getConfirmPwPanel() {
+		return confirmPwPanel;
+	}
+
 	public JButton getBtnUpdate() {
 		return btnUpdate;
 	}
@@ -61,11 +65,11 @@ public class UpdatePwContent extends JPanel {
 	public String getContent() {
 		String changePw = changePwPanel.getTextValue();
 		String confirmPw = confirmPwPanel.getTextValue();
-		
-		if(changePw.equals("") || confirmPw.equals("")) {
+
+		if (changePw.equals("") || confirmPw.equals("")) {
 			return null;
 		}
-				
+
 		if (changePw.equals(confirmPw)) {
 			return changePw;
 		}
@@ -73,9 +77,10 @@ public class UpdatePwContent extends JPanel {
 	}
 
 	public boolean isEmptyCheck() {
-		if(!nowPwPanel.isEmptyCheck() || !changePwPanel.isEmptyCheck() || !confirmPwPanel.isEmptyCheck()) {
+		if (!nowPwPanel.isEmptyCheck() || !changePwPanel.isEmptyCheck() || !confirmPwPanel.isEmptyCheck()) {
 			return false;
-		}return true;
+		}
+		return true;
 
 	}
 

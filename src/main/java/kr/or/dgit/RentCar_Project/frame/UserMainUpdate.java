@@ -23,6 +23,8 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
+import org.jdesktop.xswingx.PromptSupport;
+
 import kr.or.dgit.RentCar_Project.content.UpdateContent;
 import kr.or.dgit.RentCar_Project.content.UpdateProfileContent;
 import kr.or.dgit.RentCar_Project.content.UpdatePwContent;
@@ -136,10 +138,18 @@ public class UserMainUpdate extends JPanel {
 		updatepwcontent.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.LOWERED, null, null)), "\uBE44\uBC00\uBC88\uD638 \uC218\uC815", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		updatepwcontent.setBounds(483, 0, 488, 232);
 		bottomPanel.add(updatepwcontent);
+		
+		// 비밀번호 수정하기 기본 문구 설정
+		PromptSupport.setPrompt("현재 비밀번호를 입력해주세요.", updatepwcontent.getNowPwPanel().getTextField());
+		PromptSupport.setPrompt("영문, 숫자 8자 이상, 15자 이하", updatepwcontent.getChangePwPanel().getTextField());
+		PromptSupport.setPrompt("비밀번호 확인", updatepwcontent.getConfirmPwPanel().getTextField());
+		
 		updatepwcontent.getBtnUpdate().addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
+				
 				if(!updatepwcontent.isEmptyCheck()) {
 					JOptionPane.showMessageDialog(null, "자료를 모두 입력해주세요");
 					return;
@@ -160,7 +170,7 @@ public class UserMainUpdate extends JPanel {
 					return;
 				}
 								
-				Pattern p = Pattern.compile("(^[a-zA-Z0-9!@#$%^&*()]{9,15}$)");
+				Pattern p = Pattern.compile("(^[a-zA-Z0-9!@#$%^&*()]{8,15}$)");
 				Matcher m = p.matcher(changePw);
 
 				if (m.find()) {
@@ -188,7 +198,7 @@ public class UserMainUpdate extends JPanel {
 				
 			}
 		});
-		
+
 	}
 
 }

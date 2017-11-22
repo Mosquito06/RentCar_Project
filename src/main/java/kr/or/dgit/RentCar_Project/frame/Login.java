@@ -109,7 +109,7 @@ public class Login extends JFrame {
 			@Override
 			public void keyReleased(KeyEvent e) {
 				// 아이디 정규표현식
-				Pattern p = Pattern.compile("(^[a-zA-Z0-9]{10,15}$)");
+				Pattern p = Pattern.compile("(^[a-zA-Z0-9]{6,15}$)");
 				Matcher m = p.matcher(IdField.getText());
 
 				if (m.find()) {
@@ -148,7 +148,7 @@ public class Login extends JFrame {
 			@Override
 			public void keyReleased(KeyEvent e) {
 				// 비밀번호 정규표현식
-				Pattern p = Pattern.compile("(^[a-zA-Z0-9!@#$%^&*()]{9,15}$)");
+				Pattern p = Pattern.compile("(^[a-zA-Z0-9!@#$%^&*()]{8,15}$)");
 				Matcher m = p.matcher(PwField.getText());
 
 				if (m.find()) {
