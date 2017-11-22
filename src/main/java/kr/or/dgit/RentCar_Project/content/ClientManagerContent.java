@@ -82,7 +82,6 @@ public class ClientManagerContent extends JPanel implements ActionListener{
 		
 		imgPanel = new JLabel();
 		imgPanel.setBounds(5, 10, 264, 371);
-		/*imgPanel.setHorizontalAlignment(SwingConstants.CENTER);*/
 		add(imgPanel);
 		
 		clientId = new TextFieldComponent("아이디");
@@ -185,24 +184,7 @@ public class ClientManagerContent extends JPanel implements ActionListener{
 		comboUserCode.setEnabled(active);
 		email.setActive(active);
 	}
-	public void gradeComboBoxSelected(String grade) {
-		if(grade.equals("A")) {
-			comboUserCodeGrade.getComboBox().setSelectedIndex(0);
-		}else if(grade.equals("B")) {
-			comboUserCodeGrade.getComboBox().setSelectedIndex(1);
-		}else {
-			comboUserCodeGrade.getComboBox().setSelectedIndex(2);
-		}
-		
-	}
-	public void  genderRadioSelected(String selected) {
-		if(selected.equals("MALE")) {
-			gender.setSelect(true);
-		}else {
-			gender.setSelect(false);
-		}
-		
-	}
+
 	public Gender getSelectedGender(String selectText) {
 		if(selectText.equals("남자")) {
 			return Gender.MALE;
@@ -211,11 +193,24 @@ public class ClientManagerContent extends JPanel implements ActionListener{
 		}
 		
 	}
+	
+	public int gradeComboSelected(User uc) {
+		for(int i=0;i<comboUserCodeGrade.getComboBox().getItemCount();i++) {
+			UserGrade u = comboUserCodeGrade.getComboBox().getItemAt(i);
+			if(u.toString().equals(uc.getGrade().getGrade())) {
+				return i;
+			}
+		}
+		return 0;
+	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
 		UserService userService = UserService.getInstance();
-		int userCode = comboUserCode.getComboboxValue().getUserCode();
+		User userCode = comboUserCode.getComboboxValue();
+		User uc = userService.selectUserByUserCode(userCode);
+		int code = comboUserCode.getComboboxValue().getUserCode();
+		
 		if(e.getSource()==btnOk) {
 			
 			JOptionPane.showMessageDialog(null, "고객을 검색합니다.");
@@ -223,17 +218,17 @@ public class ClientManagerContent extends JPanel implements ActionListener{
 			
 			User user  = comboUserCode.getComboboxValue();
 			
-			clientId.setTextValue(user.getId());
-			clientCode.setTextValue(String.valueOf(user.getUserCode()));
-			clientName.setTextValue(user.getUserName());
-			phoneNum.setTextValueNum1(user.getPhone().substring(0,3));
-			phoneNum.setTextValueNum2(user.getPhone().substring(4,8));
-			phoneNum.setTextValueNum3(user.getPhone().substring(9));
-			email.setTextValueId(user.getEmail().substring(0,user.getEmail().indexOf('@')));
-			email.setTextValueEmailAddr(user.getEmail().substring(user.getEmail().indexOf('@')+1));
-			gradeComboBoxSelected(user.getGrade().getGrade());
-			genderRadioSelected(user.getGender().name());
-			imgPanel.setIcon(new ImageIcon(user.getUserImg()));
+			clientId.setTextValue(uc.getId());
+			clientCode.setTextValue(String.valueOf(uc.getUserCode()));
+			clientName.setTextValue(uc.getUserName());
+			phoneNum.setTextValueNum1(uc.getPhone().substring(0,3));
+			phoneNum.setTextValueNum2(uc.getPhone().substring(4,8));
+			phoneNum.setTextValueNum3(uc.getPhone().substring(9));
+			email.setTextValueId(uc.getEmail().substring(0,uc.getEmail().indexOf('@')));
+			email.setTextValueEmailAddr(uc.getEmail().substring(uc.getEmail().indexOf('@')+1));
+			comboUserCodeGrade.getComboBox().setSelectedIndex(gradeComboSelected(uc));
+			imgPanel.setIcon(new ImageIcon(uc.getUserImg()));
+			gender.setSelect(genderSelected(uc.getGender()));
 			clientListManager.listClient.setFull(false);
 			clientListManager.listClient.setUserCode(user);
 			clientListManager.listClient.loadDate();
@@ -249,7 +244,7 @@ public class ClientManagerContent extends JPanel implements ActionListener{
 				String userEmail = email.getTextVauleId()+"@"+email.getTextValueEmailAddr();
 				Gender userGender = getSelectedGender(gender.getSelectText());
 				UserGrade userGrade = comboUserCodeGrade.getComboboxValue();
-				userService.updateUser(new User(userCode, id, userName, phone, userEmail, userGender, userGrade));
+				userService.updateUser(new User(code, id, userName, phone, userEmail, userGender, userGrade));
 				clientListManager.listClient.loadDate();
 				setClearAll();
 			}else {
@@ -260,7 +255,7 @@ public class ClientManagerContent extends JPanel implements ActionListener{
 		if(e.getSource()==btnDelete) {
 			int delete = JOptionPane.showConfirmDialog(null, "입력 데이터를 삭제하시겠습니까?", "확인창", JOptionPane.OK_CANCEL_OPTION);
 			if (delete == 0) {
-				userService.deleteUser(new User(userCode));
+				userService.deleteUser(new User(code));
 				clientListManager.listClient.loadDate();
 				setClearAll();
 			}else {
@@ -268,6 +263,17 @@ public class ClientManagerContent extends JPanel implements ActionListener{
 			}
 		}
 	}
+
+	public boolean genderSelected(Gender gender) {
+		if(gender.name().equals("MALE")) {
+			return true;
+		}else {
+			return false;
+		}
+		
+	}
+
+	
 
 
 }

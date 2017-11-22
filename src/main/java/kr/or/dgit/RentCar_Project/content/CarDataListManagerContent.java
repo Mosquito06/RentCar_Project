@@ -1,26 +1,24 @@
 package kr.or.dgit.RentCar_Project.content;
 
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Vector;
 
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
 import kr.or.dgit.RentCar_Project.component.ComboBoxComponent;
 import kr.or.dgit.RentCar_Project.dto.CarData;
 import kr.or.dgit.RentCar_Project.dto.CarModel;
+import kr.or.dgit.RentCar_Project.dto.Fuel;
+import kr.or.dgit.RentCar_Project.dto.IsAuto;
+import kr.or.dgit.RentCar_Project.dto.Manufacturer;
 import kr.or.dgit.RentCar_Project.list.CarDataTable;
 import kr.or.dgit.RentCar_Project.service.CarDataService;
-import kr.or.dgit.RentCar_Project.service.CarModelService;
 
 @SuppressWarnings("serial")
 public class CarDataListManagerContent extends JPanel implements ActionListener {
@@ -97,16 +95,72 @@ public class CarDataListManagerContent extends JPanel implements ActionListener 
 				listCarData.setCarDataCode(cdCode);
 				listCarData.loadDate();
 				
-				JOptionPane.showMessageDialog(null, listCarData.getCarDataCode().getFuelCode().getFuelCode());
 				cdManagerContent.carDataCode.setTextValue(cdCode.getCarCode());
 				cdManagerContent.carName.setTextValue(cdCode.getCarName());
 				cdManagerContent.carOld.setTextValue(String.valueOf(cdCode.getCarOld()));
 				cdManagerContent.carSeater.setTextValue(cdCode.getCarSeater());
-				/*cdManagerContent.carModelCombo.getComboBox().setSelectedItem(cdCode.getCarModelCode());*/
+				cdManagerContent.carModelCombo.getComboBox().setSelectedIndex(setSelectedCarModel(cdCode));
+				cdManagerContent.mfCombo.getComboBox().setSelectedIndex(setSelectedMf(cdCode));
+				cdManagerContent.fuelCombo.getComboBox().setSelectedIndex(setSelectedFuel(cdCode));
 				cdManagerContent.carCount.setSpinValue(cdCode.getCarNumber());
 				cdManagerContent.img.setIcon(new ImageIcon(System.getProperty("user.dir") + "\\images\\car\\" + cdCode.getCarImage()));
+				cdManagerContent.numCombo.getComboBox().setSelectedIndex(setSelectedNum(cdCode));
+				cdManagerContent.isAuto.setSelect(isAutoSelected(cdCode.getIsAuto()));
 				
 			}
 			
 		}
+		
+	public boolean isAutoSelected(IsAuto isAuto) {
+			if(isAuto.name().equals("AUTO")) {
+				return true;
+			}else {
+				return false;
+			}
+			
+		}
+
+	public int setSelectedNum(CarData cdCode) {
+		
+		String find = cdCode.toString().substring(cdCode.toString().lastIndexOf("-")+1);
+		
+		for(int i=0;i<cdManagerContent.numCombo.getComboBox().getItemCount();i++) {
+			String num = cdManagerContent.numCombo.getComboBox().getItemAt(i);
+			if(num.equals(find)) {
+				return i;
+			}
+		}
+			return 0;
+		}
+
+	public int setSelectedCarModel(CarData cdCode) {
+		for(int i=0;i<cdManagerContent.carModelCombo.getComboBox().getItemCount();i++) {
+			CarModel cm=cdManagerContent.carModelCombo.getComboBox().getItemAt(i);
+			if(cm.toString().equals(cdCode.getCarModelCode().getCarModelCode())) {
+				return i;
+			}
+		}
+		return 0; 
+	}
+	
+	public int setSelectedMf(CarData cdCode) {
+		for(int i= 0;i<cdManagerContent.mfCombo.getComboBox().getItemCount();i++) {
+				Manufacturer mf = cdManagerContent.mfCombo.getComboBox().getItemAt(i);
+				if(mf.toString().equals(cdCode.getManufacturerCode().getManufacturerCode())) {
+					return i;
+				}
+			}
+			return 0;
+	}
+	
+	public int setSelectedFuel(CarData cdCode) {
+		
+		for(int i=0;i<cdManagerContent.fuelCombo.getComboBox().getItemCount();i++) {
+			Fuel f = cdManagerContent.fuelCombo.getComboBox().getItemAt(i);
+			if(f.toString().equals(cdCode.getFuelCode().getFuelCode())) {
+				return i;
+			}
+		}
+			return 0;
+	}
 }

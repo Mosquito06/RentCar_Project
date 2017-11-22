@@ -308,7 +308,7 @@ public class CarDataManagerContent extends JPanel implements ActionListener {
 			Graphics g = bufferedImage.getGraphics();
 			g.drawImage(resizeImage, 0, 0, this);
 			g.dispose();
-			ImageIO.write(bufferedImage, "jpg", new File("D:\\workspace\\workspace_mybatis\\RentCar_Project\\images\\car\\"+fileName));
+			ImageIO.write(bufferedImage, "jpg", new File(System.getProperty("user.dir") + "\\images\\car\\"+fileName));
 			
 			Image resizeSmall = originalImage.getScaledInstance(300, 170, Image.SCALE_SMOOTH);
 			int smallWidth = resizeSmall.getWidth(imgChooser);
@@ -317,7 +317,7 @@ public class CarDataManagerContent extends JPanel implements ActionListener {
 			Graphics s = bufferSamllImage.getGraphics();
 			s.drawImage(resizeSmall, 0, 0, this);
 			s.dispose();
-			ImageIO.write(bufferSamllImage, "jpg", new File("D:\\\\workspace\\\\workspace_mybatis\\\\RentCar_Project\\\\images\\carS\\"+fileName));
+			ImageIO.write(bufferSamllImage, "jpg", new File(System.getProperty("user.dir") + "\\images\\carS\\"+fileName));
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
