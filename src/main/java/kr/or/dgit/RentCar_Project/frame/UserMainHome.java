@@ -59,8 +59,7 @@ public class UserMainHome extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				JFrame frame = UserMain.getInstance();
 				frame.getContentPane().removeAll();
-				UserMainHistory userMainHistory = new UserMainHistory();
-				userMainHistory.setComfirmUser(ComfirmUser);
+				UserMainHistory userMainHistory = new UserMainHistory(ComfirmUser);
 				frame.getContentPane().add(userMainHistory, BorderLayout.CENTER);
 				frame.setVisible(true);
 			}
