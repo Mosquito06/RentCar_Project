@@ -7,6 +7,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -24,6 +26,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import kr.or.dgit.RentCar_Project.component.ComboBoxComponent;
@@ -56,8 +60,8 @@ public class CarDataManagerContent extends JPanel implements ActionListener {
 	protected RadioComponent isAuto;
 	protected JLabel img;
 	private JButton btnAddPhoto;
-	private JButton btnRemovePhoto;
 	private JFileChooser imgChooser;
+	private JLabel lblRemove;
 	
 	public CarDataManagerContent() {
 		setBounds(100, 100, 950, 380);
@@ -184,7 +188,7 @@ public class CarDataManagerContent extends JPanel implements ActionListener {
 		add(btnDetail);
 
 		btnAddPhoto = new JButton("이미지불러오기");
-		btnAddPhoto.setBounds(796, 248, 117, 23);
+		btnAddPhoto.setBounds(796, 286, 117, 23);
 		btnAddPhoto.addActionListener(this);
 		btnAddPhoto.setToolTipText("이미지 파일을 불러옵니다");
 		add(btnAddPhoto);
@@ -192,12 +196,6 @@ public class CarDataManagerContent extends JPanel implements ActionListener {
 		JButton btnCancel = new JButton("취소");
 		btnCancel.setBounds(872, 156, 66, 23);
 		add(btnCancel);
-
-		btnRemovePhoto = new JButton("이미지삭제");
-		btnRemovePhoto.setBounds(796, 270, 117, 23);
-		btnRemovePhoto.setToolTipText("이미지 파일을 삭제합니다");
-		btnRemovePhoto.addActionListener(this);
-		add(btnRemovePhoto);
 
 		JButton btnAdd = new JButton("추가");
 		btnAdd.setBounds(872, 67, 66, 23);
@@ -210,7 +208,49 @@ public class CarDataManagerContent extends JPanel implements ActionListener {
 		JButton btnDelete = new JButton("삭제");
 		btnDelete.setBounds(872, 113, 66, 23);
 		add(btnDelete);
-
+		
+		JLabel lblAdd = new JLabel("");
+		lblAdd.setBounds(796, 202, 45, 45);
+		add(lblAdd);
+		lblAdd.setIcon(new ImageIcon(System.getProperty("user.dir") +"\\images\\fileAdd.png"));
+		
+		lblRemove = new JLabel("");
+		lblRemove.setBounds(854, 202, 45, 45);
+		add(lblRemove);
+		lblRemove.setIcon(new ImageIcon(System.getProperty("user.dir") +"\\images\\fileDelete.png"));
+		lblRemove.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				JOptionPane.showMessageDialog(null, "click");
+				
+			}
+		});
+	
 		setCarModelComboModel();
 		setManufacturerComboModel();
 		setFuelComboModel();
@@ -293,9 +333,7 @@ public class CarDataManagerContent extends JPanel implements ActionListener {
 			}	
 				
 		}
-		if(e.getSource() == btnRemovePhoto) {
-			
-		}
+		
 	}
 
 	private void storeImg(String filePath, String fileName) {
