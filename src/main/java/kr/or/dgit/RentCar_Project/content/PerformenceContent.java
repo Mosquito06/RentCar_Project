@@ -33,6 +33,7 @@ public class PerformenceContent extends JPanel {
 	private RadioComboBoxComponent<String> genderBox;
 	private RadioComboBoxComponent<Fuel> fuelBox;
 	private RadioComboBoxComponent<String> monthBox;
+	private RadioComboBoxComponent<String> cancelBox;
 	
 	public JButton getBtnSearch() {
 		return btnSearch;
@@ -47,7 +48,7 @@ public class PerformenceContent extends JPanel {
 
 		carModelBox = new RadioComboBoxComponent<CarModel>("차종");
 		setCarModelComboBox();
-		carModelBox.setBounds(1, 118, 349, 35);
+		carModelBox.setBounds(1, 100, 349, 35);
 		add(carModelBox);
 
 		monthBox = new RadioComboBoxComponent<String>("월별");
@@ -57,18 +58,23 @@ public class PerformenceContent extends JPanel {
 
 		madeBox = new RadioComboBoxComponent<Manufacturer>("제조사");
 		setMadeBoxComboBox();
-		madeBox.setBounds(1, 172, 349, 35);
+		madeBox.setBounds(1, 145, 349, 35);
 		add(madeBox);
 
 		genderBox = new RadioComboBoxComponent<String>("성별");
 		setGenderBoxComboBox();
-		genderBox.setBounds(1, 64, 349, 35);
+		genderBox.setBounds(1, 55, 349, 35);
 		add(genderBox);
 
 		fuelBox = new RadioComboBoxComponent<Fuel>("연료별");
 		setFuelBoxComboBox();
-		fuelBox.setBounds(1, 226, 349, 35);
+		fuelBox.setBounds(1, 190, 349, 35);
 		add(fuelBox);
+		
+		cancelBox = new RadioComboBoxComponent<String>("취소내역");
+		setCancelBoxComboBox();
+		cancelBox.setBounds(1, 235, 349, 35);
+		add(cancelBox);
 
 		btnSearch = new JButton("검색");
 		btnSearch.setBounds(33, 290, 140, 39);
@@ -84,6 +90,7 @@ public class PerformenceContent extends JPanel {
 		group.add(madeBox.getRadioButton());
 		group.add(genderBox.getRadioButton());
 		group.add(fuelBox.getRadioButton());
+		group.add(cancelBox.getRadioButton());
 	}
 
 	public Object[] selectGetObject() {
@@ -153,5 +160,15 @@ public class PerformenceContent extends JPanel {
 		fuelBox.setComboBoxModel(fuel);
 		
 	}
+	
+	public void setCancelBoxComboBox() {
+		Vector<String> user = new Vector<>();
+		for(int i = 1; i <= 12; i++) {
+			user.add(new String(i + "월"));
+		}
+		cancelBox.setComboBoxModel(user);
+		
+	}
+	
 	
 }

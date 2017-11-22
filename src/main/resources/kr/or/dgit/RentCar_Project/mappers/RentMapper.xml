@@ -129,9 +129,10 @@
 		select rent_code, car_model, manufacturer_name, car_name, sum(use_time), sum(discount_price), 
 		sum(final_price) from car_data join manufacturer on car_data.manufacturer_code = manufacturer.manufacturer_code
 		join car_model on car_data.car_model_code = car_model.car_model_code 
-		join rent on car_data.car_code = rent.car_code where day_start &gt;= #{param1} and day_end &lt;= #{param2} group by car_model
-		union select rent_code, '합계', '-', '-', sum(use_time), sum(discount_price), sum(final_price) from rent
-		where day_start &gt;= #{param1} and day_end &lt;= #{param2}
+		join rent on car_data.car_code = rent.car_code where day_start &gt;= #{param1} and day_end &lt;= #{param2} 
+		and rent.situation = #{param3} group by car_model
+		union select 0, '합계', '-', '-', sum(use_time), sum(discount_price), sum(final_price) from rent
+		where day_start &gt;= #{param1} and day_end &lt;= #{param2} and rent.situation = #{param3}
 	</select>
 	
 	<select id="selectPerformenceGender" resultMap="JoinCarDataAndCarModelAndManufacturer">
@@ -140,10 +141,10 @@
 		join car_model on car_data.car_model_code = car_model.car_model_code
 		join rent on car_data.car_code = rent.car_code 
 		join user on user.user_code = rent.user_code where gender = #{param1} and day_start &gt;= #{param2} and day_end &lt;= #{param3}
-		group by car_model
+		and rent.situation = 'RESERVATION' group by car_model
 		union select 0,'합계', '-', '-', sum(use_time), sum(discount_price), sum(final_price)
 		from rent join user on rent.user_code = user.user_code where gender = #{param1} 
-		and day_start &gt;= #{param2} and day_end &lt;= #{param3}
+		and day_start &gt;= #{param2} and day_end &lt;= #{param3} and rent.situation = 'RESERVATION'
 	</select>
 	
 	<select id="selectPerformenceCarModel" resultMap="JoinCarDataAndCarModelAndManufacturer">
@@ -152,11 +153,11 @@
 		join manufacturer on car_data.manufacturer_code = manufacturer.manufacturer_code
 		join car_model on car_data.car_model_code = car_model.car_model_code 
 		join rent on car_data.car_code = rent.car_code where car_model = #{param1} 
-		and day_start &gt;= #{param2} and day_end &lt;= #{param3} group by car_name
+		and day_start &gt;= #{param2} and day_end &lt;= #{param3} and rent.situation = 'RESERVATION' group by car_name 
 		union select 0, '합계', '-', '-', sum(use_time), sum(discount_price), sum(final_price) 
 		from car_data join rent on rent.car_code = car_data.car_code 
 		join car_model on car_data.car_model_code = car_model.car_model_code where car_model = #{param1}
-		and day_start &gt;= #{param2} and day_end &lt;= #{param3}
+		and day_start &gt;= #{param2} and day_end &lt;= #{param3} and rent.situation = 'RESERVATION'
 	</select>
 	
 	<select id="selectPerformenceManufacturer" resultMap="JoinCarDataAndCarModelAndManufacturer">
@@ -165,11 +166,11 @@
 		join manufacturer on car_data.manufacturer_code = manufacturer.manufacturer_code
 		join car_model on car_data.car_model_code = car_model.car_model_code 
 		join rent on car_data.car_code = rent.car_code where manufacturer_name = #{param1} 
-		and day_start &gt;= #{param2} and day_end &lt;= #{param3} group by car_name
+		and day_start &gt;= #{param2} and day_end &lt;= #{param3} and rent.situation = 'RESERVATION' group by car_name
 		union select 0, '합계', '-', '-', sum(use_time), sum(discount_price), sum(final_price) 
 		from car_data join rent on rent.car_code = car_data.car_code 
 		join manufacturer on car_data.manufacturer_code = manufacturer.manufacturer_code where manufacturer_name = #{param1}
-		and day_start &gt;= #{param2} and day_end &lt;= #{param3}
+		and day_start &gt;= #{param2} and day_end &lt;= #{param3} and rent.situation = 'RESERVATION'
 	</select>
 	
 	<select id="selectPerformenceFuel" resultMap="JoinCarDataAndCarModelAndManufacturer">
@@ -179,10 +180,10 @@
 		join car_model on car_data.car_model_code = car_model.car_model_code 
 		join fuel on car_data.fuel_code = fuel.fuel_code 
 		join rent on car_data.car_code = rent.car_code where fuel_type= #{param1} 
-		and day_start &gt;= #{param2} and day_end &lt;= #{param3} group by car_name
+		and day_start &gt;= #{param2} and day_end &lt;= #{param3}  and rent.situation = 'RESERVATION' group by car_name
 		union select 0, '합계', '-', '-', sum(use_time), sum(discount_price), sum(final_price) 
 		from car_data join rent on rent.car_code = car_data.car_code 
 		join fuel on car_data.fuel_code = fuel.fuel_code  where fuel_type= #{param1}
-		and day_start &gt;= #{param2} and day_end &lt;= #{param3}
+		and day_start &gt;= #{param2} and day_end &lt;= #{param3} and rent.situation = 'RESERVATION'
 	</select>
 </mapper>
