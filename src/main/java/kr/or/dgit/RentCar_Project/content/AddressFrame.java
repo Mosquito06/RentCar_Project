@@ -35,6 +35,7 @@ public class AddressFrame extends JFrame {
 		contentPane.setBorder(new TitledBorder(null, "\uC8FC\uC18C\uAC80\uC0C9", TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLACK));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		setLocationRelativeTo(null);
 		
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.CENTER);
