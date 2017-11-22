@@ -101,5 +101,6 @@ CREATE TABLE car_project.post(
 	building2 varchar(80) null	
 );
 
+
 -- create and gran user
 grant select, insert, update, delete on car_project.* to 'User_RentCar' identified by '1234';

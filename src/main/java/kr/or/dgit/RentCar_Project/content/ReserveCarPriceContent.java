@@ -26,7 +26,6 @@ import kr.or.dgit.RentCar_Project.service.RentService;
 @SuppressWarnings("serial")
 public class ReserveCarPriceContent extends JPanel {
 	private JPanel carReservePanel;
-	private ReserveCarValue carValuePanel;
 	private IsInsurance isInsurance;
 	
 	public ReserveCarPriceContent(String name, String cPrice, String iPrice, String dPrice, String fPrice, String img,
@@ -100,7 +99,7 @@ public class ReserveCarPriceContent extends JPanel {
 		});
 		carReservePanel.add(btnReserve);
 
-		carValuePanel = new ReserveCarValue(name, img, old, seater, auto,fuel);
+		ReserveListCarValue carValuePanel = new ReserveListCarValue(name, img, old, seater, auto, fuel);
 		add(carValuePanel, BorderLayout.CENTER);
 		
 
