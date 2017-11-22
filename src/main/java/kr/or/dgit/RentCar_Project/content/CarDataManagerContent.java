@@ -3,18 +3,28 @@ package kr.or.dgit.RentCar_Project.content;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 import java.util.Vector;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import kr.or.dgit.RentCar_Project.component.ComboBoxComponent;
 import kr.or.dgit.RentCar_Project.component.JspinnerComponent;
@@ -45,11 +55,15 @@ public class CarDataManagerContent extends JPanel implements ActionListener {
 	protected JspinnerComponent carCount;
 	protected RadioComponent isAuto;
 	protected JLabel img;
-
+	private JButton btnAddPhoto;
+	private JButton btnRemovePhoto;
+	private JFileChooser imgChooser;
+	
 	public CarDataManagerContent() {
 		setBounds(100, 100, 950, 380);
 		setLayout(null);
-
+		imgChooser = new JFileChooser();
+		
 		JLabel lbl1 = new JLabel("+");
 		lbl1.setBounds(169, 18, 27, 32);
 		add(lbl1);
@@ -162,23 +176,27 @@ public class CarDataManagerContent extends JPanel implements ActionListener {
 		isAuto = new RadioComponent("변속기", "오토", "수동");
 		isAuto.setBounds(10, 319, 163, 32);
 		add(isAuto);
-
-		img = new JLabel();
-		img.setBorder(new LineBorder(new Color(0, 0, 0)));
-		img.setBounds(194, 60, 600, 285);
-		add(img);
+		
+				img = new JLabel();
+				img.setBorder(new LineBorder(new Color(0, 0, 0)));
+				img.setBounds(194, 60, 600, 315);
+				add(img);
 		add(btnDetail);
 
-		JButton btnAddPhoto = new JButton("이미지불러오기");
-		btnAddPhoto.setBounds(560, 349, 117, 23);
+		btnAddPhoto = new JButton("이미지불러오기");
+		btnAddPhoto.setBounds(796, 248, 117, 23);
+		btnAddPhoto.addActionListener(this);
+		btnAddPhoto.setToolTipText("이미지 파일을 불러옵니다");
 		add(btnAddPhoto);
 
 		JButton btnCancel = new JButton("취소");
 		btnCancel.setBounds(872, 156, 66, 23);
 		add(btnCancel);
 
-		JButton btnRemovePhoto = new JButton("이미지삭제");
-		btnRemovePhoto.setBounds(677, 349, 117, 23);
+		btnRemovePhoto = new JButton("이미지삭제");
+		btnRemovePhoto.setBounds(796, 270, 117, 23);
+		btnRemovePhoto.setToolTipText("이미지 파일을 삭제합니다");
+		btnRemovePhoto.addActionListener(this);
 		add(btnRemovePhoto);
 
 		JButton btnAdd = new JButton("추가");
@@ -245,23 +263,79 @@ public class CarDataManagerContent extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		if (e.getSource() == btnDetail) {
-
+		if (e.getSource() == btnAddPhoto) {
+		
+			FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG&GIF Images", "jpg","gif");
+			
+			imgChooser.setDialogTitle("이미지 파일 열기");
+			imgChooser.setFileFilter(filter);
+			imgChooser.setMultiSelectionEnabled(false);
+			
+			int ret = imgChooser.showOpenDialog(this);
+			
+			if(ret !=JFileChooser.APPROVE_OPTION) {
+				JOptionPane.showMessageDialog(null, "파일을 선택하지 않았습니다.","경고",JOptionPane.WARNING_MESSAGE);
+				return;
+			}
+			String filePath = imgChooser.getSelectedFile().getPath();
+			String fileName = imgChooser.getSelectedFile().getName();
+		
+			if(ret == JFileChooser.APPROVE_OPTION) {
+				try {
+					Image imgIcon = ImageIO.read(new File(filePath));
+					Image resizeIcon = imgIcon.getScaledInstance(600, 315, Image.SCALE_SMOOTH);
+					img.setIcon(new ImageIcon(resizeIcon));
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+				
+					storeImg(filePath,fileName);
+			}	
+				
 		}
-
+		if(e.getSource() == btnRemovePhoto) {
+			
+		}
 	}
 
+	private void storeImg(String filePath, String fileName) {
+		try {
+			Image originalImage = ImageIO.read(new File(filePath));
+			Image resizeImage = originalImage.getScaledInstance(600, 340, Image.SCALE_SMOOTH);
+			int width=resizeImage.getWidth(imgChooser);
+			int height = resizeImage.getHeight(imgChooser);
+			BufferedImage bufferedImage =  new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+			Graphics g = bufferedImage.getGraphics();
+			g.drawImage(resizeImage, 0, 0, this);
+			g.dispose();
+			ImageIO.write(bufferedImage, "jpg", new File("D:\\workspace\\workspace_mybatis\\RentCar_Project\\images\\car\\"+fileName));
+			
+			Image resizeSmall = originalImage.getScaledInstance(300, 170, Image.SCALE_SMOOTH);
+			int smallWidth = resizeSmall.getWidth(imgChooser);
+			int smallHeight = resizeSmall.getHeight(imgChooser);
+			BufferedImage bufferSamllImage = new BufferedImage(smallWidth, smallHeight, BufferedImage.TYPE_INT_RGB);
+			Graphics s = bufferSamllImage.getGraphics();
+			s.drawImage(resizeSmall, 0, 0, this);
+			s.dispose();
+			ImageIO.write(bufferSamllImage, "jpg", new File("D:\\\\workspace\\\\workspace_mybatis\\\\RentCar_Project\\\\images\\carS\\"+fileName));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		
+	}
 	private void openDetailFrame(Object selected) {
-		JFrame frame = AdminMain.getInstance();
-		frame.getContentPane().removeAll();
-
+		
 		if (selected == details[0] || selected == null) {
 			JOptionPane.showMessageDialog(null, "세부사향을 선택하세요");
 			return;
 		} else if (selected == details[1]) {
+			JFrame frame = AdminMain.getInstance();
+			frame.getContentPane().removeAll();
 			frame.getContentPane().add(new AdminMainCarManagerRentalPrice(), BorderLayout.CENTER);
 			frame.setVisible(true);
 		} else if (selected == details[2]) {
+			JFrame frame = AdminMain.getInstance();
+			frame.getContentPane().removeAll();
 			frame.getContentPane().add(new AdminMainCarManagerCarDetail(), BorderLayout.CENTER);
 			frame.setVisible(true);
 		}

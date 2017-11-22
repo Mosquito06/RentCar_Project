@@ -11,6 +11,7 @@ import java.util.Vector;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
@@ -96,6 +97,7 @@ public class CarDataListManagerContent extends JPanel implements ActionListener 
 				listCarData.setCarDataCode(cdCode);
 				listCarData.loadDate();
 				
+				JOptionPane.showMessageDialog(null, listCarData.getCarDataCode().getFuelCode().getFuelCode());
 				cdManagerContent.carDataCode.setTextValue(cdCode.getCarCode());
 				cdManagerContent.carName.setTextValue(cdCode.getCarName());
 				cdManagerContent.carOld.setTextValue(String.valueOf(cdCode.getCarOld()));
@@ -103,7 +105,7 @@ public class CarDataListManagerContent extends JPanel implements ActionListener 
 				/*cdManagerContent.carModelCombo.getComboBox().setSelectedItem(cdCode.getCarModelCode());*/
 				cdManagerContent.carCount.setSpinValue(cdCode.getCarNumber());
 				cdManagerContent.img.setIcon(new ImageIcon(System.getProperty("user.dir") + "\\images\\car\\" + cdCode.getCarImage()));
-					
+				
 			}
 			
 		}
