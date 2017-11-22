@@ -603,7 +603,7 @@ public class MembershipFrame extends JFrame {
 				}
 				if(tfAddr.getText().equals("")||tfAddr2.getText().equals("")){
 					JOptionPane.showMessageDialog(null, "주소를 정확하게 입력하세요");
-					
+					tfAddr2.requestFocus();
 					return;
 				}
 				
