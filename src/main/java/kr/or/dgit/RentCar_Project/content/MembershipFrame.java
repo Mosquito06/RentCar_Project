@@ -220,25 +220,18 @@ public class MembershipFrame extends JFrame {
 		btnCancel.setBounds(251, 430, 108, 44);
 		panel.add(btnCancel);
 
-		tfId.getTextField().addKeyListener(new KeyAdapter() {
-
-			@Override
-			public void keyReleased(KeyEvent e) {
-				Pattern p = Pattern.compile("(^[a-zA-Z0-9]{10,15}$)");
-				Matcher m = p.matcher(tfId.getTextValue());
-
-				if (m.find()) {
-					btnTest.setEnabled(true);
-				} else {
-					btnTest.setEnabled(false);
-				}
-			}
-		});
 
 		btnTest = new JButton("중복확인");
-		btnTest.setEnabled(false);
 		btnTest.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Pattern p = Pattern.compile("(^[a-zA-Z0-9]{6,15}$)");
+				Matcher m = p.matcher(tfId.getTextValue());
+
+				if (!m.find()) {
+					JOptionPane.showMessageDialog(null, "영문,숫자 6자리 이상 만 가능합니다.");
+					tfId.getTextField().requestFocus();
+					return;
+				} 
 				idCheck = 2;
 				String Id = tfId.getTextValue();
 				List<User> list = userDao.selectUserByAll();
@@ -254,7 +247,6 @@ public class MembershipFrame extends JFrame {
 					if (idCheck != 0) {
 						tfId.getTextField().requestFocus();
 						tfId.getTextField().setEnabled(true);
-						btnTest.setEnabled(false);
 						idCheck = 2;
 					} else {
 						tfId.getTextField().setEnabled(false);
@@ -262,7 +254,6 @@ public class MembershipFrame extends JFrame {
 				} else {
 					JOptionPane.showMessageDialog(null, "이미 사용중인 아이디 입니다.");
 					tfId.getTextField().requestFocus();
-					btnTest.setEnabled(false);
 				}
 			}
 		});
@@ -274,7 +265,6 @@ public class MembershipFrame extends JFrame {
 			@Override
 			public void focusGained(FocusEvent e) {
 				tfId.getTextField().setText("");
-				btnTest.setEnabled(false);
 			}
 		});
 
@@ -418,7 +408,7 @@ public class MembershipFrame extends JFrame {
 			@Override
 			public void keyReleased(KeyEvent e) {
 				// 비밀번호 정규표현식
-				Pattern p = Pattern.compile("(^[a-zA-Z0-9!@#$%^&*()]{9,15}$)");
+				Pattern p = Pattern.compile("(^[a-zA-Z0-9!@#$%^&*()]{8,15}$)");
 				Matcher m = p.matcher(tfPw.getText());
 
 				if (m.find()) {
