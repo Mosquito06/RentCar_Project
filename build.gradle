@@ -33,6 +33,8 @@ dependencies {
 	// JChartLib 파일 추가(jar 파일 추가)
 	compile files('libs/JChartLib.jar')
 	
+	compile files('libs/prompt.jar')
+	
     testImplementation 'junit:junit:4.12'
 }
 

@@ -6,18 +6,9 @@ public class Post {
 	private String sigungu;
 	private String doro;
 	private int building1;
-	private int building2;
+	private String building2;
 	private int comboType = 0;
 
-	public Post(String zipCode, String sido, String sigungu, String doro, int building1, int building2) {
-		super();
-		this.zipCode = zipCode;
-		this.sido = sido;
-		this.sigungu = sigungu;
-		this.doro = doro;
-		this.building1 = building1;
-		this.building2 = building2;
-	}
 
 	public Post(String sido, String doro) {
 		super();
@@ -28,6 +19,12 @@ public class Post {
 	public Post() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+	
+
+	public void setComboType(int comboType) {
+		this.comboType = comboType;
 	}
 
 	public String getZipCode() {
@@ -70,16 +67,12 @@ public class Post {
 		this.building1 = building1;
 	}
 
-	public int getBuilding2() {
+	public String getBuilding2() {
 		return building2;
 	}
 
-	public void setBuilding2(int building2) {
+	public void setBuilding2(String building2) {
 		this.building2 = building2;
-	}
-
-	public void setComboType(int comboType) {
-		this.comboType = comboType;
 	}
 
 	@Override

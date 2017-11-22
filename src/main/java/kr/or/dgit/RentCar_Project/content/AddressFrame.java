@@ -57,7 +57,7 @@ public class AddressFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Object sido = sidoPanel.getComboBox().getSelectedItem();
 				String doro =  doroPanel.getTextValue();
-				Post post = new Post(String.valueOf(sido), doro);
+				Post post = new Post(String.valueOf(sido), doro+'%');
 				AddressAddPanel addPanel = new AddressAddPanel(post,mf);
 				scrollPane.setViewportView(addPanel);
 				addPanel.setLayout(new GridLayout(0, 1, 0, 0));

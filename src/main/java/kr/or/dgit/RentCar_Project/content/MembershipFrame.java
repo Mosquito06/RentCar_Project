@@ -29,6 +29,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
+import org.jdesktop.xswingx.PromptSupport;
+
 import kr.or.dgit.RentCar_Project.component.RadioComponent;
 import kr.or.dgit.RentCar_Project.component.TextFieldComponent;
 import kr.or.dgit.RentCar_Project.dao.UserDao;
@@ -82,6 +84,7 @@ public class MembershipFrame extends JFrame {
 		panel.setLayout(null);
 
 		TextFieldComponent tfId = new TextFieldComponent("아이디");
+		PromptSupport.setPrompt("아이디입력", tfId.getTextField());
 		tfId.setBounds(3, 35, 231, 28);
 		panel.add(tfId);
 
@@ -179,6 +182,7 @@ public class MembershipFrame extends JFrame {
 
 		tfAddr = new JTextField();
 		tfAddr.setBounds(91, 0, 171, 28);
+		tfAddr.setFocusable(false);
 		panel_6.add(tfAddr);
 		tfAddr.setColumns(10);
 
@@ -376,6 +380,12 @@ public class MembershipFrame extends JFrame {
 		tfTestPw = new JPasswordField();
 		tfTestPw.setBounds(118, 0, 113, 28);
 		panel_2.add(tfTestPw);
+		PromptSupport.setPrompt("영문,숫자8자리이상", tfPw);
+		PromptSupport.setPrompt("영문,숫자8자리이상", tfTestPw);
+		PromptSupport.setPrompt("ex)exam.com", tfEmail2);
+		PromptSupport.setPrompt("주소검색 클릭", tfAddr);
+		PromptSupport.setPrompt("상세주소 입력", tfAddr2);
+		
 
 		tfPw.addFocusListener(new FocusListener() {
 			public void focusLost(FocusEvent e) {
@@ -588,14 +598,26 @@ public class MembershipFrame extends JFrame {
 					tfEmail1.requestFocus();
 					return;
 				}
-				p = Pattern.compile("(^[a-zA-Z0-9.]{4,15}$)");
+				
+				p = Pattern.compile("(^[a-zA-Z0-9.]{1,15}$)");
 				m = p.matcher(tfEmail2.getText());
+				if(tfEmail1.getText().equals("")){
+					JOptionPane.showMessageDialog(null, "이메일를 정확하게 입력하세요");
+					tfEmail1.setText("");
+					return;
+				}
 				if (!m.find()) {
 					JOptionPane.showMessageDialog(null, "이메일를 정확하게 입력하세요");
 					tfEmail2.requestFocus();
 					return;
 				}
-
+				if(tfAddr.getText().equals("")||tfAddr2.getText().equals("")){
+					JOptionPane.showMessageDialog(null, "주소를 정확하게 입력하세요");
+					
+					return;
+				}
+				
+				
 				String id = tfId.getTextValue();
 				String pw = tfPw.getText();
 				String userName = tfName.getTextValue();

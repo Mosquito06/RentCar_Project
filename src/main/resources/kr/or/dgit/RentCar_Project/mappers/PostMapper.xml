@@ -23,7 +23,7 @@
 	
 	<select id="selectPostByDoro" resultMap="PostResult">
 		<include refid="selectSql"/>
-		where sido=#{sido} and doro=#{doro}
+		where sido=#{sido} and doro like #{doro}
 	</select>
 	
 
