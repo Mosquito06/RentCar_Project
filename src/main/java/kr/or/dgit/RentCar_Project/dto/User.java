@@ -12,8 +12,56 @@ public class User {
 	private String email;
 	private Gender gender;
 	private UserGrade grade;
+	private String addr;
 	private int comboType = 0;
-	
+
+	public User(int userCode, String id, String pw, String userName, byte[] userImg, String phone, String email,
+			Gender gender, UserGrade grade, String addr) {
+		super();
+		this.userCode = userCode;
+		this.id = id;
+		this.pw = pw;
+		this.userName = userName;
+		this.userImg = userImg;
+		this.phone = phone;
+		this.email = email;
+		this.gender = gender;
+		this.grade = grade;
+		this.addr = addr;
+	}
+
+	public User() {
+		super();
+	}
+
+	public User(String id, String pw, String userName, String phone, String email, Gender gender,
+			String addr) {
+		super();
+		this.id = id;
+		this.pw = pw;
+		this.userName = userName;
+		this.phone = phone;
+		this.email = email;
+		this.gender = gender;
+		this.addr = addr;
+	}
+
+	public User(int userCode) {
+		super();
+		this.userCode = userCode;
+	}
+
+	public User(int userCode, String id, String userName, String phone, String email, Gender gender, UserGrade grade) {
+		super();
+		this.userCode = userCode;
+		this.id = id;
+		this.userName = userName;
+		this.phone = phone;
+		this.email = email;
+		this.gender = gender;
+		this.grade = grade;
+	}
+
 	public User(int userCode, String id, String pw, String userName, byte[] userImg, String phone, String email,
 			Gender gender, UserGrade grade) {
 		super();
@@ -27,36 +75,13 @@ public class User {
 		this.gender = gender;
 		this.grade = grade;
 	}
-	
-	public User(String id, String pw, String userName, String phone, String email, Gender gender) {
-		super();
-		this.id = id;
-		this.pw = pw;
-		this.userName = userName;
-		this.phone = phone;
-		this.email = email;
-		this.gender = gender;
+
+	public UserGrade getGrade() {
+		return grade;
 	}
 
-	public User(int userCode, String id, String userName, String phone, String email, Gender gender, UserGrade grade) {
-		super();
-		this.userCode = userCode;
-		this.id = id;
-		this.userName = userName;
-		this.phone = phone;
-		this.email = email;
-		this.gender = gender;
+	public void setGrade(UserGrade grade) {
 		this.grade = grade;
-	}
-	
-	public User(int userCode) {
-		super();
-		this.userCode = userCode;
-	}
-
-	public User() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public int getUserCode() {
@@ -123,34 +148,33 @@ public class User {
 		this.gender = gender;
 	}
 
-	public UserGrade getGrade() {
-		return grade;
+	public String getAddr() {
+		return addr;
 	}
 
-	public void setGrade(UserGrade grade) {
-		this.grade = grade;
+	public void setAddr(String addr) {
+		this.addr = addr;
 	}
-	
+
 	public void setComboType(int comboType) {
 		this.comboType = comboType;
 	}
 
 	@Override
 	public String toString() {
-		if(comboType==0) {
+		if (comboType == 0) {
 			return String.format("%s", userCode);
-		}else if(comboType==1){
+		} else if (comboType == 1) {
 			return String.format("%s", gender);
-		}else {
-			return String.format("User %s, %s, %s, %s, %s, %s, %s, %s, %s", userCode, id, pw, userName,
-					Arrays.toString(userImg), phone, email, gender, grade);
+		} else {
+			return String.format("User %s, %s, %s, %s, %s, %s, %s, %s, %s, %s", userCode, id, pw, userName,
+					Arrays.toString(userImg), phone, email, gender, grade, addr);
 		}
-	
+
 	}
 
 	public Object[] toArray() {
-		return new Object[] {userCode,id,userName,phone,email,gender,grade.getGrade()};
+		return new Object[] { userCode, id, userName, phone, email, gender, grade.getGrade(), addr };
 	}
 
-	
 }

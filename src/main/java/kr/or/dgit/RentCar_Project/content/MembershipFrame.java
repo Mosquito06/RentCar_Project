@@ -616,8 +616,9 @@ public class MembershipFrame extends JFrame {
 				}
 				UserGrade uGrade = new UserGrade();
 				uGrade.setGrade("C");
+				String addr = tfAddr.getText() +" "+ tfAddr2.getText();
 
-				User user = new User(id, pw, userName, phone, email, gender);
+				User user = new User(id, pw, userName, phone, email, gender,addr);
 				user.setGrade(uGrade);
 				userDao.insertUser(user);
 

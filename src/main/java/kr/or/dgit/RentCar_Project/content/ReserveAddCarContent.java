@@ -76,6 +76,11 @@ public class ReserveAddCarContent extends JPanel {
 			}
 
 		}
+		
+		if(lists.size()==1) {
+			JPanel jp = new JPanel();
+			add(jp);
+		}
 
 	}
 }

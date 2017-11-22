@@ -7,7 +7,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import kr.or.dgit.RentCar_Project.component.EmailTextFiedComponent;
 import kr.or.dgit.RentCar_Project.component.PhoneTextFiedComponent;
 import kr.or.dgit.RentCar_Project.component.RadioComponent;
 import kr.or.dgit.RentCar_Project.component.TextFieldComponent;

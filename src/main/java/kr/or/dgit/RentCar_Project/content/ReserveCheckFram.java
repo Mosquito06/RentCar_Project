@@ -193,12 +193,12 @@ public class ReserveCheckFram extends JFrame {
 		panel_1.add(label_18);
 		
 		JPanel panel_2 = new JPanel();
-		panel_2.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel_2.setBounds(2, 439, 215, 39);
+		panel_2.setBorder(new LineBorder(Color.LIGHT_GRAY));
+		panel_2.setBounds(2, 439, 214, 39);
 		panel_1.add(panel_2);
 		panel_2.setLayout(new BorderLayout(0, 0));
 		
-		JLabel lblNewLabel_1 = new JLabel("010-1234-1234");
+		JLabel lblNewLabel_1 = new JLabel("070-1234-1234");
 		lblNewLabel_1.setFont(new Font("굴림", Font.BOLD, 13));
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_2.add(lblNewLabel_1, BorderLayout.CENTER);

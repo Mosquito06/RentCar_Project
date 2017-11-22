@@ -72,6 +72,7 @@ CREATE TABLE car_project.user (
 	email     VARCHAR(50),
 	gender    VARCHAR(20),
 	grade     VARCHAR(5),
+	addr      VARCHAR(100),	
 	foreign key(grade) references user_grade(grade)
 );
 

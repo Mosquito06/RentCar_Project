@@ -10,11 +10,12 @@
 		<result property="userImg" column="user_image"/>
 		<result property="phone" column="phone"/>
 		<result property="email" column="email"/>
-		<result property="grade.grade" column="grade"/>		
+		<result property="grade.grade" column="grade"/>	
+		<result property="addr" column="addr"/>		
 	</resultMap>
 
 	<sql id="selectSql">
-		select user_code, id, pw, user_name, user_image, phone, email, gender, grade from user
+		select user_code, id, pw, user_name, user_image, phone, email, gender, grade, addr from user
 	</sql>
 	
 	<sql id="whereAllSql">
@@ -46,6 +47,9 @@
 			<if test="grade.grade != null">
 				and grade = #{grade.grade}
 			</if>
+			<if test="addr != null">
+				and addr = #{addr}
+			</if>
 		</where>
 	</sql>
 	
@@ -58,8 +62,8 @@
 	</sql>
 	
 	<sql id="insertSql">
-		insert into user(id, pw, user_name, user_image, phone, email, gender, grade) 
-		values(#{id}, #{pw}, #{userName}, #{userImg}, #{phone}, #{email}, #{gender}, #{grade.grade})
+		insert into user(id, pw, user_name, user_image, phone, email, gender, grade, addr) 
+		values(#{id}, #{pw}, #{userName}, #{userImg}, #{phone}, #{email}, #{gender}, #{grade.grade}, #{addr})
 	</sql>
 		
 	<sql id="deleteSql">
@@ -112,6 +116,9 @@
 				</if>
 				<if test="grade.grade != null">
 					grade = #{grade.grade},
+				</if>
+				<if test="addr != null">
+					addr = #{addr},
 				</if>
 			</set>
 		<include refid="wherePrimarySql"/>
