@@ -99,7 +99,7 @@ public class ReserveLeftContent extends JPanel {
 		add(btnReset);
 
 		chckbxAuto = new JCheckBox("오토");
-		chckbxAuto.setBounds(161, 444, 56, 23);
+		chckbxAuto.setBounds(137, 444, 56, 23);
 		chckbxAuto.setEnabled(false);
 		add(chckbxAuto);
 
