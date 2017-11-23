@@ -72,19 +72,6 @@ public class AdminMainCarManager extends JPanel {
 		carListPanel.setLayout(null);
 		
 		carListPanel.setCdManagerContent(carPanel);
-	
+		carPanel.setCdListManagercontent(carListPanel);
 	}
-
-/*	public void setRentalPriceValueClear() {
-		carCode.setTextValue("");
-		carName.setTextValue("");
-		carOld.setTextValue("");
-		seater.setTextValue("");
-		isAuto.setSelect(true);
-		carNumber.setSpinValue(1);
-		cmCode.setComboBoxModelClear();
-		mfCode.setComboBoxModelClear();
-		fCode.setComboBoxModelClear();
-	}*/
-
 }

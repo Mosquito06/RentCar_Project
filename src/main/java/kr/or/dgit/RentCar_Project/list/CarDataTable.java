@@ -11,7 +11,6 @@ public class CarDataTable extends AbstractTable {
 	private boolean isFull;
 	private CarData carDataCode;
 	
-	
 	public void setFull(boolean isFull) {
 		this.isFull = isFull;
 	}

@@ -2,16 +2,16 @@ package kr.or.dgit.RentCar_Project.content;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.Vector;
@@ -26,20 +26,21 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
-import javax.swing.event.AncestorEvent;
-import javax.swing.event.AncestorListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import kr.or.dgit.RentCar_Project.component.ComboBoxComponent;
 import kr.or.dgit.RentCar_Project.component.JspinnerComponent;
 import kr.or.dgit.RentCar_Project.component.RadioComponent;
 import kr.or.dgit.RentCar_Project.component.TextFieldComponent;
+import kr.or.dgit.RentCar_Project.dto.CarData;
 import kr.or.dgit.RentCar_Project.dto.CarModel;
 import kr.or.dgit.RentCar_Project.dto.Fuel;
+import kr.or.dgit.RentCar_Project.dto.IsAuto;
 import kr.or.dgit.RentCar_Project.dto.Manufacturer;
 import kr.or.dgit.RentCar_Project.frame.AdminMain;
 import kr.or.dgit.RentCar_Project.frame.AdminMainCarManagerCarDetail;
 import kr.or.dgit.RentCar_Project.frame.AdminMainCarManagerRentalPrice;
+import kr.or.dgit.RentCar_Project.service.CarDataService;
 import kr.or.dgit.RentCar_Project.service.CarModelService;
 import kr.or.dgit.RentCar_Project.service.FuelService;
 import kr.or.dgit.RentCar_Project.service.ManufacturerService;
@@ -59,10 +60,17 @@ public class CarDataManagerContent extends JPanel implements ActionListener {
 	protected JspinnerComponent carCount;
 	protected RadioComponent isAuto;
 	protected JLabel img;
-	private JButton btnAddPhoto;
 	private JFileChooser imgChooser;
 	private JLabel lblRemove;
+	private JButton btnCancel;
+	private JButton btnAdd;
+	private JButton btnUpdate;
+	private JButton btnDelete;
+	private CarDataListManagerContent cdListManagercontent;
 	
+	public void setCdListManagercontent(CarDataListManagerContent cdListManagercontent) {
+		this.cdListManagercontent = cdListManagercontent;
+	}
 	public CarDataManagerContent() {
 		setBounds(100, 100, 950, 380);
 		setLayout(null);
@@ -187,67 +195,97 @@ public class CarDataManagerContent extends JPanel implements ActionListener {
 				add(img);
 		add(btnDetail);
 
-		btnAddPhoto = new JButton("이미지불러오기");
-		btnAddPhoto.setBounds(796, 286, 117, 23);
-		btnAddPhoto.addActionListener(this);
-		btnAddPhoto.setToolTipText("이미지 파일을 불러옵니다");
-		add(btnAddPhoto);
-
-		JButton btnCancel = new JButton("취소");
+		btnCancel = new JButton("취소");
 		btnCancel.setBounds(872, 156, 66, 23);
+		btnCancel.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int clear = JOptionPane.showConfirmDialog(null, "입력 데이터를 취소하시겠습니까?", "확인창", JOptionPane.OK_CANCEL_OPTION);
+				if(clear==0) {
+					setClearAll();
+				}
+			}
+		});
 		add(btnCancel);
 
-		JButton btnAdd = new JButton("추가");
+		btnAdd = new JButton("추가");
 		btnAdd.setBounds(872, 67, 66, 23);
+		btnAdd.addActionListener(this);
 		add(btnAdd);
 
-		JButton btnUpdate = new JButton("수정");
+		btnUpdate = new JButton("수정");
 		btnUpdate.setBounds(872, 90, 66, 23);
+		btnUpdate.addActionListener(this);
 		add(btnUpdate);
 
-		JButton btnDelete = new JButton("삭제");
+		btnDelete = new JButton("삭제");
 		btnDelete.setBounds(872, 113, 66, 23);
+		btnDelete.addActionListener(this);
 		add(btnDelete);
 		
 		JLabel lblAdd = new JLabel("");
-		lblAdd.setBounds(796, 202, 45, 45);
+		lblAdd.setBounds(794, 60, 45, 45);
 		add(lblAdd);
 		lblAdd.setIcon(new ImageIcon(System.getProperty("user.dir") +"\\images\\fileAdd.png"));
-		
-		lblRemove = new JLabel("");
-		lblRemove.setBounds(854, 202, 45, 45);
-		add(lblRemove);
-		lblRemove.setIcon(new ImageIcon(System.getProperty("user.dir") +"\\images\\fileDelete.png"));
-		lblRemove.addMouseListener(new MouseListener() {
-			
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
+		lblAdd.setToolTipText("이미지 불러오기");
+		lblAdd.addMouseListener(new MouseAdapter() {
+
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				JOptionPane.showMessageDialog(null, "click");
+				FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG&GIF Images", "jpg","gif");
 				
+				imgChooser.setDialogTitle("이미지 파일 열기");
+				imgChooser.setFileFilter(filter);
+			/*	imgChooser.setMultiSelectionEnabled(false);*/
+				
+				int ret = imgChooser.showOpenDialog(null);
+				
+				if(ret !=JFileChooser.APPROVE_OPTION) {
+					JOptionPane.showMessageDialog(null, "파일을 선택하지 않았습니다.","경고",JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+				String filePath = imgChooser.getSelectedFile().getPath();
+				String fileName = imgChooser.getSelectedFile().getName();
+			
+				if(ret == JFileChooser.APPROVE_OPTION) {
+					try {
+						Image imgIcon = ImageIO.read(new File(filePath));
+						Image resizeIcon = imgIcon.getScaledInstance(600, 315, Image.SCALE_SMOOTH);
+						img.setIcon(new ImageIcon(resizeIcon));
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+					
+						/*storeImg(filePath,fileName);*/
+				}
+				
+				
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblAdd.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			}
+			
+			
+		});
+		
+		lblRemove = new JLabel("");
+		lblRemove.setBounds(794, 115, 45, 45);
+		add(lblRemove);
+		lblRemove.setIcon(new ImageIcon(System.getProperty("user.dir") +"\\images\\fileDelete.png"));
+		lblRemove.setToolTipText("이미지 삭제");
+		lblRemove.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int imgDelete = JOptionPane.showConfirmDialog(null, "이미지를 삭제하시겠습니까?", "확인창", JOptionPane.OK_CANCEL_OPTION);
+				if(imgDelete==0) {
+					img.setIcon(null);
+				}
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblRemove.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			}
 		});
 	
@@ -256,7 +294,19 @@ public class CarDataManagerContent extends JPanel implements ActionListener {
 		setFuelComboModel();
 		setNumComboModel();
 	}
-
+	public void setClearAll() {
+		carModelCombo.setComboBoxModelClear();
+		mfCombo.setComboBoxModelClear();
+		fuelCombo.setComboBoxModelClear();;
+		numCombo.setComboBoxModelClear();;
+		carDataCode.setTextValue("");
+		carName.setTextValue("");
+		carOld.setTextValue("");
+		carSeater.setTextValue("");
+		isAuto.setSelect(true);
+		img.setIcon(null);
+		carCount.setSpinValue(1);
+	}
 	public void setCarModelComboModel() {
 		CarModelService carModelService = CarModelService.getInstance();
 		List<CarModel> lists = carModelService.selectCarModelByAll();
@@ -302,38 +352,107 @@ public class CarDataManagerContent extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
-		if (e.getSource() == btnAddPhoto) {
 		
-			FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG&GIF Images", "jpg","gif");
-			
-			imgChooser.setDialogTitle("이미지 파일 열기");
-			imgChooser.setFileFilter(filter);
-			imgChooser.setMultiSelectionEnabled(false);
-			
-			int ret = imgChooser.showOpenDialog(this);
-			
-			if(ret !=JFileChooser.APPROVE_OPTION) {
-				JOptionPane.showMessageDialog(null, "파일을 선택하지 않았습니다.","경고",JOptionPane.WARNING_MESSAGE);
-				return;
-			}
-			String filePath = imgChooser.getSelectedFile().getPath();
-			String fileName = imgChooser.getSelectedFile().getName();
-		
-			if(ret == JFileChooser.APPROVE_OPTION) {
+		if(e.getSource()==btnAdd) {
+			int insert = JOptionPane.showConfirmDialog(null, "입력 데이터를 추가하시겠습니까?", "확인창",
+					JOptionPane.OK_CANCEL_OPTION);
+			if (insert == 0) {
+				String	filePath ="";
+				String fileName ="";
+				
 				try {
-					Image imgIcon = ImageIO.read(new File(filePath));
-					Image resizeIcon = imgIcon.getScaledInstance(600, 315, Image.SCALE_SMOOTH);
-					img.setIcon(new ImageIcon(resizeIcon));
-				} catch (IOException e1) {
-					e1.printStackTrace();
+					filePath = imgChooser.getSelectedFile().getPath();
+				 fileName = imgChooser.getSelectedFile().getName();
+				}catch(Exception e2) {	
+					e2.getStackTrace();
+					JOptionPane.showMessageDialog(null, "이미지를 등록해주세요");
 				}
 				
-					storeImg(filePath,fileName);
-			}	
-				
+				CarDataService cdService = CarDataService.getInstance();
+				String carCode = carDataCode.getTextValue();
+				String cName = carName.getTextValue();
+				int cOld = Integer.parseInt(carOld.getTextValue());
+				int carNumber = carCount.getSpinnerValue();
+				IsAuto auto = getSelectedIsAuto(isAuto.getSelectText());
+				String cSeater = carSeater.getTextValue();
+				CarModel carModelCode = carModelCombo.getComboboxValue();
+				Manufacturer manufacturerCode = mfCombo.getComboboxValue();
+				Fuel fuelCode = fuelCombo.getComboboxValue();
+				cdService.insertCarData(new CarData(carCode, cName, fileName, cOld, carNumber, auto, cSeater, carModelCode, manufacturerCode, fuelCode));
+				storeImg(filePath,fileName);
+				cdListManagercontent.listCarData.loadDate();
+				cdListManagercontent.setSearchCarCodeComboModel();
+				setClearAll();
+			}else {
+				JOptionPane.showMessageDialog(null, "취소되었습니다");
+			}
 		}
 		
+		if(e.getSource()==btnUpdate) {
+			CarDataService cdService = CarDataService.getInstance();
+			String carCode = carDataCode.getTextValue();
+			int update = JOptionPane.showConfirmDialog(null, "입력 데이터를 수정하시겠습니까?", "확인창",
+					JOptionPane.OK_CANCEL_OPTION);
+			String filePath="";
+			String fileName="";
+			
+			List<CarData> lists = cdService.selectCarDataByCarModelCode(carCode);
+	
+			if(update==0) {
+				
+				try{
+					 filePath = imgChooser.getSelectedFile().getPath();
+					 fileName = imgChooser.getSelectedFile().getName();
+				}catch(Exception e2){
+					e2.getStackTrace();
+					
+					JOptionPane.showMessageDialog(null, lists.get(1));
+				}
+				
+				String cName = carName.getTextValue();
+				int cOld = Integer.parseInt(carOld.getTextValue());
+				int carNumber = carCount.getSpinnerValue();
+				IsAuto auto = getSelectedIsAuto(isAuto.getSelectText());
+				String cSeater = carSeater.getTextValue();
+				CarModel carModelCode = carModelCombo.getComboboxValue();
+				Manufacturer manufacturerCode = mfCombo.getComboboxValue();
+				Fuel fuelCode = fuelCombo.getComboboxValue();
+				storeImg(filePath,fileName);
+				cdService.updateCarData(new CarData(carCode, cName, fileName, cOld, carNumber, auto, cSeater, carModelCode, manufacturerCode, fuelCode));
+				cdListManagercontent.listCarData.loadDate();
+				
+				cdListManagercontent.setSearchCarCodeComboModel();
+				setClearAll();
+			}else {
+				JOptionPane.showMessageDialog(null, "취소되었습니다");
+			}
+		}
+		
+		if(e.getSource()==btnDelete) {
+			
+			int delete = JOptionPane.showConfirmDialog(null, "입력 데이터를 삭제하시겠습니까?", "확인창", JOptionPane.OK_CANCEL_OPTION);
+			if (delete == 0) {
+				String carCode = carDataCode.getTextValue();
+				CarDataService cdService = CarDataService.getInstance();
+				cdService.deleteCarData(new CarData(carCode));
+				
+				cdListManagercontent.listCarData.loadDate();
+				cdListManagercontent.setSearchCarCodeComboModel();
+				setClearAll();
+			
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "취소되었습니다");
+			}
+			}
+		
+	}
+
+	public IsAuto getSelectedIsAuto(String selectText) {
+		if(selectText.equals("AUTO")) {
+			return IsAuto.AUTO;
+		}
+		return IsAuto.MANUAL;
 	}
 
 	private void storeImg(String filePath, String fileName) {

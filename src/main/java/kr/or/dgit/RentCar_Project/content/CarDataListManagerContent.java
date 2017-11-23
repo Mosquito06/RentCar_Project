@@ -24,7 +24,7 @@ import kr.or.dgit.RentCar_Project.service.CarDataService;
 public class CarDataListManagerContent extends JPanel implements ActionListener {
 	
 	private ComboBoxComponent<CarData> search;
-	private CarDataTable listCarData;
+	protected CarDataTable listCarData;
 	private JButton btnAll;
 	private JButton btnSearch;
 	private CarDataManagerContent cdManagerContent;
@@ -37,7 +37,7 @@ public class CarDataListManagerContent extends JPanel implements ActionListener 
 		setBounds(100, 100, 950, 322);
 		setLayout(null);
 		
-		JButton btnChart = new JButton("차트보기");
+		JButton btnChart = new JButton("대여고객");
 		btnChart.setBounds(841, 23, 97, 35);
 		add(btnChart);
 		

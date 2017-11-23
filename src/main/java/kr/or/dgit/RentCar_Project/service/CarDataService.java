@@ -2,6 +2,8 @@ package kr.or.dgit.RentCar_Project.service;
 
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import org.apache.ibatis.session.SqlSession;
 
 import kr.or.dgit.RentCar_Project.dao.CarDataDao;
@@ -25,7 +27,12 @@ public class CarDataService implements CarDataDao {
 			carDataDao = sqlSession.getMapper(CarDataDao.class);
 			carDataDao.insertCarData(carData);
 			sqlSession.commit();
+			JOptionPane.showMessageDialog(null, "추가되었습니다");
+		}catch(Exception e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "추가를 실패하였습니다");
 		}
+
 	}
 
 	@Override
@@ -34,6 +41,10 @@ public class CarDataService implements CarDataDao {
 			carDataDao = sqlSession.getMapper(CarDataDao.class);
 			carDataDao.updateCarData(carData);
 			sqlSession.commit();
+			JOptionPane.showMessageDialog(null, "수정되었습니다");
+		}catch(Exception e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null,"수정을 실패하였습니다");
 		}
 	}
 
@@ -43,6 +54,10 @@ public class CarDataService implements CarDataDao {
 			carDataDao = sqlSession.getMapper(CarDataDao.class);
 			carDataDao.deleteCarData(carDataCode);
 			sqlSession.commit();
+			JOptionPane.showMessageDialog(null, "삭제되었습니다");
+		}catch(Exception e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "삭제를 실패하였습니다.");
 		}
 
 	}
