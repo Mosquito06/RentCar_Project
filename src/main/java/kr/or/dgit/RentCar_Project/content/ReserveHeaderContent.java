@@ -46,8 +46,6 @@ public class ReserveHeaderContent extends JPanel {
 	private Date date2;
 	private Date date3;
 
-	
-	
 	public TextFieldComponent getStartPanel() {
 		return startPanel;
 	}
@@ -212,8 +210,6 @@ public class ReserveHeaderContent extends JPanel {
 		date2 = simpleDate.parse(startPanel.getTextField().getText(), new ParsePosition(0));
 
 	}
-
-	
 
 	private void comparestartPanel(TextFieldComponent startPanel) {
 		date1 = simpleDate.parse(toDay, new ParsePosition(0));

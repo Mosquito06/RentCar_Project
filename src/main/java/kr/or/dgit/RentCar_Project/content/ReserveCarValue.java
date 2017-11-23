@@ -11,6 +11,7 @@ import javax.swing.SwingConstants;
 
 import kr.or.dgit.RentCar_Project.component.VTextFieldComponent;
 
+@SuppressWarnings("serial")
 public class ReserveCarValue extends JPanel {
 
 	

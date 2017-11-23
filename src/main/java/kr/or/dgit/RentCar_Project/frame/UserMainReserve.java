@@ -37,6 +37,8 @@ import kr.or.dgit.RentCar_Project.dto.Manufacturer;
 import kr.or.dgit.RentCar_Project.dto.User;
 import kr.or.dgit.RentCar_Project.service.CarDataService;
 import kr.or.dgit.RentCar_Project.service.CarModelService;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 
 @SuppressWarnings("serial")
 public class UserMainReserve extends JPanel {
@@ -64,6 +66,7 @@ public class UserMainReserve extends JPanel {
 		setLayout(null);
 
 		leftPanel = new ReserveLeftContent();
+		leftPanel.setBackground(Color.WHITE);
 		leftPanel.setBorder(new TitledBorder(
 				new CompoundBorder(new LineBorder(new Color(0, 0, 0)),
 						new EtchedBorder(EtchedBorder.LOWERED, null, null)),
@@ -81,7 +84,14 @@ public class UserMainReserve extends JPanel {
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.getVerticalScrollBar().setUnitIncrement(5);
 		rightPanel.add(scrollPane);
-
+		
+		JPanel panel = new JPanel();
+		scrollPane.setViewportView(panel);
+		
+		JLabel backImg = new JLabel("");
+		backImg.setIcon(new ImageIcon("C:\\Users\\DGIT3-10\\Desktop\\asphalt-1851455_1280.jpg"));
+		panel.add(backImg);
+		
 
 		
 		
@@ -108,6 +118,7 @@ public class UserMainReserve extends JPanel {
 				comboBoxCarName.setVisible(true);
 				leftPanel.getIsInsurance().setAllEnable(true);
 				leftPanel.getBtnReset().setEnabled(true);
+				comboBoxCarName.getComboBox().setSelectedIndex(0);
 			}
 		});
 
@@ -128,6 +139,7 @@ public class UserMainReserve extends JPanel {
 					setScrollPaneAddList(scrollPane, header,isInsurance);
 					setComboBaxEnabled(true);
 					resetSelectComdo();
+					comboBoxCarName.getComboBox().setSelectedIndex(0);
 				}
 
 			});
@@ -351,6 +363,7 @@ public class UserMainReserve extends JPanel {
 				setScrollPaneAddList(scrollPane, header,isInsurance);
 				setComboBaxEnabled(true);
 				resetSelectComdo();
+				comboBoxCarName.getComboBox().setSelectedIndex(0);
 			}
 		});
 		
@@ -365,7 +378,7 @@ public class UserMainReserve extends JPanel {
 		leftPanel.getComboBoxSeater().getComboBox().setSelectedIndex(0);
 		leftPanel.getComboBoxManufacturer().getComboBox().setSelectedIndex(0);
 		leftPanel.getComboBoxFuel().getComboBox().setSelectedIndex(0);
-		comboBoxCarName.getComboBox().setSelectedIndex(0);
+		
 	}
 	
 	
