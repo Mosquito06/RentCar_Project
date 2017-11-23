@@ -37,12 +37,12 @@ public class CarDataListManagerContent extends JPanel implements ActionListener 
 		setBounds(100, 100, 950, 322);
 		setLayout(null);
 		
-		JButton btnChart = new JButton("대여고객");
+		JButton btnChart = new JButton("대여기록");
 		btnChart.setBounds(841, 23, 97, 35);
 		add(btnChart);
 		
 		btnAll = new JButton("전체보기");
-		btnAll.setBounds(744, 23, 97, 35);
+		btnAll.setBounds(740, 23, 97, 35);
 		btnAll.addActionListener(this);
 		add(btnAll);
 		
