@@ -15,6 +15,9 @@ import kr.or.dgit.RentCar_Project.dto.Manufacturer;
 import kr.or.dgit.RentCar_Project.service.CarDataService;
 import kr.or.dgit.RentCar_Project.service.FuelService;
 import kr.or.dgit.RentCar_Project.service.ManufacturerService;
+import java.awt.GridLayout;
+import javax.swing.JLabel;
+import javax.swing.JCheckBox;
 
 @SuppressWarnings("serial")
 public class ReserveLeftContent extends JPanel {
@@ -25,8 +28,8 @@ public class ReserveLeftContent extends JPanel {
 	private ComboBoxComponent<CarData> comboBoxSeater;
 	private JButton btnExit;
 	private RadioComponent isInsurance;
-	private RadioComponent isAuto;
 	private JButton btnReset;
+	private JCheckBox chckbxAuto;
 
 	public JButton getBtnReset() {
 		return btnReset;
@@ -48,16 +51,16 @@ public class ReserveLeftContent extends JPanel {
 		return comboBoxSeater;
 	}
 
-	public RadioComponent getIsAuto() {
-		return isAuto;
-	}
-
 	public RadioComponent getIsInsurance() {
 		return isInsurance;
 	}
 
 	public JButton getBtnExit() {
 		return btnExit;
+	}
+
+	public JCheckBox getChckbxAuto() {
+		return chckbxAuto;
 	}
 
 	public ReserveLeftContent() {
@@ -81,10 +84,6 @@ public class ReserveLeftContent extends JPanel {
 		comboBoxSeater.setBounds(26, 359, 191, 36);
 		add(comboBoxSeater);
 
-		isAuto = new RadioComponent("변속기", "오토", "수동");
-		isAuto.setBounds(26, 427, 205, 70);
-		add(isAuto);
-
 		isInsurance = new RadioComponent("자차 보험", "포함", "비포함");
 		isInsurance.setBounds(26, 501, 205, 70);
 		add(isInsurance);
@@ -98,6 +97,11 @@ public class ReserveLeftContent extends JPanel {
 		btnReset.setIcon(new ImageIcon(System.getProperty("user.dir") + "\\images\\reset.png"));
 		btnReset.setBounds(26, 598, 56, 53);
 		add(btnReset);
+
+		chckbxAuto = new JCheckBox("오토");
+		chckbxAuto.setBounds(161, 444, 56, 23);
+		chckbxAuto.setEnabled(false);
+		add(chckbxAuto);
 
 		setManufacturerBoxModel();
 		setFuelBoxModel();
@@ -173,5 +177,4 @@ public class ReserveLeftContent extends JPanel {
 		}
 		comboBoxSeater.setComboBoxModel(carData);
 	}
-
 }
