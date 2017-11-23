@@ -21,7 +21,7 @@ import kr.or.dgit.RentCar_Project.service.RentalPriceService;
 @SuppressWarnings("serial")
 public class RentalPriceListManagerContent extends JPanel 	implements ActionListener {
 	
-	private ComboBoxComponent<CarData> search;
+	protected ComboBoxComponent<CarData> search;
 	protected RentalPriceTable rpTable;
 	private JButton btnAll;
 	private JButton btnSearch;
@@ -99,11 +99,12 @@ public class RentalPriceListManagerContent extends JPanel 	implements ActionList
 			rpManagerContent.getBtPrice().setTextValue(String.format("%,d",rentalPrice.getBasicTimePrice()));
 			rpManagerContent.getoPrice().setTextValue(String.format("%,d",rentalPrice.getOverPrice()));
 			rpManagerContent.getInsurance().setTextValue(String.format("%,d", rentalPrice.getInsurance()));
-			
+			rpManagerContent.setActive(true);
 		}
 		if(e.getSource()==btnAll) {
 			rpTable.setFull(true);
 			rpTable.loadDate();
+			search.setComboBoxModelClear();
 		}
 	}
 }

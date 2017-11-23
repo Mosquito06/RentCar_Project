@@ -31,6 +31,7 @@ import kr.or.dgit.RentCar_Project.frame.AdminMain;
 import kr.or.dgit.RentCar_Project.frame.AdminMainClientManagerUseList;
 import kr.or.dgit.RentCar_Project.service.UserGradeService;
 import kr.or.dgit.RentCar_Project.service.UserService;
+import javax.swing.JTextField;
 
 @SuppressWarnings("serial")
 public class ClientManagerContent extends JPanel implements ActionListener{
@@ -48,6 +49,9 @@ public class ClientManagerContent extends JPanel implements ActionListener{
 	private JButton btnUpdate;
 	private JButton btnDelete;
 	private JLabel imgPanel;
+	private JButton btnUseList;
+	private JPanel addrPanel;
+	private JTextField tfAddr;
 	
 	
 	public void setClientListManager(ClientlListManagerContent clientListManager) {
@@ -55,6 +59,7 @@ public class ClientManagerContent extends JPanel implements ActionListener{
 	}
 
 	public ClientManagerContent() {
+		setBounds(100, 100, 954, 362);
 		setLayout(null);
 		
 		JPanel searchPanel = new JPanel();
@@ -83,9 +88,11 @@ public class ClientManagerContent extends JPanel implements ActionListener{
 		imgPanel = new JLabel();
 		imgPanel.setBounds(5, 10, 264, 371);
 		add(imgPanel);
+		imgPanel.setIcon(new ImageIcon(System.getProperty("user.dir") +"\\images\\readyImg.png"));
 		
 		clientId = new TextFieldComponent("아이디");
 		clientId.setBounds(234, 115, 278, 29);
+		clientId.setEnable(false);
 		add(clientId);
 		
 		comboUserCodeGrade = new ComboBoxComponent<>("고객등급");
@@ -93,23 +100,23 @@ public class ClientManagerContent extends JPanel implements ActionListener{
 		add(comboUserCodeGrade);
 		
 		clientCode = new TextFieldComponent("고객 코드");
-		clientCode.setBounds(234, 175, 278, 29);
+		clientCode.setBounds(234, 165, 278, 29);
 		add(clientCode);
 		
 		gender = new RadioComponent("성별", "남자", "여자");
-		gender.setBounds(545, 175, 290, 29);
+		gender.setBounds(547, 165, 290, 29);
 		add(gender);
 		
 		clientName = new TextFieldComponent("고객명");
-		clientName.setBounds(234, 235, 278, 29);
+		clientName.setBounds(234, 210, 278, 29);
 		add(clientName);
 		
 		phoneNum = new PhoneTextFiedComponent("연락처");
-		phoneNum.setBounds(406, 235, 462, 29);
+		phoneNum.setBounds(408, 210, 462, 29);
 		add(phoneNum);
 		
 		email = new EmailTextFiedComponent("이메일");
-		email.setBounds(244, 295, 469, 29);
+		email.setBounds(249, 310, 469, 29);
 		add(email);
 		
 		JButton btnCancel = new JButton("취소");
@@ -122,10 +129,10 @@ public class ClientManagerContent extends JPanel implements ActionListener{
 				}
 			}
 		});
-		btnCancel.setBounds(814, 337, 97, 23);
+		btnCancel.setBounds(841, 337, 97, 23);
 		add(btnCancel);
 		
-		JButton btnUseList = new JButton("이용내역 조회");
+		btnUseList = new JButton("이용내역 조회");
 		btnUseList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFrame frame = AdminMain.getInstance();
@@ -134,8 +141,21 @@ public class ClientManagerContent extends JPanel implements ActionListener{
 				frame.setVisible(true);
 			}
 		});
-		btnUseList.setBounds(775, 44, 124, 23);
+		btnUseList.setBounds(814, 40, 124, 23);
 		add(btnUseList);
+		
+		addrPanel = new JPanel();
+		addrPanel.setBounds(284, 260, 553, 29);
+		add(addrPanel);
+		addrPanel.setLayout(new BorderLayout(68, 0));
+		
+		JLabel lblAddr = new JLabel("주소");
+		addrPanel.add(lblAddr, BorderLayout.WEST);
+		
+		tfAddr = new JTextField();
+		addrPanel.add(tfAddr, BorderLayout.CENTER);
+		tfAddr.setColumns(10);
+		tfAddr.setEnabled(false);
 		
 		setUserGradeComboBoxModel();
 		setUserComboBoxModel();
@@ -173,16 +193,20 @@ public class ClientManagerContent extends JPanel implements ActionListener{
 		gender.setSelect(true);
 		comboUserCode.setComboBoxModelClear();
 		comboUserCodeGrade.setComboBoxModelClear();
+		tfAddr.setText("");
+		imgPanel.setIcon(new ImageIcon(System.getProperty("user.dir") +"\\images\\readyImg.png"));
+		
 	}
 	
 	public void setActive(boolean active) {
-		
-		clientId.getTextField().setEnabled(active);
 		clientCode.getTextField().setEnabled(active);
 		clientName.getTextField().setEnabled(active);
 		phoneNum.setActive(active);
 		comboUserCode.setEnabled(active);
 		email.setActive(active);
+		btnUpdate.setEnabled(active);
+		btnDelete.setEnabled(active);
+		btnUseList.setEnabled(active);
 	}
 
 	public Gender getSelectedGender(String selectText) {
@@ -229,6 +253,7 @@ public class ClientManagerContent extends JPanel implements ActionListener{
 			comboUserCodeGrade.getComboBox().setSelectedIndex(gradeComboSelected(uc));
 			imgPanel.setIcon(new ImageIcon(uc.getUserImg()));
 			gender.setSelect(genderSelected(uc.getGender()));
+			tfAddr.setText(uc.getAddr());
 			clientListManager.listClient.setFull(false);
 			clientListManager.listClient.setUserCode(user);
 			clientListManager.listClient.loadDate();
@@ -246,7 +271,7 @@ public class ClientManagerContent extends JPanel implements ActionListener{
 				UserGrade userGrade = comboUserCodeGrade.getComboboxValue();
 				userService.updateUser(new User(code, id, userName, phone, userEmail, userGender, userGrade));
 				clientListManager.listClient.loadDate();
-				setClearAll();
+				//setClearAll();
 			}else {
 				JOptionPane.showMessageDialog(null, "취소되었습니다");
 			}
@@ -272,8 +297,4 @@ public class ClientManagerContent extends JPanel implements ActionListener{
 		}
 		
 	}
-
-	
-
-
 }

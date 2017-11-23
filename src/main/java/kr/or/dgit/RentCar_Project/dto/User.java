@@ -174,7 +174,7 @@ public class User {
 	}
 
 	public Object[] toArray() {
-		return new Object[] { userCode, id, userName, phone, email, gender, grade.getGrade(), addr };
+		return new Object[] { userCode, id, userName,addr,phone, email, gender, grade.getGrade(), addr };
 	}
 
 }

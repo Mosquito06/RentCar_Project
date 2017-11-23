@@ -19,23 +19,23 @@ public class ClientlListManagerContent extends JPanel implements ActionListener 
 	private JLabel lblNum;
 	
 	public ClientlListManagerContent(){
-		setBounds(100, 100, 921, 362);
+		setBounds(100, 100, 954, 362);
 		setLayout(null);
 		
 		btnAll = new JButton("전체보기");
-		btnAll.setBounds(812, 23, 97, 25);
+		btnAll.setBounds(845, 22, 97, 25);
 		btnAll.addActionListener(this);
 		add(btnAll);
 		
 		listClient = new ClientListTable();
 		listClient.setBorder(new LineBorder(new Color(0, 0, 0)));
-		listClient.setBounds(12, 58, 897, 267);
+		listClient.setBounds(12, 58, 930, 267);
 		listClient.setFull(true);
 		listClient.loadDate();
 		add(listClient);
 		
 		lblNum = new JLabel("New label");
-		lblNum.setBounds(852, 330, 57, 15);
+		lblNum.setBounds(885, 330, 57, 15);
 		add(lblNum);
 	}
 

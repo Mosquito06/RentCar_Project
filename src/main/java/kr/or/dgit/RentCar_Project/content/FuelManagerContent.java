@@ -61,11 +61,10 @@ public class FuelManagerContent extends JPanel implements ActionListener {
 						JOptionPane.OK_CANCEL_OPTION);
 				if (clear == 0)
 					setFuelTextValueClear();
-					isEnabledBtn(false);
 			}
 		});
 		add(btnCancel);
-/*		isEnabledBtn(false);*/
+
 	}
 
 	public TextFieldComponent getFuelCode() {
@@ -103,10 +102,6 @@ public class FuelManagerContent extends JPanel implements ActionListener {
 		}else {
 			return true;
 		}
-	}
-	public void isEnabledBtn(boolean enable) {
-		btnUpdate.setEnabled(enable);
-		btnDelete.setEnabled(enable);
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -166,7 +161,6 @@ public class FuelManagerContent extends JPanel implements ActionListener {
 			
 
 		}
-	/*	isEnabledBtn(false);*/
 		setFuelTextValueClear();
 	}
 

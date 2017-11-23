@@ -35,13 +35,13 @@ public class AdminMainClientManager extends JPanel {
 		
 		inputPanel = new ClientManagerContent();
 		inputPanel.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.RAISED, null, null)), " \uACE0\uAC1D \uAD00\uB9AC  ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		inputPanel.setBounds(25, 5, 924, 375);
+		inputPanel.setBounds(12, 5, 950, 375);
 		add(inputPanel);
 		inputPanel.setLayout(null);
 		
 		clientListPanel = new ClientlListManagerContent();
 		clientListPanel.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.RAISED, null, null)), " \uACE0\uAC1D \uB9AC\uC2A4\uD2B8  ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		clientListPanel.setBounds(25, 385, 924, 331);
+		clientListPanel.setBounds(12, 385, 950, 331);
 		add(clientListPanel);
 		clientListPanel.setLayout(null);
 		

@@ -23,7 +23,8 @@ public class ClientListTable extends AbstractTable {
 
 	@Override
 	protected void setAlignWidth() {
-		setAlign(SwingConstants.CENTER, 0,1,2,3,4,5,6);
+		setAlign(SwingConstants.CENTER, 0,1,2,3,4,5,6,7);
+		setCellwidth(30,40,40,60,50,50,30,20);
 	}
 
 	@Override
@@ -48,7 +49,7 @@ public class ClientListTable extends AbstractTable {
 
 	@Override
 	protected Object[] getcolumnNames() {
-		return new String[]{"고객코드","아이디","고객이름","연락처","이메일","성별","고객등급"};
+		return new String[]{"고객코드","아이디","고객이름","주소","연락처","이메일","성별","고객등급"};
 	}
 
 	@Override
