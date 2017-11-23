@@ -28,7 +28,7 @@ public class ReserveListCarValue extends JPanel {
 		panel_2.add(carImg);
 		
 		JPanel carValue = new JPanel();
-		carValue.setBorder(new EmptyBorder(20, 30, 30, 30));
+		carValue.setBorder(new EmptyBorder(30, 40, 40, 40));
 		panel_2.add(carValue);
 		carValue.setLayout(new GridLayout(0, 2, 20, 20));
 		

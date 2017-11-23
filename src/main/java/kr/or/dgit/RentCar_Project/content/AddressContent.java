@@ -24,7 +24,7 @@ public class AddressContent extends JPanel {
 	}
 
 	public AddressContent(String addr) {
-		setBorder(new EmptyBorder(7, 5, 5, 5));
+		setBorder(new EmptyBorder(7, 0, 5, 0));
 		setLayout(new BorderLayout(0, 0));
 
 		JPanel panel = new JPanel();
@@ -32,6 +32,7 @@ public class AddressContent extends JPanel {
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
 		btnSelect = new JButton("선택");
+		btnSelect.setHorizontalAlignment(SwingConstants.LEADING);
 		panel.add(btnSelect);
 		
 		panel_2 = new JPanel();
