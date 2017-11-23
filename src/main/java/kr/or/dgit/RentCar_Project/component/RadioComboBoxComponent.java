@@ -73,4 +73,8 @@ public class RadioComboBoxComponent<T> extends JPanel {
 		}
 		return null;
 	}
+	
+	public void setFirstIndex() {
+		comboBox.setSelectedIndex(0);
+	}
 }

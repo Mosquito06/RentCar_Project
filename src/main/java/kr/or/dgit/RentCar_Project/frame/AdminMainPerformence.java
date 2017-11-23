@@ -134,7 +134,19 @@ public class AdminMainPerformence extends JPanel {
 		});
 		performenceContent.setBounds(12, 22, 349, 354);
 		searchPanel.add(performenceContent);
-
+		
+		// 초기화 버튼 리스너
+		performenceContent.getBtnReset().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				performenceContent.setComboBoxIndexAtFirst();
+				
+			}
+		});
+		
+		
+		
 		// 프레임 생성 시 기본 파이 차트 출력
 		abstractPieChart = new PerformenceTotalPieChart("성과분석", "", "", list, false);
 		// 자세히 보기 출력을 위한 기본 바 차트 생성

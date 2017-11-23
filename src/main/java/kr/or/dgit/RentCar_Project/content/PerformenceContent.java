@@ -170,5 +170,12 @@ public class PerformenceContent extends JPanel {
 		
 	}
 	
-	
+	public void setComboBoxIndexAtFirst() {
+		carModelBox.setFirstIndex();
+		monthBox.setFirstIndex();
+		madeBox.setFirstIndex();
+		genderBox.setFirstIndex();
+		fuelBox.setFirstIndex();
+		cancelBox.setFirstIndex();
+	}
 }
