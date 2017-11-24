@@ -73,25 +73,27 @@ public class UserMainHistory extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Rent selectItem = (Rent) historyTable.getSelectedItem();
-				
-				Date CurrentDate = new Date();
-				int CompareDate = CurrentDate.compareTo(selectItem.getDayStart());
-				
-				if(CompareDate < 0 && selectItem.getSituation().equals(Situation.RESERVATION)) {
-					int Confirm = JOptionPane.showConfirmDialog(null, "정말로 예약을 취소하시겠습니까?");
-					if(Confirm == JOptionPane.YES_OPTION) {
-						selectItem.setSituation(Situation.CANCELLATION);
-						selectItem.setUserCode(ComfirmUser);
-						RentService.getInstance().UserHistoryUpdate(selectItem);
-						historyTable.loadDate();
-						JOptionPane.showMessageDialog(null, "예약을 취소하였습니다.");  
+				try {
+					Rent selectItem = (Rent) historyTable.getSelectedItem();
+					
+					Date CurrentDate = new Date();
+					int CompareDate = CurrentDate.compareTo(selectItem.getDayStart());
+					
+					if(CompareDate < 0 && selectItem.getSituation().equals(Situation.RESERVATION)) {
+						int Confirm = JOptionPane.showConfirmDialog(null, "정말로 예약을 취소하시겠습니까?");
+						if(Confirm == JOptionPane.YES_OPTION) {
+							selectItem.setSituation(Situation.CANCELLATION);
+							selectItem.setUserCode(ComfirmUser);
+							RentService.getInstance().UserHistoryUpdate(selectItem);
+							historyTable.loadDate();
+							JOptionPane.showMessageDialog(null, "예약을 취소하였습니다.");  
+						}
+					}else {
+						JOptionPane.showMessageDialog(null, "취소할 수 없는 내역입니다");
 					}
-				}else {
-					JOptionPane.showMessageDialog(null, "취소할 수 없는 내역입니다");
+				}catch(ArrayIndexOutOfBoundsException a) {
+					JOptionPane.showMessageDialog(null, "취소할 내역을 선택해주세요.");
 				}
-				
-				
 			}
 		});
 		
