@@ -95,7 +95,7 @@ public class Login extends JFrame {
 
 		// 아이디 필드
 		IdField = new JTextField();
-		PromptSupport.setPrompt("아이디를 입력해주세요.", IdField);
+		IdField.setText("아이디를 입력하세요");
 				
 		// 아이디 필드 포거스 시 글자 선택
 		IdField.addFocusListener(new FocusAdapter() {
@@ -303,6 +303,5 @@ public class Login extends JFrame {
 		backImg.setBounds(5, 5, 640, 471);
 		backImg.setIcon(new ImageIcon(System.getProperty("user.dir") + "\\Images\\\uBC30\uACBD2.jpg"));
 		contentPane.add(backImg);
-
 	}
 }
