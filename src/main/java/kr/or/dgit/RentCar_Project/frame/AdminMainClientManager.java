@@ -8,20 +8,16 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 import kr.or.dgit.RentCar_Project.content.ClientManagerContent;
-import kr.or.dgit.RentCar_Project.dto.User;
-import kr.or.dgit.RentCar_Project.list.ClientListTable;
-import kr.or.dgit.RentCar_Project.service.UserService;
-import javax.swing.SwingConstants;
 import kr.or.dgit.RentCar_Project.content.ClientlListManagerContent;
+import kr.or.dgit.RentCar_Project.dto.User;
+import kr.or.dgit.RentCar_Project.service.UserService;
 
 @SuppressWarnings("serial")
 public class AdminMainClientManager extends JPanel {
@@ -41,7 +37,7 @@ public class AdminMainClientManager extends JPanel {
 		
 		clientListPanel = new ClientlListManagerContent();
 		clientListPanel.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.RAISED, null, null)), " \uACE0\uAC1D \uB9AC\uC2A4\uD2B8  ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		clientListPanel.setBounds(12, 385, 950, 331);
+		clientListPanel.setBounds(12, 385, 950, 333);
 		add(clientListPanel);
 		clientListPanel.setLayout(null);
 		
