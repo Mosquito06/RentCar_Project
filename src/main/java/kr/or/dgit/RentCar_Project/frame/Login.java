@@ -26,6 +26,8 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 
+import org.jdesktop.xswingx.PromptSupport;
+
 import kr.or.dgit.RentCar_Project.content.MembershipFrame;
 import kr.or.dgit.RentCar_Project.dao.UserDao;
 import kr.or.dgit.RentCar_Project.dto.User;
@@ -92,8 +94,8 @@ public class Login extends JFrame {
 
 		// 아이디 필드
 		IdField = new JTextField();
-		IdField.setText("아이디를 입력해주세요.");
-		
+		PromptSupport.setPrompt("아이디를 입력해주세요.", IdField);
+				
 		// 아이디 필드 포거스 시 글자 선택
 		IdField.addFocusListener(new FocusAdapter() {
 
@@ -129,7 +131,8 @@ public class Login extends JFrame {
 		
 		// 비밀번호 필드
 		PwField = new JPasswordField();
-		PwField.setText("비밀번호를 입력해주세요.");
+		PromptSupport.setPrompt("비밀번호를 입력해주세요.", PwField);
+			
 		contentPane.add(PwField);
 
 		// 비밀번호 필드 포거스 시 글자 선택
@@ -278,8 +281,13 @@ public class Login extends JFrame {
 				
 			}
 		});
-		btnDb.setBounds(384, 419, 97, 23);
+		btnDb.setBounds(333, 419, 97, 23);
 		contentPane.add(btnDb);
+		
+		// 내정보찾기 버튼
+		JButton btnFind = new JButton("내정보찾기");
+		btnFind.setBounds(444, 417, 97, 23);
+		contentPane.add(btnFind);
 		
 		// 배경화면 
 		JLabel backImg = new JLabel("");
