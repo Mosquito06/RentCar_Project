@@ -2,47 +2,37 @@ package kr.or.dgit.RentCar_Project.content;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.GridLayout;
 
+import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
+
 import kr.or.dgit.RentCar_Project.component.TextFieldComponent;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.ComboBoxModel;
-import javax.swing.JButton;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
 
 @SuppressWarnings("serial")
 public class FindIdPwFrame extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-
-
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					FindIdPwFrame frame = new FindIdPwFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private JTextField tfEmail1;
+	private JTextField tfEmail2;
+	private TextFieldComponent tfId;
 
 	public FindIdPwFrame() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 424, 476);
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		setBounds(100, 100, 424, 378);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -58,61 +48,84 @@ public class FindIdPwFrame extends JFrame {
 		panel.add(panel_1);
 		panel_1.setLayout(new GridLayout(1, 0, 0, 0));
 		
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("아이디 찾기");
-		rdbtnNewRadioButton.setSelected(true);
-		panel_1.add(rdbtnNewRadioButton);
+		JRadioButton rdbtnId = new JRadioButton("아이디 찾기");
 		
-		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("비밀번호 찾기");
-		panel_1.add(rdbtnNewRadioButton_1);
+		rdbtnId.setSelected(true);
+		panel_1.add(rdbtnId);
+		
+		JRadioButton rdbtnPw = new JRadioButton("비밀번호 찾기");
+		panel_1.add(rdbtnPw);
+		
+		ButtonGroup group= new ButtonGroup();
+		group.add(rdbtnId);
+		group.add(rdbtnPw);
 		
 		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(12, 83, 374, 334);
+		panel_2.setBorder(new TitledBorder(null, "\uC815\uBCF4\uC785\uB825", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_2.setBounds(12, 83, 374, 238);
 		panel.add(panel_2);
 		panel_2.setLayout(null);
 		
-		TextFieldComponent panel_3 = new TextFieldComponent("아이디");
-		panel_3.setBounds(0, 20, 187, 36);
-		panel_2.add(panel_3);
+		tfId = new TextFieldComponent("아이디");
+		tfId.setBounds(-11, 21, 180, 36);
 		
-		TextFieldComponent textFieldComponent = new TextFieldComponent("이름");
-		textFieldComponent.setBounds(0, 68, 187, 36);
-		panel_2.add(textFieldComponent);
+		panel_2.add(tfId);
 		
+		TextFieldComponent tfName = new TextFieldComponent("이름");
+		tfName.setBounds(-11, 70, 180, 36);
+		panel_2.add(tfName);
+		tfId.setEnable(false);
 		JButton btnNewButton = new JButton("찾기");
-		btnNewButton.setBounds(57, 261, 97, 42);
+		btnNewButton.setBounds(59, 178, 97, 42);
 		panel_2.add(btnNewButton);
 		
 		JButton button = new JButton("나가기");
-		button.setBounds(212, 261, 97, 42);
+		button.setBounds(207, 178, 97, 42);
 		panel_2.add(button);
 		
 		JPanel panel_5 = new JPanel();
 		panel_5.setLayout(null);
-		panel_5.setBounds(0, 114, 374, 36);
+		panel_5.setBounds(-11, 120, 380, 36);
 		panel_2.add(panel_5);
 		
 		JLabel label = new JLabel("이메일");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
-		label.setBounds(0, 0, 86, 36);
+		label.setBounds(1, 0, 86, 36);
 		panel_5.add(label);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(84, 1, 86, 35);
-		panel_5.add(textField);
+		tfEmail1 = new JTextField();
+		tfEmail1.setColumns(10);
+		tfEmail1.setBounds(92, 1, 86, 35);
+		panel_5.add(tfEmail1);
 		
-		JComboBox<String> comboBox = new JComboBox<String>((ComboBoxModel) null);
-		comboBox.setBounds(279, 0, 95, 36);
-		panel_5.add(comboBox);
+		String[] emailArr = { "직접입력", "naver.com", "gmail.com", "nate.com", "daum.net" };
+
+		DefaultComboBoxModel<String> modelEmail = new DefaultComboBoxModel<>(emailArr);
+
+		JComboBox<String> comboEmail = new JComboBox<>(modelEmail);
+		comboEmail.setBounds(285, 0, 95, 36);
+		panel_5.add(comboEmail);
 		
 		JLabel label_1 = new JLabel("@");
 		label_1.setHorizontalAlignment(SwingConstants.CENTER);
-		label_1.setBounds(167, 4, 25, 28);
+		label_1.setBounds(175, 4, 25, 28);
 		panel_5.add(label_1);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(187, 1, 86, 36);
-		panel_5.add(textField_1);
+		tfEmail2 = new JTextField();
+		tfEmail2.setColumns(10);
+		tfEmail2.setBounds(196, 1, 86, 36);
+		panel_5.add(tfEmail2);
+		
+		rdbtnId.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				if(rdbtnId.isSelected()) {
+					tfId.setEnable(false);
+				}else {
+					tfId.setEnable(true);
+				}
+			}
+		});
+		
+		
 	}
 }

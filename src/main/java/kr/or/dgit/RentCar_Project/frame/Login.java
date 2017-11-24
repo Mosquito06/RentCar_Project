@@ -28,6 +28,7 @@ import javax.swing.border.EmptyBorder;
 
 import org.jdesktop.xswingx.PromptSupport;
 
+import kr.or.dgit.RentCar_Project.content.FindIdPwFrame;
 import kr.or.dgit.RentCar_Project.content.MembershipFrame;
 import kr.or.dgit.RentCar_Project.dao.UserDao;
 import kr.or.dgit.RentCar_Project.dto.User;
@@ -288,6 +289,14 @@ public class Login extends JFrame {
 		JButton btnFind = new JButton("내정보찾기");
 		btnFind.setBounds(444, 417, 97, 23);
 		contentPane.add(btnFind);
+		btnFind.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				FindIdPwFrame findId = new FindIdPwFrame();
+				findId.setVisible(true);
+			}
+		});
 		
 		// 배경화면 
 		JLabel backImg = new JLabel("");
