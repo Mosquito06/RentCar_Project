@@ -1,22 +1,24 @@
 package kr.or.dgit.RentCar_Project.content;
 
-import javax.swing.JPanel;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 import kr.or.dgit.RentCar_Project.list.ClientListTable;
-
-import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 @SuppressWarnings("serial")
 public class ClientlListManagerContent extends JPanel implements ActionListener {
 	
 	protected ClientListTable listClient;
 	private JButton btnAll;
-	private JLabel lblNum;
+	protected JLabel lblNum;
 	
 	public ClientlListManagerContent(){
 		setBounds(100, 100, 954, 362);
@@ -29,14 +31,17 @@ public class ClientlListManagerContent extends JPanel implements ActionListener 
 		
 		listClient = new ClientListTable();
 		listClient.setBorder(new LineBorder(new Color(0, 0, 0)));
-		listClient.setBounds(12, 58, 930, 267);
+		listClient.setBounds(12, 55, 930, 251);
 		listClient.setFull(true);
 		listClient.loadDate();
 		add(listClient);
 		
-		lblNum = new JLabel("New label");
-		lblNum.setBounds(885, 330, 57, 15);
+		lblNum = new JLabel();
+		lblNum.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
+		lblNum.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNum.setBounds(880, 310, 57, 15);
 		add(lblNum);
+	
 	}
 
 	@Override
@@ -45,7 +50,9 @@ public class ClientlListManagerContent extends JPanel implements ActionListener 
 		if(e.getSource()==btnAll) {
 			listClient.setFull(true);
 			listClient.loadDate();
+	
 		}
 		
 	}
 }
+

@@ -13,7 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
+import javax.swing.JTextField;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
@@ -31,7 +31,6 @@ import kr.or.dgit.RentCar_Project.frame.AdminMain;
 import kr.or.dgit.RentCar_Project.frame.AdminMainClientManagerUseList;
 import kr.or.dgit.RentCar_Project.service.UserGradeService;
 import kr.or.dgit.RentCar_Project.service.UserService;
-import javax.swing.JTextField;
 
 @SuppressWarnings("serial")
 public class ClientManagerContent extends JPanel implements ActionListener{
@@ -102,6 +101,7 @@ public class ClientManagerContent extends JPanel implements ActionListener{
 		clientCode = new TextFieldComponent("고객 코드");
 		clientCode.setBounds(234, 165, 278, 29);
 		add(clientCode);
+		clientCode.setEnable(false);
 		
 		gender = new RadioComponent("성별", "남자", "여자");
 		gender.setBounds(547, 165, 290, 29);
@@ -199,7 +199,6 @@ public class ClientManagerContent extends JPanel implements ActionListener{
 	}
 	
 	public void setActive(boolean active) {
-		clientCode.getTextField().setEnabled(active);
 		clientName.getTextField().setEnabled(active);
 		phoneNum.setActive(active);
 		comboUserCode.setEnabled(active);
@@ -240,8 +239,6 @@ public class ClientManagerContent extends JPanel implements ActionListener{
 			JOptionPane.showMessageDialog(null, "고객을 검색합니다.");
 			setActive(true);
 			
-			User user  = comboUserCode.getComboboxValue();
-			
 			clientId.setTextValue(uc.getId());
 			clientCode.setTextValue(String.valueOf(uc.getUserCode()));
 			clientName.setTextValue(uc.getUserName());
@@ -255,8 +252,10 @@ public class ClientManagerContent extends JPanel implements ActionListener{
 			gender.setSelect(genderSelected(uc.getGender()));
 			tfAddr.setText(uc.getAddr());
 			clientListManager.listClient.setFull(false);
-			clientListManager.listClient.setUserCode(user);
+			clientListManager.listClient.setUserCode(userCode);
 			clientListManager.listClient.loadDate();
+			clientListManager.lblNum.setText("1/1");
+			
 		}
 		
 		if(e.getSource()==btnUpdate) {
@@ -271,7 +270,7 @@ public class ClientManagerContent extends JPanel implements ActionListener{
 				UserGrade userGrade = comboUserCodeGrade.getComboboxValue();
 				userService.updateUser(new User(code, id, userName, phone, userEmail, userGender, userGrade));
 				clientListManager.listClient.loadDate();
-				//setClearAll();
+				
 			}else {
 				JOptionPane.showMessageDialog(null, "취소되었습니다");
 			}
@@ -283,6 +282,7 @@ public class ClientManagerContent extends JPanel implements ActionListener{
 				userService.deleteUser(new User(code));
 				clientListManager.listClient.loadDate();
 				setClearAll();
+				setActive(false);
 			}else {
 				JOptionPane.showMessageDialog(null, "취소되었습니다");
 			}
