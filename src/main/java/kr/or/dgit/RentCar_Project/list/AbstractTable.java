@@ -24,12 +24,22 @@ public abstract class AbstractTable extends JPanel {
 		add(scrollPane, BorderLayout.CENTER);
 		
 		table = new JTable();
+		// 테이블 열 이동 불가
+		table.getTableHeader().setReorderingAllowed(false);
+		// 테이블 사이즈 변경 불가
+		table.getTableHeader().setResizingAllowed(false);
 		scrollPane.setViewportView(table);
 
 	}
 	
 	public void loadDate() {
-		DefaultTableModel model = new DefaultTableModel(getData(), getcolumnNames());
+		// 내용 수정 불가, isCellEditable overriding
+		DefaultTableModel model = new DefaultTableModel(getData(), getcolumnNames()) {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
 		table.setModel(model);
 		
 		setAlignWidth();
