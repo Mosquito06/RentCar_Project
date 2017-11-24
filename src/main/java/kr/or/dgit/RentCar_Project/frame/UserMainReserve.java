@@ -89,7 +89,7 @@ public class UserMainReserve extends JPanel {
 		scrollPane.setViewportView(panel);
 
 		JLabel backImg = new JLabel("");
-		backImg.setIcon(new ImageIcon("C:\\Users\\DGIT3-10\\Desktop\\asphalt-1851455_1280.jpg"));
+		backImg.setIcon(new ImageIcon(System.getProperty("user.dir") + "\\images\\reserve.jpg"));
 		panel.add(backImg);
 
 		ReserveHeaderContent header = new ReserveHeaderContent();

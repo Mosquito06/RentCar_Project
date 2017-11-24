@@ -205,10 +205,7 @@ public class MembershipFrame extends JFrame {
 		panel_6.add(btnAddr);
 
 		JButton btnAdd = new JButton("가입");
-		btnAdd.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+
 		btnAdd.setBounds(66, 430, 108, 44);
 		panel.add(btnAdd);
 
@@ -245,12 +242,12 @@ public class MembershipFrame extends JFrame {
 				if (idCheck == 2) {
 					idCheck = JOptionPane.showConfirmDialog(null, "사용가능한 아이디 입니다. 사용하시겠습니까?", null,
 							JOptionPane.YES_NO_OPTION);
-					if (idCheck != 0) {
+					if (idCheck == 0) {
+						tfId.getTextField().setEnabled(false);
+					} else {
 						tfId.getTextField().requestFocus();
 						tfId.getTextField().setEnabled(true);
 						idCheck = 2;
-					} else {
-						tfId.getTextField().setEnabled(false);
 					}
 				} else {
 					JOptionPane.showMessageDialog(null, "이미 사용중인 아이디 입니다.");

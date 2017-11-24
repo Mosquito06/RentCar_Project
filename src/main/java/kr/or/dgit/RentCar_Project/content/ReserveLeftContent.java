@@ -5,6 +5,7 @@ import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 
 import kr.or.dgit.RentCar_Project.component.ComboBoxComponent;
@@ -15,9 +16,6 @@ import kr.or.dgit.RentCar_Project.dto.Manufacturer;
 import kr.or.dgit.RentCar_Project.service.CarDataService;
 import kr.or.dgit.RentCar_Project.service.FuelService;
 import kr.or.dgit.RentCar_Project.service.ManufacturerService;
-import java.awt.GridLayout;
-import javax.swing.JLabel;
-import javax.swing.JCheckBox;
 
 @SuppressWarnings("serial")
 public class ReserveLeftContent extends JPanel {
@@ -107,7 +105,6 @@ public class ReserveLeftContent extends JPanel {
 		setFuelBoxModel();
 		setCarDataOldBoxModel();
 		setCarDataSeaterBoxModel();
-
 	}
 
 	public void setManufacturerBoxModel() {

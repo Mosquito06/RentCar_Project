@@ -37,6 +37,7 @@ public class AddressContent extends JPanel {
 		
 		panel_2 = new JPanel();
 		add(panel_2, BorderLayout.CENTER);
+				panel_2.setLayout(new FlowLayout(FlowLayout.LEADING, 5, 5));
 		
 				lblNewLabel = new JLabel(addr);
 				panel_2.add(lblNewLabel);
