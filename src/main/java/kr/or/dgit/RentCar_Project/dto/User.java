@@ -34,8 +34,13 @@ public class User {
 		super();
 	}
 
-	public User(String id, String pw, String userName, String phone, String email, Gender gender,
-			String addr) {
+	public User(String userName, String email) {
+		super();
+		this.userName = userName;
+		this.email = email;
+	}
+
+	public User(String id, String pw, String userName, String phone, String email, Gender gender, String addr) {
 		super();
 		this.id = id;
 		this.pw = pw;
@@ -174,7 +179,11 @@ public class User {
 	}
 
 	public Object[] toArray() {
-		return new Object[] { userCode, id, userName,addr,phone, email, gender, grade.getGrade(), addr };
+		return new Object[] { userCode, id, userName, addr, phone, email, gender, grade.getGrade(), addr };
+	}
+
+	public String toStringId() {
+		return String.format("%s", id);
 	}
 
 }

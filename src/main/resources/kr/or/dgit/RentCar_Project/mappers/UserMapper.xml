@@ -75,6 +75,11 @@
 		<include refid="wherePrimarySql"/>
 	</select>
 	
+	<select id="selectUserFindId" parameterType="User" resultMap="UserResult">
+		<include refid="selectSql"/>
+		where user_name = #{userName} and email = #{email}
+	</select>
+	
 	<select id="selectUserByAll" resultMap="UserResult">
 		<include refid="selectSql"/>
 	</select>

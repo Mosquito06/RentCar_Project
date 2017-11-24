@@ -88,4 +88,12 @@ public class UserService implements UserDao {
 		}
 	}
 
+	@Override
+	public User selectUserFindId(User user) {
+		try(SqlSession sqlsession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();){
+			userDao = sqlsession.getMapper(UserDao.class);
+			return userDao.selectUserFindId(user);
+		}
+	}
+
 }
