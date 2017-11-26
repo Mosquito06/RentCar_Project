@@ -1,22 +1,14 @@
 package kr.or.dgit.RentCar_Project.frame;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.awt.Image;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JButton;
-import javax.swing.ImageIcon;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
+
+import kr.or.dgit.RentCar_Project.dto.User;
 
 public class UserMain extends JFrame {
 	private static final UserMain instance = new UserMain();
@@ -32,6 +24,12 @@ public class UserMain extends JFrame {
 	}
 
 	private UserMain() {
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		Image img = tk.getImage(System.getProperty("user.dir") + "\\images\\Instapaper icon.png");
+		setIconImage(img);
+		
+		
+		
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 990, 790);
@@ -41,5 +39,9 @@ public class UserMain extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setLocationRelativeTo(null);
 
+	}
+	
+	public void UserFrameSetTitle(User ComfirmUser) {
+		setTitle("아이티 렌트카" + " - " + ComfirmUser.getUserName() + "님 환영합니다!");
 	}
 }

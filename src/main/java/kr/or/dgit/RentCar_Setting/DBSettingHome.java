@@ -2,6 +2,8 @@ package kr.or.dgit.RentCar_Setting;
 
 import java.awt.EventQueue;
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.Toolkit;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -15,6 +17,10 @@ public class DBSettingHome extends JFrame {
 	private JPanel contentPane;
 
 	public DBSettingHome() {
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		Image img = tk.getImage(System.getProperty("user.dir") + "\\images\\Instapaper icon.png");
+		setIconImage(img);
+	
 		setTitle("데이터베이스 설치");
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 600, 465);

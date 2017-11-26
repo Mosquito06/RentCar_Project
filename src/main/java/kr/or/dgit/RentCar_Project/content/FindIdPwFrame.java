@@ -3,6 +3,8 @@ package kr.or.dgit.RentCar_Project.content;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -39,6 +41,12 @@ public class FindIdPwFrame extends JFrame {
 	private TextFieldComponent tfId;
 
 	public FindIdPwFrame() {
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		Image img = tk.getImage(System.getProperty("user.dir") + "\\images\\Instapaper icon.png");
+		setIconImage(img);
+		
+		setTitle("내 정보 찾기");
+		
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 424, 378);
 		contentPane = new JPanel();

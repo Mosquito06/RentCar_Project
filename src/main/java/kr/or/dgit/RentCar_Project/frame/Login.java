@@ -3,6 +3,8 @@ package kr.or.dgit.RentCar_Project.frame;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Frame;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
@@ -72,6 +74,12 @@ public class Login extends JFrame {
 	}
 	
 	public Login() {
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		Image img = tk.getImage(System.getProperty("user.dir") + "\\images\\Instapaper icon.png");
+		setIconImage(img);
+		
+		setTitle("아이티 렌트카");
+		
 		setResizable(false);
 		this.userDao = UserService.getInstance();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -85,12 +93,12 @@ public class Login extends JFrame {
 		
 		// 아이디 확인 배경
 		JLabel IdCheck = new JLabel("");
-		IdCheck.setBounds(549, 274, 46, 47);
+		IdCheck.setBounds(547, 245, 46, 47);
 		contentPane.add(IdCheck);
 
 		// 비밀번호 확인 배경
 		JLabel PwCheck = new JLabel("");
-		PwCheck.setBounds(549, 331, 46, 45);
+		PwCheck.setBounds(547, 302, 46, 45);
 		contentPane.add(PwCheck);
 
 		// 아이디 필드
@@ -125,7 +133,7 @@ public class Login extends JFrame {
 			}
 
 		});
-		IdField.setBounds(323, 274, 226, 47);
+		IdField.setBounds(321, 245, 226, 47);
 		contentPane.add(IdField);
 		IdField.setColumns(10);
 		
@@ -169,12 +177,12 @@ public class Login extends JFrame {
 
 		});
 
-		PwField.setBounds(323, 331, 226, 45);
+		PwField.setBounds(321, 302, 226, 45);
 		contentPane.add(PwField);
 
 		// 로그인 버튼
 		JButton btnLogin = new JButton("\uB85C\uADF8\uC778");
-		btnLogin.setBounds(333, 386, 97, 23);
+		btnLogin.setBounds(385, 390, 97, 23);
 		
 		// 로그인 버튼 리스너
 		btnLogin.addActionListener(new ActionListener() {
@@ -242,6 +250,7 @@ public class Login extends JFrame {
 					
 					JOptionPane.showMessageDialog(null, ConfirmId + "님 환영합니다!");
 					UserMain frame = UserMain.getInstance();
+					UserMain.getInstance().UserFrameSetTitle(ComfirmUser);
 					UserMainHome userMainHome = new UserMainHome();
 					userMainHome.setComfirmUser(ComfirmUser);
 					frame.getContentPane().add(userMainHome, BorderLayout.CENTER);
@@ -259,7 +268,7 @@ public class Login extends JFrame {
 		contentPane.add(adminLoginBox);
 		
 		JButton btnRegister = new JButton("회원가입");
-		btnRegister.setBounds(442, 386, 97, 23);
+		btnRegister.setBounds(331, 357, 97, 23);
 		contentPane.add(btnRegister);
 		
 		btnRegister.addActionListener(new ActionListener() {
@@ -282,12 +291,12 @@ public class Login extends JFrame {
 				
 			}
 		});
-		btnDb.setBounds(333, 419, 97, 23);
+		btnDb.setBounds(385, 423, 97, 23);
 		contentPane.add(btnDb);
 		
 		// 내정보찾기 버튼
 		JButton btnFind = new JButton("내정보찾기");
-		btnFind.setBounds(444, 417, 97, 23);
+		btnFind.setBounds(440, 357, 97, 23);
 		contentPane.add(btnFind);
 		btnFind.addActionListener(new ActionListener() {
 			
