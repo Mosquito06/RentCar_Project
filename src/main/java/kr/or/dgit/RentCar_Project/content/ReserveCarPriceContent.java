@@ -16,11 +16,13 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 import kr.or.dgit.RentCar_Project.component.VTextFieldComponent;
+import kr.or.dgit.RentCar_Project.dao.CarDataDao;
 import kr.or.dgit.RentCar_Project.dto.CarData;
 import kr.or.dgit.RentCar_Project.dto.IsInsurance;
 import kr.or.dgit.RentCar_Project.dto.Rent;
 import kr.or.dgit.RentCar_Project.dto.Situation;
 import kr.or.dgit.RentCar_Project.dto.User;
+import kr.or.dgit.RentCar_Project.service.CarDataService;
 import kr.or.dgit.RentCar_Project.service.RentService;
 
 @SuppressWarnings("serial")
@@ -85,6 +87,17 @@ public class ReserveCarPriceContent extends JPanel {
 						}
 						String fp=fPrice.replace("원", "").replace(",", "");
 						String dp=dPrice.replace("원", "").replace(",","");
+						
+						
+						CarDataDao carDataDao = CarDataService.getInstance();
+						CarData carData=carDataDao.selectCarDataByCarDataCode(carCode);
+						if(carData.getCarNumber()==0) {
+							return;
+						}
+						int number =carData.getCarNumber()-1;
+						carData.setCarNumber(number);
+						carDataDao.updateCarData(carData);
+						
 						Rent rent = new Rent(Situation.RESERVATION,comfirmUser, String.valueOf(time),
 								isInsurance, dayStart, dayEnd,Integer.parseInt(dp), Integer.parseInt(fp), carCode);
 						rentService.insertRent(rent);
