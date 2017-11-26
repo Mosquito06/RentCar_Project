@@ -36,6 +36,9 @@ dependencies {
 	// prompt 파일 추가(jar 파일 추가)
 	compile files('libs/prompt.jar')
 	
+	// mail 파일 추가(jar 파일 추가)
+	compile files('libs/mail-1.4.7.jar')
+	
     testImplementation 'junit:junit:4.12'
 }
 
