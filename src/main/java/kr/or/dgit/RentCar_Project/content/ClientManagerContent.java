@@ -2,6 +2,7 @@ package kr.or.dgit.RentCar_Project.content;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -28,7 +29,7 @@ import kr.or.dgit.RentCar_Project.dto.Gender;
 import kr.or.dgit.RentCar_Project.dto.User;
 import kr.or.dgit.RentCar_Project.dto.UserGrade;
 import kr.or.dgit.RentCar_Project.frame.AdminMain;
-import kr.or.dgit.RentCar_Project.frame.AdminMainClientManagerUseList;
+import kr.or.dgit.RentCar_Project.frame.AdminMainClientManagerUserList;
 import kr.or.dgit.RentCar_Project.service.UserGradeService;
 import kr.or.dgit.RentCar_Project.service.UserService;
 
@@ -135,10 +136,16 @@ public class ClientManagerContent extends JPanel implements ActionListener{
 		btnUseList = new JButton("이용내역 조회");
 		btnUseList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JFrame frame = AdminMain.getInstance();
-				frame.getContentPane().removeAll();
-				frame.getContentPane().add(new AdminMainClientManagerUseList(), BorderLayout.CENTER);
-				frame.setVisible(true);
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							AdminMainClientManagerUserList frame = new AdminMainClientManagerUserList(comboUserCode.getComboboxValue());
+							frame.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
 			}
 		});
 		btnUseList.setBounds(814, 40, 124, 23);
@@ -157,11 +164,19 @@ public class ClientManagerContent extends JPanel implements ActionListener{
 		tfAddr.setColumns(10);
 		tfAddr.setEnabled(false);
 		
+		JButton btnGrade = new JButton("등급관리");
+		btnGrade.setBounds(850, 63, 88, 22);
+		add(btnGrade);
+		
 		setUserGradeComboBoxModel();
 		setUserComboBoxModel();
 		setActive(false);
 	}
 	
+	public ComboBoxComponent<User> getComboUserCode() {
+		return comboUserCode;
+	}
+
 	public void setUserGradeComboBoxModel() {
 		UserGradeService userGradeService = UserGradeService.getInstance();
 		List<UserGrade> lists = userGradeService.selectUserGradeByAll();
