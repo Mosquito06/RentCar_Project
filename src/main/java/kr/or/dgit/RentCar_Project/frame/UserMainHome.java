@@ -100,6 +100,8 @@ public class UserMainHome extends JPanel {
 						}else {
 							JOptionPane.showMessageDialog(null, "비밀번호를 확인해주세요");
 						}
+					}else{
+						break;
 					}
 				} while (pwdField == null || !pwdField.equals(ComfirmPw));
 			}
