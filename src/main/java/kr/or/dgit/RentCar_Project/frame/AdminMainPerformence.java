@@ -72,6 +72,9 @@ public class AdminMainPerformence extends JPanel {
 
 		// 검색조건 선택 패널 리스너
 		PerformenceContent performenceContent = new PerformenceContent();
+		performenceContent.getBtnSearch().setLocation(9, 290);
+		performenceContent.getBtnReset().setSize(163, 37);
+		performenceContent.getBtnSearch().setSize(163, 37);
 		performenceContent.getBtnSearch().addActionListener(new ActionListener() {
 
 			@Override

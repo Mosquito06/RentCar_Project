@@ -24,11 +24,15 @@ import javax.swing.border.TitledBorder;
 
 import org.jdesktop.xswingx.PromptSupport;
 
+import kr.or.dgit.RentCar_Project.content.AddressFrame;
+import kr.or.dgit.RentCar_Project.content.MembershipFrame;
+import kr.or.dgit.RentCar_Project.content.UpdateAddrContent;
 import kr.or.dgit.RentCar_Project.content.UpdateContent;
 import kr.or.dgit.RentCar_Project.content.UpdateProfileContent;
 import kr.or.dgit.RentCar_Project.content.UpdatePwContent;
 import kr.or.dgit.RentCar_Project.dto.User;
 import kr.or.dgit.RentCar_Project.service.UserService;
+import javax.swing.JButton;
 
 @SuppressWarnings("serial")
 public class UserMainUpdate extends JPanel {
@@ -36,6 +40,7 @@ public class UserMainUpdate extends JPanel {
 	private JPanel labelPanel;
 	private User ComfirmUser;
 	private UpdateContent updatecontent;
+	private UpdateAddrContent updateAddrContent;
 	
 	public UserMainUpdate(User comfirmUser) {
 		this.ComfirmUser = comfirmUser;
@@ -47,20 +52,20 @@ public class UserMainUpdate extends JPanel {
 		
 		labelPanel = new JPanel();
 		labelPanel.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.LOWERED, null, null)), "\uD504\uB85C\uD544", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		labelPanel.setBounds(0, 10, 428, 350);
+		labelPanel.setBounds(0, 10, 476, 350);
 		upPanel.add(labelPanel);
 		labelPanel.setLayout(null);
 		
 		
 		// 해당 유저의 프로필 이미지 가져오기
 		userImg = new JLabel("");
-		userImg.setBounds(72, 10, 327, 337);
+		userImg.setBounds(98, 10, 327, 337);
 		labelPanel.add(userImg);
 		userImg.setIcon(new ImageIcon(ComfirmUser.getUserImg()));
 		
 		UpdateProfileContent imgPanel = new UpdateProfileContent();
 		imgPanel.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.LOWERED, null, null)), "\uC774\uBBF8\uC9C0 \uC120\uD0DD", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		imgPanel.setBounds(431, 10, 540, 350);
+		imgPanel.setBounds(479, 10, 492, 350);
 		upPanel.add(imgPanel);
 		imgPanel.setLayout(null);
 		
@@ -117,7 +122,7 @@ public class UserMainUpdate extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(!updatecontent.isEmptyCheck()) {
-					JOptionPane.showMessageDialog(null, "정보를 모두 입력해주세요");
+					JOptionPane.showMessageDialog(null, "정보를 모두 입력해주세요.");
 					return;
 				}
 								
@@ -134,8 +139,40 @@ public class UserMainUpdate extends JPanel {
 		// 비밀번호 컨텐트 및 수정하기 버튼 리스너
 		UpdatePwContent updatepwcontent = new UpdatePwContent();
 		updatepwcontent.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.LOWERED, null, null)), "\uBE44\uBC00\uBC88\uD638 \uC218\uC815", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		updatepwcontent.setBounds(483, 0, 488, 232);
+		updatepwcontent.setBounds(479, 145, 493, 232);
 		bottomPanel.add(updatepwcontent);
+		
+		updateAddrContent = new UpdateAddrContent();
+		updateAddrContent.setAddrText(comfirmUser);
+		updateAddrContent.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.LOWERED, null, null)), "\uC8FC\uC18C \uC218\uC815", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		updateAddrContent.setBounds(479, 0, 492, 140);
+		updateAddrContent.getTfFirstAddr().setEnabled(false);
+		bottomPanel.add(updateAddrContent);
+		
+		updateAddrContent.getBtnNewButton().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				AddressFrame addrFrame = new AddressFrame(updateAddrContent.getTfFirstAddr());
+				addrFrame.setVisible(true);
+			}
+		});
+		
+		// 주소 수정하기 버튼 리스너
+		updateAddrContent.getBtnAddrUpdate().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(!updateAddrContent.isEmptyCheck()) {
+					JOptionPane.showMessageDialog(null, "수정할 주소를 모두 입력해주세요.");
+					return;
+				}
+				comfirmUser.setAddr(updateAddrContent.getAddr());
+				UserService.getInstance().updateUser(ComfirmUser);
+				updateAddrContent.setAddrText(comfirmUser);
+			}
+		});
+				
 		
 		// 비밀번호 수정하기 기본 문구 설정
 		PromptSupport.setPrompt("현재 비밀번호를 입력해주세요.", updatepwcontent.getNowPwPanel().getTextField());
@@ -149,7 +186,7 @@ public class UserMainUpdate extends JPanel {
 				
 				
 				if(!updatepwcontent.isEmptyCheck()) {
-					JOptionPane.showMessageDialog(null, "자료를 모두 입력해주세요");
+					JOptionPane.showMessageDialog(null, "자료를 모두 입력해주세요.");
 					return;
 				}
 								
@@ -176,7 +213,7 @@ public class UserMainUpdate extends JPanel {
 					UserService.getInstance().updateUser(ComfirmUser);
 					updatepwcontent.clear();
 				}else {
-					JOptionPane.showMessageDialog(null, "비밀번호 양식에 맞게 입력해주세요");
+					JOptionPane.showMessageDialog(null, "비밀번호 양식에 맞게 입력해주세요.");
 				}
 				
 			}
@@ -198,5 +235,4 @@ public class UserMainUpdate extends JPanel {
 		});
 
 	}
-
 }

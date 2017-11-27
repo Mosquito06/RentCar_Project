@@ -53,11 +53,11 @@ public class UpdatePwContent extends JPanel {
 		btnPanel.setLayout(null);
 
 		btnUpdate = new JButton("수정하기");
-		btnUpdate.setBounds(93, 10, 129, 25);
+		btnUpdate.setBounds(106, 10, 129, 25);
 		btnPanel.add(btnUpdate);
 
 		btnExit = new JButton("나가기");
-		btnExit.setBounds(240, 11, 129, 25);
+		btnExit.setBounds(253, 11, 129, 25);
 		btnPanel.add(btnExit);
 
 	}
