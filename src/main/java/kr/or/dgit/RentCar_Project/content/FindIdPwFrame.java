@@ -45,6 +45,7 @@ public class FindIdPwFrame extends JFrame {
 	private JComboBox<String> comboEmail;
 
 	public FindIdPwFrame() {
+		setResizable(false);
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		Image img = tk.getImage(System.getProperty("user.dir") + "\\images\\Instapaper icon.png");
 		setIconImage(img);
@@ -86,7 +87,7 @@ public class FindIdPwFrame extends JFrame {
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(
 				new TitledBorder(null, "\uC815\uBCF4\uC785\uB825", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_2.setBounds(12, 83, 374, 238);
+		panel_2.setBounds(12, 83, 384, 238);
 		panel.add(panel_2);
 		panel_2.setLayout(null);
 
@@ -145,7 +146,7 @@ public class FindIdPwFrame extends JFrame {
 				}
 			}
 		});
-		btn.setBounds(48, 178, 110, 42);
+		btn.setBounds(59, 178, 110, 42);
 		panel_2.add(btn);
 
 		JButton btnExit = new JButton("나가기");
@@ -154,7 +155,7 @@ public class FindIdPwFrame extends JFrame {
 				setVisible(false);
 			}
 		});
-		btnExit.setBounds(215, 178, 110, 42);
+		btnExit.setBounds(217, 178, 110, 42);
 		panel_2.add(btnExit);
 
 		JPanel panel_5 = new JPanel();

@@ -1,11 +1,13 @@
 package kr.or.dgit.RentCar_Project.content;
 
+import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -25,6 +27,7 @@ import kr.or.dgit.RentCar_Project.service.UserGradeService;
 public class ReserveAddCarContent extends JPanel {
 
 	private int iPrice;
+	private int carNum;
 
 	public ReserveAddCarContent(int time, User comfirmUser, List<CarData> lists, String sDay, String fDay,
 			Boolean isInsurance) {
@@ -34,7 +37,7 @@ public class ReserveAddCarContent extends JPanel {
 		FuelService fuelService = FuelService.getInstance();
 		RentalPriceService rentalPriceService = RentalPriceService.getInstance();
 		RentService rentService = RentService.getInstance();
-
+		
 		for (int i = 0; i < lists.size(); i++) {
 			CarData carCode = lists.get(i);
 			RentalPrice rentalPrice = rentalPriceService.selectRentalPriceByCarCodeString(carCode.getCarCode());
@@ -52,6 +55,7 @@ public class ReserveAddCarContent extends JPanel {
 			List<Rent> rentList = rentService.selectRentByDate(rent);
 			if (rentList.size() == carCode.getCarNumber()) {
 			} else {
+				carNum++;
 				int btPrice = rentalPrice.getBasicTimePrice();
 				int otPrice = rentalPrice.getOverPrice();
 				int bTime = rentalPrice.getBasicTime();
@@ -94,14 +98,17 @@ public class ReserveAddCarContent extends JPanel {
 			}
 		}
 		
-		if(lists.size()==0) {
-			JOptionPane.showMessageDialog(null, "해당날짜에 대여 가능한 렌트카가 존재하지 않습니다.");
-		}
-
-		if (lists.size() == 1) {
+		if(carNum==0) {
+			JPanel jp = new JPanel();
+			jp.setLayout(new BorderLayout());
+			JLabel lbl = new JLabel(new ImageIcon(System.getProperty("user.dir") + "\\images\\stop.jpg"));
+			jp.add(lbl);
+			add(jp);
+		}else if(lists.size() == 1) {	
 			JPanel jp = new JPanel();
 			add(jp);
 		}
+		
 
 	}
 }

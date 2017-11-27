@@ -29,6 +29,7 @@ public class AddressFrame extends JFrame {
 	private JScrollPane scrollPane;
 
 	public AddressFrame(JTextField tf) {
+		setTitle("주소검색");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 493, 435);

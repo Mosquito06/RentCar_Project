@@ -18,6 +18,7 @@ import javax.swing.JLabel;
 import java.awt.BorderLayout;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
+import java.awt.Toolkit;
 
 @SuppressWarnings("serial")
 public class ReserveCheckFram extends JFrame {
@@ -40,6 +41,8 @@ public class ReserveCheckFram extends JFrame {
 	}
 
 	public ReserveCheckFram(String name, String img,String old, String seater, String auto, String fuel,String sDay,String fDay) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("D:\\workspace\\workspace_mybatis\\RentCar_Project\\Images\\Instapaper icon.png"));
+		setTitle("예약확인");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 854, 542);

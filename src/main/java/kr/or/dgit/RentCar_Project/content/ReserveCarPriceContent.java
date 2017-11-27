@@ -27,6 +27,7 @@ import kr.or.dgit.RentCar_Project.frame.UserMain;
 import kr.or.dgit.RentCar_Project.frame.UserMainHome;
 import kr.or.dgit.RentCar_Project.service.CarDataService;
 import kr.or.dgit.RentCar_Project.service.RentService;
+import java.awt.GridLayout;
 
 @SuppressWarnings("serial")
 public class ReserveCarPriceContent extends JPanel {
@@ -39,9 +40,9 @@ public class ReserveCarPriceContent extends JPanel {
 		setLayout(new BorderLayout(0, 0));
 
 		carReservePanel = new JPanel();
-		carReservePanel.setBorder(new EmptyBorder(0, 5, 0, 5));
+		carReservePanel.setBorder(new EmptyBorder(0, 15, 10, 15));
 		add(carReservePanel, BorderLayout.SOUTH);
-		carReservePanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		carReservePanel.setLayout(new GridLayout(0, 5, 10, 0));
 
 		VTextFieldComponent carPrice = new VTextFieldComponent("차량요금");
 		carPrice.getTextField().setText(cPrice);
