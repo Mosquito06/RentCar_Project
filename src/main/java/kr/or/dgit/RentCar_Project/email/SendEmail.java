@@ -39,7 +39,8 @@ public class SendEmail {
 			message.setSubject("Hello!! IT RentCar");
 
 			// Text
-			message.setText("안녕하세요. 아이티 렌터카입니다. 회원님의 비밀번호는 "+pw+" 입니다.");
+			message.setText("안녕하세요. 아이티 렌터카입니다. 회원님의 임시비밀번호는 "+pw+" 입니다."
+					+ " 임시 비밀번호로 로그인 후 비밀번호를 변경해 주세요.");
 
 			// send the message
 			Transport.send(message);

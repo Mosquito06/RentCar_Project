@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.Random;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
@@ -135,8 +136,15 @@ public class FindIdPwFrame extends JFrame {
 
 					try {
 						userId = userDao.selectUserFindPw(user);
-						SendEmail sendEmail = new SendEmail(email, userId.toStringPw());
-						JOptionPane.showMessageDialog(null, "회원님의 메일로 비밀번호가 발송 되었습니다.");
+						String rPw="";
+						for(int i=0;i<8;i++) {
+							Random random = new Random();
+							rPw +=random.nextInt(10);
+						}
+						userId.setPw(rPw);
+						userDao.updateUser(userId);
+						SendEmail sendEmail = new SendEmail(email, rPw);
+						JOptionPane.showMessageDialog(null, "회원님의 메일로 임시비밀번호가 발송 되었습니다.");
 						setVisible(false);
 					} catch (NullPointerException e2) {
 						JOptionPane.showMessageDialog(null, "존재하지 않는 회원입니다.");
