@@ -78,7 +78,7 @@ public class UserMainUpdate extends JPanel {
 				if(selectString != null) {
 					labelPanel.removeAll();
 					userImg = new JLabel("");
-					userImg.setBounds(72, 10, 327, 337);
+					userImg.setBounds(98, 10, 327, 337);
 					labelPanel.add(userImg);
 					userImg.setIcon(new ImageIcon(System.getProperty("user.dir") + "\\Images\\userBig\\" + selectString + ".png"));
 					ComfirmUser.setUserImg(getImage(selectString));

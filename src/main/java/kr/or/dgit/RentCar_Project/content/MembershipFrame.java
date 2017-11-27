@@ -45,6 +45,7 @@ import kr.or.dgit.RentCar_Project.dto.Gender;
 import kr.or.dgit.RentCar_Project.dto.User;
 import kr.or.dgit.RentCar_Project.dto.UserGrade;
 import kr.or.dgit.RentCar_Project.service.UserService;
+import javax.swing.ImageIcon;
 
 @SuppressWarnings("serial")
 public class MembershipFrame extends JFrame {
@@ -85,7 +86,7 @@ public class MembershipFrame extends JFrame {
 		
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		setBounds(100, 100, 443, 543);
+		setBounds(100, 100, 443, 755);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -150,19 +151,19 @@ public class MembershipFrame extends JFrame {
 		phonePanel.add(label);
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 
-		JPanel panel_5 = new JPanel();
-		panel_5.setBounds(9, 310, 380, 28);
-		panel.add(panel_5);
-		panel_5.setLayout(null);
+		JPanel emailPanel = new JPanel();
+		emailPanel.setBounds(9, 310, 380, 28);
+		panel.add(emailPanel);
+		emailPanel.setLayout(null);
 
 		JLabel lblNewLabel_2 = new JLabel("이메일");
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_2.setBounds(10, 0, 74, 28);
-		panel_5.add(lblNewLabel_2);
+		emailPanel.add(lblNewLabel_2);
 
 		tfEmail1 = new JTextField();
 		tfEmail1.setBounds(90, 1, 86, 28);
-		panel_5.add(tfEmail1);
+		emailPanel.add(tfEmail1);
 		tfEmail1.setColumns(10);
 
 		String[] emailArr = { "직접입력", "naver.com", "gmail.com", "nate.com", "daum.net" };
@@ -172,38 +173,39 @@ public class MembershipFrame extends JFrame {
 		JComboBox<String> comboEmail = new JComboBox<>(modelEmail);
 
 		comboEmail.setBounds(285, 0, 95, 28);
-		panel_5.add(comboEmail);
+		emailPanel.add(comboEmail);
 
 		JLabel lblNewLabel_3 = new JLabel("@");
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_3.setBounds(174, 0, 25, 28);
-		panel_5.add(lblNewLabel_3);
+		emailPanel.add(lblNewLabel_3);
 
 		tfEmail2 = new JTextField();
 		tfEmail2.setColumns(10);
 		tfEmail2.setBounds(197, 0, 86, 28);
-		panel_5.add(tfEmail2);
+		emailPanel.add(tfEmail2);
 
-		JPanel panel_6 = new JPanel();
-		panel_6.setBounds(9, 354, 362, 59);
-		panel.add(panel_6);
-		panel_6.setLayout(null);
+		JPanel AddrPanel = new JPanel();
+		AddrPanel.setBounds(33, 352, 362, 59);
+		panel.add(AddrPanel);
+		AddrPanel.setLayout(null);
 
 		JLabel lblNewLabel_4 = new JLabel("주소");
+		lblNewLabel_4.setFont(new Font("굴림", Font.BOLD, 12));
 		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_4.setBounds(0, 0, 89, 59);
-		panel_6.add(lblNewLabel_4);
+		AddrPanel.add(lblNewLabel_4);
 
 		tfAddr = new JTextField();
 		tfAddr.setBounds(91, 0, 171, 28);
 		tfAddr.setFocusable(false);
-		panel_6.add(tfAddr);
+		AddrPanel.add(tfAddr);
 		tfAddr.setColumns(10);
 
 		tfAddr2 = new JTextField();
 		tfAddr2.setColumns(10);
 		tfAddr2.setBounds(91, 31, 259, 28);
-		panel_6.add(tfAddr2);
+		AddrPanel.add(tfAddr2);
 
 		JButton btnAddr = new JButton("주소검색");
 		btnAddr.addActionListener(new ActionListener() {
@@ -215,11 +217,11 @@ public class MembershipFrame extends JFrame {
 		});
 		btnAddr.setFont(new Font("굴림", Font.PLAIN, 11));
 		btnAddr.setBounds(274, 0, 76, 28);
-		panel_6.add(btnAddr);
+		AddrPanel.add(btnAddr);
 
 		JButton btnAdd = new JButton("가입");
 
-		btnAdd.setBounds(66, 430, 108, 44);
+		btnAdd.setBounds(82, 430, 130, 44);
 		panel.add(btnAdd);
 
 		JButton btnCancel = new JButton("취소");
@@ -228,7 +230,7 @@ public class MembershipFrame extends JFrame {
 				setVisible(false);
 			}
 		});
-		btnCancel.setBounds(251, 430, 108, 44);
+		btnCancel.setBounds(219, 430, 130, 44);
 		panel.add(btnCancel);
 
 
@@ -386,6 +388,11 @@ public class MembershipFrame extends JFrame {
 		PromptSupport.setPrompt("ex)exam.com", tfEmail2);
 		PromptSupport.setPrompt("주소검색 클릭", tfAddr);
 		PromptSupport.setPrompt("상세주소 입력", tfAddr2);
+		
+		JLabel BackImg = new JLabel("");
+		BackImg.setIcon(new ImageIcon(System.getProperty("user.dir") + "\\Images\\BackImg.png"));
+		BackImg.setBounds(0, 0, 427, 716);
+		panel.add(BackImg);
 		
 
 		tfPw.addFocusListener(new FocusListener() {

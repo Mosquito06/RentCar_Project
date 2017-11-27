@@ -22,8 +22,10 @@ public class DBSettingHome extends JFrame {
 		setIconImage(img);
 	
 		setTitle("데이터베이스 설치");
+		
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		setBounds(100, 100, 600, 465);
+		setBounds(100, 100, 580, 445);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
