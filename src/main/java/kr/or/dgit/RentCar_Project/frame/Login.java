@@ -93,12 +93,12 @@ public class Login extends JFrame {
 		
 		// 아이디 확인 배경
 		JLabel IdCheck = new JLabel("");
-		IdCheck.setBounds(547, 245, 46, 47);
+		IdCheck.setBounds(548, 234, 46, 47);
 		contentPane.add(IdCheck);
 
 		// 비밀번호 확인 배경
 		JLabel PwCheck = new JLabel("");
-		PwCheck.setBounds(547, 302, 46, 45);
+		PwCheck.setBounds(548, 291, 46, 45);
 		contentPane.add(PwCheck);
 
 		// 아이디 필드
@@ -133,7 +133,7 @@ public class Login extends JFrame {
 			}
 
 		});
-		IdField.setBounds(321, 245, 226, 47);
+		IdField.setBounds(322, 234, 226, 47);
 		contentPane.add(IdField);
 		IdField.setColumns(10);
 		
@@ -177,12 +177,12 @@ public class Login extends JFrame {
 
 		});
 
-		PwField.setBounds(321, 302, 226, 45);
+		PwField.setBounds(322, 291, 226, 45);
 		contentPane.add(PwField);
 
 		// 로그인 버튼
 		JButton btnLogin = new JButton("\uB85C\uADF8\uC778");
-		btnLogin.setBounds(385, 390, 97, 23);
+		btnLogin.setBounds(366, 379, 140, 34);
 		
 		// 로그인 버튼 리스너
 		btnLogin.addActionListener(new ActionListener() {
@@ -268,7 +268,7 @@ public class Login extends JFrame {
 		contentPane.add(adminLoginBox);
 		
 		JButton btnRegister = new JButton("회원가입");
-		btnRegister.setBounds(331, 357, 97, 23);
+		btnRegister.setBounds(332, 346, 97, 23);
 		contentPane.add(btnRegister);
 		
 		btnRegister.addActionListener(new ActionListener() {
@@ -291,12 +291,12 @@ public class Login extends JFrame {
 				
 			}
 		});
-		btnDb.setBounds(385, 423, 97, 23);
+		btnDb.setBounds(390, 423, 97, 23);
 		contentPane.add(btnDb);
 		
 		// 내정보찾기 버튼
 		JButton btnFind = new JButton("내정보찾기");
-		btnFind.setBounds(440, 357, 97, 23);
+		btnFind.setBounds(441, 346, 97, 23);
 		contentPane.add(btnFind);
 		btnFind.addActionListener(new ActionListener() {
 			
