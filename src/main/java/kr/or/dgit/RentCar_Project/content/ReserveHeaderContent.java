@@ -67,10 +67,6 @@ public class ReserveHeaderContent extends JPanel {
 		setBorder(new LineBorder(new Color(0, 0, 0)));
 		setLayout(null);
 
-		JLabel home = new JLabel("아이티 렌트카");
-		home.setBounds(12, 0, 81, 24);
-		add(home);
-
 		startPanel = new TextFieldComponent("대여일");
 		startPanel.setBounds(22, 31, 203, 35);
 		add(startPanel);
