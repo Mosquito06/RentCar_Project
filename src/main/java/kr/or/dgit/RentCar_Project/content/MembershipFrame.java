@@ -629,7 +629,7 @@ public class MembershipFrame extends JFrame {
 				}
 				UserGrade uGrade = new UserGrade();
 				uGrade.setGrade("C");
-				String addr = tfAddr.getText() +" "+ tfAddr2.getText();
+				String addr = tfAddr.getText() +" / "+ tfAddr2.getText();
 
 				
 				
