@@ -96,4 +96,12 @@ public class UserService implements UserDao {
 		}
 	}
 
+	@Override
+	public User selectUserFindPw(User user) {
+		try(SqlSession sqlsession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();){
+			userDao = sqlsession.getMapper(UserDao.class);
+			return userDao.selectUserFindPw(user);
+		}
+	}
+
 }

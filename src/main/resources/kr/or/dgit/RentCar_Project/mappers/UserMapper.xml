@@ -80,6 +80,11 @@
 		where user_name = #{userName} and email = #{email}
 	</select>
 	
+	<select id="selectUserFindPw" parameterType="User" resultMap="UserResult">
+		<include refid="selectSql"/>
+		where id = #{id} and user_name = #{userName} and email = #{email}
+	</select>
+	
 	<select id="selectUserByAll" resultMap="UserResult">
 		<include refid="selectSql"/>
 	</select>

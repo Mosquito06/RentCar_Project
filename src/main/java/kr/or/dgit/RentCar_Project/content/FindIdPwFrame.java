@@ -30,6 +30,7 @@ import javax.swing.event.ChangeListener;
 import kr.or.dgit.RentCar_Project.component.TextFieldComponent;
 import kr.or.dgit.RentCar_Project.dao.UserDao;
 import kr.or.dgit.RentCar_Project.dto.User;
+import kr.or.dgit.RentCar_Project.email.SendEmail;
 import kr.or.dgit.RentCar_Project.service.UserService;
 
 @SuppressWarnings("serial")
@@ -39,6 +40,9 @@ public class FindIdPwFrame extends JFrame {
 	private JTextField tfEmail1;
 	private JTextField tfEmail2;
 	private TextFieldComponent tfId;
+	private JButton btn;
+	private TextFieldComponent tfName;
+	private JComboBox<String> comboEmail;
 
 	public FindIdPwFrame() {
 		Toolkit tk = Toolkit.getDefaultToolkit();
@@ -88,41 +92,67 @@ public class FindIdPwFrame extends JFrame {
 		
 		panel_2.add(tfId);
 		
-		TextFieldComponent tfName = new TextFieldComponent("이름");
+		tfName = new TextFieldComponent("이름");
 		tfName.setBounds(-11, 37, 180, 36);
 		panel_2.add(tfName);
 		tfId.setVisible(false);
-		JButton btnNewButton = new JButton("찾기");
-		btnNewButton.addActionListener(new ActionListener() {
+		btn = new JButton("아이디 찾기");
+		btn.addActionListener(new ActionListener() {
+			private String userName;
+			private String email;
+			private UserDao userDao= UserService.getInstance();
+			private User userId;
+			private User user= new User();
+
 			public void actionPerformed(ActionEvent e) {
-				String userName=tfName.getTextValue();
-				String email = tfEmail1.getText()+"@"+tfEmail2.getText();
 				
-				UserDao userDao = UserService.getInstance();
-				User user = new User(userName, email);
-				User userId=new User();
-				try {
-					userId=userDao.selectUserFindId(user);
-					JOptionPane.showMessageDialog(null, "회원님의 아이디는 "+userId.toStringId()+" 입니다.");
-					rdbtnPw.setSelected(true);
-					tfId.setTextValue(userId.toStringId());
-				} catch (NullPointerException e2) {
-					JOptionPane.showMessageDialog(null, "존재하지 않는 회원입니다.");
-					return;
-				}	
+				if(e.getActionCommand().equals("아이디 찾기")) {
+					
+					userName = tfName.getTextValue();
+					email = tfEmail1.getText()+"@"+tfEmail2.getText();
+					user = new User(userName, email);
+					try {
+						userId=userDao.selectUserFindId(user);
+						JOptionPane.showMessageDialog(null, "회원님의 아이디는 "+userId.toStringId()+" 입니다.");
+						rdbtnPw.setSelected(true);
+						tfId.setTextValue(userId.toStringId());
+					} catch (NullPointerException e2) {
+						JOptionPane.showMessageDialog(null, "존재하지 않는 회원입니다.");
+						clearTf();
+						return;
+					}	
+					
+				}else {
+					
+					userName = tfName.getTextValue();
+					email = tfEmail1.getText()+"@"+tfEmail2.getText();
+					String id = tfId.getTextValue();
+					user = new User(id, userName, email);
+					
+					try {
+						userId=userDao.selectUserFindPw(user);
+						SendEmail sendEmail = new SendEmail(email, userId.toStringPw());
+						JOptionPane.showMessageDialog(null, "회원님의 메일로 비밀번호가 발송 되었습니다.");
+						setVisible(false);
+					} catch (NullPointerException e2) {
+						JOptionPane.showMessageDialog(null, "존재하지 않는 회원입니다.");
+						clearTf();
+						return;
+					}	
+				}
 			}
 		});
-		btnNewButton.setBounds(59, 178, 97, 42);
-		panel_2.add(btnNewButton);
+		btn.setBounds(48, 178, 110, 42);
+		panel_2.add(btn);
 		
-		JButton button = new JButton("나가기");
-		button.addActionListener(new ActionListener() {
+		JButton btnExit = new JButton("나가기");
+		btnExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 			}
 		});
-		button.setBounds(207, 178, 97, 42);
-		panel_2.add(button);
+		btnExit.setBounds(215, 178, 110, 42);
+		panel_2.add(btnExit);
 		
 		JPanel panel_5 = new JPanel();
 		panel_5.setLayout(null);
@@ -144,7 +174,7 @@ public class FindIdPwFrame extends JFrame {
 
 		DefaultComboBoxModel<String> modelEmail = new DefaultComboBoxModel<>(emailArr);
 
-		JComboBox<String> comboEmail = new JComboBox<>(modelEmail);
+		comboEmail = new JComboBox<>(modelEmail);
 		comboEmail.setBounds(285, 0, 95, 36);
 		panel_5.add(comboEmail);
 		
@@ -158,13 +188,20 @@ public class FindIdPwFrame extends JFrame {
 		tfEmail2.setBounds(196, 1, 86, 36);
 		panel_5.add(tfEmail2);
 		
-		rdbtnId.addChangeListener(new ChangeListener() {
-			public void stateChanged(ChangeEvent e) {
+		rdbtnId.addItemListener(new ItemListener() {
+			
+			@Override
+			public void itemStateChanged(ItemEvent e) {
 				if(rdbtnId.isSelected()) {
 					tfId.setVisible(false);
+					btn.setText("아이디 찾기");
+					clearTf();
 				}else {
 					tfId.setVisible(true);
+					btn.setText("비밀번호 찾기");
+					clearTf();
 				}
+				
 			}
 		});
 		
@@ -180,6 +217,16 @@ public class FindIdPwFrame extends JFrame {
 				}
 			}
 		});
+		
+	}
+	
+	
+	private void clearTf() {
+		tfId.setTextValue("");
+		tfEmail1.setText("");
+		tfEmail2.setText("");
+		tfName.setTextValue("");
+		comboEmail.setSelectedIndex(0);
 		
 	}
 }

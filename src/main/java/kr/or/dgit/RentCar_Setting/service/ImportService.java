@@ -37,7 +37,7 @@ public class ImportService implements DbService {
 				userGrade.setGrade("C");
 				
 				userItem[0] = new User(1, "RENTHAJO001", "1234567890", "최다희", getImg("User5"), "010-1111-2222", "최다희@naver.com", Gender.FEMALE, userGrade,"대구");
-				userItem[1] = new User(2, "rkd0519", "123123123", "이강현", getImg("User1"), "010-9287-3004", "이강현@naver.com", Gender.MALE, userGrade,"왜관");
+				userItem[1] = new User(2, "rkd0519", "123123123", "이강현", getImg("User1"), "010-9287-3004", "rkd7327@naver.com", Gender.MALE, userGrade,"왜관");
 				userItem[2] = new User(3, "RENTHAJO003", "1234567890", "김동환", getImg("User1"), "010-1111-2222", "김동환@naver.com", Gender.MALE, userGrade,"경산");
 				
 				for(int i = 0;i < userItem.length; i++) {

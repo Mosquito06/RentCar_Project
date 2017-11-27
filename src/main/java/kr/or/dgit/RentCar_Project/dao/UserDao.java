@@ -12,4 +12,5 @@ public interface UserDao {
 	List<User> selectUserByAll();
 	List<User> findUserCodeByUserCode(User userCode);
 	User selectUserFindId(User user);
+	User selectUserFindPw(User user);
 }

@@ -55,6 +55,15 @@ public class User {
 		super();
 		this.userCode = userCode;
 	}
+	
+	
+
+	public User(String id, String userName, String email) {
+		super();
+		this.id = id;
+		this.userName = userName;
+		this.email = email;
+	}
 
 	public User(int userCode, String id, String userName, String phone, String email, Gender gender, UserGrade grade) {
 		super();
@@ -184,6 +193,10 @@ public class User {
 
 	public String toStringId() {
 		return String.format("%s", id);
+	}
+	
+	public String toStringPw() {
+		return String.format("%s", pw);
 	}
 
 }
