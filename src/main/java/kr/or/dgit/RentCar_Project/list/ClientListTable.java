@@ -24,7 +24,7 @@ public class ClientListTable extends AbstractTable {
 	@Override
 	protected void setAlignWidth() {
 		setAlign(SwingConstants.CENTER, 0,1,2,3,4,5,6,7);
-		setCellwidth(30,40,40,60,50,50,30,20);
+		setCellwidth(10,20,30,70,60,50,20,10);
 	}
 
 	@Override

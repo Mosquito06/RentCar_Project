@@ -159,4 +159,13 @@ public class RentService implements RentDao {
 		}
 	}
 
+
+	@Override
+	public List<Rent> selectRentByCarCode(Rent rent) {
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession()){
+			rentDao = sqlSession.getMapper(RentDao.class);
+			return rentDao.selectRentByCarCode(rent);
+		}
+	}
+
 }

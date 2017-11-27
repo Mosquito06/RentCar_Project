@@ -13,6 +13,7 @@ public interface RentDao {
 	void UserHistoryUpdate(Rent rent);
 	List<Rent> selectRentByUserCode(Rent rent);
 	List<Rent> selectRentByAll();
+	List<Rent> selectRentByCarCode(Rent rent);
 	List<Rent> selectRentJoinCarData(Rent rent);
 	List<Rent> selectPerformenceTotalGroupByCarModel(String FirstMonth, String LastMonth, String setCancel);
 	List<Rent> selectPerformenceMonthAndCancelGroupByCarName(String FirstMonth, String LastMonth, String setCancel);

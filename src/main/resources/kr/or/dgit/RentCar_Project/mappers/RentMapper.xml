@@ -86,6 +86,11 @@
 		delete from rent	
 	</sql>
 	
+	<select id="selectRentByCarCode" resultMap="RentResult">
+		<include refid="selectSql"/>
+		where car_code=#{carCode.carCode}
+	</select>
+	
 	<select id="selectRentByUserCode" resultMap="RentResult">
 		<include refid="selectSql"/>
 		<include refid="wherePrimarySql"/>

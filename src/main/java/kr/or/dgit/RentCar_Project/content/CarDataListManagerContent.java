@@ -1,6 +1,7 @@
 package kr.or.dgit.RentCar_Project.content;
 
 import java.awt.Color;
+import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -17,6 +18,8 @@ import kr.or.dgit.RentCar_Project.dto.CarModel;
 import kr.or.dgit.RentCar_Project.dto.Fuel;
 import kr.or.dgit.RentCar_Project.dto.IsAuto;
 import kr.or.dgit.RentCar_Project.dto.Manufacturer;
+import kr.or.dgit.RentCar_Project.dto.Rent;
+import kr.or.dgit.RentCar_Project.frame.AdminMainRentListManager;
 import kr.or.dgit.RentCar_Project.list.CarDataTable;
 import kr.or.dgit.RentCar_Project.service.CarDataService;
 
@@ -39,6 +42,26 @@ public class CarDataListManagerContent extends JPanel implements ActionListener 
 		
 		JButton btnChart = new JButton("대여기록");
 		btnChart.setBounds(841, 23, 97, 35);
+		btnChart.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							CarData cd = search.getComboboxValue();
+							Rent rent = new Rent();
+							rent.setCarCode(cd);
+							AdminMainRentListManager frame = new AdminMainRentListManager(rent);
+							frame.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+				
+			}
+		});
 		add(btnChart);
 		
 		btnAll = new JButton("전체보기");

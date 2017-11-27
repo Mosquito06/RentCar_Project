@@ -285,7 +285,7 @@ public class ClientManagerContent extends JPanel implements ActionListener{
 				UserGrade userGrade = comboUserCodeGrade.getComboboxValue();
 				userService.updateUser(new User(code, id, userName, phone, userEmail, userGender, userGrade));
 				clientListManager.listClient.loadDate();
-				
+				JOptionPane.showMessageDialog(null, "수정되었습니다.");
 			}else {
 				JOptionPane.showMessageDialog(null, "취소되었습니다");
 			}

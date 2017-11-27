@@ -4,6 +4,8 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import kr.or.dgit.RentCar_Project.service.UserService;
+
 public class Rent {
 	private int rentCode;
 	private Situation situation;
@@ -197,5 +199,10 @@ public class Rent {
 			return "LPG";
 		}
 	}
-
+	public Object[] toRentTable() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+		User user  = UserService.getInstance().selectUserByUserCode(userCode);
+		return new Object[] {userCode.getUserCode(),user.getUserName(),sdf.format(dayStart), sdf.format(dayEnd),
+				userTime, String.format("%,d", discountPrice),String.format("%,d", finalPrice),isInsurance,situation};
+	}
 }
