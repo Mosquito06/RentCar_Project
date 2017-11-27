@@ -45,7 +45,8 @@ public class AdminMainPerformence extends JPanel {
 	public AdminMainPerformence() {
 		setLayout(null);
 
-		list = RentService.getInstance().selectPerformenceTotalAndMonth(setThisYear(true), setThisYear(false), "RESERVATION");
+		// 성과관리현황 기본 테이블 출력
+		list = RentService.getInstance().selectPerformenceTotalGroupByCarModel(setThisYear(true), setThisYear(false), "RESERVATION");
 
 		adminTable = new AdminPerformenceTable(list, 0);
 		adminTable.setBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)),
@@ -235,10 +236,10 @@ public class AdminMainPerformence extends JPanel {
 		}
 
 		// 테이블 변경
-		list = RentService.getInstance().selectPerformenceTotalAndMonth(setStart, setEnd, setCancel);
+		list = RentService.getInstance().selectPerformenceMonthAndCancelGroupByCarName(setStart, setEnd, setCancel);
 		remove(adminTable);
 
-		adminTable = new AdminPerformenceTable(list, 0);
+		adminTable = new AdminPerformenceTable(list, 1);
 		adminTable.setBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)),
 				new EtchedBorder(EtchedBorder.LOWERED, null, null)));
 		adminTable.setBounds(8, 80, 587, 664);
@@ -256,6 +257,9 @@ public class AdminMainPerformence extends JPanel {
 
 		revalidate();
 		repaint();
+		
+		// 자세히 보기 차트 프레임 미리 생성
+		chartFrame = new AdminMainPerformenceChart(list, abstractBarChart, "차종");
 	}
 
 	// 성별 검색 조건 메소드

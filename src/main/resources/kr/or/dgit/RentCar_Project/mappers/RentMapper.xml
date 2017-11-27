@@ -125,7 +125,7 @@
 		where rent_code = #{rentCode} 
 	</update>
 	
-	<select id="selectPerformenceTotalAndMonth" resultMap="JoinCarDataAndCarModelAndManufacturer">
+	<select id="selectPerformenceTotalGroupByCarModel" resultMap="JoinCarDataAndCarModelAndManufacturer">
 		select rent_code, car_model, manufacturer_name, car_name, sum(use_time), sum(discount_price), 
 		sum(final_price) from car_data join manufacturer on car_data.manufacturer_code = manufacturer.manufacturer_code
 		join car_model on car_data.car_model_code = car_model.car_model_code 
@@ -134,6 +134,17 @@
 		union select 0, '합계', '-', '-', sum(use_time), sum(discount_price), sum(final_price) from rent
 		where day_start &gt;= #{param1} and day_end &lt;= #{param2} and rent.situation = #{param3}
 	</select>
+	
+	<select id="selectPerformenceMonthAndCancelGroupByCarName" resultMap="JoinCarDataAndCarModelAndManufacturer">
+		select rent_code, car_model, manufacturer_name, car_name, sum(use_time), sum(discount_price), 
+		sum(final_price) from car_data join manufacturer on car_data.manufacturer_code = manufacturer.manufacturer_code
+		join car_model on car_data.car_model_code = car_model.car_model_code 
+		join rent on car_data.car_code = rent.car_code where day_start &gt;= #{param1} and day_end &lt;= #{param2} 
+		and rent.situation = #{param3} group by car_name
+		union select 0, '합계', '-', '-', sum(use_time), sum(discount_price), sum(final_price) from rent
+		where day_start &gt;= #{param1} and day_end &lt;= #{param2} and rent.situation = #{param3}
+	</select>
+	
 	
 	<select id="selectPerformenceGender" resultMap="JoinCarDataAndCarModelAndManufacturer">
 		select rent_code, car_model, manufacturer_name, car_name, sum(use_time), sum(discount_price), sum(final_price) from car_data  
