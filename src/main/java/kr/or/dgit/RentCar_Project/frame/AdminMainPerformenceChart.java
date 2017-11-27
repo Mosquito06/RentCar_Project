@@ -2,6 +2,8 @@ package kr.or.dgit.RentCar_Project.frame;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -32,6 +34,12 @@ public class AdminMainPerformenceChart extends JFrame {
 	private String createWhatPie;
 	
 	public AdminMainPerformenceChart(List<Rent> lists, AbstractBarChart<Rent> BarChart, String setPie) {
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		Image img = tk.getImage(System.getProperty("user.dir") + "\\images\\Instapaper icon.png");
+		setIconImage(img);
+		
+		setTitle("차트보기");
+		
 		setResizable(false);
 		this.items = lists;
 		this.abstractBarChart = BarChart;
