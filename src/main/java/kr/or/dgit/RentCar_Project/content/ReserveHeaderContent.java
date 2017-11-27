@@ -68,28 +68,28 @@ public class ReserveHeaderContent extends JPanel {
 		setLayout(null);
 
 		startPanel = new TextFieldComponent("대여일");
-		startPanel.setBounds(22, 31, 203, 35);
+		startPanel.setBounds(22, 19, 203, 35);
 		add(startPanel);
 		startPanel.setFocusable(false);
 
 		totalTimePanel = new TextFieldComponent("총  ");
-		totalTimePanel.setBounds(642, 31, 122, 35);
+		totalTimePanel.setBounds(642, 19, 122, 35);
 		add(totalTimePanel);
 		totalTimePanel.getTextField().setFocusable(false);
 		totalTimePanel.getTextField().setText("0");
 
 		JLabel lblNewLabel = new JLabel("시간");
-		lblNewLabel.setBounds(765, 31, 68, 35);
+		lblNewLabel.setBounds(765, 19, 68, 35);
 		add(lblNewLabel);
 
 		btnSearch = new JButton("전체검색");
 		btnSearch.setIcon(new ImageIcon(System.getProperty("user.dir") + "\\images\\s.png"));
 
-		btnSearch.setBounds(833, 22, 117, 41);
+		btnSearch.setBounds(832, 15, 117, 41);
 		add(btnSearch);
 
 		finalPanel = new TextFieldComponent("반납일");
-		finalPanel.setBounds(325, 31, 202, 35);
+		finalPanel.setBounds(325, 19, 202, 35);
 		add(finalPanel);
 		finalPanel.setFocusable(false);
 
@@ -100,11 +100,11 @@ public class ReserveHeaderContent extends JPanel {
 		DefaultComboBoxModel<String> model1 = new DefaultComboBoxModel<>(timeArr);
 		DefaultComboBoxModel<String> model2 = new DefaultComboBoxModel<>(timeArr);
 		startTimeCom = new JComboBox<String>(model1);
-		startTimeCom.setBounds(231, 31, 88, 35);
+		startTimeCom.setBounds(231, 19, 88, 35);
 		add(startTimeCom);
 
 		finalTimeCom = new JComboBox<String>(model2);
-		finalTimeCom.setBounds(533, 31, 88, 35);
+		finalTimeCom.setBounds(533, 19, 88, 35);
 		add(finalTimeCom);
 
 		simpleDate = new SimpleDateFormat("yyyy/MM/dd");

@@ -2,7 +2,7 @@ package kr.or.dgit.RentCar_Project.content;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
@@ -27,7 +27,6 @@ import kr.or.dgit.RentCar_Project.frame.UserMain;
 import kr.or.dgit.RentCar_Project.frame.UserMainHome;
 import kr.or.dgit.RentCar_Project.service.CarDataService;
 import kr.or.dgit.RentCar_Project.service.RentService;
-import java.awt.GridLayout;
 
 @SuppressWarnings("serial")
 public class ReserveCarPriceContent extends JPanel {
