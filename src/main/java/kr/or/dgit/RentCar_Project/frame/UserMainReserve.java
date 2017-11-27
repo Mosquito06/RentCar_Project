@@ -167,13 +167,7 @@ public class UserMainReserve extends JPanel {
 
 			@Override
 			public void itemStateChanged(ItemEvent e) {
-				if (e.getStateChange() == 1) {
-					isInsurance = true;
-					setScrollPaneAddList(scrollPane, header, isInsurance);
-				} else {
-					isInsurance = false;
-					setScrollPaneAddList(scrollPane, header, isInsurance);
-				}
+				
 
 			}
 		});
@@ -397,5 +391,10 @@ public class UserMainReserve extends JPanel {
 			carData.add(c);
 		}
 		comboBoxCarName.setComboBoxModel(carData);
+	}
+	
+	private void comboAction() {
+		
+		
 	}
 }

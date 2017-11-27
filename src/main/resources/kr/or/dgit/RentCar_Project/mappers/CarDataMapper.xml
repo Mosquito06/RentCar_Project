@@ -110,6 +110,11 @@
 		<include refid="wherePrimarySql"/>
 	</select>
 	
+	<select id="selectCarDataByCarValue" resultMap="CarDataResult">
+		<include refid="selectSql"/>
+		<include refid="whereAllSql"/>
+	</select>
+	
 	<select id="selectCarDataByAll" resultMap="CarDataResult">
 		<include refid="selectSql"/>
 	</select>

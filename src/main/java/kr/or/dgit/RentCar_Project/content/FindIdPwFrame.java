@@ -68,7 +68,7 @@ public class FindIdPwFrame extends JFrame {
 		panel.setLayout(null);
 
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(25, 33, 212, 40);
+		panel_1.setBounds(105, 33, 212, 40);
 		panel.add(panel_1);
 		panel_1.setLayout(new GridLayout(1, 0, 0, 0));
 

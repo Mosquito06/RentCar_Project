@@ -9,7 +9,6 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import kr.or.dgit.RentCar_Project.dto.CarData;

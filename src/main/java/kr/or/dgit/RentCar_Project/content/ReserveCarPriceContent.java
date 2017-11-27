@@ -24,7 +24,7 @@ import kr.or.dgit.RentCar_Project.dto.Rent;
 import kr.or.dgit.RentCar_Project.dto.Situation;
 import kr.or.dgit.RentCar_Project.dto.User;
 import kr.or.dgit.RentCar_Project.frame.UserMain;
-import kr.or.dgit.RentCar_Project.frame.UserMainHome;
+import kr.or.dgit.RentCar_Project.frame.UserMainReserve;
 import kr.or.dgit.RentCar_Project.service.CarDataService;
 import kr.or.dgit.RentCar_Project.service.RentService;
 
@@ -106,9 +106,9 @@ public class ReserveCarPriceContent extends JPanel {
 							checkFram.setVisible(false);
 							JFrame frame = UserMain.getInstance();
 							frame.getContentPane().removeAll();
-							UserMainHome userMainHome = new UserMainHome();
-							userMainHome.setComfirmUser(comfirmUser);
-							frame.getContentPane().add(userMainHome, BorderLayout.CENTER);
+							UserMainReserve userMainReserve = new UserMainReserve();
+							userMainReserve.setComfirmUser(comfirmUser);
+							frame.getContentPane().add(userMainReserve, BorderLayout.CENTER);
 							frame.setVisible(true);
 						}
 					}
