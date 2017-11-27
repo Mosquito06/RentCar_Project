@@ -209,7 +209,7 @@ public class MembershipFrame extends JFrame {
 		btnAddr.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				addr = new AddressFrame(MembershipFrame.this);
+				addr = new AddressFrame(tfAddr);
 				addr.setVisible(true);
 			}
 		});

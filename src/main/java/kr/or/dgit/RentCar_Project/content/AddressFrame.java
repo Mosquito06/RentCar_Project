@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
 import kr.or.dgit.RentCar_Project.component.ComboBoxComponent;
@@ -27,7 +28,7 @@ public class AddressFrame extends JFrame {
 	private ComboBoxComponent<Post> sidoPanel;
 	private JScrollPane scrollPane;
 
-	public AddressFrame(MembershipFrame mf) {
+	public AddressFrame(JTextField tf) {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 493, 435);
@@ -65,7 +66,7 @@ public class AddressFrame extends JFrame {
 					return;
 				}
 				Post post = new Post(String.valueOf(sido), doro+'%');
-				AddressAddPanel addPanel = new AddressAddPanel(post,mf);
+				AddressAddPanel addPanel = new AddressAddPanel(post,tf,AddressFrame.this);
 				int listSize = addPanel.getLists().size();
 				if(listSize==0) {
 					JOptionPane.showMessageDialog(null, "검색결과가 없습니다. 정확하게 입력하세요.");

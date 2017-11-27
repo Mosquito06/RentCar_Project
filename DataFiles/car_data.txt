@@ -1,5 +1,5 @@
-CC-H-G-002	엑센트	accent.jpg	2015	20	AUTO	5	CC	H	G	
-CC-H-L-003	아반테AD	avanteAD.jpg	2017	20	AUTO	5	CC	H	L	
+CC-H-G-002	엑센트	accent.jpg	2015	2	AUTO	5	CC	H	G	
+CC-H-L-003	아반테AD	avanteAD.jpg	2017	5	AUTO	5	CC	H	L	
 CC-H-L-004	아반테MD	avanteMD.jpg	2015	20	AUTO	5	CC	H	L	
 CC-H-G-006	i30	i30.jpg	2016	20	AUTO	5	CC	H	G	
 CC-K-G-001	K3	k3.jpg	2017	20	AUTO	5	CC	K	G	

@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import kr.or.dgit.RentCar_Project.dto.Post;
 import kr.or.dgit.RentCar_Project.service.PostService;
@@ -23,7 +24,7 @@ public class AddressAddPanel extends JPanel {
 		return address;
 	}
 
-	public AddressAddPanel(Post post, MembershipFrame mf) {
+	public AddressAddPanel(Post post, JTextField tf,AddressFrame af) {
 		lists = postService.selectPostByDoro(post);
 
 		for (int i = 0; i < lists.size(); i++) {
@@ -34,8 +35,8 @@ public class AddressAddPanel extends JPanel {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					address = addrContent.getLblNewLabel().getText();
-					mf.getTfAddr().setText(address);
-					mf.getAddr().setVisible(false);
+					tf.setText(address);
+					af.setVisible(false);
 				}
 			});
 		}

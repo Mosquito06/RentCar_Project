@@ -39,11 +39,11 @@ public class SendEmail {
 			message.setSubject("Hello!! IT RentCar");
 
 			// Text
-			message.setText("안녕하세요. 아이티 렌터카입니다. 회원님의 비밀번호는 "+pw+"입니다.");
+			message.setText("안녕하세요. 아이티 렌터카입니다. 회원님의 비밀번호는 "+pw+" 입니다.");
 
 			// send the message
 			Transport.send(message);
-			System.out.println("message sent successfully...");
+			System.out.println("전송성공");
 
 		} catch (MessagingException e) {
 			e.printStackTrace();

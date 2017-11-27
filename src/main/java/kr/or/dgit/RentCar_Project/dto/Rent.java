@@ -33,6 +33,15 @@ public class Rent {
 		this.finalPrice = finalPrice;
 		this.carCode = carCode;
 	}
+	
+	
+
+	public Rent(Date dayStart, Date dayEnd, CarData carCode) {
+		super();
+		this.dayStart = dayStart;
+		this.dayEnd = dayEnd;
+		this.carCode = carCode;
+	}
 
 	public int getRentCode() {
 		return rentCode;

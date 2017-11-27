@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -22,6 +23,8 @@ import kr.or.dgit.RentCar_Project.dto.IsInsurance;
 import kr.or.dgit.RentCar_Project.dto.Rent;
 import kr.or.dgit.RentCar_Project.dto.Situation;
 import kr.or.dgit.RentCar_Project.dto.User;
+import kr.or.dgit.RentCar_Project.frame.UserMain;
+import kr.or.dgit.RentCar_Project.frame.UserMainHome;
 import kr.or.dgit.RentCar_Project.service.CarDataService;
 import kr.or.dgit.RentCar_Project.service.RentService;
 
@@ -82,7 +85,6 @@ public class ReserveCarPriceContent extends JPanel {
 							dayStart = simpleDate.parse(sDay);
 							dayEnd= simpleDate.parse(fDay);
 						} catch (ParseException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 						String fp=fPrice.replace("원", "").replace(",", "");
@@ -94,9 +96,6 @@ public class ReserveCarPriceContent extends JPanel {
 						if(carData.getCarNumber()==0) {
 							return;
 						}
-						int number =carData.getCarNumber()-1;
-						carData.setCarNumber(number);
-						carDataDao.updateCarData(carData);
 						
 						Rent rent = new Rent(Situation.RESERVATION,comfirmUser, String.valueOf(time),
 								isInsurance, dayStart, dayEnd,Integer.parseInt(dp), Integer.parseInt(fp), carCode);
@@ -105,6 +104,12 @@ public class ReserveCarPriceContent extends JPanel {
 								JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null,null);
 						if(yes==0) {
 							checkFram.setVisible(false);
+							JFrame frame = UserMain.getInstance();
+							frame.getContentPane().removeAll();
+							UserMainHome userMainHome = new UserMainHome();
+							userMainHome.setComfirmUser(comfirmUser);
+							frame.getContentPane().add(userMainHome, BorderLayout.CENTER);
+							frame.setVisible(true);
 						}
 					}
 				});

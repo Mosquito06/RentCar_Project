@@ -1,5 +1,6 @@
 package kr.or.dgit.RentCar_Project.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -146,6 +147,15 @@ public class RentService implements RentDao {
 		try(SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession()){
 			rentDao = sqlSession.getMapper(RentDao.class);
 			return rentDao.selectPerformenceFuel(fuel, FirstMonth, LastMonth);
+		}
+	}
+
+
+	@Override
+	public List<Rent> selectRentByDate(Rent rent) {
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession()){
+			rentDao = sqlSession.getMapper(RentDao.class);
+			return rentDao.selectRentByDate(rent);
 		}
 	}
 

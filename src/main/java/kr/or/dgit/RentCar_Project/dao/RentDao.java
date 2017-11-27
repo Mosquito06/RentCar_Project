@@ -1,5 +1,6 @@
 package kr.or.dgit.RentCar_Project.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import kr.or.dgit.RentCar_Project.dto.Rent;
@@ -19,4 +20,5 @@ public interface RentDao {
 	List<Rent> selectPerformenceCarModel(String carModel, String FirstMonth, String LastMonth);
 	List<Rent> selectPerformenceManufacturer(String manufacturer, String FirstMonth, String LastMonth);
 	List<Rent> selectPerformenceFuel(String fuel, String FirstMonth, String LastMonth);
+	List<Rent> selectRentByDate(Rent rent);
 }

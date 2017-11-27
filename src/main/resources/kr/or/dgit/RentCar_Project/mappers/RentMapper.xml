@@ -95,6 +95,11 @@
 		<include refid="selectSql"></include>
 	</select>
 	
+	<select id="selectRentByDate" resultMap="RentResult">
+		<include refid="selectSql"></include>
+		where day_start &lt;= #{dayEnd} and day_end &gt;= #{dayStart} and car_code = #{carCode.carCode}
+	</select>
+	
 	<insert id="insertRent" parameterType="Rent">
 		<include refid="insertSql"></include>
 	</insert>
