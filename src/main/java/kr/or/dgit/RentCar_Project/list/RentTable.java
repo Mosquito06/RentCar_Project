@@ -32,7 +32,7 @@ public class RentTable extends AbstractTable {
 
 	@Override
 	protected Object[] getcolumnNames() {
-		return new String[] {"고객코드","고객명","대여일","반납일","사용시간","할인가격","최종가격","보험유무","상태"};
+		return new String[] {"고객코드","고객명","연락처","대여일","반납일","사용시간","할인가격","최종가격","보험유무","상태"};
 	}
 
 	@Override

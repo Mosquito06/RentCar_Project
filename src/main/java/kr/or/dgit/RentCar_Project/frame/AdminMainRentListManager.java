@@ -26,8 +26,6 @@ public class AdminMainRentListManager extends JFrame implements ActionListener{
 	private RentTable rentTable;
 	private JButton btnOk;
 	private JButton btnAll;
-	private ComboBoxComponent<String> yearCombo;
-	private ComboBoxComponent<String> monthCombo;
 	
 	public AdminMainRentListManager(Rent rent) {
 		
@@ -36,20 +34,20 @@ public class AdminMainRentListManager extends JFrame implements ActionListener{
 
 		setTitle(rent.getCarCode() + " ("+carCode.getCarName()+") "+"대여 기록");
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		setBounds(100, 100, 876, 580);
+		setBounds(100, 100, 949, 580);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		rentTable = new RentTable();
-		rentTable.setBounds(12, 91, 846, 417);
+		rentTable.setBounds(12, 91, 919, 417);
 		rentTable.setRent(rent);
 		rentTable.loadDate();
 		contentPane.add(rentTable);
 		
 		btnOk = new JButton("확인");
-		btnOk.setBounds(773, 518, 85, 23);
+		btnOk.setBounds(846, 518, 85, 23);
 		btnOk.addActionListener(new ActionListener() {
 			
 			@Override
@@ -60,7 +58,7 @@ public class AdminMainRentListManager extends JFrame implements ActionListener{
 		contentPane.add(btnOk);
 		
 		btnAll = new JButton("전체기록");
-		btnAll.setBounds(773, 58, 85, 23);
+		btnAll.setBounds(846, 26, 85, 23);
 		btnAll.addActionListener(new ActionListener() {
 			
 			@Override
@@ -72,12 +70,12 @@ public class AdminMainRentListManager extends JFrame implements ActionListener{
 		contentPane.add(btnAll);
 		
 		JButton btnSearch = new JButton("검색");
-		btnSearch.setBounds(661, 48, 85, 23);
+		btnSearch.setBounds(590, 58, 85, 23);
 		contentPane.add(btnSearch);
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), " \uC120\uD0DD \uC0AC\uD56D ", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(349, 16, 310, 55);
+		panel.setBounds(268, 26, 310, 55);
 		contentPane.add(panel);
 		
 		JCheckBox checkReserve = new JCheckBox("예약기록");
@@ -89,17 +87,9 @@ public class AdminMainRentListManager extends JFrame implements ActionListener{
 		JCheckBox checkComplete = new JCheckBox("완료기록");
 		panel.add(checkComplete);
 		
-		JButton button = new JButton("검색");
-		button.setBounds(688, 518, 85, 23);
+		JButton button = new JButton("최신순");
+		button.setBounds(846, 59, 85, 23);
 		contentPane.add(button);
-		
-		yearCombo = new ComboBoxComponent<>("년도");
-		yearCombo.setBounds(45, 28, 123, 43);
-		contentPane.add(yearCombo);
-		
-		monthCombo = new ComboBoxComponent<>("월");
-		monthCombo.setBounds(180, 28, 123, 43);
-		contentPane.add(monthCombo);
 	}
 
 	@Override

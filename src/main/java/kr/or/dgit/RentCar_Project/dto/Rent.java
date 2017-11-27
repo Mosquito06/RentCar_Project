@@ -202,7 +202,7 @@ public class Rent {
 	public Object[] toRentTable() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 		User user  = UserService.getInstance().selectUserByUserCode(userCode);
-		return new Object[] {userCode.getUserCode(),user.getUserName(),sdf.format(dayStart), sdf.format(dayEnd),
+		return new Object[] {userCode.getUserCode(),user.getUserName(),user.getPhone(),sdf.format(dayStart), sdf.format(dayEnd),
 				userTime, String.format("%,d", discountPrice),String.format("%,d", finalPrice),isInsurance,situation};
 	}
 }
