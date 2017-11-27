@@ -13,6 +13,11 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Vector;
 import java.util.regex.Matcher;
@@ -613,17 +618,23 @@ public class MembershipFrame extends JFrame {
 				String userName = tfName.getTextValue();
 				String phone = comboPhone.getSelectedItem() + "-" + tfNum1.getText() + "-" + tfNum2.getText();
 				String email = tfEmail1.getText() + "@" + tfEmail2.getText();
+				byte[] userImg;
 				Gender gender;
 				if (genderRadio.getSelectText().equals("남")) {
 					gender = Gender.MALE;
+					userImg = getImg("user1");
 				} else {
 					gender = Gender.FEMALE;
+					userImg = getImg("user5");
 				}
 				UserGrade uGrade = new UserGrade();
 				uGrade.setGrade("C");
 				String addr = tfAddr.getText() +" "+ tfAddr2.getText();
 
-				User user = new User(id, pw, userName, phone, email, gender,addr);
+				
+				
+				
+				User user = new User(id, pw, userName, userImg, phone, email, gender, addr);
 				user.setGrade(uGrade);
 				userDao.insertUser(user);
 
@@ -632,6 +643,25 @@ public class MembershipFrame extends JFrame {
 			}
 		});
 
+	}
+	
+	private byte[] getImg(String imgName) {
+		byte[] img = null;
+		File file = new File(System.getProperty("user.dir") + "\\images\\userBig\\" + imgName + ".png");
+		try {
+			InputStream is = new FileInputStream(file);
+			img = new byte[is.available()];
+			is.read(img);
+			is.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return img;
 	}
 
 }
