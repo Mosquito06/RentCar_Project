@@ -40,11 +40,12 @@ public class User {
 		this.email = email;
 	}
 
-	public User(String id, String pw, String userName, String phone, String email, Gender gender, String addr) {
+	public User(String id, String pw, String userName, byte[] userImg, String phone, String email, Gender gender, String addr) {
 		super();
 		this.id = id;
 		this.pw = pw;
 		this.userName = userName;
+		this.userImg = userImg;
 		this.phone = phone;
 		this.email = email;
 		this.gender = gender;

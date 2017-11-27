@@ -98,12 +98,21 @@ public class RentService implements RentDao {
 
 
 	@Override
-	public List<Rent> selectPerformenceTotalAndMonth(String FirstMonth, String LastMonth, String setCancel) {
+	public List<Rent> selectPerformenceTotalGroupByCarModel(String FirstMonth, String LastMonth, String setCancel) {
 		try(SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession()){
 			rentDao = sqlSession.getMapper(RentDao.class);
-			return rentDao.selectPerformenceTotalAndMonth(FirstMonth, LastMonth, setCancel);
+			return rentDao.selectPerformenceTotalGroupByCarModel(FirstMonth, LastMonth, setCancel);
 		}
 	}
+	
+	@Override
+	public List<Rent> selectPerformenceMonthAndCancelGroupByCarName(String FirstMonth, String LastMonth, String setCancel) {
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession()){
+			rentDao = sqlSession.getMapper(RentDao.class);
+			return rentDao.selectPerformenceMonthAndCancelGroupByCarName(FirstMonth, LastMonth, setCancel);
+		}
+	}
+	
 
 	@Override
 	public List<Rent> selectPerformenceGender(String gender, String FirstMonth, String LastMonth) {
