@@ -481,10 +481,10 @@ public class CarDataManagerContent extends JPanel implements ActionListener {
 		
 	}
 	private void openDetailFrame(Object selected) {
-		
-		if (selected == details[0] || selected == null) {
+		if(selected==null) {
+			JOptionPane.showMessageDialog(null, "취소하셨습니다");
+		}else if (selected == details[0] || selected == null) {
 			JOptionPane.showMessageDialog(null, "세부사향을 선택하세요");
-			return;
 		} else if (selected == details[1]) {
 			JFrame frame = AdminMain.getInstance();
 			frame.getContentPane().removeAll();
