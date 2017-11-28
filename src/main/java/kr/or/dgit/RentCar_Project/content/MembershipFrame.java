@@ -102,8 +102,8 @@ public class MembershipFrame extends JFrame {
 		contentPane.add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 
-		JLabel IdImg = new JLabel("");
-		IdImg.setIcon(new ImageIcon("D:\\workspace\\workspace_mybatis\\RentCar_Project\\Images\\RegisterImg\\Id.png"));
+		JLabel IdImg = new JLabel("아이디");
+		IdImg.setHorizontalAlignment(SwingConstants.CENTER);
 		IdImg.setBackground(SystemColor.window);
 		IdImg.setBounds(17, 20, 52, 34);
 		panel.add(IdImg);
@@ -114,8 +114,8 @@ public class MembershipFrame extends JFrame {
 		IdBar.setBounds(86, 20, 5, 34);
 		panel.add(IdBar);
 
-		JLabel PwImg = new JLabel("");
-		PwImg.setIcon(new ImageIcon("D:\\workspace\\workspace_mybatis\\RentCar_Project\\Images\\RegisterImg\\Pw.png"));
+		JLabel PwImg = new JLabel("비밀번호");
+		PwImg.setHorizontalAlignment(SwingConstants.CENTER);
 		PwImg.setBackground(Color.WHITE);
 		PwImg.setBounds(17, 69, 53, 43);
 		panel.add(PwImg);
@@ -132,16 +132,14 @@ public class MembershipFrame extends JFrame {
 		PwConfirmBar.setOpaque(true);
 		PwConfirmBar.setBackground(SystemColor.activeCaptionBorder);
 
-		JLabel PwConfirmImg = new JLabel("");
-		PwConfirmImg.setBounds(17, 120, 53, 43);
+		JLabel PwConfirmImg = new JLabel("비밀번호 확인");
+		PwConfirmImg.setHorizontalAlignment(SwingConstants.CENTER);
+		PwConfirmImg.setBounds(0, 122, 87, 43);
 		panel.add(PwConfirmImg);
-		PwConfirmImg.setIcon(
-				new ImageIcon("D:\\workspace\\workspace_mybatis\\RentCar_Project\\Images\\RegisterImg\\PwConfirm.png"));
 		PwConfirmImg.setBackground(Color.WHITE);
 
-		JLabel BirthImg = new JLabel("");
-		BirthImg.setIcon(
-				new ImageIcon("D:\\workspace\\workspace_mybatis\\RentCar_Project\\Images\\RegisterImg\\Birth.png"));
+		JLabel BirthImg = new JLabel("생년월일");
+		BirthImg.setHorizontalAlignment(SwingConstants.CENTER);
 		BirthImg.setBackground(Color.WHITE);
 		BirthImg.setBounds(17, 172, 53, 43);
 		panel.add(BirthImg);
@@ -152,9 +150,8 @@ public class MembershipFrame extends JFrame {
 		BirthBar.setBounds(86, 177, 5, 34);
 		panel.add(BirthBar);
 
-		JLabel NameImg = new JLabel("");
-		NameImg.setIcon(
-				new ImageIcon("D:\\workspace\\workspace_mybatis\\RentCar_Project\\Images\\RegisterImg\\Name.png"));
+		JLabel NameImg = new JLabel("성명");
+		NameImg.setHorizontalAlignment(SwingConstants.CENTER);
 		NameImg.setBackground(Color.WHITE);
 		NameImg.setBounds(17, 227, 53, 43);
 		panel.add(NameImg);
@@ -165,8 +162,8 @@ public class MembershipFrame extends JFrame {
 		NameBar.setBounds(86, 229, 5, 34);
 		panel.add(NameBar);
 		
-		JLabel GenderImg = new JLabel("");
-		GenderImg.setIcon(new ImageIcon("D:\\workspace\\workspace_mybatis\\RentCar_Project\\Images\\RegisterImg\\Gender.png"));
+		JLabel GenderImg = new JLabel("성별");
+		GenderImg.setHorizontalAlignment(SwingConstants.CENTER);
 		GenderImg.setBackground(Color.WHITE);
 		GenderImg.setBounds(17, 276, 53, 43);
 		panel.add(GenderImg);
@@ -177,8 +174,8 @@ public class MembershipFrame extends JFrame {
 		GenderBar.setBounds(86, 281, 5, 34);
 		panel.add(GenderBar);
 		
-		JLabel PhoneImg = new JLabel("");
-		PhoneImg.setIcon(new ImageIcon("D:\\workspace\\workspace_mybatis\\RentCar_Project\\Images\\RegisterImg\\Phone.png"));
+		JLabel PhoneImg = new JLabel("전화번호");
+		PhoneImg.setHorizontalAlignment(SwingConstants.CENTER);
 		PhoneImg.setBackground(Color.WHITE);
 		PhoneImg.setBounds(17, 330, 53, 43);
 		panel.add(PhoneImg);
@@ -189,8 +186,8 @@ public class MembershipFrame extends JFrame {
 		PhoneBar.setBounds(86, 333, 5, 34);
 		panel.add(PhoneBar);
 		
-		JLabel EmailImg = new JLabel("");
-		EmailImg.setIcon(new ImageIcon("D:\\workspace\\workspace_mybatis\\RentCar_Project\\Images\\RegisterImg\\Email.png"));
+		JLabel EmailImg = new JLabel("이메일");
+		EmailImg.setHorizontalAlignment(SwingConstants.CENTER);
 		EmailImg.setBackground(Color.WHITE);
 		EmailImg.setBounds(17, 380, 53, 43);
 		panel.add(EmailImg);
@@ -201,10 +198,10 @@ public class MembershipFrame extends JFrame {
 		EmailBar.setBounds(86, 385, 5, 34);
 		panel.add(EmailBar);
 		
-		JLabel AddrImg = new JLabel("");
+		JLabel AddrImg = new JLabel("주소");
+		AddrImg.setHorizontalAlignment(SwingConstants.CENTER);
 		AddrImg.setBounds(20, 447, 53, 43);
 		panel.add(AddrImg);
-		AddrImg.setIcon(new ImageIcon("D:\\workspace\\workspace_mybatis\\RentCar_Project\\Images\\RegisterImg\\Addr.png"));
 		AddrImg.setBackground(Color.WHITE);
 		
 		JLabel AddrBar = new JLabel("");
