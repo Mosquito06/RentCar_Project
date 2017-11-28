@@ -59,7 +59,7 @@ public class UserGradeContent extends JPanel implements ActionListener {
 		btnCancel.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int clear = JOptionPane.showConfirmDialog(null, "입력 데이터를 취소하시겠습니까?", "확인창", JOptionPane.OK_CANCEL_OPTION);
+				int clear = JOptionPane.showConfirmDialog(null, "입력 데이터를 취소하시겠습니까?", "Message", JOptionPane.YES_NO_OPTION);
 				if(clear==0) {
 					setUserGradeTextValueClear();
 					setActive(false);
@@ -95,39 +95,34 @@ public class UserGradeContent extends JPanel implements ActionListener {
 		
 		if(e.getSource() == btnAdd) {
 			
-			int insert = JOptionPane.showConfirmDialog(null, "입력 데이터를 추가하시겠습니까?", "확인창",
-					JOptionPane.OK_CANCEL_OPTION);
+			int insert = JOptionPane.showConfirmDialog(null,"입력 데이터를 추가하시겠습니까?", "Message", JOptionPane.YES_NO_OPTION);
 			if(insert==0) {
 				UserGradeService.getInstance().insertUserGrade(new UserGrade(grade, gradeDiscount));
-				userGradeList.userGradeTable.loadDate();
-				userGradeList.setGradeComboModel();
 			}else {
 				JOptionPane.showMessageDialog(null, "취소되었습니다");
 			}
 		}
 		if(e.getSource() == btnUpdate) {
-			int update = JOptionPane.showConfirmDialog(null, "입력 데이터를 수정하시겠습니까?", "확인창",
-					JOptionPane.OK_CANCEL_OPTION);
+			int update = JOptionPane.showConfirmDialog(null, "입력 데이터를 수정하시겠습니까?", "Message", JOptionPane.YES_NO_OPTION);
 			if(update==0) {
 				UserGradeService.getInstance().updateUserGrade(new UserGrade(grade, gradeDiscount));
-				userGradeList.userGradeTable.loadDate();
-				userGradeList.setGradeComboModel();
 				setActive(false);
 			}else {
 				JOptionPane.showMessageDialog(null, "취소되었습니다");
 			}
 		}
 		if(e.getSource()==btnDelete) {
-			int delete = JOptionPane.showConfirmDialog(null, "입력 데이터를 삭제하시겠습니까?", "확인창", JOptionPane.OK_CANCEL_OPTION);
+			int delete = JOptionPane.showConfirmDialog(null, "입력 데이터를 삭제하시겠습니까?", "Message", JOptionPane.YES_NO_OPTION);
 			if(delete==0) {
 				UserGradeService.getInstance().deleteUserGrade(new UserGrade(grade));
-				userGradeList.userGradeTable.loadDate();
-				userGradeList.setGradeComboModel();
 				setActive(false);
 			}else {
 				JOptionPane.showMessageDialog(null, "취소되었습니다");
 			}
 		}
+		userGradeList.userGradeTable.loadDate();
+		userGradeList.setGradeComboModel();
+		setUserGradeTextValueClear();
 	}
 	
 }

@@ -7,6 +7,12 @@ import javax.swing.JButton;
 import javax.swing.border.EmptyBorder;
 import java.awt.FlowLayout;
 import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
+import javax.swing.border.SoftBevelBorder;
+import javax.swing.border.BevelBorder;
+import javax.swing.UIManager;
+import javax.swing.border.EtchedBorder;
 
 @SuppressWarnings("serial")
 public class AddressContent extends JPanel {
@@ -24,7 +30,7 @@ public class AddressContent extends JPanel {
 	}
 
 	public AddressContent(String addr) {
-		setBorder(new EmptyBorder(7, 0, 5, 0));
+		setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
 		setLayout(new BorderLayout(0, 0));
 
 		JPanel panel = new JPanel();
@@ -34,13 +40,16 @@ public class AddressContent extends JPanel {
 		btnSelect = new JButton("선택");
 		btnSelect.setHorizontalAlignment(SwingConstants.LEADING);
 		panel.add(btnSelect);
-		
+
 		panel_2 = new JPanel();
 		add(panel_2, BorderLayout.CENTER);
-				panel_2.setLayout(new FlowLayout(FlowLayout.LEADING, 5, 5));
-		
-				lblNewLabel = new JLabel(addr);
-				panel_2.add(lblNewLabel);
+		panel_2.setLayout(new FlowLayout(FlowLayout.LEADING, 5, 5));
+		if (addr.length() >= 39) {
+			addr = addr.substring(0, 39);
+			addr += "..";
+		}
+		lblNewLabel = new JLabel(addr);
+		panel_2.add(lblNewLabel);
 
 	}
 

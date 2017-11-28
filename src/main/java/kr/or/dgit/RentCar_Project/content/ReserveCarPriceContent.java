@@ -27,6 +27,7 @@ import kr.or.dgit.RentCar_Project.frame.UserMain;
 import kr.or.dgit.RentCar_Project.frame.UserMainReserve;
 import kr.or.dgit.RentCar_Project.service.CarDataService;
 import kr.or.dgit.RentCar_Project.service.RentService;
+import javax.swing.border.EtchedBorder;
 
 @SuppressWarnings("serial")
 public class ReserveCarPriceContent extends JPanel {
@@ -35,7 +36,7 @@ public class ReserveCarPriceContent extends JPanel {
 	
 	public ReserveCarPriceContent(String name, String cPrice, String iPrice, String dPrice, String fPrice, String img,
 			String old, String seater, String auto, String fuel,String sDay,String fDay,int time,CarData carCode,User comfirmUser) {
-		setBorder(new LineBorder(new Color(0, 0, 0)));
+		setBorder(new EtchedBorder(EtchedBorder.RAISED, Color.GRAY, null));
 		setLayout(new BorderLayout(0, 0));
 
 		carReservePanel = new JPanel();

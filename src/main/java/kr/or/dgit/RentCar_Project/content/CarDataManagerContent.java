@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Vector;
 
 import javax.imageio.ImageIO;
+import javax.print.attribute.standard.JobMessageFromOperator;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -77,25 +78,25 @@ public class CarDataManagerContent extends JPanel implements ActionListener {
 		imgChooser = new JFileChooser();
 		
 		JLabel lbl1 = new JLabel("+");
-		lbl1.setBounds(169, 18, 27, 32);
+		lbl1.setBounds(180, 18, 27, 32);
 		add(lbl1);
 		lbl1.setFont(new Font("맑은 고딕", Font.PLAIN, 21));
 		lbl1.setHorizontalAlignment(SwingConstants.CENTER);
 
 		JLabel lbl2 = new JLabel("+");
-		lbl2.setBounds(353, 18, 27, 32);
+		lbl2.setBounds(369, 18, 27, 32);
 		add(lbl2);
 		lbl2.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl2.setFont(new Font("맑은 고딕", Font.PLAIN, 21));
 
 		JLabel lbl3 = new JLabel("+");
-		lbl3.setBounds(526, 18, 27, 32);
+		lbl3.setBounds(544, 18, 27, 32);
 		add(lbl3);
 		lbl3.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl3.setFont(new Font("맑은 고딕", Font.PLAIN, 21));
 
 		JLabel lbl4 = new JLabel("=");
-		lbl4.setBounds(713, 18, 27, 32);
+		lbl4.setBounds(722, 18, 27, 32);
 		add(lbl4);
 		lbl4.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl4.setFont(new Font("맑은 고딕", Font.PLAIN, 21));
@@ -108,7 +109,7 @@ public class CarDataManagerContent extends JPanel implements ActionListener {
 				carDataCode.setTextValue(carModelCombo.getComboboxValue().getCarModelCode());
 			}
 		});
-		carModelCombo.setBounds(10, 18, 163, 32);
+		carModelCombo.setBounds(0, 18, 190, 32);
 
 		add(carModelCombo);
 
@@ -121,7 +122,7 @@ public class CarDataManagerContent extends JPanel implements ActionListener {
 						+ mfCombo.getComboboxValue().getManufacturerCode());
 			}
 		});
-		mfCombo.setBounds(194, 18, 163, 32);
+		mfCombo.setBounds(202, 18, 175, 32);
 		add(mfCombo);
 
 		fuelCombo = new ComboBoxComponent<>("연료코드");
@@ -135,7 +136,7 @@ public class CarDataManagerContent extends JPanel implements ActionListener {
 
 			}
 		});
-		fuelCombo.setBounds(364, 18, 163, 32);
+		fuelCombo.setBounds(374, 18, 175, 32);
 		add(fuelCombo);
 
 		numCombo = new ComboBoxComponent<>("차 고유번호");
@@ -149,11 +150,11 @@ public class CarDataManagerContent extends JPanel implements ActionListener {
 						+ numCombo.getComboboxValue());
 			}
 		});
-		numCombo.setBounds(544, 18, 163, 32);
+		numCombo.setBounds(561, 18, 163, 32);
 		add(numCombo);
 
 		carDataCode = new TextFieldComponent("차 코드");
-		carDataCode.setBounds(713, 18, 214, 32);
+		carDataCode.setBounds(724, 18, 214, 32);
 		add(carDataCode);
 		carDataCode.setEnable(false);
 
@@ -201,9 +202,10 @@ public class CarDataManagerContent extends JPanel implements ActionListener {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int clear = JOptionPane.showConfirmDialog(null, "입력 데이터를 취소하시겠습니까?", "확인창", JOptionPane.OK_CANCEL_OPTION);
+				int clear = JOptionPane.showConfirmDialog(null, "입력 데이터를 취소하시겠습니까?", "Message", JOptionPane.YES_NO_OPTION);
 				if(clear==0) {
 					setClearAll();
+					cdListManagercontent.btnChart.setEnabled(false);
 				}
 			}
 		});
@@ -230,14 +232,14 @@ public class CarDataManagerContent extends JPanel implements ActionListener {
 		lblAdd.setIcon(new ImageIcon(System.getProperty("user.dir") +"\\images\\fileAdd.png"));
 		lblAdd.setToolTipText("이미지 불러오기");
 		lblAdd.addMouseListener(new MouseAdapter() {
-
+			
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				
 				FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG&GIF Images", "jpg","gif");
 				
 				imgChooser.setDialogTitle("이미지 파일 열기");
 				imgChooser.setFileFilter(filter);
-			/*	imgChooser.setMultiSelectionEnabled(false);*/
 				
 				int ret = imgChooser.showOpenDialog(null);
 				
@@ -256,8 +258,6 @@ public class CarDataManagerContent extends JPanel implements ActionListener {
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
-					
-						/*storeImg(filePath,fileName);*/
 				}
 				
 				
@@ -278,9 +278,12 @@ public class CarDataManagerContent extends JPanel implements ActionListener {
 		lblRemove.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				int imgDelete = JOptionPane.showConfirmDialog(null, "이미지를 삭제하시겠습니까?", "확인창", JOptionPane.OK_CANCEL_OPTION);
+				int imgDelete = JOptionPane.showConfirmDialog(null,"이미지를 삭제하시겠습니까?",  "Message", JOptionPane.YES_NO_OPTION);
 				if(imgDelete==0) {
 					img.setIcon(null);
+					JOptionPane.showMessageDialog(null, "삭제되었습니다");
+				}else {
+					JOptionPane.showMessageDialog(null, "취소되었습니다");
 				}
 			}
 			@Override
@@ -312,7 +315,7 @@ public class CarDataManagerContent extends JPanel implements ActionListener {
 		List<CarModel> lists = carModelService.selectCarModelByAll();
 		Vector<CarModel> carModel = new Vector<>();
 		for (CarModel cm : lists) {
-			cm.setComboType(0);
+			cm.setComboType(4);
 			carModel.add(cm);
 		}
 		carModelCombo.setComboBoxModel(carModel);
@@ -353,9 +356,19 @@ public class CarDataManagerContent extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
+		CarDataService cdService = CarDataService.getInstance();
+		String carCode = carDataCode.getTextValue();
+		String cName = carName.getTextValue();
+		int cOld = Integer.parseInt(carOld.getTextValue());
+		int carNumber = carCount.getSpinnerValue();
+		IsAuto auto = getSelectedIsAuto(isAuto.getSelectText());
+		String cSeater = carSeater.getTextValue();
+		CarModel carModelCode = carModelCombo.getComboboxValue();
+		Manufacturer manufacturerCode = mfCombo.getComboboxValue();
+		Fuel fuelCode = fuelCombo.getComboboxValue();
+		
 		if(e.getSource()==btnAdd) {
-			int insert = JOptionPane.showConfirmDialog(null, "입력 데이터를 추가하시겠습니까?", "확인창",
-					JOptionPane.OK_CANCEL_OPTION);
+			int insert = JOptionPane.showConfirmDialog(null,"입력 데이터를 추가하시겠습니까?", "Message", JOptionPane.YES_NO_OPTION);
 			if (insert == 0) {
 				String	filePath ="";
 				String fileName ="";
@@ -365,64 +378,44 @@ public class CarDataManagerContent extends JPanel implements ActionListener {
 				 fileName = imgChooser.getSelectedFile().getName();
 				}catch(Exception e2) {	
 					e2.getStackTrace();
-					JOptionPane.showMessageDialog(null, "이미지를 등록해주세요");
+					JOptionPane.showMessageDialog(null, "추후에 이미지를 등록해주세요");
 				}
 				
-				CarDataService cdService = CarDataService.getInstance();
-				String carCode = carDataCode.getTextValue();
-				String cName = carName.getTextValue();
-				int cOld = Integer.parseInt(carOld.getTextValue());
-				int carNumber = carCount.getSpinnerValue();
-				IsAuto auto = getSelectedIsAuto(isAuto.getSelectText());
-				String cSeater = carSeater.getTextValue();
-				CarModel carModelCode = carModelCombo.getComboboxValue();
-				Manufacturer manufacturerCode = mfCombo.getComboboxValue();
-				Fuel fuelCode = fuelCombo.getComboboxValue();
 				cdService.insertCarData(new CarData(carCode, cName, fileName, cOld, carNumber, auto, cSeater, carModelCode, manufacturerCode, fuelCode));
 				storeImg(filePath,fileName);
 				cdListManagercontent.listCarData.loadDate();
 				cdListManagercontent.setSearchCarCodeComboModel();
-				setClearAll();
+				
+				addInsertInformation(insert);
+			
 			}else {
 				JOptionPane.showMessageDialog(null, "취소되었습니다");
 			}
 		}
 		
 		if(e.getSource()==btnUpdate) {
-			CarDataService cdService = CarDataService.getInstance();
-			String carCode = carDataCode.getTextValue();
-			int update = JOptionPane.showConfirmDialog(null, "입력 데이터를 수정하시겠습니까?", "확인창",
-					JOptionPane.OK_CANCEL_OPTION);
+			
+			int update = JOptionPane.showConfirmDialog(null, "입력 데이터를 수정하시겠습니까?", "Message", JOptionPane.YES_NO_OPTION);
+			
 			String filePath="";
 			String fileName="";
 			
-			List<CarData> lists = cdService.selectCarDataByCarModelCode(carCode);
-	
 			if(update==0) {
-				
 				try{
-					 filePath = imgChooser.getSelectedFile().getPath();
-					 fileName = imgChooser.getSelectedFile().getName();
-				}catch(Exception e2){
-					e2.getStackTrace();
-					
-					JOptionPane.showMessageDialog(null, lists.get(1));
+					filePath = imgChooser.getSelectedFile().getPath();
+					fileName = imgChooser.getSelectedFile().getName();
+				}catch(Exception e1){
+					e1.getStackTrace();
+					fileName = cdListManagercontent.getSearch().getComboboxValue().getCarImage();
+					filePath = System.getProperty("user.dir") + "\\images\\car\\"+fileName;
 				}
 				
-				String cName = carName.getTextValue();
-				int cOld = Integer.parseInt(carOld.getTextValue());
-				int carNumber = carCount.getSpinnerValue();
-				IsAuto auto = getSelectedIsAuto(isAuto.getSelectText());
-				String cSeater = carSeater.getTextValue();
-				CarModel carModelCode = carModelCombo.getComboboxValue();
-				Manufacturer manufacturerCode = mfCombo.getComboboxValue();
-				Fuel fuelCode = fuelCombo.getComboboxValue();
-				storeImg(filePath,fileName);
 				cdService.updateCarData(new CarData(carCode, cName, fileName, cOld, carNumber, auto, cSeater, carModelCode, manufacturerCode, fuelCode));
-				cdListManagercontent.listCarData.loadDate();
 				
+				storeImg(filePath,fileName);
+				cdListManagercontent.listCarData.loadDate();
 				cdListManagercontent.setSearchCarCodeComboModel();
-				setClearAll();
+				
 			}else {
 				JOptionPane.showMessageDialog(null, "취소되었습니다");
 			}
@@ -430,21 +423,18 @@ public class CarDataManagerContent extends JPanel implements ActionListener {
 		
 		if(e.getSource()==btnDelete) {
 			
-			int delete = JOptionPane.showConfirmDialog(null, "입력 데이터를 삭제하시겠습니까?", "확인창", JOptionPane.OK_CANCEL_OPTION);
+			int delete = JOptionPane.showConfirmDialog(null, "입력 데이터를 삭제하시겠습니까?", "Message", JOptionPane.YES_NO_OPTION);
 			if (delete == 0) {
-				String carCode = carDataCode.getTextValue();
-				CarDataService cdService = CarDataService.getInstance();
-				cdService.deleteCarData(new CarData(carCode));
 				
+				cdService.deleteCarData(new CarData(carCode));
 				cdListManagercontent.listCarData.loadDate();
 				cdListManagercontent.setSearchCarCodeComboModel();
-				setClearAll();
-			
 			}
 			else {
 				JOptionPane.showMessageDialog(null, "취소되었습니다");
 			}
 			}
+		setClearAll();
 		
 	}
 
@@ -497,5 +487,20 @@ public class CarDataManagerContent extends JPanel implements ActionListener {
 			frame.setVisible(true);
 		}
 
+	}
+	
+	private void addInsertInformation(int insert) {
+		if(insert==0) {
+			int ok = JOptionPane.showConfirmDialog(null, "추가된 차량의 대여단가 정보를 지금 등록하시겠습니까?", "Message", JOptionPane.YES_NO_OPTION);
+			if(ok==0) {
+				JFrame frame = AdminMain.getInstance();
+				frame.getContentPane().removeAll();
+				frame.getContentPane().add(new AdminMainCarManagerRentalPrice(), BorderLayout.CENTER);
+				frame.setVisible(true);
+			}else {
+				JOptionPane.showMessageDialog(null,"대여단가정보를 추후에 등록하세요");
+			}
+		}
+		
 	}
 }

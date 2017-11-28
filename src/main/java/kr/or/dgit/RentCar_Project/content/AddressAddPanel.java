@@ -24,7 +24,7 @@ public class AddressAddPanel extends JPanel {
 		return address;
 	}
 
-	public AddressAddPanel(Post post, JTextField tf,AddressFrame af) {
+	public AddressAddPanel(Post post, JTextField tf, AddressFrame af) {
 		lists = postService.selectPostByDoro(post);
 
 		for (int i = 0; i < lists.size(); i++) {

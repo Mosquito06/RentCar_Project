@@ -31,17 +31,25 @@ public class CarDataListManagerContent extends JPanel implements ActionListener 
 	private JButton btnAll;
 	private JButton btnSearch;
 	private CarDataManagerContent cdManagerContent;
+	protected JButton btnChart;
 	
 	public void setCdManagerContent(CarDataManagerContent cdManagerContent) {
 		this.cdManagerContent = cdManagerContent;
+	}
+	
+	
+
+	public ComboBoxComponent<CarData> getSearch() {
+		return search;
 	}
 
 	public CarDataListManagerContent() {
 		setBounds(100, 100, 950, 322);
 		setLayout(null);
 		
-		JButton btnChart = new JButton("대여기록");
+		btnChart = new JButton("대여기록");
 		btnChart.setBounds(841, 23, 97, 35);
+		btnChart.setEnabled(false);
 		btnChart.addActionListener(new ActionListener() {
 			
 			@Override
@@ -70,7 +78,7 @@ public class CarDataListManagerContent extends JPanel implements ActionListener 
 		add(btnAll);
 		
 		search = new ComboBoxComponent<>("차 코드");
-		search.setBounds(258, 23, 296, 35);
+		search.setBounds(179, 23, 395, 35);
 		add(search);
 		
 		listCarData = new CarDataTable();
@@ -81,7 +89,7 @@ public class CarDataListManagerContent extends JPanel implements ActionListener 
 		add(listCarData);
 		
 		btnSearch = new JButton("검색");
-		btnSearch.setBounds(554, 23, 66, 35);
+		btnSearch.setBounds(575, 23, 66, 35);
 		btnSearch.addActionListener(this);
 		add(btnSearch);
 		
@@ -93,7 +101,7 @@ public class CarDataListManagerContent extends JPanel implements ActionListener 
 		List<CarData> lists = carDataService.selectCarDataByAll();
 		Vector<CarData> carData = new Vector<>();
 		for(CarData cd : lists) {
-			cd.setComboType(0);
+			cd.setComboType(4);
 			carData.add(cd);
 		}
 		
@@ -106,7 +114,9 @@ public class CarDataListManagerContent extends JPanel implements ActionListener 
 			if(e.getSource()==btnAll) {
 				listCarData.setFull(true);
 				listCarData.loadDate();
-				
+				cdManagerContent.setClearAll();
+				search.getComboBox().setSelectedIndex(0);
+				btnChart.setEnabled(false);
 			}
 			if(e.getSource()==btnSearch) {
 				CarData carDataCode = search.getComboboxValue();
@@ -130,6 +140,7 @@ public class CarDataListManagerContent extends JPanel implements ActionListener 
 				cdManagerContent.numCombo.getComboBox().setSelectedIndex(setSelectedNum(cdCode));
 				cdManagerContent.isAuto.setSelect(isAutoSelected(cdCode.getIsAuto()));
 				
+				btnChart.setEnabled(true);
 			}
 			
 		}

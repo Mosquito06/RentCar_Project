@@ -103,7 +103,7 @@ public class ReserveAddCarContent extends JPanel {
 			JLabel lbl = new JLabel(new ImageIcon(System.getProperty("user.dir") + "\\images\\stop.jpg"));
 			jp.add(lbl);
 			add(jp);
-		}else if(lists.size() == 1) {	
+		}else if(carNum == 1) {	
 			JPanel jp = new JPanel();
 			add(jp);
 		}

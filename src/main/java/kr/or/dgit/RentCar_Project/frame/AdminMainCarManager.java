@@ -60,7 +60,7 @@ public class AdminMainCarManager extends JPanel {
 		add(btnBack);
 		
 		carPanel = new CarDataManagerContent();
-		carPanel.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.RAISED, null, null)), " \uCC28\uB7C9 \uAD00\uB9AC  ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		carPanel.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.RAISED, null, null)), " \uCC28\uB7C9 \uB4F1\uB85D  ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		carPanel.setBounds(12, 10, 950, 382);
 		add(carPanel);
 		carPanel.setLayout(null);

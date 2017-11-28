@@ -18,8 +18,6 @@ import kr.or.dgit.RentCar_Project.service.RentalPriceService;
 
 @SuppressWarnings("serial")
 public class RentalPriceManagerContent extends JPanel implements ActionListener{
-	
-	private ComboBoxComponent<CarData> carCode;
 	private TextFieldComponent bPrice;
 	private TextFieldComponent useTime;
 	private TextFieldComponent oPrice;
@@ -29,6 +27,7 @@ public class RentalPriceManagerContent extends JPanel implements ActionListener{
 	private JButton btnDelete;
 	private RentalPriceListManagerContent rpListManagerContent;
 	private JButton btnCancel;
+	private TextFieldComponent carCode;
 	
 	
 	public void setRpListManagerContent(RentalPriceListManagerContent rpListManagerContent) {
@@ -38,24 +37,9 @@ public class RentalPriceManagerContent extends JPanel implements ActionListener{
 		setBounds(100, 100, 267, 489);
 		setLayout(null);
 		
-		carCode = new ComboBoxComponent<>("차 코드");
-		carCode.getComboBox().addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				RentalPriceService rentalPriceService = RentalPriceService.getInstance();
-				
-				String code = carCode.getComboBox().getSelectedItem().toString();
-				RentalPrice rentalPrice = rentalPriceService.selectRentalPriceByCarCodeString(code);
-				
-				bPrice.setTextValue(String.format("%,d", rentalPrice.getBasicPrice()));
-				useTime.setTextValue(String.valueOf(rentalPrice.getBasicTime()));
-				btPrice.setTextValue(String.format("%,d", rentalPrice.getBasicTimePrice()));
-				oPrice.setTextValue(String.format("%,d",rentalPrice.getOverPrice()));
-				insurance.setTextValue(String.format("%,d",rentalPrice.getInsurance()));
-				setActive(true);
-				
-			}
-		});
-		carCode.setBounds(5, 35, 230, 30);
+		carCode = new TextFieldComponent("차 코드");
+		carCode.setBounds(5, 38, 230, 30);
+		carCode.setEnable(false);
 		add(carCode);
 		
 		bPrice = new TextFieldComponent("기본가격");
@@ -94,7 +78,7 @@ public class RentalPriceManagerContent extends JPanel implements ActionListener{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int clear = JOptionPane.showConfirmDialog(null, "입력 데이터를 취소하시겠습니까?", "확인창", JOptionPane.OK_CANCEL_OPTION);
+				int clear = JOptionPane.showConfirmDialog(null, "입력 데이터를 취소하시겠습니까?", "Message", JOptionPane.YES_NO_OPTION);
 				if(clear==0) {
 					setRentalPriceValueClear();
 					setActive(false);
@@ -102,11 +86,10 @@ public class RentalPriceManagerContent extends JPanel implements ActionListener{
 			}
 		});
 		add(btnCancel);
-		setCarCodeComboModel();
 		setActive(false);
 	}
 	
-	public ComboBoxComponent<CarData> getCarCode() {
+	public TextFieldComponent getCarCode() {
 		return carCode;
 	}
 	public TextFieldComponent getbPrice() {
@@ -124,18 +107,9 @@ public class RentalPriceManagerContent extends JPanel implements ActionListener{
 	public TextFieldComponent getInsurance() {
 		return insurance;
 	}
-	public void setCarCodeComboModel() {
-		CarDataService carDataService = CarDataService.getInstance();
-		List<CarData> lists = carDataService.selectCarDataByAll();
-		Vector<CarData> carDataCode = new Vector<>();
-		for(CarData cd:lists) {
-			cd.setComboType(0);
-			carDataCode.add(cd);
-		}
-		carCode.setComboBoxModel(carDataCode);
-	}
+
 	public void setRentalPriceValueClear() {
-		carCode.setComboBoxModelClear();
+		carCode.setTextValue("");
 		bPrice.setTextValue("");
 		useTime.setTextValue("");
 		oPrice.setTextValue("");
@@ -154,7 +128,9 @@ public class RentalPriceManagerContent extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		RentalPriceService rentalPriceService = RentalPriceService.getInstance();
-		CarData  cCode = carCode.getComboboxValue();
+		String carCode = rpListManagerContent.search.getComboboxValue().getCarCode();
+		RentalPrice rentalPrice = rentalPriceService.selectRentalPriceByCarCodeString(carCode);
+		CarData cCode = rentalPrice.getCarCode();
 		int basicPrice = Integer.parseInt(bPrice.getTextValue().replaceAll(",", "").trim());
 		int basicTime  = Integer.parseInt(useTime.getTextValue());
 		int basicTimePrice = Integer.parseInt(btPrice.getTextValue().replaceAll(",", "").trim());
@@ -162,8 +138,7 @@ public class RentalPriceManagerContent extends JPanel implements ActionListener{
 		int is = Integer.parseInt(insurance.getTextValue().replaceAll(",", "").trim());
 		
  		if(e.getSource()==btnUpdate) {
-			int update = JOptionPane.showConfirmDialog(null, "입력 데이터를 수정하시겠습니까?", "확인창",
-					JOptionPane.OK_CANCEL_OPTION);
+			int update = JOptionPane.showConfirmDialog(null, "입력 데이터를 수정하시겠습니까?", "Message", JOptionPane.YES_NO_OPTION);
 			if(update==0) {
 				rentalPriceService.updateRentalPrice(new RentalPrice(cCode, basicPrice, basicTime, basicTimePrice, overPrice, is));
 				rpListManagerContent.rpTable.loadDate();
@@ -174,7 +149,7 @@ public class RentalPriceManagerContent extends JPanel implements ActionListener{
 		}
 
  		if(e.getSource()==btnDelete) {
- 			int delete = JOptionPane.showConfirmDialog(null, "입력 데이터를 삭제하시겠습니까?", "확인창", JOptionPane.OK_CANCEL_OPTION);
+ 			int delete = JOptionPane.showConfirmDialog(null, "입력 데이터를 삭제하시겠습니까?", "Message", JOptionPane.YES_NO_OPTION);
  			if(delete==0) {
  				rentalPriceService.deleteRentalPrice(new RentalPrice(cCode));
  				rpListManagerContent.rpTable.loadDate();
@@ -183,7 +158,7 @@ public class RentalPriceManagerContent extends JPanel implements ActionListener{
 				JOptionPane.showMessageDialog(null, "취소되었습니다");	
 			}
  		}
- 		setCarCodeComboModel();
+ 		
 		setRentalPriceValueClear();
 		setActive(false);
 		/*rpListManagerContent.rpTable.setFull(true);

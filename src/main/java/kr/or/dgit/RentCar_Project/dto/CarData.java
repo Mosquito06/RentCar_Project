@@ -142,7 +142,10 @@ public class CarData {
 			return String.format("%s", carOld);
 		} else if (comboType == 3) {
 			return String.format("%s", carSeater);
-		} else {
+		}else if(comboType==4) {
+			return String.format("%s(%s)", carCode,carName);
+		}
+		else {
 			return String.format("%s %s %s %s %s %s %s %s %s %s %s", carCode, carName, carImage, carOld, carNumber,
 					isAuto, carSeater, carModelCode, manufacturerCode, fuelCode, comboType);
 		}

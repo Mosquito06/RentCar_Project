@@ -23,6 +23,7 @@ import java.awt.Toolkit;
 
 import kr.or.dgit.RentCar_Project.component.ComboBoxComponent;
 
+@SuppressWarnings("serial")
 public class AdminMainRentListManager extends JFrame implements ActionListener{
 
 	private JPanel contentPane;

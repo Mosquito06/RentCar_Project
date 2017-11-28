@@ -69,7 +69,7 @@ public class AdminMainCarManagerRentalPrice extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				JFrame frame = AdminMain.getInstance();
 				frame.getContentPane().removeAll();
-				frame.getContentPane().add(new AdminMainCarManager(), BorderLayout.CENTER);
+				frame.getContentPane().add(new AdminMainHome(), BorderLayout.CENTER);
 				frame.setVisible(true);
 				
 			}
