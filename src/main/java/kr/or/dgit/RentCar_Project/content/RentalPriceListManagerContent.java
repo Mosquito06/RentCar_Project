@@ -37,16 +37,16 @@ public class RentalPriceListManagerContent extends JPanel 	implements ActionList
 		
 		JPanel searchPanel = new JPanel();
 		searchPanel.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), " \uAC80\uC0C9 ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		searchPanel.setBounds(8, 7, 337, 62);
+		searchPanel.setBounds(8, 7, 435, 62);
 		add(searchPanel);
 		searchPanel.setLayout(null);
 		
 		search = new ComboBoxComponent<>("차 코드");
-		search.setBounds(12, 21, 244, 28);
+		search.setBounds(12, 21, 341, 28);
 		searchPanel.add(search);
 		
 		btnSearch = new JButton("검색");
-		btnSearch.setBounds(257, 21, 68, 28);
+		btnSearch.setBounds(355, 21, 68, 28);
 		btnSearch.addActionListener(this);
 		searchPanel.add(btnSearch);
 		
@@ -70,7 +70,7 @@ public class RentalPriceListManagerContent extends JPanel 	implements ActionList
 		List<CarData> lists = carDataService.selectCarDataByAll();
 		Vector<CarData> carData = new Vector<>();
 		for(CarData cd : lists) {
-			cd.setComboType(0);
+			cd.setComboType(4);
 			carData.add(cd);
 		}
 	
@@ -82,7 +82,7 @@ public class RentalPriceListManagerContent extends JPanel 	implements ActionList
 		if(e.getSource()==btnSearch) {
 			RentalPriceService rentalPriceService = RentalPriceService.getInstance();
 			
-			String code = search.getComboBox().getSelectedItem().toString();
+			String code = search.getComboboxValue().getCarCode();
 			RentalPrice rentalPrice = rentalPriceService.selectRentalPriceByCarCodeString(code);
 			
 			CarData cd = new CarData();
@@ -93,7 +93,7 @@ public class RentalPriceListManagerContent extends JPanel 	implements ActionList
 			rpTable.setCarCode(rp);
 			rpTable.loadDate();
 			
-			rpManagerContent.getCarCode().setTextValue(rentalPrice.getCarCode().getCarCode());
+			rpManagerContent.getCarCode().setTextValue(code);
 			rpManagerContent.getbPrice().setTextValue(String.format("%,d",rentalPrice.getBasicPrice()));
 			rpManagerContent.getUseTime().setTextValue(String.valueOf(rentalPrice.getBasicTime()));
 			rpManagerContent.getBtPrice().setTextValue(String.format("%,d",rentalPrice.getBasicTimePrice()));

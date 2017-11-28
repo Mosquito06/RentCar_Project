@@ -78,25 +78,25 @@ public class CarDataManagerContent extends JPanel implements ActionListener {
 		imgChooser = new JFileChooser();
 		
 		JLabel lbl1 = new JLabel("+");
-		lbl1.setBounds(169, 18, 27, 32);
+		lbl1.setBounds(180, 18, 27, 32);
 		add(lbl1);
 		lbl1.setFont(new Font("맑은 고딕", Font.PLAIN, 21));
 		lbl1.setHorizontalAlignment(SwingConstants.CENTER);
 
 		JLabel lbl2 = new JLabel("+");
-		lbl2.setBounds(353, 18, 27, 32);
+		lbl2.setBounds(369, 18, 27, 32);
 		add(lbl2);
 		lbl2.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl2.setFont(new Font("맑은 고딕", Font.PLAIN, 21));
 
 		JLabel lbl3 = new JLabel("+");
-		lbl3.setBounds(526, 18, 27, 32);
+		lbl3.setBounds(544, 18, 27, 32);
 		add(lbl3);
 		lbl3.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl3.setFont(new Font("맑은 고딕", Font.PLAIN, 21));
 
 		JLabel lbl4 = new JLabel("=");
-		lbl4.setBounds(713, 18, 27, 32);
+		lbl4.setBounds(722, 18, 27, 32);
 		add(lbl4);
 		lbl4.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl4.setFont(new Font("맑은 고딕", Font.PLAIN, 21));
@@ -109,7 +109,7 @@ public class CarDataManagerContent extends JPanel implements ActionListener {
 				carDataCode.setTextValue(carModelCombo.getComboboxValue().getCarModelCode());
 			}
 		});
-		carModelCombo.setBounds(10, 18, 163, 32);
+		carModelCombo.setBounds(0, 18, 190, 32);
 
 		add(carModelCombo);
 
@@ -122,7 +122,7 @@ public class CarDataManagerContent extends JPanel implements ActionListener {
 						+ mfCombo.getComboboxValue().getManufacturerCode());
 			}
 		});
-		mfCombo.setBounds(194, 18, 163, 32);
+		mfCombo.setBounds(202, 18, 175, 32);
 		add(mfCombo);
 
 		fuelCombo = new ComboBoxComponent<>("연료코드");
@@ -136,7 +136,7 @@ public class CarDataManagerContent extends JPanel implements ActionListener {
 
 			}
 		});
-		fuelCombo.setBounds(364, 18, 163, 32);
+		fuelCombo.setBounds(374, 18, 175, 32);
 		add(fuelCombo);
 
 		numCombo = new ComboBoxComponent<>("차 고유번호");
@@ -150,11 +150,11 @@ public class CarDataManagerContent extends JPanel implements ActionListener {
 						+ numCombo.getComboboxValue());
 			}
 		});
-		numCombo.setBounds(544, 18, 163, 32);
+		numCombo.setBounds(561, 18, 163, 32);
 		add(numCombo);
 
 		carDataCode = new TextFieldComponent("차 코드");
-		carDataCode.setBounds(713, 18, 214, 32);
+		carDataCode.setBounds(724, 18, 214, 32);
 		add(carDataCode);
 		carDataCode.setEnable(false);
 
@@ -205,6 +205,7 @@ public class CarDataManagerContent extends JPanel implements ActionListener {
 				int clear = JOptionPane.showConfirmDialog(null, "입력 데이터를 취소하시겠습니까?", "Message", JOptionPane.YES_NO_OPTION);
 				if(clear==0) {
 					setClearAll();
+					cdListManagercontent.btnChart.setEnabled(false);
 				}
 			}
 		});
@@ -314,7 +315,7 @@ public class CarDataManagerContent extends JPanel implements ActionListener {
 		List<CarModel> lists = carModelService.selectCarModelByAll();
 		Vector<CarModel> carModel = new Vector<>();
 		for (CarModel cm : lists) {
-			cm.setComboType(0);
+			cm.setComboType(4);
 			carModel.add(cm);
 		}
 		carModelCombo.setComboBoxModel(carModel);

@@ -41,7 +41,7 @@ public class CarModel {
 		}else if(comboType==1){
 			return String.format("%s", carModel);
 		}else {
-			return String.format("CarModel %s, %s", carModelCode, carModel);
+			return String.format("%s(%s)", carModelCode, carModel);
 		}
 		
 	}

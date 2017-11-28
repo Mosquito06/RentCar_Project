@@ -86,7 +86,6 @@ public class RentalPriceManagerContent extends JPanel implements ActionListener{
 			}
 		});
 		add(btnCancel);
-		setCarCodeComboModel();
 		setActive(false);
 	}
 	
@@ -108,15 +107,7 @@ public class RentalPriceManagerContent extends JPanel implements ActionListener{
 	public TextFieldComponent getInsurance() {
 		return insurance;
 	}
-	public void setCarCodeComboModel() {
-		CarDataService carDataService = CarDataService.getInstance();
-		List<CarData> lists = carDataService.selectCarDataByAll();
-		Vector<CarData> carDataCode = new Vector<>();
-		for(CarData cd:lists) {
-			cd.setComboType(0);
-			carDataCode.add(cd);
-		}
-	}
+
 	public void setRentalPriceValueClear() {
 		carCode.setTextValue("");
 		bPrice.setTextValue("");
@@ -167,7 +158,7 @@ public class RentalPriceManagerContent extends JPanel implements ActionListener{
 				JOptionPane.showMessageDialog(null, "취소되었습니다");	
 			}
  		}
- 		setCarCodeComboModel();
+ 		
 		setRentalPriceValueClear();
 		setActive(false);
 		/*rpListManagerContent.rpTable.setFull(true);
