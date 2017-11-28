@@ -18,8 +18,13 @@ public class ClientlListManagerContent extends JPanel implements ActionListener 
 	
 	protected ClientListTable listClient;
 	private JButton btnAll;
-	protected JLabel lblNum;
+	private ClientManagerContent clientManager;
 	
+	
+	public void setClientManager(ClientManagerContent clientManager) {
+		this.clientManager = clientManager;
+	}
+
 	public ClientlListManagerContent(){
 		setBounds(100, 100, 954, 362);
 		setLayout(null);
@@ -35,12 +40,6 @@ public class ClientlListManagerContent extends JPanel implements ActionListener 
 		listClient.setFull(true);
 		listClient.loadDate();
 		add(listClient);
-		
-		lblNum = new JLabel();
-		lblNum.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
-		lblNum.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNum.setBounds(880, 310, 57, 15);
-		add(lblNum);
 	
 	}
 
@@ -50,7 +49,8 @@ public class ClientlListManagerContent extends JPanel implements ActionListener 
 		if(e.getSource()==btnAll) {
 			listClient.setFull(true);
 			listClient.loadDate();
-	
+			clientManager.setClearAll();
+			clientManager.setActive(false);
 		}
 		
 	}

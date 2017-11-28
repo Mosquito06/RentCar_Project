@@ -8,7 +8,19 @@ import kr.or.dgit.RentCar_Project.dto.UserGrade;
 
 import kr.or.dgit.RentCar_Project.service.UserGradeService;
 
+@SuppressWarnings("serial")
 public class UserGradeTable extends AbstractTable {
+	private boolean isFull;
+	private UserGrade userGarde;
+	
+	
+	public void setFull(boolean isFull) {
+		this.isFull = isFull;
+	}
+
+	public void setUserGarde(UserGrade userGarde) {
+		this.userGarde = userGarde;
+	}
 
 	@Override
 	protected void setAlignWidth() {
@@ -18,7 +30,13 @@ public class UserGradeTable extends AbstractTable {
 
 	@Override
 	protected Object[][] getData() {
-		List<UserGrade> lists = UserGradeService.getInstance().selectUserGradeByAll();
+		List<UserGrade> lists;
+		if(isFull) {
+			lists = UserGradeService.getInstance().selectUserGradeByAll();
+		}else {
+			lists=UserGradeService.getInstance().findUserGradeByGrade(userGarde);
+		}
+	
 		Object[][] datas = new Object[lists.size()][];
 		for(int i=0; i<lists.size();i++) {
 			UserGrade ug = lists.get(i);

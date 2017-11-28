@@ -4,7 +4,19 @@ public class UserGrade {
 	private String grade;
 	private int discount;
 	private int comboType=0;
+
+	public UserGrade() {}
+
+	public UserGrade(String grade, int discount) {
+		this.grade = grade;
+		this.discount = discount;
+	}
 	
+	
+	public UserGrade(String grade) {
+		this.grade = grade;
+	}
+
 	public String getGrade() {
 		return grade;
 	}

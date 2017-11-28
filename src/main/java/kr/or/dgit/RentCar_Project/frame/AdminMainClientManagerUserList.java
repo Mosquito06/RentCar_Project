@@ -61,8 +61,8 @@ public class AdminMainClientManagerUserList extends JFrame {
 		
 		findCode = RentService.getInstance().selectRentByUserCode(rent);
 		
-		SimpleDateFormat dateFirstFormat = new SimpleDateFormat("yyyy/01/01");
-		SimpleDateFormat dateLastFormat = new SimpleDateFormat("yyyy/12/31");
+		SimpleDateFormat dateFirstFormat = new SimpleDateFormat("2000/01/01");
+		SimpleDateFormat dateLastFormat = new SimpleDateFormat("2100/12/31");
 		Date Fdate = new Date();
 		Date Ldate = new Date();
 		
