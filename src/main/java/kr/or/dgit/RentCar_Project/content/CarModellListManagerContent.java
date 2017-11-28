@@ -78,6 +78,8 @@ public class CarModellListManagerContent extends JPanel implements ActionListene
 		if(e.getSource()==btnAll) {
 			cmTable.setFull(true);
 			cmTable.loadDate();
+			cmContent.setCarModelValueClear();
+			carModel.getComboBox().setSelectedIndex(0);
 		}
 	}
 	

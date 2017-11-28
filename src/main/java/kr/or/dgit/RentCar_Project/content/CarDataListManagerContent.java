@@ -114,7 +114,8 @@ public class CarDataListManagerContent extends JPanel implements ActionListener 
 			if(e.getSource()==btnAll) {
 				listCarData.setFull(true);
 				listCarData.loadDate();
-				
+				cdManagerContent.setClearAll();
+				search.getComboBox().setSelectedIndex(0);
 			}
 			if(e.getSource()==btnSearch) {
 				CarData carDataCode = search.getComboboxValue();

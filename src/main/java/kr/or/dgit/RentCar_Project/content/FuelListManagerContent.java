@@ -78,6 +78,8 @@ public class FuelListManagerContent extends JPanel implements ActionListener{
 		if(e.getSource()==btnAll) {
 			fuelTable.setFull(true);
 			fuelTable.loadDate();
+			fmContent.setFuelTextValueClear();
+			fuel.getComboBox().setSelectedIndex(0);
 		}
 	}
 	
