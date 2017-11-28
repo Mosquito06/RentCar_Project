@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
 
@@ -39,6 +40,8 @@ import kr.or.dgit.RentCar_Project.dto.Manufacturer;
 import kr.or.dgit.RentCar_Project.dto.User;
 import kr.or.dgit.RentCar_Project.service.CarDataService;
 import kr.or.dgit.RentCar_Project.service.CarModelService;
+import java.awt.Font;
+import javax.swing.border.BevelBorder;
 
 @SuppressWarnings("serial")
 public class UserMainReserve extends JPanel {
@@ -57,6 +60,8 @@ public class UserMainReserve extends JPanel {
 	private ComboBoxComponent<CarData> comboBoxCarName;
 	private JScrollPane scrollPane;
 	private ReserveHeaderContent header;
+	private JLabel lblCarModel;
+	private CarModel carModel;
 
 	public void setComfirmUser(User comfirmUser) {
 		this.comfirmUser = comfirmUser;
@@ -68,7 +73,11 @@ public class UserMainReserve extends JPanel {
 		setLayout(null);
 
 		leftPanel = new ReserveLeftContent();
-		leftPanel.setBackground(Color.WHITE);
+		leftPanel.getChckbxAuto().setLocation(137, 449);
+		leftPanel.getComboBoxSeater().setLocation(26, 364);
+		leftPanel.getComboBoxOld().setLocation(26, 275);
+		leftPanel.getComboBoxFuel().setLocation(26, 184);
+		leftPanel.getComboBoxManufacturer().setLocation(26, 93);
 		leftPanel.setBorder(new TitledBorder(
 				new CompoundBorder(new LineBorder(new Color(0, 0, 0)),
 						new EtchedBorder(EtchedBorder.LOWERED, null, null)),
@@ -107,7 +116,7 @@ public class UserMainReserve extends JPanel {
 					JOptionPane.showMessageDialog(null, "날짜를 정확하게 입력하세요");
 					return;
 				}
-
+				resetSelectComdo();
 				lists = carDataService.selectCarDataByAll();
 				setScrollPaneAddList(scrollPane, header, isInsurance);
 				setComboBaxEnabled(true);
@@ -124,19 +133,21 @@ public class UserMainReserve extends JPanel {
 		btnsPanel.setBounds(271, 76, 565, 35);
 		List<CarModel> carModelLists = carModelService.selectCarModelByAll();
 		for (int i = 0; i < carModelLists.size(); i++) {
-			String carModel = carModelLists.get(i).getCarModel();
-			String carModelCode = carModelLists.get(i).getCarModelCode();
-			JButton btn = new JButton(carModel);
+			CarModel carM = carModelLists.get(i);
+			String carModelName = carModelLists.get(i).getCarModel();
+			JButton btn = new JButton(carModelName);
 			btnsPanel.add(btn);
 			btn.addActionListener(new ActionListener() {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					lists = carDataService.selectCarDataByCarModelCode(carModelCode);
-					setScrollPaneAddList(scrollPane, header, isInsurance);
+					carModel = carM;
 					setComboBaxEnabled(true);
 					resetSelectComdo();
 					comboBoxCarName.getComboBox().setSelectedIndex(0);
+					lblCarModel.setText(carModelName);
+					comboAction();
+					setScrollPaneAddList(scrollPane, header, isInsurance);
 				}
 
 			});
@@ -169,8 +180,13 @@ public class UserMainReserve extends JPanel {
 
 			@Override
 			public void itemStateChanged(ItemEvent e) {
-				
-
+				if (e.getStateChange() == 1) {
+					isInsurance = true;
+					setScrollPaneAddList(scrollPane, header, isInsurance);
+				} else {
+					isInsurance = false;
+					setScrollPaneAddList(scrollPane, header, isInsurance);
+				}
 			}
 		});
 
@@ -178,168 +194,77 @@ public class UserMainReserve extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (leftPanel.getChckbxAuto().isSelected()) {
-					auto = IsAuto.AUTO;
-					for (int i = lists.size() - 1; i >= 0; i--) {
-						if (!lists.get(i).getIsAuto().equals(auto)) {
-							lists.remove(i);
-						}
-					}
-					if (lists.size() == 0) {
-						lists = newLists;
-						JOptionPane.showMessageDialog(null, auto.toString() + " 의 렌트카가 존재하지 않습니다.");
-						leftPanel.getChckbxAuto().setSelected(false);
-						return;
-					}
-				} 
+				comboAction();
 				setScrollPaneAddList(scrollPane, header, isInsurance);
-				leftPanel.getChckbxAuto().setEnabled(false);
 			}
 
 		});
 
-		comboBoxCarName.getComboBox().addActionListener(new ActionListener() {
+		comboBoxCarName.getComboBox().addItemListener(new ItemListener() {
 
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void itemStateChanged(ItemEvent e) {
 				if (comboBoxCarName.getComboboxValue() == comboBoxCarName.getComboBox().getItemAt(0)) {
 					return;
 				}
+				resetSelectComdo();
 				CarData carData = comboBoxCarName.getComboboxValue();
 				lists = carDataService.selectCarDataByCarDataCodeList(carData);
 				setComboBaxEnabled(false);
 				setScrollPaneAddList(scrollPane, header, isInsurance);
-				resetSelectComdo();
+				
 
 			}
 		});
 
-		leftPanel.getComboBoxFuel().getComboBox().addActionListener(new ActionListener() {
+		leftPanel.getComboBoxFuel().getComboBox().addItemListener(new ItemListener() {
 
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void itemStateChanged(ItemEvent e) {
 				comboAction();
-			}
-			/*	if (leftPanel.getComboBoxFuel().getComboboxValue() == leftPanel.getComboBoxFuel().getComboBox()
-						.getItemAt(0)) {
-					return;
-				}
-				newListAdd();
-				Fuel fuel = leftPanel.getComboBoxFuel().getComboboxValue();
-				for (int i = lists.size() - 1; i >= 0; i--) {
-					if (!lists.get(i).getFuelCode().getFuelCode().equals(fuel.getFuelCode())) {
-						lists.remove(i);
-					}
-				}
-
-				if (lists.size() == 0) {
-					lists = newLists;
-					JOptionPane.showMessageDialog(null, fuel.getFuelType() + "type 렌트카가 존재하지 않습니다.");
-					leftPanel.getComboBoxFuel().getComboBox().setSelectedIndex(0);
-					return;
-				}
 				setScrollPaneAddList(scrollPane, header, isInsurance);
-				leftPanel.getComboBoxFuel().getComboBox().setEnabled(false);
-			}*/
+			}
 
 		});
 
-		leftPanel.getComboBoxManufacturer().getComboBox().addActionListener(new ActionListener() {
+		leftPanel.getComboBoxManufacturer().getComboBox().addItemListener(new ItemListener() {
 
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void itemStateChanged(ItemEvent e) {
 				comboAction();
-			}
-			/*	if (leftPanel.getComboBoxManufacturer().getComboboxValue() == leftPanel.getComboBoxManufacturer()
-						.getComboBox().getItemAt(0)) {
-					return;
-				}
-				newListAdd();
-				Manufacturer manufacturer = leftPanel.getComboBoxManufacturer().getComboboxValue();
-				for (int i = lists.size() - 1; i >= 0; i--) {
-					if (!lists.get(i).getManufacturerCode().getManufacturerCode()
-							.equals(manufacturer.getManufacturerCode())) {
-						lists.remove(i);
-					}
-				}
-
-				if (lists.size() == 0) {
-					lists = newLists;
-					JOptionPane.showMessageDialog(null, manufacturer.getManufacturerName() + " 의 렌트카가 존재하지 않습니다.");
-					leftPanel.getComboBoxManufacturer().getComboBox().setSelectedIndex(0);
-					return;
-				}
 				setScrollPaneAddList(scrollPane, header, isInsurance);
-				leftPanel.getComboBoxManufacturer().getComboBox().setEnabled(false);
-			}*/
+			}
+
 		});
 
-		leftPanel.getComboBoxSeater().getComboBox().addActionListener(new ActionListener() {
+		leftPanel.getComboBoxSeater().getComboBox().addItemListener(new ItemListener() {
 
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void itemStateChanged(ItemEvent e) {
 				comboAction();
-			}
-				/*if (leftPanel.getComboBoxSeater().getComboboxValue() == leftPanel.getComboBoxSeater().getComboBox()
-						.getItemAt(0)) {
-					return;
-				}
-				newListAdd();
-				CarData seater = leftPanel.getComboBoxSeater().getComboboxValue();
-				for (int i = lists.size() - 1; i >= 0; i--) {
-					if (!lists.get(i).getCarSeater().equals(seater.getCarSeater())) {
-						lists.remove(i);
-					}
-				}
-
-				if (lists.size() == 0) {
-					lists = newLists;
-					JOptionPane.showMessageDialog(null, seater.getCarSeater() + " 인승 렌트카가 존재하지 않습니다.");
-					leftPanel.getComboBoxSeater().getComboBox().setSelectedIndex(0);
-					return;
-				}
 				setScrollPaneAddList(scrollPane, header, isInsurance);
-				leftPanel.getComboBoxSeater().getComboBox().setEnabled(false);
-			}*/
+			}
+
 		});
 
-		leftPanel.getComboBoxOld().getComboBox().addActionListener(new ActionListener() {
+		leftPanel.getComboBoxOld().getComboBox().addItemListener(new ItemListener() {
 
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void itemStateChanged(ItemEvent e) {
 				comboAction();
-			}
-				/*if (leftPanel.getComboBoxOld().getComboboxValue() == leftPanel.getComboBoxOld().getComboBox()
-						.getItemAt(0)) {
-					return;
-				}
-				newListAdd();
-				CarData old = leftPanel.getComboBoxOld().getComboboxValue();
-				for (int i = lists.size() - 1; i >= 0; i--) {
-					if (lists.get(i).getCarOld() != old.getCarOld()) {
-						lists.remove(i);
-					}
-				}
-
-				if (lists.size() == 0) {
-					lists = newLists;
-					JOptionPane.showMessageDialog(null, old.getCarOld() + " 연식 렌트카가 존재하지 않습니다.");
-					leftPanel.getComboBoxOld().getComboBox().setSelectedIndex(0);
-					return;
-				}
 				setScrollPaneAddList(scrollPane, header, isInsurance);
-				leftPanel.getComboBoxOld().getComboBox().setEnabled(false);
-			}*/
+			}
+
 		});
 
 		leftPanel.getBtnReset().addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				resetSelectComdo();
 				lists = carDataService.selectCarDataByAll();
 				setScrollPaneAddList(scrollPane, header, isInsurance);
 				setComboBaxEnabled(true);
-				resetSelectComdo();
 				comboBoxCarName.getComboBox().setSelectedIndex(0);
 			}
 		});
@@ -347,6 +272,17 @@ public class UserMainReserve extends JPanel {
 		setComboBaxEnabled(false);
 		leftPanel.getBtnReset().setEnabled(false);
 		leftPanel.getIsInsurance().setAllEnable(false);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
+		panel_1.setBounds(72, 23, 113, 36);
+		leftPanel.add(panel_1);
+		panel_1.setLayout(new BorderLayout(0, 0));
+		
+		lblCarModel = new JLabel("전체차량");
+		lblCarModel.setFont(new Font("굴림", Font.PLAIN, 13));
+		lblCarModel.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_1.add(lblCarModel, BorderLayout.CENTER);
 	}
 
 	private void resetSelectComdo() {
@@ -356,15 +292,7 @@ public class UserMainReserve extends JPanel {
 		leftPanel.getComboBoxManufacturer().getComboBox().setSelectedIndex(0);
 		leftPanel.getComboBoxFuel().getComboBox().setSelectedIndex(0);
 		leftPanel.getChckbxAuto().setSelected(false);
-
-	}
-
-	private List<CarData> newListAdd() {
-		newLists = new ArrayList<>();
-		for (int i = 0; i < lists.size(); i++) {
-			newLists.add(lists.get(i));
-		}
-		return newLists;
+		lblCarModel.setText("전체차량");
 	}
 
 	private void setComboBaxEnabled(Boolean yes) {
@@ -402,30 +330,46 @@ public class UserMainReserve extends JPanel {
 		}
 		comboBoxCarName.setComboBoxModel(carData);
 	}
-	
+
 	private void comboAction() {
-		JOptionPane.showMessageDialog(null, "Asdf");
-		CarData car = new CarData();
-		if(leftPanel.getComboBoxManufacturer().getComboBox().getSelectedIndex()!=0) {
+		HashMap<String, Object> map = new HashMap<>();
+	
+		
+		
+		if(!lblCarModel.getText().equals("전체차량")){
+			map.put("carModelCode", carModel);
+		}
+		
+		if (leftPanel.getChckbxAuto().isSelected()) {
+			auto = IsAuto.AUTO;
+			map.put("isAuto", auto);
+		}
+		
+		
+		if (leftPanel.getComboBoxManufacturer().getComboBox().getSelectedIndex() != 0) {
 			Manufacturer manufacturer = leftPanel.getComboBoxManufacturer().getComboboxValue();
-			car.setManufacturerCode(manufacturer);
+			map.put("manufacturerCode", manufacturer);
 		}
-		if(leftPanel.getComboBoxFuel().getComboBox().getSelectedIndex()!=0) {
+
+		if (leftPanel.getComboBoxFuel().getComboBox().getSelectedIndex() != 0) {
 			Fuel fuel = leftPanel.getComboBoxFuel().getComboboxValue();
-			car.setFuelCode(fuel);
+			map.put("fuelCode", fuel);
 		}
-		if(leftPanel.getComboBoxOld().getComboBox().getSelectedIndex()!=0) {
-			Object carOld = leftPanel.getComboBoxOld().getComboboxValue();
-			car.setCarOld((int)carOld);
+		if (leftPanel.getComboBoxOld().getComboBox().getSelectedIndex() != 0) {
+			CarData carOld = leftPanel.getComboBoxOld().getComboboxValue();
+			map.put("carOld", carOld.getCarOld());
 		}
-		if(leftPanel.getComboBoxSeater().getComboBox().getSelectedIndex()!=0) {
-			Object seater = leftPanel.getComboBoxSeater().getComboboxValue();
-			car.setCarSeater((String)seater);
+
+		if (leftPanel.getComboBoxSeater().getComboBox().getSelectedIndex() != 0) {
+			CarData seater = leftPanel.getComboBoxSeater().getComboboxValue();
+			map.put("carSeater", seater.getCarSeater());
 		}
-		if(car.getManufacturerCode()==null&&car.getFuelCode()==null&&car.getCarOld()==0&&car.getCarSeater()==null) {
+
+		if (map.size() == 0) {
 			return;
 		}
-		lists=carDataService.selectCarDataByCarValue(car);
-		setScrollPaneAddList(scrollPane, header, isInsurance);
+
+		lists = carDataService.selectCarDataByCarValue(map);
+		
 	}
 }

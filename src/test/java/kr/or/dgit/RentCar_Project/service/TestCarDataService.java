@@ -2,6 +2,8 @@ package kr.or.dgit.RentCar_Project.service;
 
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -45,7 +47,7 @@ public class TestCarDataService {
 		
 	}*/
 	
-	@Test
+/*	@Test
 	public void test3FindSelectCarDataByAll() {
 		List<CarData> list = carDataService.selectCarDataByAll();
 		Assert.assertNotNull(list);
@@ -53,7 +55,7 @@ public class TestCarDataService {
 		for(CarData cd : list) {
 			System.out.println(cd.getFuelCode().getFuelCode());
 		}
-	}
+	}*/
 	
 	/*@Test
 	public void test4UpdeteCarDataByCarDataCode() {
@@ -66,6 +68,18 @@ public class TestCarDataService {
 		CarData carData = new CarData();
 		carData.setCarCode("aaaaa");
 		carDataService.deleteCarData(carData);
+	}*/
+	
+	/*@Test
+	public void test1SelectCarDataByWhereAll() {
+		CarData carData = new CarData();
+		List<CarData> list = carDataService.selectCarDataByCarValue(null);
+		Assert.assertNotNull(list);
+		JOptionPane.showMessageDialog(null, "Asdfasdf");
+		for(CarData cd : list) {
+			JOptionPane.showMessageDialog(null, cd);
+			
+		}
 	}*/
 
 }

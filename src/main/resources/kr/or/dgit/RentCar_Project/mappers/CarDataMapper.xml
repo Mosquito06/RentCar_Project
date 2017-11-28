@@ -32,9 +32,6 @@
 		
 	<sql id="whereAllSql">
 		<where>
-			<if test ="carCode != null">
-				car_code = #{carCode}
-			</if>
 			<if test ="carName != null">
 			 	and car_name = #{carName}
 			</if>
@@ -62,7 +59,6 @@
 			<if test ="fuelCode != null">
 				and fuel_code = #{fuelCode.fuelCode}
 			</if>
-			
 		</where>
 	</sql>
 	
