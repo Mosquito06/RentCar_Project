@@ -71,6 +71,17 @@
 		</where>
 	</sql>
 	
+	<sql id="whereCarCode">
+		<where>
+			<if test="carCode.carCode != null">
+				 car_code = #{carCode.carCode}
+			</if>
+			<if test="situation != null">
+				and situation = #{situation}
+			</if>
+		</where>
+	</sql>
+	
 	<sql id="selectSql">
 		select situation, user_code, use_time, is_insurance, day_start, day_end, discount_Price, final_price, car_code from rent
 	</sql>
@@ -88,7 +99,7 @@
 	
 	<select id="selectRentByCarCode" resultMap="RentResult">
 		<include refid="selectSql"/>
-		where car_code=#{carCode.carCode}
+		<include refid="whereCarCode"/>
 	</select>
 	
 	<select id="selectRentByUserCode" resultMap="RentResult">
