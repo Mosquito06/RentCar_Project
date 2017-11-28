@@ -28,7 +28,7 @@ public class AdminMainClientGradeManager extends JFrame {
 		setTitle("등급&할인률관리");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		setBounds(100, 100, 365, 400);
+		setBounds(100, 100, 368, 410);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -41,7 +41,7 @@ public class AdminMainClientGradeManager extends JFrame {
 				setVisible(false);
 			}
 		});
-		btnOk.setBounds(282, 342, 69, 23);
+		btnOk.setBounds(291, 355, 69, 23);
 		contentPane.add(btnOk);
 		
 		userGrade = new UserGradeContent();
@@ -49,7 +49,7 @@ public class AdminMainClientGradeManager extends JFrame {
 		contentPane.add(userGrade);
 		
 		userGradeList = new UserGradeListContent();
-		userGradeList.setBounds(0, 159, 356, 179);
+		userGradeList.setBounds(0, 159, 360, 189);
 		contentPane.add(userGradeList);
 		
 		userGradeList.setUserGradeContnet(userGrade);

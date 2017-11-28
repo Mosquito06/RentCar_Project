@@ -42,7 +42,6 @@ public class ClientlListManagerContent extends JPanel implements ActionListener 
 		add(listClient);
 	
 	}
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		

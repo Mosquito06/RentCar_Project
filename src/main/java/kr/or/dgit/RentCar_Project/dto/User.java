@@ -181,7 +181,9 @@ public class User {
 			return String.format("%s", userCode);
 		} else if (comboType == 1) {
 			return String.format("%s", gender);
-		} else {
+		}else if(comboType==2) {
+			return String.format("%s(%s)", userCode,userName);
+		}else {
 			return String.format("User %s, %s, %s, %s, %s, %s, %s, %s, %s, %s", userCode, id, pw, userName,
 					Arrays.toString(userImg), phone, email, gender, grade, addr);
 		}

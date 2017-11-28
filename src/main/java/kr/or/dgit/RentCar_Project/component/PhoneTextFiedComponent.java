@@ -14,6 +14,19 @@ public class PhoneTextFiedComponent extends JPanel {
 	private JTextField tfNum2;
 	private JTextField tfNum3;
 
+	
+	public JTextField getTfNum1() {
+		return tfNum1;
+	}
+
+	public JTextField getTfNum2() {
+		return tfNum2;
+	}
+
+	public JTextField getTfNum3() {
+		return tfNum3;
+	}
+
 	public PhoneTextFiedComponent(String title) {
 		setLayout(new GridLayout(0, 2, 50, 0));
 		
@@ -70,7 +83,6 @@ public class PhoneTextFiedComponent extends JPanel {
 	
 	public boolean isEmptyCheck(){
 		if(getTextValueNum1().equals("")||getTextValueNum2().equals("")||getTextValueNum3().equals("")) {
-			tfNum1.requestFocus();
 			return false;
 		}return true;
 	}

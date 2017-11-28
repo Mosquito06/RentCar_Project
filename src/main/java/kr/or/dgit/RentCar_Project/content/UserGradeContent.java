@@ -105,7 +105,7 @@ public class UserGradeContent extends JPanel implements ActionListener {
 	}
 
 	public boolean isOk(String code) {
-		Pattern p = Pattern.compile("(^[A-Z]$)");
+		Pattern p = Pattern.compile("(^[A-Z]{1}$)");
 		Matcher m = p.matcher(code);
 		if (m.find()) {
 			return true;

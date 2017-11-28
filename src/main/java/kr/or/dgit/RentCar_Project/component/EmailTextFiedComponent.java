@@ -18,6 +18,15 @@ public class EmailTextFiedComponent extends JPanel {
 	private JTextField tfEmailAddr;
 	private JComboBox<String> cbEmailAddr;
 
+	
+
+	public JTextField getTfEmailId() {
+		return tfEmailId;
+	}
+
+	public JTextField getTfEmailAddr() {
+		return tfEmailAddr;
+	}
 
 	public EmailTextFiedComponent(String title) {
 		setLayout(new BorderLayout(15, 0));
@@ -88,7 +97,7 @@ public class EmailTextFiedComponent extends JPanel {
 		tfEmailAddr.setText(value);
 	}
 	
-	public boolean isEmptyChech(){
+	public boolean isEmptyCheck(){
 		if(getTextVauleId().equals("")||getTextValueEmailAddr().equals("")) {
 			tfEmailId.requestFocus();
 			return false;

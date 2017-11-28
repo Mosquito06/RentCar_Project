@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Vector;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import kr.or.dgit.RentCar_Project.component.ComboBoxComponent;
@@ -28,26 +29,26 @@ public class UserGradeListContent extends JPanel implements ActionListener{
 		this.userGradeContnet = userGradeContnet;
 	}
 	public UserGradeListContent() {
-		setBounds(100, 100, 345, 177);
+		setBounds(100, 100, 355, 189);
 		setLayout(null);
 		
 		grade = new ComboBoxComponent<>("고객등급");
-		grade.setBounds(5, 10, 166, 25);
+		grade.setBounds(2, 9, 202, 25);
 		add(grade);
 		
 		btnSearch = new JButton("검색");
-		btnSearch.setBounds(175, 8, 65, 27);
+		btnSearch.setBounds(205, 8, 57, 27);
 		btnSearch.addActionListener(this);
 		add(btnSearch);
 		
 		btnAll = new JButton("전체보기");
 		btnAll.addActionListener(this);
-		btnAll.setBounds(254, 8, 91, 27);
+		btnAll.setBounds(274, 9, 81, 27);
 		add(btnAll);
 		
 		userGradeTable = new UserGradeTable();
 		userGradeTable.setBorder(new LineBorder(new Color(0, 0, 0)));
-		userGradeTable.setBounds(5, 45, 340, 122);
+		userGradeTable.setBounds(5, 45, 350, 140);
 		userGradeTable.setFull(true);
 		userGradeTable.loadDate();
 		add(userGradeTable);
@@ -56,6 +57,9 @@ public class UserGradeListContent extends JPanel implements ActionListener{
 	}
 	public void setGradeComboModel() {
 		List<UserGrade> lists = UserGradeService.getInstance().selectUserGradeByAll();
+		UserGrade uGrade = new UserGrade();
+		uGrade.setGrade("선택하세요");
+		lists.add(0,uGrade);
 		Vector<UserGrade> userGrade = new Vector<>();
 		for(UserGrade ug : lists) {
 			ug.setComboType(1);
@@ -72,13 +76,23 @@ public class UserGradeListContent extends JPanel implements ActionListener{
 			userGradeContnet.setActive(false);
 		}
 		if(e.getSource()==btnSearch) {
-			UserGrade ugkey = grade.getComboboxValue();
-			userGradeTable.setFull(false);
-			userGradeTable.setUserGarde(ugkey);
-			userGradeTable.loadDate();
-			userGradeContnet.getUserGrade().setTextValue(ugkey.getGrade());
-			userGradeContnet.getDiscount().setTextValue(String.valueOf(ugkey.getDiscount()));
-			userGradeContnet.setActive(true);
+			if(grade.getComboBox().getSelectedIndex()!=0) {
+				UserGrade ugkey = grade.getComboboxValue();
+				userGradeTable.setFull(false);
+				userGradeTable.setUserGarde(ugkey);
+				userGradeTable.loadDate();
+				userGradeContnet.getUserGrade().setTextValue(ugkey.getGrade());
+				userGradeContnet.getDiscount().setTextValue(String.valueOf(ugkey.getDiscount()));
+				userGradeContnet.setActive(true);
+			}else {
+				JOptionPane.showMessageDialog(null, "검색창을 선택하세요");
+				userGradeTable.setFull(true);
+				userGradeTable.loadDate();
+				userGradeContnet.setUserGradeTextValueClear();
+				userGradeContnet.setActive(false);
+				return;
+			}
+			
 		}
 	}
 
