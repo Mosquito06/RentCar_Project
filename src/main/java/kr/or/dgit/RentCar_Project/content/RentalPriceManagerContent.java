@@ -52,7 +52,6 @@ public class RentalPriceManagerContent extends JPanel implements ActionListener{
 				oPrice.setTextValue(String.format("%,d",rentalPrice.getOverPrice()));
 				insurance.setTextValue(String.format("%,d",rentalPrice.getInsurance()));
 				setActive(true);
-				
 			}
 		});
 		carCode.setBounds(5, 35, 230, 30);
@@ -94,7 +93,7 @@ public class RentalPriceManagerContent extends JPanel implements ActionListener{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int clear = JOptionPane.showConfirmDialog(null, "입력 데이터를 취소하시겠습니까?", "확인창", JOptionPane.OK_CANCEL_OPTION);
+				int clear = JOptionPane.showConfirmDialog(null, "입력 데이터를 취소하시겠습니까?", "Message", JOptionPane.YES_NO_OPTION);
 				if(clear==0) {
 					setRentalPriceValueClear();
 					setActive(false);
@@ -162,8 +161,7 @@ public class RentalPriceManagerContent extends JPanel implements ActionListener{
 		int is = Integer.parseInt(insurance.getTextValue().replaceAll(",", "").trim());
 		
  		if(e.getSource()==btnUpdate) {
-			int update = JOptionPane.showConfirmDialog(null, "입력 데이터를 수정하시겠습니까?", "확인창",
-					JOptionPane.OK_CANCEL_OPTION);
+			int update = JOptionPane.showConfirmDialog(null, "입력 데이터를 수정하시겠습니까?", "Message", JOptionPane.YES_NO_OPTION);
 			if(update==0) {
 				rentalPriceService.updateRentalPrice(new RentalPrice(cCode, basicPrice, basicTime, basicTimePrice, overPrice, is));
 				rpListManagerContent.rpTable.loadDate();
@@ -174,7 +172,7 @@ public class RentalPriceManagerContent extends JPanel implements ActionListener{
 		}
 
  		if(e.getSource()==btnDelete) {
- 			int delete = JOptionPane.showConfirmDialog(null, "입력 데이터를 삭제하시겠습니까?", "확인창", JOptionPane.OK_CANCEL_OPTION);
+ 			int delete = JOptionPane.showConfirmDialog(null, "입력 데이터를 삭제하시겠습니까?", "Message", JOptionPane.YES_NO_OPTION);
  			if(delete==0) {
  				rentalPriceService.deleteRentalPrice(new RentalPrice(cCode));
  				rpListManagerContent.rpTable.loadDate();

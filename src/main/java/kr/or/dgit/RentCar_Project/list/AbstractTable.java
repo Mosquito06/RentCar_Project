@@ -29,7 +29,7 @@ public abstract class AbstractTable extends JPanel {
 		// 테이블 사이즈 변경 불가
 		table.getTableHeader().setResizingAllowed(false);
 		scrollPane.setViewportView(table);
-
+		
 	}
 	
 	public void loadDate() {

@@ -35,6 +35,14 @@ public class CarDataListManagerContent extends JPanel implements ActionListener 
 	public void setCdManagerContent(CarDataManagerContent cdManagerContent) {
 		this.cdManagerContent = cdManagerContent;
 	}
+	
+	
+
+	public ComboBoxComponent<CarData> getSearch() {
+		return search;
+	}
+
+
 
 	public CarDataListManagerContent() {
 		setBounds(100, 100, 950, 322);

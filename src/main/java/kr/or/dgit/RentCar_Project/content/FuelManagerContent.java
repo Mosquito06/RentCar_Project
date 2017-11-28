@@ -57,8 +57,7 @@ public class FuelManagerContent extends JPanel implements ActionListener {
 		btnCancel.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int clear = JOptionPane.showConfirmDialog(null, "입력 데이터를 취소하시겠습니까?", "확인창",
-						JOptionPane.OK_CANCEL_OPTION);
+				int clear = JOptionPane.showConfirmDialog(null, "입력 데이터를 취소하시겠습니까?", "Message", JOptionPane.YES_NO_OPTION);
 				if (clear == 0)
 					setFuelTextValueClear();
 			}
@@ -112,8 +111,7 @@ public class FuelManagerContent extends JPanel implements ActionListener {
 
 		if (e.getSource() == btnAdd) {
 			if (!isEmptyCheck()) {
-				int insert = JOptionPane.showConfirmDialog(null, "입력 데이터를 추가하시겠습니까?", "확인창",
-						JOptionPane.OK_CANCEL_OPTION);
+				int insert = JOptionPane.showConfirmDialog(null,"입력 데이터를 추가하시겠습니까?", "Message", JOptionPane.YES_NO_OPTION);
 				if (insert == 0) {
 					fuelService.insertFuel(new Fuel(fCode, fType));
 					fuelList.fuelTable.loadDate();
@@ -129,8 +127,7 @@ public class FuelManagerContent extends JPanel implements ActionListener {
 		}
 		if (e.getSource() == btnUpdate) {
 			if (!isEmptyCheck()) {
-				int update = JOptionPane.showConfirmDialog(null, "입력 데이터를 수정하시겠습니까?", "확인창",
-						JOptionPane.OK_CANCEL_OPTION);
+				int update = JOptionPane.showConfirmDialog(null, "입력 데이터를 수정하시겠습니까?", "Message", JOptionPane.YES_NO_OPTION);
 				if (update == 0) {
 					fuelService.updateFuel(new Fuel(fCode, fType));
 					fuelList.fuelTable.loadDate();
@@ -146,7 +143,7 @@ public class FuelManagerContent extends JPanel implements ActionListener {
 		}
 		if (e.getSource() == btnDelete) {
 			if(!codeEmptyCheck()) {
-				int delete = JOptionPane.showConfirmDialog(null, "입력 데이터를 삭제하시겠습니까?", "확인창", JOptionPane.OK_CANCEL_OPTION);
+				int delete = JOptionPane.showConfirmDialog(null, "입력 데이터를 삭제하시겠습니까?", "Message", JOptionPane.YES_NO_OPTION);
 				if (delete == 0) {
 					fuelService.deleteFule(new Fuel(fCode));
 					fuelList.fuelTable.loadDate();

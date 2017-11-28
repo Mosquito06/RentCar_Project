@@ -124,7 +124,7 @@ public class ClientManagerContent extends JPanel implements ActionListener{
 		JButton btnCancel = new JButton("취소");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int clear = JOptionPane.showConfirmDialog(null, "입력 데이터를 취소하시겠습니까?", "확인창", JOptionPane.OK_CANCEL_OPTION);
+				int clear = JOptionPane.showConfirmDialog(null, "입력 데이터를 취소하시겠습니까?", "Message", JOptionPane.YES_NO_OPTION);
 				if(clear==0) {
 					setClearAll();
 					setActive(false);
@@ -293,8 +293,7 @@ public class ClientManagerContent extends JPanel implements ActionListener{
 		}
 		
 		if(e.getSource()==btnUpdate) {
-			int update = JOptionPane.showConfirmDialog(null, "입력 데이터를 수정하시겠습니까?", "확인창",
-					JOptionPane.OK_CANCEL_OPTION);
+			int update = JOptionPane.showConfirmDialog(null, "입력 데이터를 수정하시겠습니까?", "Message", JOptionPane.YES_NO_OPTION);
 			if (update == 0) {
 				String id = clientId.getTextValue();
 				String userName = clientName.getTextValue();
@@ -305,13 +304,15 @@ public class ClientManagerContent extends JPanel implements ActionListener{
 				userService.updateUser(new User(code, id, userName, phone, userEmail, userGender, userGrade));
 				clientListManager.listClient.loadDate();
 				JOptionPane.showMessageDialog(null, "수정되었습니다.");
+				setClearAll();
+				setActive(false);
 			}else {
 				JOptionPane.showMessageDialog(null, "취소되었습니다");
 			}
 			
 		}
 		if(e.getSource()==btnDelete) {
-			int delete = JOptionPane.showConfirmDialog(null, "입력 데이터를 삭제하시겠습니까?", "확인창", JOptionPane.OK_CANCEL_OPTION);
+			int delete = JOptionPane.showConfirmDialog(null, "입력 데이터를 삭제하시겠습니까?", "Message", JOptionPane.YES_NO_OPTION);
 			if (delete == 0) {
 				userService.deleteUser(new User(code));
 				clientListManager.listClient.loadDate();
