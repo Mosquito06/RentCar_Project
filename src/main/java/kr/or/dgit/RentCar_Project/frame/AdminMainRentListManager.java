@@ -29,7 +29,6 @@ public class AdminMainRentListManager extends JFrame implements ActionListener{
 	private JPanel contentPane;
 	private RentTable rentTable;
 	private JButton btnOk;
-	private JButton btnAll;
 	
 	public AdminMainRentListManager(Rent rent) {
 		Toolkit tk = Toolkit.getDefaultToolkit();
@@ -50,7 +49,8 @@ public class AdminMainRentListManager extends JFrame implements ActionListener{
 		
 		rentTable = new RentTable();
 		rentTable.setBounds(12, 91, 919, 417);
-		rentTable.setRent(rent);
+		rentTable.setKey("carCode");
+		rentTable.setValue(carCode);
 		rentTable.loadDate();
 		contentPane.add(rentTable);
 		
@@ -65,39 +65,26 @@ public class AdminMainRentListManager extends JFrame implements ActionListener{
 		});
 		contentPane.add(btnOk);
 		
-		btnAll = new JButton("전체기록");
-		btnAll.setBounds(846, 26, 85, 23);
-		btnAll.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				rentTable.setRent(rent);
-				rentTable.loadDate();
-			}
-		});
-		contentPane.add(btnAll);
-		
 		JButton btnSearch = new JButton("검색");
 		btnSearch.setBounds(590, 58, 85, 23);
 		contentPane.add(btnSearch);
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), " \uC120\uD0DD \uC0AC\uD56D ", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(268, 26, 310, 55);
+		panel.setBounds(666, 10, 310, 55);
 		contentPane.add(panel);
 		
-		JCheckBox checkReserve = new JCheckBox("예약기록");
-		panel.add(checkReserve);
+		JRadioButton radioReservation = new JRadioButton("예약기록");
+		radioReservation.setBounds(26, 38, 121, 23);
+		contentPane.add(radioReservation);
 		
-		JCheckBox checkCancel = new JCheckBox("취소기록");
-		panel.add(checkCancel);
+		JRadioButton radioButton_1 = new JRadioButton("취소기록");
+		radioButton_1.setBounds(207, 38, 121, 23);
+		contentPane.add(radioButton_1);
 		
-		JCheckBox checkComplete = new JCheckBox("완료기록");
-		panel.add(checkComplete);
-		
-		JButton button = new JButton("최신순");
-		button.setBounds(846, 59, 85, 23);
-		contentPane.add(button);
+		JRadioButton radioButton_2 = new JRadioButton("완료기록");
+		radioButton_2.setBounds(354, 38, 121, 23);
+		contentPane.add(radioButton_2);
 	}
 
 	@Override

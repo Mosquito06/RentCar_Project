@@ -1,16 +1,24 @@
 package kr.or.dgit.RentCar_Project.list;
 
+import java.util.HashMap;
 import java.util.List;
 
 import kr.or.dgit.RentCar_Project.dto.Rent;
 import kr.or.dgit.RentCar_Project.service.RentService;
 
 public class RentTable extends AbstractTable {
-	private Rent rent;
+	private HashMap<String, Object> map=new HashMap<>();
+	private String key;
+	private Object value;
 	
 	
-	public void setRent(Rent rent) {
-		this.rent = rent;
+	
+	public void setKey(String key) {
+		this.key = key;
+	}
+
+	public void setValue(Object value) {
+		this.value = value;
 	}
 
 	@Override
@@ -21,7 +29,8 @@ public class RentTable extends AbstractTable {
 
 	@Override
 	protected Object[][] getData() {
-		List<Rent> lists = RentService.getInstance().selectRentByCarCode(rent);
+		map.put(key, value);
+		List<Rent> lists = RentService.getInstance().selectRentByCarCode(map);
 		Object[][] datas = new Object[lists.size()][];
 		for(int i=0; i<lists.size();i++) {
 			Rent r = lists.get(i);
