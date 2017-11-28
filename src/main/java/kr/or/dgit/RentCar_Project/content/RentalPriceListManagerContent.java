@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Vector;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
@@ -66,8 +67,13 @@ public class RentalPriceListManagerContent extends JPanel 	implements ActionList
 	}
 	
 	public void setSearchCarCodeComboModel() {
-		CarDataService carDataService = CarDataService.getInstance();
-		List<CarData> lists = carDataService.selectCarDataByAll();
+		List<CarData> lists = CarDataService.getInstance().selectCarDataByAll();
+		CarData c = new CarData();
+		c.setCarCode("선택하세요");
+		c.setCarName("선택");
+		
+		lists.add(0,c);
+		
 		Vector<CarData> carData = new Vector<>();
 		for(CarData cd : lists) {
 			cd.setComboType(4);
@@ -80,32 +86,47 @@ public class RentalPriceListManagerContent extends JPanel 	implements ActionList
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==btnSearch) {
-			RentalPriceService rentalPriceService = RentalPriceService.getInstance();
 			
-			String code = search.getComboboxValue().getCarCode();
-			RentalPrice rentalPrice = rentalPriceService.selectRentalPriceByCarCodeString(code);
-			
-			CarData cd = new CarData();
-			cd.setCarCode(code);
-			RentalPrice rp = new RentalPrice();
-			rp.setCarCode(cd);
-			rpTable.setFull(false);
-			rpTable.setCarCode(rp);
-			rpTable.loadDate();
-			
-			rpManagerContent.getCarCode().setTextValue(code);
-			rpManagerContent.getbPrice().setTextValue(String.format("%,d",rentalPrice.getBasicPrice()));
-			rpManagerContent.getUseTime().setTextValue(String.valueOf(rentalPrice.getBasicTime()));
-			rpManagerContent.getBtPrice().setTextValue(String.format("%,d",rentalPrice.getBasicTimePrice()));
-			rpManagerContent.getoPrice().setTextValue(String.format("%,d",rentalPrice.getOverPrice()));
-			rpManagerContent.getInsurance().setTextValue(String.format("%,d", rentalPrice.getInsurance()));
-			rpManagerContent.setActive(true);
+			if(search.getComboBox().getSelectedIndex()!=0) {
+				searchData();
+			}else {
+				JOptionPane.showMessageDialog(null, "검색창을 선택하세요");
+				rpTable.setFull(true);
+				rpTable.loadDate();
+				rpManagerContent.setRentalPriceValueClear();
+				rpManagerContent.setActive(false);
+			}
+		
 		}
 		if(e.getSource()==btnAll) {
 			rpTable.setFull(true);
 			rpTable.loadDate();
 			search.setComboBoxModelClear();
 			rpManagerContent.setRentalPriceValueClear();
+			rpManagerContent.setActive(false);
 		}
+	}
+
+	private void searchData() {
+		RentalPriceService rentalPriceService = RentalPriceService.getInstance();
+		
+		String code = search.getComboboxValue().getCarCode();
+		RentalPrice rentalPrice = rentalPriceService.selectRentalPriceByCarCodeString(code);
+		
+		CarData cd = new CarData();
+		cd.setCarCode(code);
+		RentalPrice rp = new RentalPrice();
+		rp.setCarCode(cd);
+		rpTable.setFull(false);
+		rpTable.setCarCode(rp);
+		rpTable.loadDate();
+		
+		rpManagerContent.getCarCode().setTextValue(code);
+		rpManagerContent.getbPrice().setTextValue(String.format("%,d",rentalPrice.getBasicPrice()));
+		rpManagerContent.getUseTime().setTextValue(String.valueOf(rentalPrice.getBasicTime()));
+		rpManagerContent.getBtPrice().setTextValue(String.format("%,d",rentalPrice.getBasicTimePrice()));
+		rpManagerContent.getoPrice().setTextValue(String.format("%,d",rentalPrice.getOverPrice()));
+		rpManagerContent.getInsurance().setTextValue(String.format("%,d", rentalPrice.getInsurance()));
+		rpManagerContent.setActive(true);
 	}
 }
