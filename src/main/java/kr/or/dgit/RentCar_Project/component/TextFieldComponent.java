@@ -10,11 +10,20 @@ import javax.swing.SwingConstants;
 @SuppressWarnings("serial")
 public class TextFieldComponent extends JPanel {
 	private JTextField textField;
+	private JLabel lblNewLabel;
+
+	public JTextField getTextField() {
+		return textField;
+	}
+
+	public JLabel getLblNewLabel() {
+		return lblNewLabel;
+	}
 
 	public TextFieldComponent(String title) {
 		setLayout(new GridLayout(0, 2, 5, 0));
 
-		JLabel lblNewLabel = new JLabel(title);
+		lblNewLabel = new JLabel(title);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lblNewLabel);
 
@@ -37,17 +46,12 @@ public class TextFieldComponent extends JPanel {
 		textField.setEditable(isEnable);
 	}
 
-	public boolean isEmptyCheck(){
+	public boolean isEmptyCheck() {
 		if (getTextValue().equals("")) {
 			textField.requestFocus();
 			return false;
-		}return true;
+		}
+		return true;
 	}
-
-	public JTextField getTextField() {
-		return textField;
-	}
-	
-	
 
 }
