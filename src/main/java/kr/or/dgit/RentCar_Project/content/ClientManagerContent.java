@@ -262,6 +262,15 @@ public class ClientManagerContent extends JPanel implements ActionListener{
 		}
 		return 0;
 	}
+	
+	public boolean genderSelected(Gender gender) {
+		if(gender.name().equals("MALE")) {
+			return true;
+		}else {
+			return false;
+		}
+		
+	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
@@ -324,12 +333,5 @@ public class ClientManagerContent extends JPanel implements ActionListener{
 		}
 	}
 
-	public boolean genderSelected(Gender gender) {
-		if(gender.name().equals("MALE")) {
-			return true;
-		}else {
-			return false;
-		}
-		
-	}
+
 }
