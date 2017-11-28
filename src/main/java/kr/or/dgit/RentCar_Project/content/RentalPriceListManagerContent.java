@@ -93,7 +93,7 @@ public class RentalPriceListManagerContent extends JPanel 	implements ActionList
 			rpTable.setCarCode(rp);
 			rpTable.loadDate();
 			
-			rpManagerContent.getCarCode().getComboBox().setSelectedIndex(search.getComboBox().getSelectedIndex());
+			rpManagerContent.getCarCode().setTextValue(rentalPrice.getCarCode().getCarCode());
 			rpManagerContent.getbPrice().setTextValue(String.format("%,d",rentalPrice.getBasicPrice()));
 			rpManagerContent.getUseTime().setTextValue(String.valueOf(rentalPrice.getBasicTime()));
 			rpManagerContent.getBtPrice().setTextValue(String.format("%,d",rentalPrice.getBasicTimePrice()));
@@ -105,6 +105,7 @@ public class RentalPriceListManagerContent extends JPanel 	implements ActionList
 			rpTable.setFull(true);
 			rpTable.loadDate();
 			search.setComboBoxModelClear();
+			rpManagerContent.setRentalPriceValueClear();
 		}
 	}
 }
