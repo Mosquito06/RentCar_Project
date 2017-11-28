@@ -1,5 +1,7 @@
 package kr.or.dgit.RentCar_Project.frame;
 
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -20,10 +22,14 @@ public class AdminMainClientGradeManager extends JFrame {
 	private UserGradeListContent userGradeList;
 	
 	public AdminMainClientGradeManager() {
-		
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		Image img = tk.getImage(System.getProperty("user.dir") + "\\images\\Instapaper icon.png");
+		setIconImage(img);
+		setTitle("등급&할인률관리");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 365, 400);
+		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

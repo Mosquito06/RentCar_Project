@@ -18,6 +18,9 @@ import javax.swing.JCheckBox;
 import javax.swing.border.TitledBorder;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
+import java.awt.Image;
+import java.awt.Toolkit;
+
 import kr.or.dgit.RentCar_Project.component.ComboBoxComponent;
 
 public class AdminMainRentListManager extends JFrame implements ActionListener{
@@ -28,6 +31,9 @@ public class AdminMainRentListManager extends JFrame implements ActionListener{
 	private JButton btnAll;
 	
 	public AdminMainRentListManager(Rent rent) {
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		Image img = tk.getImage(System.getProperty("user.dir") + "\\images\\Instapaper icon.png");
+		setIconImage(img);
 		
 		setResizable(false);
 		CarData carCode = CarDataService.getInstance().selectCarDataByCarDataCode(rent.getCarCode());
@@ -35,6 +41,7 @@ public class AdminMainRentListManager extends JFrame implements ActionListener{
 		setTitle(rent.getCarCode() + " ("+carCode.getCarName()+") "+"대여 기록");
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 949, 580);
+		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
