@@ -23,7 +23,7 @@ import kr.or.dgit.RentCar_Project.content.ManufacturerManagerContent;
 
 @SuppressWarnings("serial")
 public class AdminMainCarManagerCarDetail extends JPanel{
-	private String[] details = {"선택하세요","대여단가 관리","초기화면"};
+	private String[] details = {"선택하세요","대여단가 관리","차량제원 관리"};
 	private FuelManagerContent inputFuelPanel;
 	private ManufacturerManagerContent inputManufacturer;
 	private CarModelContent inputCarModel;
@@ -114,17 +114,21 @@ public class AdminMainCarManagerCarDetail extends JPanel{
 		add(button);
 	}
 	private void openDetailFrame(Object selected) {
-		JFrame frame = AdminMain.getInstance();
-		frame.getContentPane().removeAll();
-			if(selected==details[0]||selected==null){
+		if(selected==null) {
+			JOptionPane.showMessageDialog(null, "취소하셨습니다");
+		}else if(selected==details[0]){
 			JOptionPane.showMessageDialog(null, "세부사향을 선택하세요");
 		}else if(selected==details[1]) {
+			JFrame frame = AdminMain.getInstance();
+			frame.getContentPane().removeAll();
 			frame.getContentPane().add(new AdminMainCarManagerRentalPrice(), BorderLayout.CENTER);
-		}else if(selected==details[2]) {
-			frame.getContentPane().add(new AdminMainCarManager(), BorderLayout.CENTER);
-		}
 			frame.setVisible(true);
-		
+		}else if(selected==details[2]){
+			JFrame frame = AdminMain.getInstance();
+			frame.getContentPane().removeAll();
+			frame.getContentPane().add(new AdminMainCarManager(), BorderLayout.CENTER);
+			frame.setVisible(true);
+		}
 	}
 	
 }
