@@ -28,7 +28,7 @@ public class AdminMainClientManager extends JPanel {
 	public AdminMainClientManager() {
 		setBounds(100, 100, 974, 751);
 		setLayout(null);
-		
+
 		inputPanel = new ClientManagerContent();
 		inputPanel.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.RAISED, null, null)), " \uACE0\uAC1D \uAD00\uB9AC  ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		inputPanel.setBounds(12, 5, 950, 375);
@@ -42,7 +42,7 @@ public class AdminMainClientManager extends JPanel {
 		clientListPanel.setLayout(null);
 		
 		inputPanel.setClientListManager(clientListPanel);
-		
+		clientListPanel.setClientManager(inputPanel);
 		
 		JButton btnBack = new JButton("나가기");
 		btnBack.addActionListener(new ActionListener() {
@@ -56,10 +56,5 @@ public class AdminMainClientManager extends JPanel {
 		});
 		btnBack.setBounds(865, 726, 97, 23);
 		add(btnBack);
-	}
-
-	public int totalList() {
-		List<User> lists =  UserService.getInstance().selectUserByAll();
-		return lists.size();
 	}
 }

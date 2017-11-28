@@ -29,6 +29,7 @@ import kr.or.dgit.RentCar_Project.dto.Gender;
 import kr.or.dgit.RentCar_Project.dto.User;
 import kr.or.dgit.RentCar_Project.dto.UserGrade;
 import kr.or.dgit.RentCar_Project.frame.AdminMain;
+import kr.or.dgit.RentCar_Project.frame.AdminMainClientGradeManager;
 import kr.or.dgit.RentCar_Project.frame.AdminMainClientManagerUserList;
 import kr.or.dgit.RentCar_Project.service.UserGradeService;
 import kr.or.dgit.RentCar_Project.service.UserService;
@@ -53,12 +54,12 @@ public class ClientManagerContent extends JPanel implements ActionListener{
 	private JPanel addrPanel;
 	private JTextField tfAddr;
 	
-	
 	public void setClientListManager(ClientlListManagerContent clientListManager) {
 		this.clientListManager = clientListManager;
 	}
 
 	public ClientManagerContent() {
+	
 		setBounds(100, 100, 954, 362);
 		setLayout(null);
 		
@@ -165,6 +166,20 @@ public class ClientManagerContent extends JPanel implements ActionListener{
 		tfAddr.setEnabled(false);
 		
 		JButton btnGrade = new JButton("등급관리");
+		btnGrade.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							AdminMainClientGradeManager frame = new AdminMainClientGradeManager();
+							frame.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+			}
+		});
 		btnGrade.setBounds(850, 63, 88, 22);
 		add(btnGrade);
 		
@@ -175,6 +190,12 @@ public class ClientManagerContent extends JPanel implements ActionListener{
 	
 	public ComboBoxComponent<User> getComboUserCode() {
 		return comboUserCode;
+	}
+	
+	
+
+	public ComboBoxComponent<UserGrade> getComboUserCodeGrade() {
+		return comboUserCodeGrade;
 	}
 
 	public void setUserGradeComboBoxModel() {
@@ -268,9 +289,7 @@ public class ClientManagerContent extends JPanel implements ActionListener{
 			tfAddr.setText(uc.getAddr());
 			clientListManager.listClient.setFull(false);
 			clientListManager.listClient.setUserCode(userCode);
-			clientListManager.listClient.loadDate();
-			clientListManager.lblNum.setText("1/1");
-			
+			clientListManager.listClient.loadDate();	
 		}
 		
 		if(e.getSource()==btnUpdate) {

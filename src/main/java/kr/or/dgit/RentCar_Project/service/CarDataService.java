@@ -1,6 +1,7 @@
 package kr.or.dgit.RentCar_Project.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.JOptionPane;
 
@@ -120,10 +121,10 @@ public class CarDataService implements CarDataDao {
 	}
 
 	@Override
-	public List<CarData> selectCarDataByCarValue(CarData carData) {
+	public List<CarData> selectCarDataByCarValue(Map<String,Object> map) {
 		try (SqlSession sqlsession = MyBatisSqlSessionFactory.getSqlSessionFactory().openSession();) {
 			carDataDao = sqlsession.getMapper(CarDataDao.class);
-			return carDataDao.selectCarDataByCarValue(carData);
+			return carDataDao.selectCarDataByCarValue(map);
 		}
 	}
 

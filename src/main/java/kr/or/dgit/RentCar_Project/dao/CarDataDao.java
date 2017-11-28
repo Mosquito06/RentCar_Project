@@ -1,6 +1,7 @@
 package kr.or.dgit.RentCar_Project.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import kr.or.dgit.RentCar_Project.dto.CarData;
 
@@ -15,5 +16,5 @@ public interface CarDataDao {
 	List<CarData> selectCarDataByFuel(String fuel);
 	List<CarData> selectCarDataByOld();
 	List<CarData> selectCarDataBySeater();
-	List<CarData> selectCarDataByCarValue(CarData carData);
+	List<CarData> selectCarDataByCarValue(Map<String,Object> map);
 }
