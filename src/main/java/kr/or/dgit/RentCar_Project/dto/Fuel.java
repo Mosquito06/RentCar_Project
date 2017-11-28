@@ -45,8 +45,10 @@ public class Fuel {
 	public String toString() {
 		if(comboType==0) {
 			return String.format("%s",fuelType);
-		}else {
+		}else if(comboType==1) {
 			return String.format("%s",fuelCode);
+		}else {
+			return String.format("%s(%s)",fuelCode,fuelType);
 		}
 		
 	}

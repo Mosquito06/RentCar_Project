@@ -85,7 +85,13 @@ public class CarModelContent extends JPanel implements ActionListener {
 		if (cmCode.isEmptyCheck() && carModel.isEmptyCheck()) {
 			return false;
 		} else {
-			cmCode.requestFocus();
+			return true;
+		}
+	}
+	public boolean codeEmptyCheck() {
+		if(cmCode.isEmptyCheck()) {
+			return false;
+		}else {
 			return true;
 		}
 	}
@@ -106,11 +112,20 @@ public class CarModelContent extends JPanel implements ActionListener {
 					carModelService.insertCarModel(new CarModel(carModelCode, cModel));
 					carModelListContent.cmTable.loadDate();
 					carModelListContent.setCarModelComboBoxModel();
+					setCarModelValueClear();
+					setActive(false);
 				} else {
 					JOptionPane.showMessageDialog(null, "취소되었습니다");
+					return;
 				}
 			} else {
 				JOptionPane.showMessageDialog(null, "공백이 존재합니다");
+				if(carModelCode.equals("")) {
+					cmCode.getTextField().requestFocus();
+				}else {
+					carModel.getTextField().requestFocus();
+				}
+				return;
 			}
 
 		}
@@ -121,29 +136,41 @@ public class CarModelContent extends JPanel implements ActionListener {
 					carModelService.updateCarModel(new CarModel(carModelCode, cModel));
 					carModelListContent.cmTable.loadDate();
 					carModelListContent.setCarModelComboBoxModel();
+					setCarModelValueClear();
+					setActive(false);
 				} else {
 					JOptionPane.showMessageDialog(null, "취소되었습니다");
+					return;
 				}
 			}else {
 				JOptionPane.showMessageDialog(null, "공백이 존재합니다");
+				if(carModelCode.equals("")) {
+					cmCode.getTextField().requestFocus();
+				}else {
+					carModel.getTextField().requestFocus();
+				}
+				return;
 			}
 		}
 		if (e.getSource() == btnDelete) {
-			if (!isEmptyCheck()) {
+			if (!codeEmptyCheck()) {
 				int delete = JOptionPane.showConfirmDialog(null,"입력 데이터를 삭제하시겠습니까?", "Message", JOptionPane.YES_NO_OPTION);
 				if (delete == 0) {
 					carModelService.deleteCarModel(new CarModel(carModelCode, cModel));
 					carModelListContent.cmTable.loadDate();
 					carModelListContent.setCarModelComboBoxModel();
+					setCarModelValueClear();
+					setActive(false);
 				} else {
 					JOptionPane.showMessageDialog(null, "취소되었습니다");
+					return;
 				}
 			}else {
 				JOptionPane.showMessageDialog(null, "공백이 존재합니다");
+				cmCode.getTextField().requestFocus();
 			}
 			
 		}
-		setCarModelValueClear();
-		setActive(false);
+		
 	}
 }

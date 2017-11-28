@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Vector;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
@@ -57,9 +58,14 @@ public class FuelListManagerContent extends JPanel implements ActionListener{
 	}
 	public void setFuelComboBoxModel() {
 		List<Fuel> lists = FuelService.getInstance().selectFuelByAll();
+		Fuel fu = new Fuel();
+		fu.setFuelCode("선택하세요");
+		fu.setFuelType("선택");
+		lists.add(0,fu);
+		
 		Vector<Fuel> fuelCode = new Vector<>();
 		for(Fuel f : lists) {
-			f.setComboType(1);
+			f.setComboType(2);
 			fuelCode.add(f);
 		}
 		fuel.setComboBoxModel(fuelCode);
@@ -68,13 +74,21 @@ public class FuelListManagerContent extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==btnSearch) {
-			Fuel fuelKey = fuel.getComboboxValue();
-			fuelTable.setFull(false);
-			fuelTable.setFuel(fuelKey);
-			fuelTable.loadDate();
-			fmContent.getFuelCode().setTextValue(fuelKey.getFuelCode());
-			fmContent.getFuelType().setTextValue(fuelKey.getFuelType());
-			fmContent.setActive(true);
+			if(fuel.getComboBox().getSelectedIndex()!=0) {
+				Fuel fuelKey = fuel.getComboboxValue();
+				fuelTable.setFull(false);
+				fuelTable.setFuel(fuelKey);
+				fuelTable.loadDate();
+				fmContent.getFuelCode().setTextValue(fuelKey.getFuelCode());
+				fmContent.getFuelType().setTextValue(fuelKey.getFuelType());
+				fmContent.setActive(true);
+			}else {
+				JOptionPane.showMessageDialog(null, "검색창을 선택하세요");
+				fuelTable.setFull(true);
+				fuelTable.loadDate();
+				fmContent.setFuelTextValueClear();
+				fmContent.setActive(false);
+			}
 		}
 		if(e.getSource()==btnAll) {
 			fuelTable.setFull(true);

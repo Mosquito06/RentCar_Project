@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Vector;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
@@ -57,9 +58,14 @@ public class ManufacturerListContent extends JPanel implements ActionListener{
 	
 	public void setManufacturerComboBoxModel(){
 		List<Manufacturer> lists = ManufacturerService.getInstance().selectManufacturerByAll();
+		Manufacturer manu = new Manufacturer();
+		manu.setManufacturerCode("선택하세요");
+		manu.setManufacturerName("선택");
+		lists.add(0,manu);
+		
 		Vector<Manufacturer> mfCode = new Vector<>();
 		for(Manufacturer mf : lists) {
-			mf.setComboType(1);
+			mf.setComboType(2);
 			mfCode.add(mf);
 		}
 		manufacturer.setComboBoxModel(mfCode);
@@ -68,13 +74,22 @@ public class ManufacturerListContent extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==btnSearch) {
-			Manufacturer mf = manufacturer.getComboboxValue();
-			mfTable.setFull(false);
-			mfTable.setMfCode(mf);
-			mfTable.loadDate();
-			mfManagerContent.getMfCode().setTextValue(mf.getManufacturerCode());
-			mfManagerContent.getMfName().setTextValue(mf.getManufacturerName());
-			mfManagerContent.setActive(true);
+			if(manufacturer.getComboBox().getSelectedIndex()!=0) {
+				Manufacturer mf = manufacturer.getComboboxValue();
+				mfTable.setFull(false);
+				mfTable.setMfCode(mf);
+				mfTable.loadDate();
+				mfManagerContent.getMfCode().setTextValue(mf.getManufacturerCode());
+				mfManagerContent.getMfName().setTextValue(mf.getManufacturerName());
+				mfManagerContent.setActive(true);
+			}else {
+				JOptionPane.showMessageDialog(null, "검색창을 선택하세요");
+				mfTable.setFull(true);
+				mfTable.loadDate();
+				mfManagerContent.setManufacturerTextValueClear();
+				mfManagerContent.setActive(false);
+			}
+		
 		}
 		if(e.getSource()==btnAll) {
 			mfTable.setFull(true);

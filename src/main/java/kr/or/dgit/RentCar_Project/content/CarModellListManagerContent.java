@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Vector;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
@@ -57,9 +58,15 @@ public class CarModellListManagerContent extends JPanel implements ActionListene
 	
 	public void setCarModelComboBoxModel() {
 		List<CarModel> lists = CarModelService.getInstance().selectCarModelByAll();
+		CarModel carm = new CarModel();
+		carm.setCarModel("선택");
+		carm.setCarModelCode("선택하세요");
+		
+		lists.add(0,carm);
+		
 		Vector<CarModel> cmCode = new Vector<>();
 		for(CarModel cm:lists) {
-			cm.setComboType(0);
+			cm.setComboType(4);
 			cmCode.add(cm);
 		}
 		carModel.setComboBoxModel(cmCode);
@@ -68,13 +75,22 @@ public class CarModellListManagerContent extends JPanel implements ActionListene
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==btnSearch) {
-			cmTable.setFull(false);
-			CarModel cmCode = carModel.getComboboxValue();
-			cmTable.setCmCode(cmCode);
-			cmTable.loadDate();
-			cmContent.getCmCode().setTextValue(cmCode.getCarModelCode());
-			cmContent.getCarModel().setTextValue(cmCode.getCarModel());
-			cmContent.setActive(true);
+			if(carModel.getComboBox().getSelectedIndex()!=0) {
+				cmTable.setFull(false);
+				CarModel cmCode = carModel.getComboboxValue();
+				cmTable.setCmCode(cmCode);
+				cmTable.loadDate();
+				cmContent.getCmCode().setTextValue(cmCode.getCarModelCode());
+				cmContent.getCarModel().setTextValue(cmCode.getCarModel());
+				cmContent.setActive(true);
+			}else {
+				JOptionPane.showMessageDialog(null, "검색창을 선택하세요");
+				cmTable.setFull(true);
+				cmTable.loadDate();
+				cmContent.setCarModelValueClear();
+				cmContent.setActive(false);
+			}
+			
 		}
 		if(e.getSource()==btnAll) {
 			cmTable.setFull(true);

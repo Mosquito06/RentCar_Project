@@ -75,12 +75,9 @@ public class ManufacturerManagerContent extends JPanel 	implements ActionListene
 	public TextFieldComponent getMfCode() {
 		return mfCode;
 	}
-
-
 	public TextFieldComponent getMfName() {
 		return mfName;
 	}
-
 
 	public void setManufacturerTextValueClear() {
 		mfCode.setTextValue("");
@@ -90,44 +87,95 @@ public class ManufacturerManagerContent extends JPanel 	implements ActionListene
 		btnUpdate.setEnabled(active);
 		btnDelete.setEnabled(active);
 	}
+	public boolean isEmptyCheck(){
+		if(mfCode.isEmptyCheck()&&mfName.isEmptyCheck()) {
+			return false;
+		}else {
+			return true;
+		}
+	}
+	public boolean codeEmptyCheck() {
+		if(mfCode.isEmptyCheck()) {
+			return false;
+		}else {
+			return true;
+		}
+	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String manufacturerCode = mfCode.getTextValue();
 		String manufacturerName = mfName.getTextValue();
 		ManufacturerService manufacturerService = ManufacturerService.getInstance();
 		
+		
 		if(e.getSource()==btnAdd) {
-			int insert = JOptionPane.showConfirmDialog(null, "입력 데이터를 추가하시겠습니까?", "Message", JOptionPane.YES_NO_OPTION);
-			if(insert ==0) {
-				manufacturerService.insertManufacturer(new Manufacturer(manufacturerCode, manufacturerName));
-				mfList.mfTable.loadDate();
-				mfList.setManufacturerComboBoxModel();
+			if(!isEmptyCheck()) {
+				int insert = JOptionPane.showConfirmDialog(null, "입력 데이터를 추가하시겠습니까?", "Message", JOptionPane.YES_NO_OPTION);
+				if(insert ==0) {
+					manufacturerService.insertManufacturer(new Manufacturer(manufacturerCode, manufacturerName));
+					mfList.mfTable.loadDate();
+					mfList.setManufacturerComboBoxModel();
+					setManufacturerTextValueClear();
+					setActive(false);
+				}else {
+					JOptionPane.showMessageDialog(null, "취소되었습니다");
+					return;
+				}
 			}else {
-				JOptionPane.showMessageDialog(null, "취소되었습니다");
-			}	
-			
+				JOptionPane.showMessageDialog(null, "공백이 존재합니다");
+				if(manufacturerCode.equals("")) {
+					mfCode.getTextField().requestFocus();
+				}else {
+					mfName.getTextField().requestFocus();
+				}
+				return;
+			}
 		}
 		if(e.getSource()==btnUpdate) {
-			int update = JOptionPane.showConfirmDialog(null, "입력 데이터를 수정하시겠습니까?", "Message", JOptionPane.YES_NO_OPTION);
-			if(update==0) {
-				manufacturerService.updateManufacturer(new Manufacturer(manufacturerCode, manufacturerName));
-				mfList.mfTable.loadDate();
-				mfList.setManufacturerComboBoxModel();
+			
+			if(!isEmptyCheck()) {
+				int update = JOptionPane.showConfirmDialog(null, "입력 데이터를 수정하시겠습니까?", "Message", JOptionPane.YES_NO_OPTION);
+				if(update==0) {
+					manufacturerService.updateManufacturer(new Manufacturer(manufacturerCode, manufacturerName));
+					mfList.mfTable.loadDate();
+					mfList.setManufacturerComboBoxModel();
+					setManufacturerTextValueClear();
+					setActive(false);
+				}else {
+					JOptionPane.showMessageDialog(null, "취소되었습니다");
+					return;
+				}
 			}else {
-				JOptionPane.showMessageDialog(null, "취소되었습니다");
+				JOptionPane.showMessageDialog(null, "공백이 존재합니다");
+				if(manufacturerCode.equals("")) {
+					mfCode.getTextField().requestFocus();
+				}else {
+					mfName.getTextField().requestFocus();
+				}
+				return;
 			}
+			
 		}
 		if(e.getSource()==btnDelete) {
-			int delete = JOptionPane.showConfirmDialog(null, "입력 데이터를 삭제하시겠습니까?", "Message", JOptionPane.YES_NO_OPTION);
-			if(delete==0) {
-				manufacturerService.deleteManufacturer(new Manufacturer(manufacturerCode, manufacturerName));
-				mfList.mfTable.loadDate();
-				mfList.setManufacturerComboBoxModel();
+			if(!codeEmptyCheck()) {
+				int delete = JOptionPane.showConfirmDialog(null, "입력 데이터를 삭제하시겠습니까?", "Message", JOptionPane.YES_NO_OPTION);
+				if(delete==0) {
+					manufacturerService.deleteManufacturer(new Manufacturer(manufacturerCode, manufacturerName));
+					mfList.mfTable.loadDate();
+					mfList.setManufacturerComboBoxModel();
+					setManufacturerTextValueClear();
+					setActive(false);
+				}else {
+					JOptionPane.showMessageDialog(null, "취소되었습니다");
+					return;
+				}
 			}else {
-				JOptionPane.showMessageDialog(null, "취소되었습니다");
+				JOptionPane.showMessageDialog(null, "코드를 입력하세요");
+				mfCode.getTextField().requestFocus();
+				return;
 			}
+			
 		}
-		setManufacturerTextValueClear();
-		setActive(false);
+		
 	}
 }

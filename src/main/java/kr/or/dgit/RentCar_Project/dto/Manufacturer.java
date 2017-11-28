@@ -40,8 +40,10 @@ public class Manufacturer {
 	public String toString() {
 		if (comboType == 1) {
 			return String.format("%s", manufacturerCode);
-		}else {
+		}else if(comboType == 0){
 			return String.format("%s", manufacturerName);
+		}else {
+			return String.format("%s(%s)",manufacturerCode,manufacturerName);
 		}
 	}
 
