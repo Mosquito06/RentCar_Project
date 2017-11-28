@@ -1,6 +1,8 @@
 package kr.or.dgit.RentCar_Project.frame;
 
 import java.awt.Font;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
@@ -35,10 +37,15 @@ public class AdminMainClientManagerUserList extends JFrame {
 
 	public AdminMainClientManagerUserList(User userCode) {
 		
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		Image img = tk.getImage(System.getProperty("user.dir") + "\\images\\Instapaper icon.png");
+		setIconImage(img);
+		
 		setResizable(false);
 		setTitle(userCode.getUserName()+"님의 이용내역");
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 963, 442);
+		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
