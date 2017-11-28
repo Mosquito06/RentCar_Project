@@ -115,6 +115,7 @@ public class UserMainHistory extends JPanel {
 		rent = new Rent();
 		rent.setUserCode(ComfirmUser);
 		
+	
 		findRent = RentService.getInstance().selectRentByUserCode(rent);
 		
 		SimpleDateFormat dateFirstFormat = new SimpleDateFormat("yyyy/MM/01");
@@ -128,9 +129,18 @@ public class UserMainHistory extends JPanel {
 		historyTable = new UserHistoryTable();
 		historyTable.setBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.LOWERED, null, null)));
 		historyTable.setBounds(0, 116, 974, 635);
-		historyTable.setRent(setDate(firstDate, lastDate));
-		historyTable.loadDate();
-		add(historyTable);
+		
+		// 이용내역 없을 시 setRent 함수 호출을 막기 위한 코드		
+		if(findRent.size() == 0) {
+			historyTable.loadDate();
+			add(historyTable);
+			return;
+		}else {
+			historyTable.setRent(setDate(firstDate, lastDate));
+			historyTable.loadDate();
+			add(historyTable);
+		}
+			
 	}
 	
 	// 날짜 설정 함수
