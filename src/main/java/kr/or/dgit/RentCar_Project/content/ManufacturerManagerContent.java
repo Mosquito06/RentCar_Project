@@ -45,7 +45,7 @@ public class ManufacturerManagerContent extends JPanel 	implements ActionListene
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int clear = JOptionPane.showConfirmDialog(null, "입력 데이터를 취소하시겠습니까?", "확인창", JOptionPane.OK_CANCEL_OPTION);
+				int clear = JOptionPane.showConfirmDialog(null, "입력 데이터를 취소하시겠습니까?", "Message", JOptionPane.YES_NO_OPTION);
 				if(clear==0) {
 					setManufacturerTextValueClear();
 					setActive(false);
@@ -97,7 +97,7 @@ public class ManufacturerManagerContent extends JPanel 	implements ActionListene
 		ManufacturerService manufacturerService = ManufacturerService.getInstance();
 		
 		if(e.getSource()==btnAdd) {
-			int insert = JOptionPane.showConfirmDialog(null, "입력 데이터를 추가하시겠습니까?", "확인창", JOptionPane.OK_CANCEL_OPTION);
+			int insert = JOptionPane.showConfirmDialog(null, "입력 데이터를 추가하시겠습니까?", "Message", JOptionPane.YES_NO_OPTION);
 			if(insert ==0) {
 				manufacturerService.insertManufacturer(new Manufacturer(manufacturerCode, manufacturerName));
 				mfList.mfTable.loadDate();
@@ -108,7 +108,7 @@ public class ManufacturerManagerContent extends JPanel 	implements ActionListene
 			
 		}
 		if(e.getSource()==btnUpdate) {
-			int update = JOptionPane.showConfirmDialog(null, "입력 데이터를 수정하시겠습니까?", "확인창", JOptionPane.OK_CANCEL_OPTION);
+			int update = JOptionPane.showConfirmDialog(null, "입력 데이터를 수정하시겠습니까?", "Message", JOptionPane.YES_NO_OPTION);
 			if(update==0) {
 				manufacturerService.updateManufacturer(new Manufacturer(manufacturerCode, manufacturerName));
 				mfList.mfTable.loadDate();
@@ -118,7 +118,7 @@ public class ManufacturerManagerContent extends JPanel 	implements ActionListene
 			}
 		}
 		if(e.getSource()==btnDelete) {
-			int delete = JOptionPane.showConfirmDialog(null, "입력 데이터를 삭제하시겠습니까?", "확인창", JOptionPane.OK_CANCEL_OPTION);
+			int delete = JOptionPane.showConfirmDialog(null, "입력 데이터를 삭제하시겠습니까?", "Message", JOptionPane.YES_NO_OPTION);
 			if(delete==0) {
 				manufacturerService.deleteManufacturer(new Manufacturer(manufacturerCode, manufacturerName));
 				mfList.mfTable.loadDate();

@@ -74,7 +74,7 @@ public class CarModellListManagerContent extends JPanel implements ActionListene
 			cmTable.loadDate();
 			cmContent.getCmCode().setTextValue(cmCode.getCarModelCode());
 			cmContent.getCarModel().setTextValue(cmCode.getCarModel());
-			cmContent.setEnabled(true);
+			cmContent.setActive(true);
 		}
 		if(e.getSource()==btnAll) {
 			cmTable.setFull(true);
