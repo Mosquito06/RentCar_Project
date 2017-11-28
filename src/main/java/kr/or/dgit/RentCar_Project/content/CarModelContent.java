@@ -61,10 +61,11 @@ public class CarModelContent extends JPanel implements ActionListener {
 				int clear = JOptionPane.showConfirmDialog(null, "입력 데이터를 취소하시겠습니까?", "Message", JOptionPane.YES_NO_OPTION);
 				if (clear == 0)
 					setCarModelValueClear();
+					setActive(false);
 			}
 		});
 		add(btnCancel);
-
+		setActive(false);
 	}
 
 	public TextFieldComponent getCmCode() {
@@ -88,7 +89,10 @@ public class CarModelContent extends JPanel implements ActionListener {
 			return true;
 		}
 	}
-
+	public void setActive(boolean active) {
+		btnUpdate.setEnabled(active);
+		btnDelete.setEnabled(active);
+	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String carModelCode = cmCode.getTextValue();
@@ -140,5 +144,6 @@ public class CarModelContent extends JPanel implements ActionListener {
 			
 		}
 		setCarModelValueClear();
+		setActive(false);
 	}
 }

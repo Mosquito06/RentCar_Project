@@ -58,12 +58,16 @@ public class FuelManagerContent extends JPanel implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int clear = JOptionPane.showConfirmDialog(null, "입력 데이터를 취소하시겠습니까?", "Message", JOptionPane.YES_NO_OPTION);
-				if (clear == 0)
+				if (clear == 0) {
 					setFuelTextValueClear();
+					setActive(false);
+				}
+					
 			}
 		});
 		add(btnCancel);
-
+		
+		setActive(false);
 	}
 
 	public TextFieldComponent getFuelCode() {
@@ -86,7 +90,10 @@ public class FuelManagerContent extends JPanel implements ActionListener {
 	public JButton getBtnDelete() {
 		return btnDelete;
 	}
-
+	public void setActive(boolean active) {
+		btnUpdate.setEnabled(active);
+		btnDelete.setEnabled(active);
+	}
 	public boolean isEmptyCheck() {
 		if (fuelCode.isEmptyCheck() && fuelType.isEmptyCheck()) {
 			return false;
@@ -159,6 +166,7 @@ public class FuelManagerContent extends JPanel implements ActionListener {
 
 		}
 		setFuelTextValueClear();
+		setActive(false);
 	}
 
 }

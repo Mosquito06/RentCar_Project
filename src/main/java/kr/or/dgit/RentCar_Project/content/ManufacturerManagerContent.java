@@ -46,7 +46,10 @@ public class ManufacturerManagerContent extends JPanel 	implements ActionListene
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int clear = JOptionPane.showConfirmDialog(null, "입력 데이터를 취소하시겠습니까?", "확인창", JOptionPane.OK_CANCEL_OPTION);
-				if(clear==0)setManufacturerTextValueClear();
+				if(clear==0) {
+					setManufacturerTextValueClear();
+					setActive(false);
+				}
 				
 			}
 		});
@@ -66,6 +69,8 @@ public class ManufacturerManagerContent extends JPanel 	implements ActionListene
 		btnDelete.addActionListener(this);
 		btnDelete.setBounds(163, 117, 66, 23);
 		add(btnDelete);
+		
+		setActive(false);
 	}
 	public TextFieldComponent getMfCode() {
 		return mfCode;
@@ -81,7 +86,10 @@ public class ManufacturerManagerContent extends JPanel 	implements ActionListene
 		mfCode.setTextValue("");
 		mfName.setTextValue("");
 	}
-	
+	public void setActive(boolean active) {
+		btnUpdate.setEnabled(active);
+		btnDelete.setEnabled(active);
+	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String manufacturerCode = mfCode.getTextValue();
@@ -120,5 +128,6 @@ public class ManufacturerManagerContent extends JPanel 	implements ActionListene
 			}
 		}
 		setManufacturerTextValueClear();
+		setActive(false);
 	}
 }

@@ -74,12 +74,14 @@ public class ManufacturerListContent extends JPanel implements ActionListener{
 			mfTable.loadDate();
 			mfManagerContent.getMfCode().setTextValue(mf.getManufacturerCode());
 			mfManagerContent.getMfName().setTextValue(mf.getManufacturerName());
+			mfManagerContent.setActive(true);
 		}
 		if(e.getSource()==btnAll) {
 			mfTable.setFull(true);
 			mfTable.loadDate();
 			mfManagerContent.setManufacturerTextValueClear();
 			manufacturer.getComboBox().setSelectedIndex(0);
+			mfManagerContent.setActive(false);
 		}
 	}
 
