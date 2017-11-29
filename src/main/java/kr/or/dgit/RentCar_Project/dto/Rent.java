@@ -199,10 +199,10 @@ public class Rent {
 			return "LPG";
 		}
 	}
-	public Object[] toRentTable() {
+	public Object[] toRentTable(Date endDate) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 		User user  = UserService.getInstance().selectUserByUserCode(userCode);	
 		return new Object[] {userCode.getUserCode(),user.getUserName(),user.getPhone(),sdf.format(dayStart), sdf.format(dayEnd),
-				userTime, String.format("%,d", discountPrice),String.format("%,d", finalPrice),isInsurance,situation};
+				userTime, String.format("%,d", discountPrice),String.format("%,d", finalPrice),isInsurance, getSituationTostring(endDate)};
 	}
 }

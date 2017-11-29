@@ -34,7 +34,7 @@ public class RentTable extends AbstractTable {
 		Object[][] datas = new Object[lists.size()][];
 		for(int i=0; i<lists.size();i++) {
 			Rent r = lists.get(i);
-			datas[i] = r.toRentTable();
+			datas[i] = r.toRentTable(lists.get(i).getDayEnd());
 		}
 		return datas;
 	}
