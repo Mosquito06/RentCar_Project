@@ -250,9 +250,9 @@ public class AdminMainPerformence extends JPanel {
 		add(adminTable);
 
 		// 그래프 변경
-		abstractPieChart = new PerformenceTotalPieChart("성과분석", "", "", list, false);
+		abstractPieChart = new PerformenceCarModelPieChart("성과분석", "", "", list, false);
 		// 자세히 보기 차트 출력을 위한 바 차트 생성
-		abstractBarChart = new PerformenceTotalBarChart("성과분석", "차종별", "최종요금", list);
+		abstractBarChart = new PerformenceCarModelBarChart("성과분석", "차종별", "최종요금", list);
 
 		chartPanel.removeAll();
 		JChartLibPanel jChart = abstractPieChart.getPieChart();
