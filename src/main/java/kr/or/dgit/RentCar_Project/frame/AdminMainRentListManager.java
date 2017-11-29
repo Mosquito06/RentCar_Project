@@ -1,35 +1,34 @@
 package kr.or.dgit.RentCar_Project.frame;
 
+import java.awt.Font;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.border.EmptyBorder;
 
+import kr.or.dgit.RentCar_Project.component.TextFieldComponent;
 import kr.or.dgit.RentCar_Project.dto.CarData;
 import kr.or.dgit.RentCar_Project.dto.Rent;
 import kr.or.dgit.RentCar_Project.list.RentTable;
 import kr.or.dgit.RentCar_Project.service.CarDataService;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-import javax.swing.JRadioButton;
-import javax.swing.JCheckBox;
-import javax.swing.border.TitledBorder;
-import javax.swing.border.LineBorder;
-import java.awt.Color;
-import java.awt.Image;
-import java.awt.Toolkit;
-
-import kr.or.dgit.RentCar_Project.component.ComboBoxComponent;
-
 @SuppressWarnings("serial")
-public class AdminMainRentListManager extends JFrame implements ActionListener{
+public class AdminMainRentListManager extends JFrame{
 
 	private JPanel contentPane;
 	private RentTable rentTable;
 	private JButton btnOk;
-	
+	private JRadioButton radioCancellation;
+	private JRadioButton radioReservation;
+
 	public AdminMainRentListManager(Rent rent) {
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		Image img = tk.getImage(System.getProperty("user.dir") + "\\images\\Instapaper icon.png");
@@ -40,22 +39,35 @@ public class AdminMainRentListManager extends JFrame implements ActionListener{
 
 		setTitle(rent.getCarCode() + " ("+carCode.getCarName()+") "+"대여 기록");
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		setBounds(100, 100, 949, 580);
+		setBounds(100, 100, 936, 580);
 		setLocationRelativeTo(null);
+		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		TextFieldComponent carCodePanel = new TextFieldComponent("차코드");
+		carCodePanel.setTextValue(carCode.getCarCode());
+		carCodePanel.setBounds(93, 10, 226, 46);
+		carCodePanel.setEnable(false);
+		contentPane.add(carCodePanel);
+		
+		TextFieldComponent carNamePanel = new TextFieldComponent("차종명");
+		carNamePanel.setTextValue(carCode.getCarName());
+		carNamePanel.setEnable(false);
+		carNamePanel.setBounds(331, 10, 308, 46);
+		contentPane.add(carNamePanel);
+		
 		rentTable = new RentTable();
-		rentTable.setBounds(12, 91, 919, 417);
+		rentTable.setBounds(12, 66, 906, 442);
 		rentTable.setKey("carCode");
 		rentTable.setValue(carCode);
 		rentTable.loadDate();
 		contentPane.add(rentTable);
-		
+	
 		btnOk = new JButton("확인");
-		btnOk.setBounds(846, 518, 85, 23);
+		btnOk.setBounds(833, 518, 85, 23);
 		btnOk.addActionListener(new ActionListener() {
 			
 			@Override
@@ -64,32 +76,55 @@ public class AdminMainRentListManager extends JFrame implements ActionListener{
 			}
 		});
 		contentPane.add(btnOk);
+
+		radioReservation = new JRadioButton("예약(완료)내역");
+		radioReservation.setFont(new Font("굴림", Font.PLAIN, 15));
+		radioReservation.addItemListener(new ItemListener() {
+	
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				
+				if(radioReservation.isSelected()) {
+					radioCancellation.setEnabled(false);
+					rentTable.setKey("situation");
+					rentTable.setValue(rent.getSituation().RESERVATION);
+					rentTable.loadDate();
+				}else {
+					radioCancellation.setEnabled(true);
+					rentTable.setKey("situation");
+					rentTable.setValue(null);
+					rentTable.loadDate();
+				}
+				
+			}
+		});
 		
-		JButton btnSearch = new JButton("검색");
-		btnSearch.setBounds(590, 58, 85, 23);
-		contentPane.add(btnSearch);
 		
-		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), " \uC120\uD0DD \uC0AC\uD56D ", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(666, 10, 310, 55);
-		contentPane.add(panel);
-		
-		JRadioButton radioReservation = new JRadioButton("예약기록");
-		radioReservation.setBounds(26, 38, 121, 23);
+		radioReservation.setBounds(690, 37, 136, 23);
 		contentPane.add(radioReservation);
 		
-		JRadioButton radioButton_1 = new JRadioButton("취소기록");
-		radioButton_1.setBounds(207, 38, 121, 23);
-		contentPane.add(radioButton_1);
+		radioCancellation = new JRadioButton("취소내역");
+		radioCancellation.setFont(new Font("굴림", Font.PLAIN, 15));
+		radioCancellation.setBounds(830, 37, 85, 23);
+		radioCancellation.addItemListener(new ItemListener() {
+			
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				if(radioCancellation.isSelected()) {
+					radioReservation.setEnabled(false);
+					rentTable.setKey("situation");
+					rentTable.setValue(rent.getSituation().CANCELLATION);
+					rentTable.loadDate();
+				}else {
+					radioReservation.setEnabled(true);
+					rentTable.setKey("situation");
+					rentTable.setValue(null);
+					rentTable.loadDate();
+				}
+			}
+		});
+		contentPane.add(radioCancellation);
 		
-		JRadioButton radioButton_2 = new JRadioButton("완료기록");
-		radioButton_2.setBounds(354, 38, 121, 23);
-		contentPane.add(radioButton_2);
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 }

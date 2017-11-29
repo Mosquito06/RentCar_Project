@@ -77,7 +77,7 @@ public class CarDataListManagerContent extends JPanel implements ActionListener 
 		add(btnAll);
 
 		search = new ComboBoxComponent<>("차 코드");
-		search.setBounds(179, 23, 395, 35);
+		search.setBounds(161, 23, 427, 35);
 		add(search);
 
 		listCarData = new CarDataTable();
@@ -88,7 +88,7 @@ public class CarDataListManagerContent extends JPanel implements ActionListener 
 		add(listCarData);
 
 		btnSearch = new JButton("검색");
-		btnSearch.setBounds(575, 23, 66, 35);
+		btnSearch.setBounds(588, 23, 66, 35);
 		btnSearch.addActionListener(this);
 		add(btnSearch);
 
@@ -135,14 +135,8 @@ public class CarDataListManagerContent extends JPanel implements ActionListener 
 			cdManagerContent.isAuto.setSelect(isAutoSelected(cdCode.getIsAuto()));
 
 			btnChart.setEnabled(true);
-		}else {
-			JOptionPane.showMessageDialog(null, "검색창을 선택하세요");
-			listCarData.setFull(true);
-			listCarData.loadDate();
-			btnChart.setEnabled(true);
-			cdManagerContent.setClearAll();
+			cdManagerContent.btnActive(true);
 		}
-	
 	}
 
 	public boolean isAutoSelected(IsAuto isAuto) {
@@ -209,6 +203,7 @@ public class CarDataListManagerContent extends JPanel implements ActionListener 
 			cdManagerContent.setClearAll();
 			search.getComboBox().setSelectedIndex(0);
 			btnChart.setEnabled(false);
+			cdManagerContent.btnActive(false);
 		}
 		if (e.getSource() == btnSearch) {
 			if (search.getComboBox().getSelectedIndex() != 0) {
@@ -219,6 +214,7 @@ public class CarDataListManagerContent extends JPanel implements ActionListener 
 				listCarData.setFull(true);
 				listCarData.loadDate();
 				cdManagerContent.setClearAll();
+				cdManagerContent.btnActive(false);
 			}
 
 		}

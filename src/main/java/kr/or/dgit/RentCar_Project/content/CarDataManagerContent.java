@@ -15,6 +15,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Vector;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.imageio.ImageIO;
 import javax.print.attribute.standard.JobMessageFromOperator;
@@ -216,6 +218,7 @@ public class CarDataManagerContent extends JPanel implements ActionListener {
 				if (clear == 0) {
 					setClearAll();
 					cdListManagercontent.btnChart.setEnabled(false);
+					btnActive(false);
 				}
 			}
 		});
@@ -307,6 +310,8 @@ public class CarDataManagerContent extends JPanel implements ActionListener {
 		setManufacturerComboModel();
 		setFuelComboModel();
 		setNumComboModel();
+
+		btnActive(false);
 	}
 
 	public void setClearAll() {
@@ -354,13 +359,67 @@ public class CarDataManagerContent extends JPanel implements ActionListener {
 	}
 
 	public void setNumComboModel() {
-		String[] numArr = {"001", "002", "003", "004", "005", "006", "007", "008", "009", "010", "011", "012",
-				"013", "014", "015", "016", "017", "018", "019", "020" };
+		String[] numArr = { "001", "002", "003", "004", "005", "006", "007", "008", "009", "010", "011", "012", "013",
+				"014", "015", "016", "017", "018", "019", "020" };
 		Vector<String> num = new Vector<>();
 		for (int i = 0; i < numArr.length; i++) {
 			num.add(numArr[i]);
 		}
 		numCombo.setComboBoxModel(num);
+	}
+
+	public boolean isEmptyCheck() {
+		if (carDataCode.isEmptyCheck() && carName.isEmptyCheck() && carSeater.isEmptyCheck()) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	public boolean codeEmptyCheck() {
+		if(carDataCode.isEmptyCheck()) {
+			return false;
+		}else {
+			JOptionPane.showMessageDialog(null, "공백이 존재합니다");
+			carDataCode.getTextField().requestFocus();
+			return true;
+		}
+	}
+
+	public void FindeEmptyText() {
+		if (carDataCode.getTextValue().equals("")) {
+			carDataCode.getTextField().requestFocus();
+		} else if (carName.getTextValue().equals("")) {
+			carName.getTextField().requestFocus();
+		} else if (carSeater.getTextValue().equals("")) {
+			carSeater.getTextField().requestFocus();
+		}
+
+	}
+
+	public boolean carNameCheck(String cName) {
+		Pattern p = Pattern.compile("(^[a-zA-Z가-힣]{1,15}$)");
+		Matcher m = p.matcher(cName);
+		if (m.find()) {
+			return true;
+		} else {
+			JOptionPane.showMessageDialog(null, "차 이름을 정확하게 입력하세요");
+			carName.setTextValue("");
+			carName.getTextField().requestFocus();
+			return false;
+		}
+	}
+
+	public boolean carSeaterCheck(String cSeater) {
+		Pattern p = Pattern.compile("(^[0-9]{1}$)");
+		Matcher m = p.matcher(cSeater);
+		if (m.find()) {
+			return true;
+		} else {
+			JOptionPane.showMessageDialog(null, "인승을 정확하게 입력하세요");
+			carSeater.setTextValue("");
+			carSeater.getTextField().requestFocus();
+			return false;
+		}
 	}
 
 	@Override
@@ -369,8 +428,8 @@ public class CarDataManagerContent extends JPanel implements ActionListener {
 		CarDataService cdService = CarDataService.getInstance();
 		String carCode = carDataCode.getTextValue();
 		String cName = carName.getTextValue();
-		int cOld = Integer.parseInt(carOld.getTextValue());
-		int carNumber = carCount.getSpinnerValue();
+		int cOld = 0;
+		int carNumber = 0;
 		IsAuto auto = getSelectedIsAuto(isAuto.getSelectText());
 		String cSeater = carSeater.getTextValue();
 		CarModel carModelCode = carModelCombo.getComboboxValue();
@@ -378,30 +437,77 @@ public class CarDataManagerContent extends JPanel implements ActionListener {
 		Fuel fuelCode = fuelCombo.getComboboxValue();
 
 		if (e.getSource() == btnAdd) {
-			int insert = JOptionPane.showConfirmDialog(null, "입력 데이터를 추가하시겠습니까?", "Message", JOptionPane.YES_NO_OPTION);
-			if (insert == 0) {
-				String filePath = "";
-				String fileName = "";
+			if (!isEmptyCheck()) {
+				if (carNameCheck(cName)) {
+					if (carSeaterCheck(cSeater)) {
 
-				try {
-					filePath = imgChooser.getSelectedFile().getPath();
-					fileName = imgChooser.getSelectedFile().getName();
-				} catch (Exception e2) {
-					e2.getStackTrace();
-					JOptionPane.showMessageDialog(null, "추후에 이미지를 등록해주세요");
+						try {
+							cOld = Integer.parseInt(carOld.getTextValue());
+							if (cOld == 0) {
+								JOptionPane.showMessageDialog(null, "연식이 0년입니다");
+								carOld.getTextField().requestFocus();
+								return;
+							}
+						} catch (Exception e1) {
+							JOptionPane.showMessageDialog(null, "연식을 다시입력하세요");
+							carOld.setTextValue("");
+							carOld.getTextField().requestFocus();
+							return;
+						}
+
+						try {
+							carNumber = carCount.getSpinnerValue();
+							if (cOld == 0) {
+								JOptionPane.showMessageDialog(null, "차량이 0대입니다");
+								carCount.requestFocus();
+								return;
+							}
+						} catch (Exception e1) {
+							JOptionPane.showMessageDialog(null, "차량대수를 다시입력하세요");
+							carCount.setSpinValue(1);
+							carCount.requestFocus();
+							return;
+						}
+
+						int insert = JOptionPane.showConfirmDialog(null, "입력 데이터를 추가하시겠습니까?", "Message",
+								JOptionPane.YES_NO_OPTION);
+						if (insert == 0) {
+							String filePath = "";
+							String fileName = "";
+
+							try {
+								filePath = imgChooser.getSelectedFile().getPath();
+								fileName = imgChooser.getSelectedFile().getName();
+							} catch (Exception e2) {
+								e2.getStackTrace();
+								JOptionPane.showMessageDialog(null, "추후에 이미지를 등록해주세요");
+							}
+
+							cdService.insertCarData(new CarData(carCode, cName, fileName, cOld, carNumber, auto,
+									cSeater, carModelCode, manufacturerCode, fuelCode));
+							storeImg(filePath, fileName);
+							cdListManagercontent.listCarData.loadDate();
+							cdListManagercontent.setSearchCarCodeComboModel();
+
+							addInsertInformation(insert);
+
+						} else {
+							JOptionPane.showMessageDialog(null, "취소되었습니다");
+							return;
+						}
+					} else {
+						return;
+					}
+				} else {
+					return;
 				}
 
-				cdService.insertCarData(new CarData(carCode, cName, fileName, cOld, carNumber, auto, cSeater,
-						carModelCode, manufacturerCode, fuelCode));
-				storeImg(filePath, fileName);
-				cdListManagercontent.listCarData.loadDate();
-				cdListManagercontent.setSearchCarCodeComboModel();
-
-				addInsertInformation(insert);
-
 			} else {
-				JOptionPane.showMessageDialog(null, "취소되었습니다");
+				JOptionPane.showMessageDialog(null, "공백이 존재합니다");
+				FindeEmptyText();
+				return;
 			}
+
 		}
 
 		if (e.getSource() == btnUpdate) {
@@ -412,40 +518,95 @@ public class CarDataManagerContent extends JPanel implements ActionListener {
 			String fileName = "";
 
 			if (update == 0) {
-				try {
-					filePath = imgChooser.getSelectedFile().getPath();
-					fileName = imgChooser.getSelectedFile().getName();
-				} catch (Exception e1) {
-					e1.getStackTrace();
-					fileName = cdListManagercontent.getSearch().getComboboxValue().getCarImage();
-					filePath = System.getProperty("user.dir") + "\\images\\car\\" + fileName;
+				if (!isEmptyCheck()) {
+					if (carNameCheck(cName)) {
+						if (carSeaterCheck(cSeater)) {
+
+							try {
+								cOld = Integer.parseInt(carOld.getTextValue());
+								if (cOld == 0) {
+									JOptionPane.showMessageDialog(null, "연식이 0년입니다");
+									carOld.getTextField().requestFocus();
+									return;
+								}
+							} catch (Exception e1) {
+								JOptionPane.showMessageDialog(null, "연식을 다시입력하세요");
+								carOld.setTextValue("");
+								carOld.getTextField().requestFocus();
+								return;
+							}
+
+							try {
+								carNumber = carCount.getSpinnerValue();
+								if (cOld == 0) {
+									JOptionPane.showMessageDialog(null, "차량이 0대입니다");
+									carCount.requestFocus();
+									return;
+								}
+							} catch (Exception e1) {
+								JOptionPane.showMessageDialog(null, "차량대수를 다시입력하세요");
+								carCount.setSpinValue(1);
+								carCount.requestFocus();
+								return;
+							}
+
+							try {
+								filePath = imgChooser.getSelectedFile().getPath();
+								fileName = imgChooser.getSelectedFile().getName();
+							} catch (Exception e1) {
+								e1.getStackTrace();
+								fileName = cdListManagercontent.getSearch().getComboboxValue().getCarImage();
+								filePath = System.getProperty("user.dir") + "\\images\\car\\" + fileName;
+							}
+
+							cdService.updateCarData(new CarData(carCode, cName, fileName, cOld, carNumber, auto,
+									cSeater, carModelCode, manufacturerCode, fuelCode));
+
+							storeImg(filePath, fileName);
+							cdListManagercontent.listCarData.loadDate();
+							cdListManagercontent.setSearchCarCodeComboModel();
+							setClearAll();
+							btnActive(false);
+
+						} else {
+							JOptionPane.showMessageDialog(null, "취소되었습니다");
+							return;
+						}
+					} else {
+						return;
+					}
+
+				} else {
+					return;
 				}
 
-				cdService.updateCarData(new CarData(carCode, cName, fileName, cOld, carNumber, auto, cSeater,
-						carModelCode, manufacturerCode, fuelCode));
-
-				storeImg(filePath, fileName);
-				cdListManagercontent.listCarData.loadDate();
-				cdListManagercontent.setSearchCarCodeComboModel();
-
 			} else {
-				JOptionPane.showMessageDialog(null, "취소되었습니다");
+				JOptionPane.showMessageDialog(null, "공백이 존재합니다");
+				FindeEmptyText();
+				return;
 			}
+
 		}
 
 		if (e.getSource() == btnDelete) {
+			if(codeEmptyCheck()) {
+				int delete = JOptionPane.showConfirmDialog(null, "입력 데이터를 삭제하시겠습니까?", "Message", JOptionPane.YES_NO_OPTION);
+				if (delete == 0) {
 
-			int delete = JOptionPane.showConfirmDialog(null, "입력 데이터를 삭제하시겠습니까?", "Message", JOptionPane.YES_NO_OPTION);
-			if (delete == 0) {
-
-				cdService.deleteCarData(new CarData(carCode));
-				cdListManagercontent.listCarData.loadDate();
-				cdListManagercontent.setSearchCarCodeComboModel();
-			} else {
-				JOptionPane.showMessageDialog(null, "취소되었습니다");
+					cdService.deleteCarData(new CarData(carCode));
+					cdListManagercontent.listCarData.loadDate();
+					cdListManagercontent.setSearchCarCodeComboModel();
+					cdListManagercontent.btnChart.setEnabled(false);
+					setClearAll();
+					btnActive(false);
+				} else {
+					JOptionPane.showMessageDialog(null, "취소되었습니다");
+				}
+			}else {
+				return;
 			}
+			
 		}
-		setClearAll();
 
 	}
 
@@ -512,10 +673,17 @@ public class CarDataManagerContent extends JPanel implements ActionListener {
 				frame.getContentPane().removeAll();
 				frame.getContentPane().add(new AdminMainCarManagerRentalPrice(), BorderLayout.CENTER);
 				frame.setVisible(true);
+				setClearAll();
+				btnActive(false);
 			} else {
 				JOptionPane.showMessageDialog(null, "대여단가정보를 추후에 등록하세요");
 			}
 		}
 
+	}
+
+	public void btnActive(boolean active) {
+		btnUpdate.setEnabled(active);
+		btnDelete.setEnabled(active);
 	}
 }

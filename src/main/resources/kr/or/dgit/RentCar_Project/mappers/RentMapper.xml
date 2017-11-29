@@ -100,6 +100,7 @@
 	<select id="selectRentByCarCode" resultMap="RentResult">
 		<include refid="selectSql"/>
 		<include refid="whereCarCode"/>
+		order by day_end desc; 
 	</select>
 	
 	<select id="selectRentByUserCode" resultMap="RentResult">

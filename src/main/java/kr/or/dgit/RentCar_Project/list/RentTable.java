@@ -3,9 +3,12 @@ package kr.or.dgit.RentCar_Project.list;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.swing.SwingConstants;
+
 import kr.or.dgit.RentCar_Project.dto.Rent;
 import kr.or.dgit.RentCar_Project.service.RentService;
 
+@SuppressWarnings("serial")
 public class RentTable extends AbstractTable {
 	private HashMap<String, Object> map=new HashMap<>();
 	private String key;
@@ -23,8 +26,9 @@ public class RentTable extends AbstractTable {
 
 	@Override
 	protected void setAlignWidth() {
-		// TODO Auto-generated method stub
-
+		setAlign(SwingConstants.CENTER,0,1,2,3,4,5,6,9);
+		setAlign(SwingConstants.RIGHT,7,8);
+		setCellwidth(30,10,40,60,40,40,20,40,40,10);
 	}
 
 	@Override
@@ -41,7 +45,7 @@ public class RentTable extends AbstractTable {
 
 	@Override
 	protected Object[] getcolumnNames() {
-		return new String[] {"고객코드","고객명","연락처","대여일","반납일","사용시간","할인가격","최종가격","보험유무","상태"};
+		return new String[] {"상태","고객코드","고객명","연락처","대여일","반납일","사용시간","할인가격","최종가격","보험유무"};
 	}
 
 	@Override
