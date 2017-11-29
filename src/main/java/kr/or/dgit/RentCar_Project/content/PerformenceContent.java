@@ -17,6 +17,7 @@ import java.util.Vector;
 
 import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
+import javax.swing.ButtonModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -112,6 +113,8 @@ public class PerformenceContent extends JPanel {
 		group.add(fuelBox.getRadioButton());
 		group.add(cancelBox.getRadioButton());
 		
+		
+		// 라디오 버튼 선택 시 콤보박스 활성화, 선택 안될 시 비활성화 코드
 		Enumeration<AbstractButton> selectObject = group.getElements();
 		while (selectObject.hasMoreElements()) {
 			JRadioButton jb = (JRadioButton) selectObject.nextElement();
@@ -213,6 +216,7 @@ public class PerformenceContent extends JPanel {
 		genderBox.setFirstIndex();
 		fuelBox.setFirstIndex();
 		cancelBox.setFirstIndex();
+		monthBox.getRadioButton().setSelected(true);
 	}
 
 }
