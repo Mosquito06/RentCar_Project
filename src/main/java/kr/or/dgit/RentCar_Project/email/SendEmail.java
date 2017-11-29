@@ -1,5 +1,6 @@
 package kr.or.dgit.RentCar_Project.email;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -9,6 +10,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeUtility;
 
 public class SendEmail {
 	private final String host = "smtp.naver.com";
@@ -36,11 +38,17 @@ public class SendEmail {
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 
 			// Subject
-			message.setSubject("Hello!! IT RentCar");
-
+			String subject = "안녕하세요. 아이티 렌터카 입니다!! (임시비밀번호 전송)";
+			try {
+				message.setSubject(MimeUtility.encodeText(subject, "UTF-8", "B"));
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			// Text
-			message.setText("안녕하세요. 아이티 렌터카입니다. 회원님의 임시비밀번호는 "+pw+" 입니다."
-					+ " 임시 비밀번호로 로그인 후 비밀번호를 변경해 주세요.");
+			message.setText("안녕하세요. 아이티 렌터카입니다.\n \n 회원님의 임시비밀번호는 "+pw+" 입니다.\n \n"+"임시 비밀번호로 로그인 후 비밀번호를 변경해 주세요.");
+		
+			
 
 			// send the message
 			Transport.send(message);
