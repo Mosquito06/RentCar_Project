@@ -1,3 +1,6 @@
-1	RENTHAJO001	1234567890	최다희	[B@7b9f6e3b	010-1111-2222	최다희@naver.com	FEMALE	C
-2	dlrkdgus0519	1231231231	이강현	[B@6376fa1c	010-9287-3004	이강현@naver.com	MALE	C
-3	RENTHAJO003	1234567890	김동환	[B@629f9fb5	010-1111-2222	김동환@naver.com	MALE	C
+1	RENTHAJO001	1234567890	최다희	[B@6a38d57f	010-1111-2222	최다희@naver.com	FEMALE	C	대구/j
+2	rkd0519	123123123	이강현	[B@636d0764	010-9287-3004	rkd7327@naver.com	MALE	C	(39901) 경상북도 칠곡군 평장7길 11/강현이네 집
+3	RENTHAJO003	1234567890	김동환	[B@18086ba9	010-1111-2222	skykim10908@naver.com	MALE	C	(38652) 경상북도 경산시 정평길 5 / 동환이네 집
+4	RENTHAJO001	1234567890	최다희	[B@26a0f5b5	010-1111-2222	최다희@naver.com	FEMALE	C	대구/j
+5	rkd0519	123123123	이강현	[B@a1f4f33	010-9287-3004	rkd7327@naver.com	MALE	C	(39901) 경상북도 칠곡군 평장7길 11/강현이네 집
+6	RENTHAJO003	1234567890	김동환	[B@1c23f33	010-1111-2222	skykim10908@naver.com	MALE	C	(38652) 경상북도 경산시 정평길 5 / 동환이네 집
