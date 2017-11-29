@@ -31,6 +31,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import org.jdesktop.xswingx.PromptSupport;
+
 import kr.or.dgit.RentCar_Project.component.ComboBoxComponent;
 import kr.or.dgit.RentCar_Project.component.JspinnerComponent;
 import kr.or.dgit.RentCar_Project.component.RadioComponent;
@@ -174,10 +176,12 @@ public class CarDataManagerContent extends JPanel implements ActionListener {
 		add(carName);
 
 		carOld = new TextFieldComponent("연식");
+		PromptSupport.setPrompt("ex)2017",carOld.getTextField());
 		carOld.setBounds(10, 145, 163, 32);
 		add(carOld);
 
 		carSeater = new TextFieldComponent("인승");
+		PromptSupport.setPrompt("ex)2",carSeater.getTextField());
 		carSeater.setBounds(10, 202, 163, 32);
 		add(carSeater);
 
