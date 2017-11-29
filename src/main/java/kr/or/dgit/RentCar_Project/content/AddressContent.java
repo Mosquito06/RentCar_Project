@@ -1,17 +1,12 @@
 package kr.or.dgit.RentCar_Project.content;
 
-import javax.swing.JPanel;
 import java.awt.BorderLayout;
-import javax.swing.JLabel;
-import javax.swing.JButton;
-import javax.swing.border.EmptyBorder;
 import java.awt.FlowLayout;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.border.LineBorder;
-import java.awt.Color;
-import javax.swing.border.SoftBevelBorder;
-import javax.swing.border.BevelBorder;
-import javax.swing.UIManager;
 import javax.swing.border.EtchedBorder;
 
 @SuppressWarnings("serial")
