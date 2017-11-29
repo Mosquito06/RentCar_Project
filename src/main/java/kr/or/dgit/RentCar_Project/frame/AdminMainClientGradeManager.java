@@ -10,9 +10,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import kr.or.dgit.RentCar_Project.content.ClientManagerContent;
+import kr.or.dgit.RentCar_Project.component.ComboBoxComponent;
 import kr.or.dgit.RentCar_Project.content.UserGradeContent;
 import kr.or.dgit.RentCar_Project.content.UserGradeListContent;
+import kr.or.dgit.RentCar_Project.dto.UserGrade;
 
 @SuppressWarnings("serial")
 public class AdminMainClientGradeManager extends JFrame {
@@ -21,7 +22,7 @@ public class AdminMainClientGradeManager extends JFrame {
 	private UserGradeContent userGrade;
 	private UserGradeListContent userGradeList;
 	
-	public AdminMainClientGradeManager() {
+	public AdminMainClientGradeManager(ComboBoxComponent<UserGrade> comboUserCodeGrade) {
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		Image img = tk.getImage(System.getProperty("user.dir") + "\\images\\Instapaper icon.png");
 		setIconImage(img);
@@ -44,7 +45,7 @@ public class AdminMainClientGradeManager extends JFrame {
 		btnOk.setBounds(291, 355, 69, 23);
 		contentPane.add(btnOk);
 		
-		userGrade = new UserGradeContent();
+		userGrade = new UserGradeContent(comboUserCodeGrade);
 		userGrade.setBounds(0, 7, 344, 153);
 		contentPane.add(userGrade);
 		

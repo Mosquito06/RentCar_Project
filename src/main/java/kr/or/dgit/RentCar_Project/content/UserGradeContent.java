@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import kr.or.dgit.RentCar_Project.component.ComboBoxComponent;
 import kr.or.dgit.RentCar_Project.component.TextFieldComponent;
 import kr.or.dgit.RentCar_Project.dto.UserGrade;
 import kr.or.dgit.RentCar_Project.service.UserGradeService;
@@ -26,12 +27,14 @@ public class UserGradeContent extends JPanel implements ActionListener {
 	private JButton btnDelete;
 	private UserGradeListContent userGradeList;
 	private boolean ok = false;
+	private ComboBoxComponent<UserGrade> comboUserCodeGrade;
 
 	public void setUserGradeList(UserGradeListContent userGradeList) {
 		this.userGradeList = userGradeList;
 	}
 
-	public UserGradeContent() {
+	public UserGradeContent(ComboBoxComponent<UserGrade> comboUserCodeGrade) {
+		this.comboUserCodeGrade= comboUserCodeGrade;
 		setBounds(100, 100, 333, 171);
 		setLayout(null);
 
@@ -144,6 +147,7 @@ public class UserGradeContent extends JPanel implements ActionListener {
 						userGradeList.setGradeComboModel();
 						setUserGradeTextValueClear();
 						setActive(false);
+						comboUserCodeGrade.setComboBoxModel(userGradeList.getUserGrade());
 					} else {
 						JOptionPane.showMessageDialog(null, "취소되었습니다");
 						return;
@@ -186,6 +190,7 @@ public class UserGradeContent extends JPanel implements ActionListener {
 						userGradeList.setGradeComboModel();
 						setUserGradeTextValueClear();
 						setActive(false);
+						comboUserCodeGrade.setComboBoxModel(userGradeList.getUserGrade());
 					} else {
 						JOptionPane.showMessageDialog(null, "취소되었습니다");
 					}
@@ -211,6 +216,7 @@ public class UserGradeContent extends JPanel implements ActionListener {
 					userGradeList.setGradeComboModel();
 					setUserGradeTextValueClear();
 					setActive(false);
+					comboUserCodeGrade.setComboBoxModel(userGradeList.getUserGrade());
 				} else {
 					JOptionPane.showMessageDialog(null, "취소되었습니다");
 					return;

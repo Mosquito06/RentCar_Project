@@ -24,7 +24,13 @@ public class UserGradeListContent extends JPanel implements ActionListener{
 	private JButton btnAll;
 	private JButton btnSearch;
 	private UserGradeContent userGradeContnet;
+	private Vector<UserGrade> userGrade;
 	
+	
+	
+	public Vector<UserGrade> getUserGrade() {
+		return userGrade;
+	}
 	public void setUserGradeContnet(UserGradeContent userGradeContnet) {
 		this.userGradeContnet = userGradeContnet;
 	}
@@ -60,7 +66,7 @@ public class UserGradeListContent extends JPanel implements ActionListener{
 		UserGrade uGrade = new UserGrade();
 		uGrade.setGrade("선택하세요");
 		lists.add(0,uGrade);
-		Vector<UserGrade> userGrade = new Vector<>();
+		userGrade = new Vector<>();
 		for(UserGrade ug : lists) {
 			ug.setComboType(1);
 			userGrade.add(ug);
