@@ -27,6 +27,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import kr.or.dgit.RentCar_Project.component.ComboBoxComponent;
 import kr.or.dgit.RentCar_Project.content.ReserveAddCarContent;
@@ -51,7 +53,6 @@ public class UserMainReserve extends JPanel {
 	private String fDay;
 	private ReserveAddCarContent addCar;
 	private Boolean isInsurance;
-	private List<CarData> newLists;
 	private IsAuto auto;
 	private ReserveLeftContent leftPanel;
 	private JPanel btnsPanel;
@@ -60,6 +61,7 @@ public class UserMainReserve extends JPanel {
 	private ReserveHeaderContent header;
 	private JLabel lblCarModel;
 	private CarModel carModel;
+	private Boolean searchClick = false;
 
 	public void setComfirmUser(User comfirmUser) {
 		this.comfirmUser = comfirmUser;
@@ -107,6 +109,20 @@ public class UserMainReserve extends JPanel {
 		header.setBounds(3, 3, 968, 72);
 		add(header);
 
+		header.getTotalTimePanel().getTextField().getDocument().addDocumentListener(new DocumentListener() {
+			@Override
+			public void removeUpdate(DocumentEvent e) {}
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				if(searchClick) {
+					setScrollPaneAddList(scrollPane, header, isInsurance);
+				}
+				
+			}
+			@Override
+			public void changedUpdate(DocumentEvent e) {}
+		});
+		
 		header.getBtnSearch().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -123,6 +139,7 @@ public class UserMainReserve extends JPanel {
 				leftPanel.getIsInsurance().setAllEnable(true);
 				leftPanel.getBtnReset().setEnabled(true);
 				comboBoxCarName.getComboBox().setSelectedIndex(0);
+				searchClick=true;
 			}
 		});
 
@@ -303,7 +320,6 @@ public class UserMainReserve extends JPanel {
 	private void setScrollPaneAddList(JScrollPane scrollPane, ReserveHeaderContent header, Boolean isInsurance) {
 		int totalTime = Integer.parseInt(header.getTotalTimePanel().getTextValue());
 		if (totalTime == 0) {
-			JOptionPane.showMessageDialog(null, "날짜를 입력하세요");
 			return;
 		}
 		scrollPane.getViewport().removeAll();

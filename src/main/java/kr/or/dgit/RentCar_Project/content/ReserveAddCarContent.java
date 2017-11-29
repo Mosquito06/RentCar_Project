@@ -71,7 +71,7 @@ public class ReserveAddCarContent extends JPanel {
 				}
 				int dPrice = userGradeService.selectUserGradeByGrade(user).getDiscount();
 
-				int dTotalPrice = ((price + btPrice * bTime + otPrice * (time - bTime)) * (dPrice)) / 100;
+				int dTotalPrice = Math.round(((price + btPrice * bTime + otPrice * (time - bTime)) * (dPrice)) / 10000)*100;
 				int oTotalPrice = price + iPrice + btPrice * bTime + otPrice * (time - bTime);
 
 				if (time <= bTime) {
