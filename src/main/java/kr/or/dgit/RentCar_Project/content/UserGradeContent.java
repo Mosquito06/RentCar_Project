@@ -2,16 +2,14 @@ package kr.or.dgit.RentCar_Project.content;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.print.attribute.standard.JobMessageFromOperator;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import kr.or.dgit.RentCar_Project.component.ComboBoxComponent;
 import kr.or.dgit.RentCar_Project.component.TextFieldComponent;
 import kr.or.dgit.RentCar_Project.dto.UserGrade;
 import kr.or.dgit.RentCar_Project.service.UserGradeService;
@@ -25,16 +23,17 @@ public class UserGradeContent extends JPanel implements ActionListener {
 	private JButton btnUpdate;
 	private JButton btnDelete;
 	private UserGradeListContent userGradeList;
+
 	private ClientManagerContent clientManager;
 	
 	public void setClientManager(ClientManagerContent clientManager) {
 		this.clientManager = clientManager;
 	}
 
+
 	public void setUserGradeList(UserGradeListContent userGradeList) {
 		this.userGradeList = userGradeList;
 	}
-
 	public UserGradeContent() {
 		setBounds(100, 100, 333, 171);
 		setLayout(null);
@@ -150,6 +149,7 @@ public class UserGradeContent extends JPanel implements ActionListener {
 						setActive(false);
 						clientManager.setUserGradeComboBoxModel();
 					
+
 					} else {
 						JOptionPane.showMessageDialog(null, "취소되었습니다");
 						return;
@@ -193,6 +193,7 @@ public class UserGradeContent extends JPanel implements ActionListener {
 						setUserGradeTextValueClear();
 						setActive(false);
 						clientManager.setUserGradeComboBoxModel();
+
 					} else {
 						JOptionPane.showMessageDialog(null, "취소되었습니다");
 					}
@@ -219,6 +220,7 @@ public class UserGradeContent extends JPanel implements ActionListener {
 					setUserGradeTextValueClear();
 					setActive(false);
 					clientManager.setUserGradeComboBoxModel();
+
 				} else {
 					JOptionPane.showMessageDialog(null, "취소되었습니다");
 					return;

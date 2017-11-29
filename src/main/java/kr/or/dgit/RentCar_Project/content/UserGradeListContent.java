@@ -1,5 +1,6 @@
 package kr.or.dgit.RentCar_Project.content;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -8,14 +9,12 @@ import java.util.Vector;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
 
 import kr.or.dgit.RentCar_Project.component.ComboBoxComponent;
 import kr.or.dgit.RentCar_Project.dto.UserGrade;
 import kr.or.dgit.RentCar_Project.list.UserGradeTable;
 import kr.or.dgit.RentCar_Project.service.UserGradeService;
-import kr.or.dgit.RentCar_Project.service.UserService;
-import javax.swing.border.LineBorder;
-import java.awt.Color;
 
 @SuppressWarnings("serial")
 public class UserGradeListContent extends JPanel implements ActionListener{
@@ -24,10 +23,17 @@ public class UserGradeListContent extends JPanel implements ActionListener{
 	private JButton btnAll;
 	private JButton btnSearch;
 	private UserGradeContent userGradeContnet;
-
+	private Vector<UserGrade> userGrade;
+	
+	
 	public void setUserGradeContnet(UserGradeContent userGradeContnet) {
 		this.userGradeContnet = userGradeContnet;
 	}
+
+	public Vector<UserGrade> getUserGrade() {
+		return userGrade;
+	}
+
 	public UserGradeListContent() {
 		setBounds(100, 100, 355, 189);
 		setLayout(null);
@@ -60,7 +66,7 @@ public class UserGradeListContent extends JPanel implements ActionListener{
 		UserGrade uGrade = new UserGrade();
 		uGrade.setGrade("선택하세요");
 		lists.add(0,uGrade);
-		Vector<UserGrade> userGrade = new Vector<>();
+		userGrade = new Vector<>();
 		for(UserGrade ug : lists) {
 			ug.setComboType(1);
 			userGrade.add(ug);
@@ -95,5 +101,6 @@ public class UserGradeListContent extends JPanel implements ActionListener{
 			
 		}
 	}
+
 
 }

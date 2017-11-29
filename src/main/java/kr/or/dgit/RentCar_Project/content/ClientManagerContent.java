@@ -14,7 +14,6 @@ import java.util.regex.Pattern;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -32,7 +31,6 @@ import kr.or.dgit.RentCar_Project.component.TextFieldComponent;
 import kr.or.dgit.RentCar_Project.dto.Gender;
 import kr.or.dgit.RentCar_Project.dto.User;
 import kr.or.dgit.RentCar_Project.dto.UserGrade;
-import kr.or.dgit.RentCar_Project.frame.AdminMain;
 import kr.or.dgit.RentCar_Project.frame.AdminMainClientGradeManager;
 import kr.or.dgit.RentCar_Project.frame.AdminMainClientManagerUserList;
 import kr.or.dgit.RentCar_Project.service.UserGradeService;
