@@ -2,13 +2,13 @@ package kr.or.dgit.RentCar_Project.frame;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
@@ -40,8 +40,6 @@ import kr.or.dgit.RentCar_Project.dto.Manufacturer;
 import kr.or.dgit.RentCar_Project.dto.User;
 import kr.or.dgit.RentCar_Project.service.CarDataService;
 import kr.or.dgit.RentCar_Project.service.CarModelService;
-import java.awt.Font;
-import javax.swing.border.BevelBorder;
 
 @SuppressWarnings("serial")
 public class UserMainReserve extends JPanel {
@@ -212,7 +210,6 @@ public class UserMainReserve extends JPanel {
 				lists = carDataService.selectCarDataByCarDataCodeList(carData);
 				setComboBaxEnabled(false);
 				setScrollPaneAddList(scrollPane, header, isInsurance);
-				
 
 			}
 		});
@@ -272,13 +269,13 @@ public class UserMainReserve extends JPanel {
 		setComboBaxEnabled(false);
 		leftPanel.getBtnReset().setEnabled(false);
 		leftPanel.getIsInsurance().setAllEnable(false);
-		
+
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
 		panel_1.setBounds(72, 23, 113, 36);
 		leftPanel.add(panel_1);
 		panel_1.setLayout(new BorderLayout(0, 0));
-		
+
 		lblCarModel = new JLabel("전체차량");
 		lblCarModel.setFont(new Font("굴림", Font.PLAIN, 13));
 		lblCarModel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -333,19 +330,16 @@ public class UserMainReserve extends JPanel {
 
 	private void comboAction() {
 		HashMap<String, Object> map = new HashMap<>();
-	
-		
-		
-		if(!lblCarModel.getText().equals("전체차량")){
+
+		if (!lblCarModel.getText().equals("전체차량")) {
 			map.put("carModelCode", carModel);
 		}
-		
+
 		if (leftPanel.getChckbxAuto().isSelected()) {
 			auto = IsAuto.AUTO;
 			map.put("isAuto", auto);
 		}
-		
-		
+
 		if (leftPanel.getComboBoxManufacturer().getComboBox().getSelectedIndex() != 0) {
 			Manufacturer manufacturer = leftPanel.getComboBoxManufacturer().getComboboxValue();
 			map.put("manufacturerCode", manufacturer);
@@ -364,12 +358,8 @@ public class UserMainReserve extends JPanel {
 			CarData seater = leftPanel.getComboBoxSeater().getComboboxValue();
 			map.put("carSeater", seater.getCarSeater());
 		}
-
-		if (map.size() == 0) {
-			return;
-		}
-
+	
 		lists = carDataService.selectCarDataByCarValue(map);
-		
+	
 	}
 }

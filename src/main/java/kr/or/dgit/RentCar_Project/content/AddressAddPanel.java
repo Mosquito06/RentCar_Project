@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import kr.or.dgit.RentCar_Project.dto.Post;
+import kr.or.dgit.RentCar_Project.frame.AddressFrame;
 import kr.or.dgit.RentCar_Project.service.PostService;
 
 @SuppressWarnings("serial")
