@@ -1,4 +1,4 @@
-package kr.or.dgit.RentCar_Project.content;
+package kr.or.dgit.RentCar_Project.frame;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -44,6 +44,7 @@ public class FindIdPwFrame extends JFrame {
 	private TextFieldComponent tfName;
 	private JComboBox<String> comboEmail;
 	private JLabel lbl;
+	private JLabel label_3;
 
 	public FindIdPwFrame() {
 		setResizable(false);
@@ -68,10 +69,10 @@ public class FindIdPwFrame extends JFrame {
 		contentPane.add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 
-		JLabel label_3 = new JLabel("");
+		label_3 = new JLabel("");
 		label_3.setOpaque(true);
 		label_3.setBackground(SystemColor.activeCaptionBorder);
-		label_3.setBounds(83, 133, 4, 36);
+		label_3.setBounds(83, 103, 4, 36);
 		panel.add(label_3);
 
 		lbl = new JLabel("");
@@ -118,7 +119,7 @@ public class FindIdPwFrame extends JFrame {
 		tfName = new TextFieldComponent("이름");
 		tfName.getLblNewLabel().setText("이름          ");
 		tfName.getLblNewLabel().setHorizontalAlignment(SwingConstants.RIGHT);
-		tfName.setBounds(-62, 133, 311, 36);
+		tfName.setBounds(-62, 103, 311, 36);
 		panel.add(tfName);
 
 		JLabel label_4 = new JLabel("");
@@ -233,11 +234,15 @@ public class FindIdPwFrame extends JFrame {
 			@Override
 			public void itemStateChanged(ItemEvent e) {
 				if (rdbtnId.isSelected()) {
+					tfName.setBounds(-62, 103, 311, 36);
+					label_3.setBounds(83, 103, 4, 36);
 					tfId.setVisible(false);
 					lbl.setVisible(false);
 					btn.setText("아이디 찾기");
 					clearTf();
 				} else {
+					tfName.setBounds(-62, 133, 311, 36);
+					label_3.setBounds(83, 133, 4, 36);
 					tfId.setVisible(true);
 					lbl.setVisible(true);
 					btn.setText("비밀번호 찾기");

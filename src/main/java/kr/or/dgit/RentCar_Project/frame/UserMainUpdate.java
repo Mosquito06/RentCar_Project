@@ -24,8 +24,6 @@ import javax.swing.border.TitledBorder;
 
 import org.jdesktop.xswingx.PromptSupport;
 
-import kr.or.dgit.RentCar_Project.content.AddressFrame;
-import kr.or.dgit.RentCar_Project.content.MembershipFrame;
 import kr.or.dgit.RentCar_Project.content.UpdateAddrContent;
 import kr.or.dgit.RentCar_Project.content.UpdateContent;
 import kr.or.dgit.RentCar_Project.content.UpdateProfileContent;

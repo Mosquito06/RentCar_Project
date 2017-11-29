@@ -30,8 +30,6 @@ import javax.swing.border.EmptyBorder;
 
 import org.jdesktop.xswingx.PromptSupport;
 
-import kr.or.dgit.RentCar_Project.content.FindIdPwFrame;
-import kr.or.dgit.RentCar_Project.content.MembershipFrame;
 import kr.or.dgit.RentCar_Project.dao.UserDao;
 import kr.or.dgit.RentCar_Project.dto.User;
 import kr.or.dgit.RentCar_Project.service.UserService;

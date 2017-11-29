@@ -1,4 +1,4 @@
-package kr.or.dgit.RentCar_Project.content;
+package kr.or.dgit.RentCar_Project.frame;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

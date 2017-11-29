@@ -1,4 +1,4 @@
-package kr.or.dgit.RentCar_Project.content;
+package kr.or.dgit.RentCar_Project.frame;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -20,6 +20,7 @@ import javax.swing.border.TitledBorder;
 
 import kr.or.dgit.RentCar_Project.component.ComboBoxComponent;
 import kr.or.dgit.RentCar_Project.component.TextFieldComponent;
+import kr.or.dgit.RentCar_Project.content.AddressAddPanel;
 import kr.or.dgit.RentCar_Project.dto.Post;
 import kr.or.dgit.RentCar_Project.service.PostService;
 
