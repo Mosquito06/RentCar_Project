@@ -9,8 +9,6 @@ import javax.swing.JPanel;
 
 import kr.or.dgit.RentCar_Project.component.TextFieldComponent;
 import kr.or.dgit.RentCar_Project.dto.CarModel;
-import kr.or.dgit.RentCar_Project.frame.AdminMainCarManagerCarDetail;
-import kr.or.dgit.RentCar_Project.list.CarModelTable;
 import kr.or.dgit.RentCar_Project.service.CarModelService;
 
 @SuppressWarnings("serial")

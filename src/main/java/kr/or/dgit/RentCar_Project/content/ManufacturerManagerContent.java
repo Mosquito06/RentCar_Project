@@ -1,17 +1,15 @@
 package kr.or.dgit.RentCar_Project.content;
 
-import javax.swing.JPanel;
-import kr.or.dgit.RentCar_Project.component.TextFieldComponent;
-import kr.or.dgit.RentCar_Project.dto.Manufacturer;
-import kr.or.dgit.RentCar_Project.frame.AdminMainCarManagerCarDetail;
-import kr.or.dgit.RentCar_Project.list.ManufacturerTable;
-import kr.or.dgit.RentCar_Project.service.ManufacturerService;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+import kr.or.dgit.RentCar_Project.component.TextFieldComponent;
+import kr.or.dgit.RentCar_Project.dto.Manufacturer;
+import kr.or.dgit.RentCar_Project.service.ManufacturerService;
 
 @SuppressWarnings("serial")
 public class ManufacturerManagerContent extends JPanel 	implements ActionListener{

@@ -6,7 +6,6 @@ import javax.swing.JOptionPane;
 
 import org.apache.ibatis.session.SqlSession;
 
-import kr.or.dgit.RentCar_Project.dao.UserDao;
 import kr.or.dgit.RentCar_Project.dao.UserGradeDao;
 import kr.or.dgit.RentCar_Project.dto.UserGrade;
 import kr.or.dgit.RentCar_Project.util.MyBatisSqlSessionFactory;

@@ -30,7 +30,6 @@ import kr.or.dgit.RentCar_Project.content.UpdateProfileContent;
 import kr.or.dgit.RentCar_Project.content.UpdatePwContent;
 import kr.or.dgit.RentCar_Project.dto.User;
 import kr.or.dgit.RentCar_Project.service.UserService;
-import javax.swing.JButton;
 
 @SuppressWarnings("serial")
 public class UserMainUpdate extends JPanel {

@@ -9,7 +9,6 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import kr.or.dgit.RentCar_Project.component.ComboBoxComponent;
 import kr.or.dgit.RentCar_Project.component.TextFieldComponent;
 import kr.or.dgit.RentCar_Project.dto.UserGrade;
 import kr.or.dgit.RentCar_Project.service.UserGradeService;

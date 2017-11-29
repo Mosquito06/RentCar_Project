@@ -1,17 +1,9 @@
 package kr.or.dgit.RentCar_Project.service;
 
-import static org.junit.Assert.fail;
-
-import java.util.List;
-
 import org.junit.AfterClass;
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
-import org.junit.Test;
 import org.junit.runners.MethodSorters;
-
-import kr.or.dgit.RentCar_Project.dto.Manufacturer;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestManufacturerService {
@@ -27,7 +19,7 @@ public class TestManufacturerService {
 		manufacturerService = null;
 	}
 
-	@Test
+	/*@Test
 	public void test1InsertManufacturer() {
 		Manufacturer manufacturer = new Manufacturer("BZ", "벤츠");
 		
@@ -60,5 +52,5 @@ public class TestManufacturerService {
 		manufacturerService.deleteManufacturer(manufacturer);
 	}
 
-
+*/
 }

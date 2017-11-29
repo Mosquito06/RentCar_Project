@@ -1,22 +1,9 @@
 package kr.or.dgit.RentCar_Project.service;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.List;
-
 import org.junit.AfterClass;
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
-import org.junit.Test;
 import org.junit.runners.MethodSorters;
-
-import kr.or.dgit.RentCar_Project.dto.Gender;
-import kr.or.dgit.RentCar_Project.dto.User;
-import kr.or.dgit.RentCar_Project.dto.UserGrade;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestUserService {
@@ -66,7 +53,7 @@ public class TestUserService {
 		Assert.assertNotNull(list);
 	}*/
 	
-	@Test
+	/*@Test
 	public void test4UpdeteUserByUserCode() {
 		UserGrade userGrade = new UserGrade();
 		userGrade.setGrade("A");
@@ -77,7 +64,7 @@ public class TestUserService {
 		userService.updateUser(user);
 		
 	}
-	
+	*/
 	/*@Test
 	public void test5DeleteUserByUserCode() {
 		User user = new User();

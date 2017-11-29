@@ -4,34 +4,15 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
-import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
-import kr.or.dgit.RentCar_Project.component.ComboBoxComponent;
-import kr.or.dgit.RentCar_Project.component.JspinnerComponent;
-import kr.or.dgit.RentCar_Project.component.RadioComponent;
-import kr.or.dgit.RentCar_Project.component.TextFieldComponent;
-import kr.or.dgit.RentCar_Project.dto.CarData;
-import kr.or.dgit.RentCar_Project.dto.CarModel;
-import kr.or.dgit.RentCar_Project.dto.Fuel;
-import kr.or.dgit.RentCar_Project.dto.Manufacturer;
-import kr.or.dgit.RentCar_Project.list.CarDataTable;
-import kr.or.dgit.RentCar_Project.list.RentalPriceTable;
-import kr.or.dgit.RentCar_Project.service.CarDataService;
-import kr.or.dgit.RentCar_Project.service.CarModelService;
-import kr.or.dgit.RentCar_Project.service.FuelService;
-import kr.or.dgit.RentCar_Project.service.ManufacturerService;
 import kr.or.dgit.RentCar_Project.content.CarDataListManagerContent;
 import kr.or.dgit.RentCar_Project.content.CarDataManagerContent;
 

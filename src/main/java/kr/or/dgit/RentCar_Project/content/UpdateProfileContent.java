@@ -10,6 +10,7 @@ import javax.swing.JRadioButton;
 import kr.or.dgit.RentCar_Project.component.ImgRadioComponent;
 import javax.swing.JButton;
 
+@SuppressWarnings("serial")
 public class UpdateProfileContent extends JPanel {
 
 	private JButton btnUpdate;

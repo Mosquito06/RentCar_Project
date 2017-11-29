@@ -8,6 +8,7 @@ import javax.swing.SwingConstants;
 
 import kr.or.dgit.RentCar_Project.dto.User;
 
+@SuppressWarnings("serial")
 public class UpdateAddrContent extends JPanel {
 	private JTextField TfFirstAddr;
 	private JTextField TfLastAddr;

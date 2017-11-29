@@ -1,6 +1,5 @@
 package kr.or.dgit.RentCar_Setting;
 
-import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -12,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+@SuppressWarnings("serial")
 public class DBSettingHome extends JFrame {
 
 	private JPanel contentPane;

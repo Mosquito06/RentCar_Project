@@ -2,16 +2,10 @@ package kr.or.dgit.RentCar_Project.content;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
-import org.jdesktop.xswingx.PromptSupport;
 
 import kr.or.dgit.RentCar_Project.component.TextFieldComponent;
 import kr.or.dgit.RentCar_Project.dto.Fuel;

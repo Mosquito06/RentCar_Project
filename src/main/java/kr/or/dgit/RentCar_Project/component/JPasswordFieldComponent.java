@@ -1,13 +1,13 @@
 package kr.or.dgit.RentCar_Project.component;
 
+import java.awt.GridLayout;
+
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import java.awt.GridLayout;
 import javax.swing.SwingConstants;
 
+@SuppressWarnings("serial")
 public class JPasswordFieldComponent extends JPanel {
 	private JPasswordField textField;
 

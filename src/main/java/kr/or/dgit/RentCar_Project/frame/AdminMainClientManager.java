@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,8 +15,6 @@ import javax.swing.border.TitledBorder;
 
 import kr.or.dgit.RentCar_Project.content.ClientManagerContent;
 import kr.or.dgit.RentCar_Project.content.ClientlListManagerContent;
-import kr.or.dgit.RentCar_Project.dto.User;
-import kr.or.dgit.RentCar_Project.service.UserService;
 
 @SuppressWarnings("serial")
 public class AdminMainClientManager extends JPanel {

@@ -5,7 +5,6 @@ import java.util.List;
 import javax.swing.SwingConstants;
 
 import kr.or.dgit.RentCar_Project.dto.Rent;
-import kr.or.dgit.RentCar_Project.service.RentService;
 
 public class AdminPerformenceTable extends AbstractTable {
 	

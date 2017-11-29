@@ -1,25 +1,14 @@
 package kr.or.dgit.RentCar_Project.frame;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JButton;
-import javax.swing.ImageIcon;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+@SuppressWarnings("serial")
 public class AdminMain extends JFrame {
 	private static final AdminMain instance = new AdminMain();
 

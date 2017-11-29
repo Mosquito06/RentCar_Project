@@ -1,16 +1,9 @@
 package kr.or.dgit.RentCar_Project.service;
 
-import java.util.List;
-
 import org.junit.AfterClass;
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
-import org.junit.Test;
 import org.junit.runners.MethodSorters;
-
-import kr.or.dgit.RentCar_Project.dto.CarData;
-import kr.or.dgit.RentCar_Project.dto.RentalPrice;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestRentalPriceService {
@@ -27,7 +20,7 @@ public class TestRentalPriceService {
 		rentalPriceService = null;
 	}
 
-	@Test
+/*	@Test
 	public void test1InsertRentalPrice() {
 		CarData carDate = new CarData();
 		carDate.setCarCode("HC-H-G-003");
@@ -79,5 +72,5 @@ public class TestRentalPriceService {
 		rentalPrice.setCarCode(carData);
 		
 		rentalPriceService.selectRentalPriceByCarCode(rentalPrice);
-	}
+	}*/
 }

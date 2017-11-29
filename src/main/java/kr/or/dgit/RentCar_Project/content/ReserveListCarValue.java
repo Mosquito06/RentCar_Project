@@ -10,6 +10,7 @@ import java.awt.GridLayout;
 import kr.or.dgit.RentCar_Project.component.VTextFieldComponent;
 import javax.swing.border.EmptyBorder;
 
+@SuppressWarnings("serial")
 public class ReserveListCarValue extends JPanel {
 
 

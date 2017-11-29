@@ -1,21 +1,9 @@
 package kr.or.dgit.RentCar_Project.service;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.List;
-
 import org.junit.AfterClass;
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
-import org.junit.Test;
 import org.junit.runners.MethodSorters;
-
-import kr.or.dgit.RentCar_Project.dto.CarData;
-import kr.or.dgit.RentCar_Project.dto.IsInsurance;
-import kr.or.dgit.RentCar_Project.dto.Rent;
-import kr.or.dgit.RentCar_Project.dto.Situation;
-import kr.or.dgit.RentCar_Project.dto.User;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestRentService {

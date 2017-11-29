@@ -14,7 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
+import javax.swing.border.EtchedBorder;
 
 import kr.or.dgit.RentCar_Project.component.VTextFieldComponent;
 import kr.or.dgit.RentCar_Project.dao.CarDataDao;
@@ -27,7 +27,6 @@ import kr.or.dgit.RentCar_Project.frame.UserMain;
 import kr.or.dgit.RentCar_Project.frame.UserMainReserve;
 import kr.or.dgit.RentCar_Project.service.CarDataService;
 import kr.or.dgit.RentCar_Project.service.RentService;
-import javax.swing.border.EtchedBorder;
 
 @SuppressWarnings("serial")
 public class ReserveCarPriceContent extends JPanel {

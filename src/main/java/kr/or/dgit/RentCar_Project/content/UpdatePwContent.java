@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 
 import kr.or.dgit.RentCar_Project.component.JPasswordFieldComponent;
 
+@SuppressWarnings("serial")
 public class UpdatePwContent extends JPanel {
 
 	private JPasswordFieldComponent nowPwPanel;

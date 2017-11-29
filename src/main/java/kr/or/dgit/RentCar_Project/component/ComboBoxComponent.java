@@ -10,8 +10,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import kr.or.dgit.RentCar_Project.dto.UserGrade;
-
 @SuppressWarnings("serial")
 public class ComboBoxComponent<T> extends JPanel {
 	private JComboBox<T> comboBox;

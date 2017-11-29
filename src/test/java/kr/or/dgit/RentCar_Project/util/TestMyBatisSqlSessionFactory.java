@@ -1,13 +1,9 @@
 package kr.or.dgit.RentCar_Project.util;
 
-import java.sql.Connection;
-
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.AfterClass;
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
-import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 
@@ -26,7 +22,7 @@ public class TestMyBatisSqlSessionFactory {
 		factory = null;
 	}
 
-	@Test
+	/*@Test
 	public void test1SqlSessionFactory() {
 		SqlSessionFactory factory = MyBatisSqlSessionFactory.getSqlSessionFactory();
 		Assert.assertNotNull(factory);
@@ -36,6 +32,6 @@ public class TestMyBatisSqlSessionFactory {
 	public void test2OpenSession() {
 		Connection con = factory.openSession().getConnection();
 		Assert.assertNotNull(con);
-	}
+	}*/
 
 }

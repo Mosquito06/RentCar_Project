@@ -1,15 +1,9 @@
 package kr.or.dgit.RentCar_Project.service;
 
-import java.util.List;
-
 import org.junit.AfterClass;
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
-import org.junit.Test;
 import org.junit.runners.MethodSorters;
-
-import kr.or.dgit.RentCar_Project.dto.UserGrade;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestUserGradeService {
@@ -26,7 +20,7 @@ public class TestUserGradeService {
 		userGradeService = null;
 	}
 
-	@Test
+	/*@Test
 	public void test1InsertUserGrade() {
 		UserGrade userGrade = new UserGrade();
 		userGrade.setGrade("E");
@@ -68,7 +62,7 @@ public class TestUserGradeService {
 		userGrade.setGrade("E");
 	
 		userGradeService.deleteUserGrade(userGrade);
-	}
+	}*/
 	
 
 }

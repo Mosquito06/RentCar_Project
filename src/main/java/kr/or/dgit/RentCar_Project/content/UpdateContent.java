@@ -14,6 +14,7 @@ import kr.or.dgit.RentCar_Project.dto.Gender;
 import kr.or.dgit.RentCar_Project.dto.User;
 import kr.or.dgit.RentCar_Project.dto.UserGrade;
 
+@SuppressWarnings("serial")
 public class UpdateContent extends JPanel {
 
 	private TextFieldComponent panelId;

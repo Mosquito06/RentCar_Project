@@ -27,7 +27,7 @@ public class TestCarModelService {
 		carModelService = null;
 	}
 
-	@Test
+/*	@Test
 	public void test1InsertCarModel() {
 		CarModel carmodel = new CarModel("VV", "추가중");
 		carModelService.insertCarModel(carmodel);
@@ -56,6 +56,6 @@ public class TestCarModelService {
 	public void test5DeleteCarModelByCarModelCode() {
 		CarModel carmodel = new CarModel("VV", "수정 중");
 		carModelService.deleteCarModel(carmodel);
-	}
+	}*/
 
 }

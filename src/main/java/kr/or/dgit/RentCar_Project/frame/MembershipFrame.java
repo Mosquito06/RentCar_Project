@@ -3,7 +3,9 @@ package kr.or.dgit.RentCar_Project.frame;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.SystemColor;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -33,7 +35,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
+import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 
 import org.jdesktop.xswingx.PromptSupport;
@@ -45,10 +47,6 @@ import kr.or.dgit.RentCar_Project.dto.Gender;
 import kr.or.dgit.RentCar_Project.dto.User;
 import kr.or.dgit.RentCar_Project.dto.UserGrade;
 import kr.or.dgit.RentCar_Project.service.UserService;
-import javax.swing.ImageIcon;
-import javax.swing.UIManager;
-import java.awt.SystemColor;
-import java.awt.GridLayout;
 
 @SuppressWarnings("serial")
 public class MembershipFrame extends JFrame {

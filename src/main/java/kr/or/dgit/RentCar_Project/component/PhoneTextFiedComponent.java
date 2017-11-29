@@ -1,12 +1,11 @@
 package kr.or.dgit.RentCar_Project.component;
 
-import java.awt.BorderLayout;
+import java.awt.GridLayout;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import java.awt.GridLayout;
 
 @SuppressWarnings("serial")
 public class PhoneTextFiedComponent extends JPanel {
