@@ -25,7 +25,11 @@ public class UserGradeContent extends JPanel implements ActionListener {
 	private JButton btnUpdate;
 	private JButton btnDelete;
 	private UserGradeListContent userGradeList;
-	private boolean ok = false;
+	private ClientManagerContent clientManager;
+	
+	public void setClientManager(ClientManagerContent clientManager) {
+		this.clientManager = clientManager;
+	}
 
 	public void setUserGradeList(UserGradeListContent userGradeList) {
 		this.userGradeList = userGradeList;
@@ -125,8 +129,8 @@ public class UserGradeContent extends JPanel implements ActionListener {
 				if (isOk(grade)) {
 					try {
 						gradeDiscount = Integer.parseInt(discount.getTextValue());
-						if (gradeDiscount == 0) {
-							JOptionPane.showMessageDialog(null, "할인률이 0%입니다");
+						if (gradeDiscount <= 0) {
+							JOptionPane.showMessageDialog(null, "할인률 0%이하는 적용할 수 없습니다");
 							discount.getTextField().requestFocus();
 							return;
 						}
@@ -144,6 +148,8 @@ public class UserGradeContent extends JPanel implements ActionListener {
 						userGradeList.setGradeComboModel();
 						setUserGradeTextValueClear();
 						setActive(false);
+						clientManager.setUserGradeComboBoxModel();
+					
 					} else {
 						JOptionPane.showMessageDialog(null, "취소되었습니다");
 						return;
@@ -167,7 +173,7 @@ public class UserGradeContent extends JPanel implements ActionListener {
 				if (isOk(grade)) {
 					try {
 						gradeDiscount = Integer.parseInt(discount.getTextValue());
-						if (gradeDiscount == 0) {
+						if (gradeDiscount <= 0) {
 							JOptionPane.showMessageDialog(null, "할인률이 0%입니다");
 							discount.getTextField().requestFocus();
 							return;
@@ -186,6 +192,7 @@ public class UserGradeContent extends JPanel implements ActionListener {
 						userGradeList.setGradeComboModel();
 						setUserGradeTextValueClear();
 						setActive(false);
+						clientManager.setUserGradeComboBoxModel();
 					} else {
 						JOptionPane.showMessageDialog(null, "취소되었습니다");
 					}
@@ -211,6 +218,7 @@ public class UserGradeContent extends JPanel implements ActionListener {
 					userGradeList.setGradeComboModel();
 					setUserGradeTextValueClear();
 					setActive(false);
+					clientManager.setUserGradeComboBoxModel();
 				} else {
 					JOptionPane.showMessageDialog(null, "취소되었습니다");
 					return;

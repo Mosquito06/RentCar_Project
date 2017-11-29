@@ -20,7 +20,13 @@ public class AdminMainClientGradeManager extends JFrame {
 	private JPanel contentPane;
 	private UserGradeContent userGrade;
 	private UserGradeListContent userGradeList;
+	private ClientManagerContent clientManager;
 	
+	public void setClientManager(ClientManagerContent clientManager) {
+		this.clientManager = clientManager;
+		userGrade.setClientManager(clientManager);
+	}
+
 	public AdminMainClientGradeManager() {
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		Image img = tk.getImage(System.getProperty("user.dir") + "\\images\\Instapaper icon.png");
@@ -46,6 +52,7 @@ public class AdminMainClientGradeManager extends JFrame {
 		
 		userGrade = new UserGradeContent();
 		userGrade.setBounds(0, 7, 344, 153);
+		
 		contentPane.add(userGrade);
 		
 		userGradeList = new UserGradeListContent();

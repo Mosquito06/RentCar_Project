@@ -105,7 +105,7 @@ public class ClientManagerContent extends JPanel implements ActionListener {
 		comboUserCodeGrade = new ComboBoxComponent<>("고객등급");
 		comboUserCodeGrade.setBounds(517, 115, 305, 29);
 		add(comboUserCodeGrade);
-
+		
 		clientCode = new TextFieldComponent("고객 코드");
 		clientCode.setBounds(234, 165, 278, 29);
 		add(clientCode);
@@ -180,6 +180,7 @@ public class ClientManagerContent extends JPanel implements ActionListener {
 					public void run() {
 						try {
 							AdminMainClientGradeManager frame = new AdminMainClientGradeManager();
+							frame.setClientManager(ClientManagerContent.this);
 							frame.setVisible(true);
 						} catch (Exception e) {
 							e.printStackTrace();
@@ -236,6 +237,7 @@ public class ClientManagerContent extends JPanel implements ActionListener {
 		}
 
 		comboUserCodeGrade.setComboBoxModel(userGrade);
+	
 	}
 
 	public void setUserComboBoxModel() {

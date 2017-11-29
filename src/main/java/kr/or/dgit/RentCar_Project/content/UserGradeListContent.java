@@ -24,7 +24,7 @@ public class UserGradeListContent extends JPanel implements ActionListener{
 	private JButton btnAll;
 	private JButton btnSearch;
 	private UserGradeContent userGradeContnet;
-	
+
 	public void setUserGradeContnet(UserGradeContent userGradeContnet) {
 		this.userGradeContnet = userGradeContnet;
 	}
